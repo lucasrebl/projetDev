@@ -1,8 +1,10 @@
 <?php
 
 require_once __DIR__ . '/controllers/registerController.php';
+require_once __DIR__ . '/controllers/homeContoller.php';
 
 $routes = [
+    '/' => ['controller' => 'homeController', 'method' => 'home'],
     '/inscription' => ['controller' => 'registerController', 'method' => 'register'],
 ];
 
