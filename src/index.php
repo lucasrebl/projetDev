@@ -5,6 +5,7 @@ require_once __DIR__ . '/controllers/summaryController.php';
 require_once __DIR__ . '/controllers/loginController.php';
 require_once __DIR__ . '/controllers/registerController.php';
 require_once __DIR__ . '/controllers/dashboardController.php';
+require_once __DIR__ . '/controllers/worksController.php';
 
 $routes = [
     '/' => ['controller' => 'homeController', 'method' => 'home'],
@@ -12,6 +13,7 @@ $routes = [
     '/connexion' => ['controller' => 'loginController', 'method' => 'login'],
     '/inscription' => ['controller' => 'registerController', 'method' => 'register'],
     '/panelAdmin' => ['controller' => 'dashboardController', 'method' => 'dashboard'],
+    '/oeuvres' => ['controller' => 'worksController', 'method' => 'works'],
 ];
 
 $request = $_SERVER['REQUEST_URI'];
