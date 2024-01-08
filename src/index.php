@@ -9,6 +9,7 @@ require_once __DIR__ . '/controllers/worksController.php';
 require_once __DIR__ . '/controllers/profilController.php';
 require_once __DIR__ . '/controllers/recommendedController.php';
 require_once __DIR__ . '/controllers/solunaslistController.php';
+require_once __DIR__ . '/controllers/logOutController.php';
 
 $routes = [
     '/' => ['controller' => 'homeController', 'method' => 'home'],
@@ -20,6 +21,7 @@ $routes = [
     '/profil' => ['controller' => 'profilController', 'method' => 'profil'],
     '/recommande' => ['controller' => 'recommendedController', 'method' => 'recommended'],
     '/solunasList' => ['controller' => 'solunaslistController', 'method' => 'solunaslist'],
+    '/deconnexion' => ['controller' => 'logOutController', 'method' => 'logOut'],
 ];
 
 $request = $_SERVER['REQUEST_URI'];
