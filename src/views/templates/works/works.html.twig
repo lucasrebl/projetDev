@@ -5,4 +5,18 @@
 {% block stylesheets %}
 	<link href="/../public/css/works.css" rel="stylesheet">
 {% endblock %}
-{% block body %}page d'une oeuvres scpécifique{% endblock %}
+{% block body %}
+{# page d'une oeuvres scpécifique #}
+	<div class="container">
+		{% for work in Works %}
+			<a href="/resume?id={{ work.ID }}">
+			<div class="work">
+				<p>Nom : {{ work.Name }}</p>
+				<p>Résumé : {{ work.Summary }}</p>
+				<p>Nombre d'épisodes : {{ work.NbEpisodes }}</p>
+				<p>Status : {{ work.Status }}</p>
+			</div>
+			</a>
+		{% endfor %}
+	</div>
+{% endblock %}

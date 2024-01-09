@@ -18,6 +18,11 @@ class worksController
 
     public function works()
     {
-        echo $this->twig->render('works/works.html.twig');
+        $WM = new worksManager();
+        $works = $WM->selectAll();
+        if ($works == null){
+            $WM->addOneA();
+        }
+        echo $this->twig->render('works/works.html.twig', ["Works" => $works]);
     }
 }
