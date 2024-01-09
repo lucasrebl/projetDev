@@ -1,36 +1,22 @@
 <?php
+session_start();
+include_once('_config.php');
+date_default_timezone_set('Europe/Paris');
+MyAutoLoad::start();
 
-require_once __DIR__ . '/controllers/homeContoller.php';
-require_once __DIR__ . '/controllers/summaryController.php';
-require_once __DIR__ . '/controllers/loginController.php';
-require_once __DIR__ . '/controllers/registerController.php';
-require_once __DIR__ . '/controllers/dashboardController.php';
-require_once __DIR__ . '/controllers/worksController.php';
-require_once __DIR__ . '/controllers/profilController.php';
-require_once __DIR__ . '/controllers/recommendedController.php';
-require_once __DIR__ . '/controllers/solunaslistController.php';
-require_once __DIR__ . '/controllers/logOutController.php';
+$_SESSION['initD'] = null;
 
-require_once __DIR__ . '/database/createDatabase.php';
-
-$routes = [
-    '/' => ['controller' => 'homeController', 'method' => 'home'],
-    '/resume' => ['controller' => 'summaryController', 'method' => 'summary'],
-    '/connexion' => ['controller' => 'loginController', 'method' => 'login'],
-    '/inscription' => ['controller' => 'registerController', 'method' => 'register'],
-    '/panelAdmin' => ['controller' => 'dashboardController', 'method' => 'dashboard'],
-    '/oeuvres' => ['controller' => 'worksController', 'method' => 'works'],
-    '/profil' => ['controller' => 'profilController', 'method' => 'profil'],
-    '/recommande' => ['controller' => 'recommendedController', 'method' => 'recommended'],
-    '/solunasList' => ['controller' => 'solunaslistController', 'method' => 'solunaslist'],
-    '/deconnexion' => ['controller' => 'logOutController', 'method' => 'logOut'],
-];
-
-$request = $_SERVER['REQUEST_URI'];
-if (array_key_exists($request, $routes)) {
-    $controllerName = $routes[$request]['controller'];
-    $methodName = $routes[$request]['method'];
-
-    $controller = new $controllerName();
-    $controller->$methodName();
+if (empty($_SESSION['initD'])){
+    $_SESSION['initD'] = null;
 }
+
+if ($_SESSION['initD'] == null){
+    $database = new database();
+    $database->createDatabase();
+    $_SESSION['initD'] = 0;
+}
+
+$request = $_GET['action'] ?? 'home';
+
+$routeur = new router($request);
+$routeur->renderController();

@@ -5,4 +5,22 @@
 {% block stylesheets %}
 	<link href="/../public/css/summary.css" rel="stylesheet">
 {% endblock %}
-{% block body %}page contenant tous les résumer des films/séries/livres{% endblock %}
+{% block body %}
+	<div class="container">
+			<div class="work">
+				<p>{{ Work.Name }}</p>
+				<p>Résumé : {{ Work.Summary }}</p>
+				<p>Nombre d'épisodes : {{ Work.NbEpisodes }}</p>
+				<p>Status : {{ Work.Status }}</p>
+				<p>Nombre de Saisons : {{ Work.NbSeason }}</p>
+				<p>{{ Work.Category }}</p>
+				<div class="tags">
+				{% for tag in Work.Tags %}
+					<div class="tag">
+						<p>{{ tag }}</p>
+				{% endfor %}
+				</div>
+			</div>
+	</div>
+<script src="/js/summary.js"></script>
+{% endblock %}

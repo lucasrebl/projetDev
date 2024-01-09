@@ -18,6 +18,9 @@ class summaryController
 
     public function summary()
     {
-        echo $this->twig->render('summary/summary.html.twig');
+        $Workid = $_GET['id'];
+        $WM = new worksManager;
+        $work = $WM->selectOneById($Workid);
+        echo $this->twig->render('summary/summary.html.twig', ['Work' => $work]);
     }
 }
