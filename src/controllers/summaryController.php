@@ -13,7 +13,11 @@ class summaryController
     public function __construct()
     {
         $this->loader = new FilesystemLoader(__DIR__ . '/../views/templates');
-        $this->twig = new Environment($this->loader);
+        $this->twig = new Environment($this->loader, [
+            'debug' => true,
+            // ...
+        ]);
+        $this->twig->addExtension(new \Twig\Extension\DebugExtension());
     }
 
     public function summary()
@@ -21,6 +25,15 @@ class summaryController
         $Workid = $_GET['id'];
         $WM = new worksManager;
         $work = $WM->selectOneById($Workid);
-        echo $this->twig->render('summary/summary.html.twig', ['Work' => $work]);
+        $CM = new categoryManager;
+        $categories = $CM->selectAll();
+        $TM = new categoryManager;
+        $tags = $TM->selectAll();
+        // var_dump($work->Tags[0]->id);
+        echo $this->twig->render('summary/summary.html.twig', ['Work' => $work, "Categories" => $categories, "Tags" => $tags]);
+    }
+
+    public function modify(){
+
     }
 }
