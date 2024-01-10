@@ -73,8 +73,8 @@ class worksManager{
         $result->execute();
         while ($row = $result->fetch(PDO::FETCH_ASSOC)){
             $work->setCategory($row['nameCategory']);
-            $obj = (object) array('id' => $row['idTag'], 'name' => $row['nameTag']);
-            $Tags[] = $obj;
+            $tag = (object) array('id' => $row['idTag'], 'name' => $row['nameTag']);
+            $Tags[] = $tag;
         };
             $work->setTags($Tags);
             return $work;

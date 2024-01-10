@@ -9,6 +9,12 @@ let tag = document.querySelectorAll('.tag');
 let modify = document.querySelector('.modify');
 let cancel = document.querySelector('.cancel');
 let del = document.querySelectorAll('.delete');
+let tagN = document.querySelectorAll('.tagN');
+
+let count = 0
+let WorkID = window.location.href.split('=')[1];
+
+console.log(tag[0])
 
 modify.addEventListener('click', function() {
     modify.remove();
@@ -19,9 +25,8 @@ cancel.addEventListener('click', function() {
     location.reload()
 })
 
-del.forEach((element) => 
-element.addEventListener('click', function() {
-    location.reload()
-})
-);
-
+for(let c = 0; c < del.length; c++){
+    del[c].addEventListener('click', function() {
+        tag[c].remove()
+     })
+}

@@ -12,6 +12,7 @@ class router{
         'recommande' => ['controller' => 'recommendedController', 'method' => 'recommended'],
         'solunasList' => ['controller' => 'solunaslistController', 'method' => 'solunaslist'],
         'deconnexion' => ['controller' => 'logOutController', 'method' => 'logOut'],
+        'mWork' => ['controller' => 'summaryController', 'method' => 'modify'],
     ];
     public function __construct($request)
     {

@@ -22,35 +22,47 @@
 			<button class="modify">Modifier</button>
 			</div>
 		<div>
-			<form action="/mWork" method="post">
+			<form action="/mWork?id={{ Work.ID }}" method="post">
+			<label for="picture">Image : </label>
+			<input type="file" id="picture" name="picture" accept="image/png, image/jpeg"></input>
+			<label for="name">Titre : </label>
 			<input type="text" id="name" name="name" value="{{ Work.Name }}"></input>
-			<label id="summary">Résumé : </label>
-			<input type="text" id="summary" name="summary" value="{{ Work.Summary }}"></input>
-			<label id="episodes">Nombre d'épisodes : </label>
+			<label for="summary">Résumé : </label>
+			<textarea type="text" id="summary" name="summary">{{ Work.Summary }}</textarea>
+			<label for="episodes">Nombre d'épisodes : </label>
 			<input type="text" id="episodes" name="episodes" value="{{ Work.NbEpisodes }}"></input>
-			<label id="status">Status : </label>
+			<label for="status">Status : </label>
 			<input type="text" id="status" name="status" value="{{ Work.Status }}"></input>
-			<label id="season">Nombre de Saisons : </label>
+			<label for="season">Nombre de Saisons : </label>
 			<input type="text" id="season" name="season" value="{{ Work.NbSeason }}"></input>
-			<label id="category">Category : </label>
+			<label for="category">Category : </label>
 				
 			<select list="category" id="category" name="category">
-
+				{% for Category in Categories %}
+					<option value="{{ Category.ID }}">{{ Category.Name }}</option>
+				{% endfor %}
 			</select>
 			<div class="tags">
 				{% for tag in Work.Tags %}
-						<select class="tag">
+					<div class="tag">
+						<select>
 						<option value="tag.id">{{ tag.name }}</option>
 						</select>
 						<p class="delete">supprimer</p>
+					</div>
 				{% endfor %}
+				<select class="NewTag">
+					{% for tag in Tags %}
+					<option value="{{ tag.ID }}">{{ tag.Name }}</option>
+					{% endfor %}
+				</select>
 				</div>
 			<button type="submit">Valider</button>
 			</form>
 			<button class="cancel" style="visibility: hidden;">Annuler</button>
 		</div>
 	</div>
-	<div style="visibility: hidden;">
+	<div style="display: none;">
 		{% for category in Categories %}
 			<p class="categoriesI">{{ category.ID }}</p>
 			<p class="categoriesN">{{ category.Name }}</p>
