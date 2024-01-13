@@ -12,57 +12,75 @@
 			<a href="/resume?id={{ work.ID }}">
 			<div class="work">
 				<img src = "data:image/png;base64,{{ work.Image }}"/>
-				<p class="title">Nom : {{ work.Name }}</p>
+				<p class="title">{{ work.Name }}</p>
 				<p class="summary">Résumé : {{ work.Summary }}</p>
 				<p class="episodes">Nombre d'épisodes : {{ work.NbEpisodes }}</p>
 				<p class="status">Status : {{ work.Status }}</p>
 			</div>
 			</a>
 		{% endfor %}
-	</div>
-	<button id="add">Ajouter une oeuvre</button>
-	<div class="form" style="display: none;">
-			<form enctype="multipart/form-data" action="/getImage?id={{ Work.ID }}" method="post">
-				<label for="picture">Image : </label>
-				<input type="file" id="picture" name="picture" accept="image/*"></input>
-				<input type="submit" value="get" hidden/>
+		<button id="add">Ajouter une oeuvre</button>
+		<div class="filters">
+			<form action="/Filters" method="post">
+				<fieldset>
+					<legend>
+					Filtres:
+					</legend>
+					Catégories :
+					{% for Category in Categories %}
+						<label>
+							<input type="radio" name="option" value="{{ Category.ID }}">
+							{{ Category.Name }}
+						</label>
+					{% endfor %}
+					{% for tag in Tags %}
+						<label>
+							<input class="tag" type="checkbox" name="tag" value="{{ tag.ID }}">
+							{{ tag.Name }}
+						</label>
+					{% endfor %}
+					<input type="submit">
+				</fieldset>
 			</form>
+		</div>
+	</div>
+	<div class="form" style="display: none;">
 			<form action="/aWork" method="post">
-			<input type="text" id="id" name="id" value="{{ Work.ID }}" hidden></input>
 			<label for="name">Titre : </label>
-			<input type="text" id="name" name="name" value="{{ Work.Name }}"></input>
+			<input type="text" id="name" name="name" value=""></input>
 			<label for="summary">Résumé : </label>
-			<textarea type="text" id="summary" name="summary">{{ Work.Summary }}</textarea>
-			<label for="episodes">Nombre d'épisodes : </label>
-			<input type="text" id="episodes" name="episodes" value="{{ Work.NbEpisodes }}"></input>
+			<textarea type="text" id="summary" name="summary"></textarea>
 			<label for="status">Status : </label>
-			<input type="text" id="status" name="status" value="{{ Work.Status }}"></input>
-			<label for="season">Nombre de Saisons : </label>
-			<input type="text" id="season" name="season" value="{{ Work.NbSeason }}"></input>
+			<input type="text" id="status" name="status" value=""></input>
 			<label for="category">Category : </label>
-				
 			<select list="category" id="category" name="category">
+				{# <option value="0">Sélectionner une catégorie</option> #}
 				{% for Category in Categories %}
 					<option value="{{ Category.ID }}">{{ Category.Name }}</option>
 				{% endfor %}
 			</select>
+			<div class="part2" style="display: none;">
+			<label for="episodes">Nombre d'épisodes : </label>
+			<input type="text" id="episodes" name="episodes" value=""></input>
+			<label for="season">Nombre de Saisons : </label>
+			<input type="text" id="season" name="season" value=""></input>
+			</div>
+			<div class="part3" style="display: none;">
+			<label for="tome">Nombre de Tomes : </label>
+			<input type="text" id="tome" name="tome" value=""></input>
+			</div>
 			<div class="tagsM">
-				{% for tag in Work.Tags %}
-					<div class="tag">
-						<select name="tag">
-						<option value="{{ tag.id }}">{{ tag.name }}</option>
-						</select>
-						<p class="delete">supprimer</p>
-					</div>
-				{% endfor %}
-				</div>
+				
+			</div>
 				<select class="NewTag">
 					<option value="0">Ajouter un tag</option>
 					{% for tag in Tags %}
 					<option value="{{ tag.ID }}">{{ tag.Name }}</option>
 					{% endfor %}
 				</select>
-			<button type="submit">Valider</button>
+			<input type="submit" value="Valider"></input>
 			</form>
-<script src="/js/works.js"/>
+			<button id="cancel">Annuler</button>
+	</div>
+<script src="/js/works.js"></script>
 {% endblock %}

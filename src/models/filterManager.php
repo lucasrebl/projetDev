@@ -26,5 +26,9 @@ class filterManager{
         $result = $this->db->prepare("UPDATE worksCategory SET idCategory = $idCategory WHERE idWorks = $idWorks");
         $result->execute();
     }
+    function addCategory($idWorks, $idCategory){
+        $result = $this->db->prepare("INSERT INTO worksCategory(idWorks,idCategory) VALUES($idWorks,$idCategory)");
+        $result->execute();
+    }
 }
 ?>

@@ -42,15 +42,19 @@ class summaryController
         $tome = $_POST["tome"] ?? 0;
         $category = $_POST["category"] ?? "";
 
+        if(empty($tome)){
+            $tome = 0;
+        }
+
         $MW = new worksManager();
         $FW = new filterManager();
         $bdd = new database();
         $MW->updateOne($id,$name,$status,$summary,$episodes,$season,$tome);
         $FW->updateCategory($id, $category);
         $data = $bdd->connect();
-        if(count($_POST) > 7){
+        if(count($_POST) > 8){
             $data->prepare("DELETE FROM worksTag WHERE idWorks = $id")->execute();
-            for($c = 0; $c < count($_POST) - 7; $c++){
+            for($c = 0; $c < count($_POST) - 8; $c++){
                 $tag = $_POST["tag" . $c + 1] ?? "";
                 $data->prepare("INSERT INTO worksTag(idWorks,idTag) VALUES($id,$tag)")->execute();
             }

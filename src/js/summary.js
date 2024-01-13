@@ -6,7 +6,7 @@ let summary = document.querySelector('#summary');
 let episodes = document.querySelector('#episodes');
 let status = document.querySelector('#status');
 let season = document.querySelector('#season');
-let category = document.querySelector('#category');
+let category = VForm.querySelector('#category');
 let tag = Form.querySelectorAll('.tag');
 let modify = document.querySelector('.modify');
 let cancel = document.querySelector('.cancel');
@@ -14,7 +14,8 @@ let del = document.querySelectorAll('.delete');
 let tagN = document.querySelectorAll('.tagN');
 let NewTag = document.querySelector('.NewTag');
 let picture = document.querySelector('#picture');
-// let buttonI = document.querySelector('#subImage');
+let part2 = VForm.querySelector('.part2')
+let part3 = VForm.querySelector('.part3')
 
 let count = 0
 let WorkID = window.location.href.split('=')[1];
@@ -64,6 +65,21 @@ NewTag.addEventListener('change', function(){
         }
     }
     
+})
+
+category.addEventListener('change', function() {
+    if(category.value == 1){
+        part2.style.display = "block"
+        part3.style.display = "none"
+    } else if(category.value == 2){
+        part2.style.display = "none"
+        part3.style.display = "none"
+
+    } else if(category.value == 3){
+        part2.style.display = "none"
+        part3.style.display = "block"
+
+    }
 })
 
 picture.addEventListener('change', function(){

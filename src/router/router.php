@@ -15,6 +15,7 @@ class router{
         'mWork' => ['controller' => 'summaryController', 'method' => 'modify'],
         'getImage' => ['controller' => 'summaryController', 'method' => 'getImage'],
         'aWork' => ['controller' => 'worksController', 'method' => 'add'],
+        'Filters' => ['controller' => 'worksController', 'method' => 'filters'],
     ];
     public function __construct($request)
     {
