@@ -8,6 +8,7 @@
 {% block body %}
 	<div class="container">
 			<div class="work">
+				<img src = "data:image/png;base64,{{ Work.Image }}"/>
 				<p id="name">{{ Work.Name }}</p>
 				<p id="summary">Résumé : {{ Work.Summary }}</p>
 				<p id="episodes">Nombre d'épisodes : {{ Work.NbEpisodes }}</p>
@@ -21,10 +22,14 @@
 				</div>
 			<button class="modify">Modifier</button>
 			</div>
-		<div>
-			<form action="/mWork?id={{ Work.ID }}" method="post">
-			<label for="picture">Image : </label>
-			<input type="file" id="picture" name="picture" accept="image/png, image/jpeg"></input>
+		<div class="form" style="display: none;">
+			<form enctype="multipart/form-data" action="/getImage?id={{ Work.ID }}" method="post">
+				<label for="picture">Image : </label>
+				<input type="file" id="picture" name="picture" accept="image/*"></input>
+				<input type="submit" value="get" hidden/>
+			</form>
+			<form action="/mWork" method="post">
+			<input type="text" id="id" name="id" value="{{ Work.ID }}" hidden></input>
 			<label for="name">Titre : </label>
 			<input type="text" id="name" name="name" value="{{ Work.Name }}"></input>
 			<label for="summary">Résumé : </label>
@@ -42,21 +47,22 @@
 					<option value="{{ Category.ID }}">{{ Category.Name }}</option>
 				{% endfor %}
 			</select>
-			<div class="tags">
+			<div class="tagsM">
 				{% for tag in Work.Tags %}
 					<div class="tag">
-						<select>
-						<option value="tag.id">{{ tag.name }}</option>
+						<select name="tag">
+						<option value="{{ tag.id }}">{{ tag.name }}</option>
 						</select>
 						<p class="delete">supprimer</p>
 					</div>
 				{% endfor %}
+				</div>
 				<select class="NewTag">
+					<option value="0">Ajouter un tag</option>
 					{% for tag in Tags %}
 					<option value="{{ tag.ID }}">{{ tag.Name }}</option>
 					{% endfor %}
 				</select>
-				</div>
 			<button type="submit">Valider</button>
 			</form>
 			<button class="cancel" style="visibility: hidden;">Annuler</button>

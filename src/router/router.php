@@ -13,6 +13,7 @@ class router{
         'solunasList' => ['controller' => 'solunaslistController', 'method' => 'solunaslist'],
         'deconnexion' => ['controller' => 'logOutController', 'method' => 'logOut'],
         'mWork' => ['controller' => 'summaryController', 'method' => 'modify'],
+        'getImage' => ['controller' => 'summaryController', 'method' => 'getImage'],
     ];
     public function __construct($request)
     {

@@ -25,18 +25,46 @@ class summaryController
         $Workid = $_GET['id'];
         $WM = new worksManager;
         $work = $WM->selectOneById($Workid);
-        $CM = new categoryManager;
-        $categories = $CM->selectAll();
-        $TM = new tagManager;
-        $tags = $TM->selectAll();
-        // var_dump($work->Tags[0]->id);
+        $FM = new filterManager;
+        $categories = $FM->selectAll("Category");
+        $tags = $FM->selectAll("tag");
         echo $this->twig->render('summary/summary.html.twig', ['Work' => $work, "Categories" => $categories, "Tags" => $tags]);
     }
 
     public function modify(){
-        $image = $_POST['picture'];
-        $image = new Imagick();
-        var_dump($image);
-        echo $image;
+        // var_dump($_POST);
+        $id = $_POST["id"] ?? "";
+        $name = $_POST["name"] ?? "";
+        $summary = $_POST["summary"] ?? "";
+        $episodes = $_POST["episodes"] ?? "";
+        $status = $_POST["status"] ?? "";
+        $season = $_POST["season"] ?? "";
+        $tome = $_POST["tome"] ?? 0;
+        $category = $_POST["category"] ?? "";
+
+        $MW = new worksManager();
+        $FW = new filterManager();
+        $bdd = new database();
+        $MW->updateOne($id,$name,$status,$summary,$episodes,$season,$tome);
+        $FW->updateCategory($id, $category);
+        $data = $bdd->connect();
+        if(count($_POST) > 7){
+            $data->prepare("DELETE FROM worksTag WHERE idWorks = $id")->execute();
+            for($c = 0; $c < count($_POST) - 7; $c++){
+                $tag = $_POST["tag" . $c + 1] ?? "";
+                $data->prepare("INSERT INTO worksTag(idWorks,idTag) VALUES($id,$tag)")->execute();
+            }
+        }
+
+        header ("location: /resume?id=$id");
+    }
+
+    public function getImage(){
+        $id = $_GET['id'];
+        $img_blob = file_get_contents ($_FILES['picture']['tmp_name']);
+        $WM = new worksManager;
+        $WM->UpdateImageById($id, base64_encode($img_blob));
+        header ("location: /resume?id=$id");
+        // echo '<img src = "data:image/png;base64,' . base64_encode($img_blob) . '"/>';
     }
 }

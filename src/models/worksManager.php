@@ -46,9 +46,54 @@ class worksManager{
             } else {
                 $text = $work->synopsis;
             }
-            $result = $this->db->prepare("INSERT INTO works(nameWorks,status,image,summary,numberOfEpisodes,numberOfSeason,numberOfTome) VALUES('$work->title','$work->status','','$work->synopsis',$work->episodes,0,null)");
+            $result = $this->db->prepare("INSERT INTO works(nameWorks,status,image,summary,numberOfEpisodes,numberOfSeason,numberOfTome) 
+            VALUES('$work->title','$work->status','','$work->synopsis',$work->episodes,0,null)");
             $result->execute();
         }
+    }
+
+    function addOneM($nameWorks,$status,$summary,$episodes,$season,$tome){
+            $texts = explode("'",$summary);
+            if(count($texts)-1 > 0){
+                foreach(explode("'",$summary,-1) as $value){
+                    $tab[] = $value . "''";
+                }
+                $text = $tab[0];
+                for($c = 1; $c < count($tab); $c++){
+                    $text = $text . $tab[$c];
+                }
+                $summary = $text . $texts[count($texts)-1];
+            } else {
+                $text = $summary;
+            }
+            $result = $this->db->prepare("INSERT INTO works(nameWorks,status,image,summary,numberOfEpisodes,numberOfSeason,numberOfTome) 
+            VALUES('$nameWorks','$status','','$summary',$episodes,$season,$tome)");
+            $result->execute();
+    }
+
+    function UpdateImageById($id, $image){
+        $result = $this->db->prepare("UPDATE works SET image = '$image' WHERE idWorks = $id");
+        $result->execute();
+    }
+
+    public function updateOne($id,$name,$status,$summary,$episodes,$season,$tome){
+        $db = $this->db;
+        $texts = explode("'",$summary);
+            if(count($texts)-1 > 0){
+                foreach(explode("'",$summary,-1) as $value){
+                    $tab[] = $value . "''";
+                }
+                $text = $tab[0];
+                for($c = 1; $c < count($tab); $c++){
+                    $text = $text . $tab[$c];
+                }
+                $summary = $text . $texts[count($texts)-1];
+            } else {
+                $text = $summary;
+            }
+        $result = $db->prepare("UPDATE works SET nameWorks = '$name', status = '$status',
+        summary = '$summary', numberOfEpisodes = '$episodes', numberOfSeason = $season, numberOfTome = $tome WHERE idWorks = $id");
+        $result->execute();
     }
 
     function selectOneById($id){
@@ -69,7 +114,7 @@ class worksManager{
         inner JOIN worksTag ON worksCategory.idWorks = worksTag.idWorks
         inner join Category on worksCategory.idCategory = Category.idCategory
         inner join tag on worksTag.idTag = tag.idTag
-        where worksCategory.idWorks = 11;");
+        where worksCategory.idWorks = $id;");
         $result->execute();
         while ($row = $result->fetch(PDO::FETCH_ASSOC)){
             $work->setCategory($row['nameCategory']);
@@ -79,5 +124,14 @@ class worksManager{
             $work->setTags($Tags);
             return $work;
     }
+
+    public function deleteOne($id){
+        $db = $this->db;
+        $result = $db->prepare("DELETE FROM worksTag WHERE idWorks = $id;
+        DELETE FROM worksCategory WHERE idWorks = $id;
+        DELETE FROM works WHERE idWorks = $id;");
+        $result->execute();
+    }
+
 }
 ?>
