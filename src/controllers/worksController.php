@@ -20,9 +20,10 @@ class worksController
     {
         $WM = new worksManager();
         $works = $WM->selectAll();
-        if ($works == null){
-            $WM->addOneA();
-        }
         echo $this->twig->render('works/works.html.twig', ["Works" => $works]);
+    }
+
+    public function add(){
+        
     }
 }

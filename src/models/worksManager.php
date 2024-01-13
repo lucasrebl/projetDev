@@ -32,7 +32,6 @@ class worksManager{
         $url = "https://api.jikan.moe/v4/anime";
         $raw = file_get_contents($url);
         $json = json_decode($raw);
-        // echo $json->data[0]->episodes;
         foreach($json->data as $work){
             $texts = explode("'",$work->synopsis);
             if(count($texts)-1 > 0){
@@ -51,6 +50,25 @@ class worksManager{
             $result->execute();
         }
     }
+
+    function addOneM($nameWorks,$status,$summary,$episodes,$season,$tome){
+        $texts = explode("'",$summary);
+        if(count($texts)-1 > 0){
+            foreach(explode("'",$summary,-1) as $value){
+                $tab[] = $value . "''";
+            }
+            $text = $tab[0];
+            for($c = 1; $c < count($tab); $c++){
+                $text = $text . $tab[$c];
+            }
+            $summary = $text . $texts[count($texts)-1];
+        } else {
+            $text = $summary;
+        }
+        $result = $this->db->prepare("INSERT INTO works(nameWorks,status,image,summary,numberOfEpisodes,numberOfSeason,numberOfTome) 
+        VALUES('$nameWorks','$status','','$summary',$episodes,$season,$tome)");
+        $result->execute();
+}
 
     function selectOneById($id){
         $result = $this->db->prepare("SELECT * from works where idWorks = $id");
