@@ -46,7 +46,8 @@ class worksManager{
             } else {
                 $text = $work->synopsis;
             }
-            $result = $this->db->prepare("INSERT INTO works(nameWorks,status,image,summary,numberOfEpisodes,numberOfSeason,numberOfTome) VALUES('$work->title','$work->status','','$work->synopsis',$work->episodes,0,null)");
+            $result = $this->db->prepare("INSERT INTO works(nameWorks,status,image,summary,numberOfEpisodes,numberOfSeason,numberOfTome) 
+            VALUES('$work->title','$work->status','','$work->synopsis',$work->episodes,0,null)");
             $result->execute();
         }
     }
@@ -96,7 +97,29 @@ class worksManager{
             $work->setNbSeason($row['numberOfSeason']);
             $work->setNbTome($row['numberOfTome']);
         };
-        return $work;
+    
+        $result = $this->db->prepare("SELECT distinct worksCategory.*, worksTag.*, Category.nameCategory, tag.nameTag from worksCategory
+        inner JOIN worksTag ON worksCategory.idWorks = worksTag.idWorks
+        inner join Category on worksCategory.idCategory = Category.idCategory
+        inner join tag on worksTag.idTag = tag.idTag
+        where worksCategory.idWorks = $id;");
+        $result->execute();
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+            $work->setCategory($row['nameCategory']);
+            $tag = (object) array('id' => $row['idTag'], 'name' => $row['nameTag']);
+            $Tags[] = $tag;
+        };
+            $work->setTags($Tags);
+            return $work;
     }
+
+    public function deleteOne($id){
+        $db = $this->db;
+        $result = $db->prepare("DELETE FROM worksTag WHERE idWorks = $id;
+        DELETE FROM worksCategory WHERE idWorks = $id;
+        DELETE FROM works WHERE idWorks = $id;");
+        $result->execute();
+    }
+
 }
 ?>
