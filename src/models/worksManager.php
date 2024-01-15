@@ -142,7 +142,56 @@ public function updateOne($id,$name,$status,$summary,$episodes,$season,$tome){
             return $work;
     }
 
-    public function deleteOne($id){
+    function selectAllByFilters($category,$tags){
+        $text = "";
+        if($category == "" && $tags == ""){
+            $result = $this->db->prepare("SELECT DISTINCT wt.idWorks
+            FROM works wt;");
+        } elseif($tags == ""){
+            $result = $this->db->prepare("SELECT DISTINCT wt.idWorks
+            FROM worksCategory wt WHERE wt.idCategory = $category;");
+        } elseif($category == ""){
+            $result = $this->db->prepare("SELECT DISTINCT wt.idWorks
+            FROM worksTag wt
+            WHERE wt.idTag IN ($tags);");
+        } else {
+            $result = $this->db->prepare("SELECT DISTINCT wt.idWorks
+            FROM worksTag wt
+            INNER JOIN worksCategory wc ON wt.idWorks = wc.idWorks
+            WHERE wc.idCategory = $category AND wt.idTag IN ($tags);");
+        }
+        $result->execute();
+        if($result->rowCount() > 0){
+            while ($row = $result->fetch(PDO::FETCH_ASSOC)){
+                $filters[] = $row['idWorks'];
+            };
+            for($c = 0; $c < count($filters); $c++){
+                $text = $text . $filters[$c] . ",";
+            }
+            $placeholders = substr($text,0,-1);
+            $result2 = $this->db->prepare("SELECT * from works WHERE idWorks IN ($placeholders)");
+            $result2->execute();
+            if($result2->rowCount() > 0){
+                while ($row = $result2->fetch(PDO::FETCH_ASSOC)){
+                    $work = new worksModel();
+                    $work->setID($row['idWorks']);
+                    $work->setName($row['nameWorks']);
+                    $work->setStatus($row['status']);
+                    $work->setImage($row['image']);
+                    $work->setSummary($row['summary']);
+                    $work->setNbEpisodes($row['numberOfEpisodes']);
+                    $work->setNbSeason($row['numberOfSeason']);
+                    $work->setNbTome($row['numberOfTome']);
+                    $works[] = $work;
+                };
+                return $works;
+            }
+            }
+        return null;
+    }
+    
+
+    function deleteOne($id){
         $db = $this->db;
         $result = $db->prepare("DELETE FROM worksTag WHERE idWorks = $id;
         DELETE FROM worksCategory WHERE idWorks = $id;

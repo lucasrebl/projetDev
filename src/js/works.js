@@ -10,14 +10,44 @@ let part2 = form.querySelector('.part2')
 let part3 = form.querySelector('.part3')
 let NewTag = document.querySelector('.NewTag');
 let FilTag = filters.querySelectorAll('.tag')
+let FilForm = filters.querySelector('#filters')
+let FilClick = filters.querySelector('input[type="submit"]')
 
-console.log(FilTag)
+let Tags = [];
 
 summary.forEach((element) => element.textContent = element.textContent.substring(0,100) + "...")
 
 for(let c = 0; c < FilTag.length; c++){
-    FilTag[c].setAttribute("name",`tag${c + 1}`)
+    // FilTag[c].setAttribute("name",`tag${c + 1}`)
 }
+
+function createCookie(name, value, days) {
+    let expires;
+ 
+    if (days) {
+        let date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+    }
+    else {
+        expires = "";
+    }
+ 
+    document.cookie = escape(name) + "=" +
+        escape(value) + expires + "; path=/oeuvres";
+}
+
+FilTag.forEach((element) => element.addEventListener('click', function(){
+    if(element.checked){
+        Tags.push(element.value)
+    }else{
+        for(let c = 0; c < Tags.length; c++){
+            if(Tags[c] == element.value){
+                Tags.splice(c,1)
+            }
+        }
+    }
+}))
 
 add.addEventListener('click', function() {
     container.style.display = "none"
@@ -67,4 +97,8 @@ NewTag.addEventListener('change', function(){
         }
     }
     
+})
+
+FilClick.addEventListener('click', function() {
+    createCookie("Tags", Tags, 1)
 })

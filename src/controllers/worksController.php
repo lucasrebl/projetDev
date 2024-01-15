@@ -17,10 +17,16 @@ class worksController
     }
 
     public function works()
-    {
+    {   
+        $cookie = $_COOKIE['Tags'] ?? "";
+        $category = $_POST["option"] ?? "";
         $WM = new worksManager();
         $FM = new filterManager();
-        $works = $WM->selectAll();
+        if(!empty($category) || !empty($cookie)){
+            $works = $WM->selectAllByFilters($category,$cookie);
+        } else {
+            $works = $WM->selectAll();
+        }
         $categories = $FM->selectAll("Category");
         $tags = $FM->selectAll("tag");
         echo $this->twig->render('works/works.html.twig', ["Works" => $works, "Categories" => $categories, "Tags" => $tags]);
@@ -53,10 +59,6 @@ class worksController
             }
         }
         header("Location: /oeuvres");
-    }
-
-    public function filters(){
-        var_dump($_POST);
     }
 
 }
