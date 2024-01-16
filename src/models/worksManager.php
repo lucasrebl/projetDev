@@ -21,6 +21,14 @@ class worksManager{
             $work->setNbEpisodes($row['numberOfEpisodes']);
             $work->setNbSeason($row['numberOfSeason']);
             $work->setNbTome($row['numberOfTome']);
+            $result2 = $this->db->prepare("SELECT worksCategory.idCategory, Category.nameCategory from worksCategory
+            inner join Category on worksCategory.idCategory = Category.idCategory WHERE idWorks = $work->ID");
+            $result2->execute();
+            if($result2->rowCount() > 0){
+                while ($row = $result2->fetch(PDO::FETCH_ASSOC)){
+                    $work->setCategory($row['nameCategory']);
+                }
+            }
             $works[] = $work;
         };
         return $works;
@@ -71,7 +79,7 @@ class worksManager{
         VALUES('$nameWorks','$status','','$summary',$episodes,$season,$tome)");
         $result->execute();
         } catch (PDOException $e){
-
+            header("Location: /oeuvres");
         }
 }
 
@@ -142,7 +150,7 @@ public function updateOne($id,$name,$status,$summary,$episodes,$season,$tome){
             return $work;
     }
 
-    function selectAllByFilters($category,$tags){
+    function selectAllByFilters($category,$tags,$episodes,$tomes){
         $text = "";
         if($category == "" && $tags == ""){
             $result = $this->db->prepare("SELECT DISTINCT wt.idWorks
@@ -169,7 +177,21 @@ public function updateOne($id,$name,$status,$summary,$episodes,$season,$tome){
                 $text = $text . $filters[$c] . ",";
             }
             $placeholders = substr($text,0,-1);
-            $result2 = $this->db->prepare("SELECT * from works WHERE idWorks IN ($placeholders)");
+            if($category == 1){
+                if($episodes != ""){
+                    $result2 = $this->db->prepare("SELECT * from works WHERE idWorks IN ($placeholders) AND numberOfEpisodes >= $episodes");
+                } else {
+                    $result2 = $this->db->prepare("SELECT * from works WHERE idWorks IN ($placeholders)");
+                }
+            } elseif($category == 3){
+                if($tomes != ""){
+
+                } else {
+                    $result2 = $this->db->prepare("SELECT * from works WHERE idWorks IN ($placeholders) AND numberOfTome >= $tomes");
+                }
+            } else {
+                $result2 = $this->db->prepare("SELECT * from works WHERE idWorks IN ($placeholders)");
+            }
             $result2->execute();
             if($result2->rowCount() > 0){
                 while ($row = $result2->fetch(PDO::FETCH_ASSOC)){
@@ -182,6 +204,14 @@ public function updateOne($id,$name,$status,$summary,$episodes,$season,$tome){
                     $work->setNbEpisodes($row['numberOfEpisodes']);
                     $work->setNbSeason($row['numberOfSeason']);
                     $work->setNbTome($row['numberOfTome']);
+                    $result3 = $this->db->prepare("SELECT worksCategory.idCategory, Category.nameCategory from worksCategory
+                    inner join Category on worksCategory.idCategory = Category.idCategory WHERE idWorks = $work->ID");
+                    $result3->execute();
+                    if($result3->rowCount() > 0){
+                        while ($row = $result3->fetch(PDO::FETCH_ASSOC)){
+                            $work->setCategory($row['nameCategory']);
+                        }
+                    }
                     $works[] = $work;
                 };
                 return $works;
@@ -190,7 +220,6 @@ public function updateOne($id,$name,$status,$summary,$episodes,$season,$tome){
         return null;
     }
     
-
     function deleteOne($id){
         $db = $this->db;
         $result = $db->prepare("DELETE FROM worksTag WHERE idWorks = $id;
@@ -198,6 +227,5 @@ public function updateOne($id,$name,$status,$summary,$episodes,$season,$tome){
         DELETE FROM works WHERE idWorks = $id;");
         $result->execute();
     }
-
 }
 ?>

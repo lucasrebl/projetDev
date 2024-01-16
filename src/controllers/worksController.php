@@ -20,10 +20,12 @@ class worksController
     {   
         $cookie = $_COOKIE['Tags'] ?? "";
         $category = $_POST["option"] ?? "";
+        $episodes = $_POST["episodes"] ?? "";
+        $tomes = $_POST["tome"] ?? "";
         $WM = new worksManager();
         $FM = new filterManager();
         if(!empty($category) || !empty($cookie)){
-            $works = $WM->selectAllByFilters($category,$cookie);
+            $works = $WM->selectAllByFilters($category,$cookie,$episodes,$tomes);
         } else {
             $works = $WM->selectAll();
         }

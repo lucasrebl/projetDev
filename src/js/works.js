@@ -6,8 +6,11 @@ let add = container.querySelector('button')
 let summary = container.querySelectorAll('.summary')
 let cancel = form.querySelector('button')
 let category = form.querySelector('#category')
+let category2 = filters.querySelectorAll('.category')
 let part2 = form.querySelector('.part2')
 let part3 = form.querySelector('.part3')
+let partie2 = filters.querySelector('.part2')
+let partie3 = filters.querySelector('.part3')
 let NewTag = document.querySelector('.NewTag');
 let FilTag = filters.querySelectorAll('.tag')
 let FilForm = filters.querySelector('#filters')
@@ -102,3 +105,18 @@ NewTag.addEventListener('change', function(){
 FilClick.addEventListener('click', function() {
     createCookie("Tags", Tags, 1)
 })
+
+category2.forEach((element) => element.addEventListener('click', function(){
+    if(element.value == 1){
+        partie2.style.display = "flex"
+        partie3.style.display = "none"
+    } else if(element.value == 2){
+        partie2.style.display = "none"
+        partie3.style.display = "none"
+
+    } else if(element.value == 3){
+        partie2.style.display = "none"
+        partie3.style.display = "flex"
+
+    }
+}))

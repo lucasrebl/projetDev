@@ -2,6 +2,7 @@
 class filterModel{
     public $ID;
     public $Name;
+    public $image;
 
     /**
      * Get the value of ID
@@ -35,6 +36,24 @@ class filterModel{
     public function setName($Name): self
     {
         $this->Name = $Name;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of image
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set the value of image
+     */
+    public function setImage($image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

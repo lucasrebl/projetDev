@@ -13,6 +13,7 @@ class database{
             `passwordUser` varchar(255) DEFAULT NULL,
             `age` int(11) DEFAULT NULL,
             `isAdmin` tinyint(1) DEFAULT '0',
+            `image` LONGBLOB DEFAULT NULL,
             PRIMARY KEY (`idUser`),
             CONSTRAINT unique_key UNIQUE (`username`, `email`)
         ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1");

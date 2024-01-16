@@ -14,8 +14,13 @@
 				<img src = "data:image/png;base64,{{ work.Image }}"/>
 				<p class="title">{{ work.Name }}</p>
 				<p class="summary">Résumé : {{ work.Summary }}</p>
-				<p class="episodes">Nombre d'épisodes : {{ work.NbEpisodes }}</p>
 				<p class="status">Status : {{ work.Status }}</p>
+				{% if work.Category == "Series" %}
+					<p class="episodes">Nombre d'épisodes : {{ work.NbEpisodes }}</p>
+				{% endif %}
+				{% if work.Category == "Livres" %}
+					<p class="tome">Nombre de tomes : {{ work.NbTome }}</p>
+				{% endif %}
 			</div>
 			</a>
 		{% endfor %}
@@ -29,7 +34,7 @@
 					Catégories :
 					{% for Category in Categories %}
 						<label>
-							<input type="radio" name="option" value="{{ Category.ID }}">
+							<input class="category" type="radio" name="option" value="{{ Category.ID }}">
 							{{ Category.Name }}
 						</label>
 					{% endfor %}
@@ -39,6 +44,14 @@
 							{{ tag.Name }}
 						</label>
 					{% endfor %}
+					<div class="part2" style="display: none;">
+					<label for="episodes">Nombre d'épisodes : </label>
+					<input type="text" id="episodes" name="episodes" value=""></input>
+					</div>
+					<div class="part3" style="display: none;">
+					<label for="tome">Nombre de Tomes : </label>
+					<input type="text" id="tome" name="tome" value=""></input>
+					</div>
 					<input type="submit">
 				</fieldset>
 			</form>
