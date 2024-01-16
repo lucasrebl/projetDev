@@ -32,7 +32,6 @@ class summaryController
     }
 
     public function modify(){
-        // var_dump($_POST);
         $id = $_POST["id"] ?? "";
         $name = $_POST["name"] ?? "";
         $summary = $_POST["summary"] ?? "";
@@ -69,6 +68,5 @@ class summaryController
         $WM = new worksManager;
         $WM->UpdateImageById($id, base64_encode($img_blob));
         header ("location: /resume?id=$id");
-        // echo '<img src = "data:image/png;base64,' . base64_encode($img_blob) . '"/>';
     }
 }

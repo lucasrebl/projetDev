@@ -12,8 +12,8 @@ class database{
             `email` varchar(255) DEFAULT NULL,
             `passwordUser` varchar(255) DEFAULT NULL,
             `age` int(11) DEFAULT NULL,
+            `pictures` LONGBLOB DEFAULT NULL,
             `isAdmin` tinyint(1) DEFAULT '0',
-            `image` LONGBLOB DEFAULT NULL,
             PRIMARY KEY (`idUser`),
             CONSTRAINT unique_key UNIQUE (`username`, `email`)
         ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1");
@@ -69,7 +69,7 @@ class database{
             `nameWorks` varchar(255) DEFAULT NULL,
             `status` varchar(255) DEFAULT NULL,
             `image` LONGBLOB DEFAULT NULL,
-            `summary` LONGTEXT DEFAULT NULL,
+            `summary` varchar(255) DEFAULT NULL,
             `numberOfEpisodes` int(11) DEFAULT NULL,
             `numberOfSeason` int(11) DEFAULT NULL,
             `numberOfTome` int(11) DEFAULT NULL,
@@ -93,6 +93,7 @@ class database{
         `tag` (
             `idTag` int(11) NOT NULL AUTO_INCREMENT,
             `nameTag` varchar(255) DEFAULT NULL,
+            `pictures` LONGBLOB DEFAULT NULL,
             PRIMARY key (`idTag`),
             CONSTRAINT unique_nameTag UNIQUE (`nameTag`)
         ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1");
@@ -102,6 +103,7 @@ class database{
         `Category` (
             `idCategory` int(11) NOT NULL AUTO_INCREMENT,
             `nameCategory` varchar(255) DEFAULT NULL,
+            `pictures` LONGBLOB DEFAULT NULL,
             PRIMARY key (`idCategory`),
             CONSTRAINT unique_nameCategory UNIQUE (`nameCategory`)
         ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1");
