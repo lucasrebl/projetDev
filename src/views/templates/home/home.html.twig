@@ -7,19 +7,45 @@
 {% endblock %}
 
 {% block body %}
-  <div class="container">
-    <div class="switch">
-      <label for="toggle">
-        <input id="toggle" class="toggle-switch" type="checkbox">
-        <div class="sun-moon">
-          <div class="dots"></div>
-        </div>
-        <div class="background">
-          <div class="stars1"></div>
-          <div class="stars2"></div>
-        </div>
-        <div class="fill"></div>
-      </label>
+<div class="all">
+  <header>
+    <a class="active" href="/">
+      <img src="/../../static/css/asset/home.svg" alt="Home">
+  </a>
+    <a href="/login">Connecter</a>
+    <label id="dark-change"></label>
+  </header>
+  <main>
+    <div class="container-left">
+      <h1>Bienvenue sur Soluna Comic</h1>
+      <button>Commencer l'aventure !</button>
+      <button>Continuer l'aventure !</button>
+      <button>Faire le touriste.</button>
     </div>
-  </div>
+
+    <div class="container-right">
+      <img id="modeImage" src="/../../static/css/asset/lightmode.png">
+    </div>
+  </main>
+</div>
+<script>
+  var content = document.getElementsByTagName("body")[0];
+  var darkMode = document.getElementById("dark-change");
+  var modeImage = document.getElementById("modeImage");
+  darkMode.addEventListener('click', function () {
+    darkMode.classList.toggle('active');
+    content.classList.toggle('night');
+    toggleImage();
+  });
+
+  function toggleImage() {
+    if (darkMode.classList.contains('active')) {
+      modeImage.src = '/../../static/css/asset/darkmode.png';
+    } else {
+      modeImage.src = '/../../static/css/asset/lightmode.png';
+    }
+  }
+
+</script>
+
 {% endblock %}
