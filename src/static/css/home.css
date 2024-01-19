@@ -62,7 +62,7 @@ body.night {
 /* HEADER */
 
 header {
-  overflow: hidden;
+  /* overflow: hidden; */
   border-radius: 170px;
   border: 1px solid #4A3321;
   background: rgba(239, 248, 255, 0.05);
@@ -84,12 +84,36 @@ header a {
   text-align: center;
   text-decoration: none;
   font-size: 20px;
-  padding: 12px 60px;
+  padding: 0 40px;
   color: #4A3321;
 }
 
 header a:active {
   filter: drop-shadow(3px 4px 4px rgba(255, 255, 255, 0.60));
+}
+
+.navbar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar .links {
+  display: flex;
+  gap: 4rem;
+}
+.navbar .action-btn{
+  color: #4A3321;
+  cursor: pointer;
+  display: none;
+}
+
+li{
+  list-style: none;
+}
+
+a:hover{
+  color: aqua;
 }
 
 body.night header a {
@@ -130,4 +154,54 @@ body.night .container-left button {
   border-bottom: 1px solid #FFF;
   background: #000;
   color: #FFF; /* Set the text color to white */
+}
+
+/* DROPDOWN MENU */
+
+.dropdown_menu {
+  position: absolute;
+  top: 60px;
+  height: 0;
+  width:300px;
+  background: rgba(239, 248, 255, 0.05);
+  backdrop-filter: blur(15px);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dropdown_menu.open {
+  height: 500px;
+}
+
+.dropdown_menu li {
+  padding: 1rem;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 1472px) {
+  .navbar .links {
+    display: none;
+  }
+
+  .navbar .action-btn {
+    display: block;
+  }
+
+  label#dark-change {
+    display: block; /* Add this to make the label visible */
+    margin-top: 10px; /* Adjust the margin as needed */
+  }
+}
+
+@media (max-width: 1472px) {
+  .dropdown_menu{
+    left: 2rem;
+    width: unset;
+  }
 }
