@@ -11,6 +11,8 @@ require_once __DIR__ . '/controllers/recommendedController.php';
 require_once __DIR__ . '/controllers/solunaslistController.php';
 require_once __DIR__ . '/controllers/logOutController.php';
 
+require_once __DIR__ . '/database/createDatabase.php';
+
 $routes = [
     '/' => ['controller' => 'homeController', 'method' => 'home'],
     '/resume' => ['controller' => 'summaryController', 'method' => 'summary'],
