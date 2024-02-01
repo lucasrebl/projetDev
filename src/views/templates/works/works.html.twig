@@ -5,4 +5,95 @@
 {% block stylesheets %}
 	<link href="/../public/css/works.css" rel="stylesheet">
 {% endblock %}
-{% block body %}page d'une oeuvres scpécifique{% endblock %}
+{% block body %}
+{# page d'une oeuvres scpécifique #}
+	<div class="container">
+		{% for work in Works %}
+			<a href="/resume?id={{ work.ID }}">
+			<div class="work">
+				<img src = "data:image/png;base64,{{ work.Image }}"/>
+				<p class="title">{{ work.Name }}</p>
+				<p class="summary">Résumé : {{ work.Summary }}</p>
+				<p class="status">Status : {{ work.Status }}</p>
+				{% if work.Category == "Series" %}
+					<p class="episodes">Nombre d'épisodes : {{ work.NbEpisodes }}</p>
+				{% endif %}
+				{% if work.Category == "Livres" %}
+					<p class="tome">Nombre de tomes : {{ work.NbTome }}</p>
+				{% endif %}
+			</div>
+			</a>
+		{% endfor %}
+		<button id="add">Ajouter une oeuvre</button>
+		<div class="filters">
+			<form id="filters" action="/oeuvres" method="post">
+				<fieldset>
+					<legend>
+					Filtres:
+					</legend>
+					Catégories :
+					{% for Category in Categories %}
+						<label>
+							<input class="category" type="radio" name="option" value="{{ Category.ID }}">
+							{{ Category.Name }}
+						</label>
+					{% endfor %}
+					{% for tag in Tags %}
+						<label>
+							<input class="tag" type="checkbox" name="tag" value="{{ tag.ID }}">
+							{{ tag.Name }}
+						</label>
+					{% endfor %}
+					<div class="part2" style="display: none;">
+					<label for="episodes">Nombre d'épisodes : </label>
+					<input type="text" id="episodes" name="episodes" value=""></input>
+					</div>
+					<div class="part3" style="display: none;">
+					<label for="tome">Nombre de Tomes : </label>
+					<input type="text" id="tome" name="tome" value=""></input>
+					</div>
+					<input type="submit">
+				</fieldset>
+			</form>
+		</div>
+	</div>
+	<div class="form" style="display: none;">
+			<form action="/aWork" method="post">
+			<label for="name">Titre : </label>
+			<input type="text" id="name" name="name" value=""></input>
+			<label for="summary">Résumé : </label>
+			<textarea type="text" id="summary" name="summary"></textarea>
+			<label for="status">Status : </label>
+			<input type="text" id="status" name="status" value=""></input>
+			<label for="category">Category : </label>
+			<select list="category" id="category" name="category">
+				{# <option value="0">Sélectionner une catégorie</option> #}
+				{% for Category in Categories %}
+					<option value="{{ Category.ID }}">{{ Category.Name }}</option>
+				{% endfor %}
+			</select>
+			<div class="part2" style="display: none;">
+			<label for="episodes">Nombre d'épisodes : </label>
+			<input type="text" id="episodes" name="episodes" value=""></input>
+			<label for="season">Nombre de Saisons : </label>
+			<input type="text" id="season" name="season" value=""></input>
+			</div>
+			<div class="part3" style="display: none;">
+			<label for="tome">Nombre de Tomes : </label>
+			<input type="text" id="tome" name="tome" value=""></input>
+			</div>
+			<div class="tagsM">
+				
+			</div>
+				<select class="NewTag">
+					<option value="0">Ajouter un tag</option>
+					{% for tag in Tags %}
+					<option value="{{ tag.ID }}">{{ tag.Name }}</option>
+					{% endfor %}
+				</select>
+			<input type="submit" value="Valider"></input>
+			</form>
+			<button id="cancel">Annuler</button>
+	</div>
+<script src="/js/works.js"></script>
+{% endblock %}

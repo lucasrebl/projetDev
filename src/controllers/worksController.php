@@ -17,7 +17,50 @@ class worksController
     }
 
     public function works()
-    {
-        echo $this->twig->render('works/works.html.twig');
+    {   
+        $cookie = $_COOKIE['Tags'] ?? "";
+        $category = $_POST["option"] ?? "";
+        $episodes = $_POST["episodes"] ?? "";
+        $tomes = $_POST["tome"] ?? "";
+        $WM = new worksManager();
+        $FM = new filterManager();
+        if(!empty($category) || !empty($cookie)){
+            $works = $WM->selectAllByFilters($category,$cookie,$episodes,$tomes);
+        } else {
+            $works = $WM->selectAll();
+        }
+        $categories = $FM->selectAll("Category");
+        $tags = $FM->selectAll("tag");
+        echo $this->twig->render('works/works.html.twig', ["Works" => $works, "Categories" => $categories, "Tags" => $tags]);
     }
+
+    public function add(){
+        $name = $_POST["name"] ?? "";
+        $summary = $_POST["summary"] ?? "";
+        $episodes = $_POST["episodes"] ?? 0;
+        $status = $_POST["status"] ?? "";
+        $season = $_POST["season"] ?? 0;
+        $tome = $_POST["tome"] ?? 0;
+        $category = $_POST["category"] ?? "";
+        if(empty($tome)){
+            $tome = 0;
+        }
+
+        $MW = new worksManager();
+        $FW = new filterManager();
+        $bdd = new database();
+        $MW->addOneM($name,$status,$summary,$episodes,$season,$tome);
+        $Works = count($MW->selectAll());
+        $FW->addCategory($Works, $category);
+        $data = $bdd->connect();
+        if(count($_POST) > 7){
+            // $data->prepare("DELETE FROM worksTag WHERE idWorks = $id")->execute();
+            for($c = 0; $c < count($_POST) - 7; $c++){
+                $tag = $_POST["tag" . $c + 1] ?? "";
+                $data->prepare("INSERT INTO worksTag(idWorks,idTag) VALUES($Works,$tag)")->execute();
+            }
+        }
+        header("Location: /oeuvres");
+    }
+
 }

@@ -5,4 +5,89 @@
 {% block stylesheets %}
 	<link href="/../public/css/summary.css" rel="stylesheet">
 {% endblock %}
-{% block body %}page contenant tous les résumer des films/séries/livres{% endblock %}
+{% block body %}
+	<div class="container">
+			<div class="work">
+				<img src = "data:image/png;base64,{{ Work.Image }}"/>
+				<p id="name">{{ Work.Name }}</p>
+				<p id="summary">Résumé : {{ Work.Summary }}</p>
+				<p id="status">Status : {{ Work.Status }}</p>
+				{% if Work.Category == "Series" %}
+				<p id="episodes">Nombre d'épisodes : {{ Work.NbEpisodes }}</p>
+				<p id="season">Nombre de Saisons : {{ Work.NbSeason }}</p>
+				{% endif %}
+				{% if Work.Category == "Livres" %}
+				<p id="tome">Nombre de Tomes : {{ Work.NbTome }}</p>
+				{% endif %}
+				<p id="category">{{ Work.Category }}</p>
+				<div class="tags">
+					{# {{ dump(Work.Tags) }} #}
+				{% for tag in Work.Tags %}
+						<p class="tag">{{ tag.name }}</p>
+				{% endfor %}
+				</div>
+			<button class="modify">Modifier</button>
+			</div>
+		<div class="form" style="display: none;">
+			<form enctype="multipart/form-data" action="/getImage?id={{ Work.ID }}" method="post">
+				<label for="picture">Image : </label>
+				<input type="file" id="picture" name="picture" accept="image/*"></input>
+				<input type="submit" value="get" hidden/>
+			</form>
+			<form action="/mWork" method="post">
+			<input type="text" id="id" name="id" value="{{ Work.ID }}" hidden></input>
+			<label for="name">Titre : </label>
+			<input type="text" id="name" name="name" value="{{ Work.Name }}"></input>
+			<label for="summary">Résumé : </label>
+			<textarea type="text" id="summary" name="summary">{{ Work.Summary }}</textarea>
+			<label for="status">Status : </label>
+			<input type="text" id="status" name="status" value="{{ Work.Status }}"></input>
+			<label for="category">Category : </label>
+			<select list="category" id="category" name="category">
+				{% for Category in Categories %}
+					<option value="{{ Category.ID }}">{{ Category.Name }}</option>
+				{% endfor %}
+			</select>
+			<div class="part2" style="display: none;">
+			<label for="episodes">Nombre d'épisodes : </label>
+			<input type="text" id="episodes" name="episodes" value="{{ Work.NbEpisodes }}"></input>
+			<label for="season">Nombre de Saisons : </label>
+			<input type="text" id="season" name="season" value="{{ Work.NbSeason }}"></input>
+			</div>
+			<div class="part3" style="display: none;">
+			<label for="tome">Nombre de Tomes : </label>
+			<input type="text" id="tome" name="tome" value="{{ Work.NbTome }}"></input>
+			</div>
+			<div class="tagsM">
+				{% for tag in Work.Tags %}
+					<div class="tag">
+						<select name="tag">
+						<option value="{{ tag.id }}">{{ tag.name }}</option>
+						</select>
+						<p class="delete">supprimer</p>
+					</div>
+				{% endfor %}
+				</div>
+				<select class="NewTag">
+					<option value="0">Ajouter un tag</option>
+					{% for tag in Tags %}
+					<option value="{{ tag.ID }}">{{ tag.Name }}</option>
+					{% endfor %}
+				</select>
+			<button type="submit">Valider</button>
+			</form>
+			<button class="cancel" style="visibility: hidden;">Annuler</button>
+		</div>
+	</div>
+	<div style="display: none;">
+		{% for category in Categories %}
+			<p class="categoriesI">{{ category.ID }}</p>
+			<p class="categoriesN">{{ category.Name }}</p>
+		{% endfor %}
+		{% for tag in Tags %}
+			<p class="tagI">{{ tag.ID }}</p>
+			<p class="tagN">{{ tag.Name }}</p>
+		{% endfor %}
+	</div>
+<script src="/js/summary.js"></script>
+{% endblock %}

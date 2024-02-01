@@ -15,7 +15,7 @@ class dashboardController
         $this->loader = new FilesystemLoader(__DIR__ . '/../views/templates');
         $this->twig = new Environment($this->loader);
     }
-
+    
     public function dashboard()
     {
         echo $this->twig->render('dashboard/dashboard.html.twig');

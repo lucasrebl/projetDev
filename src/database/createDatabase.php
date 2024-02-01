@@ -1,8 +1,5 @@
 <?php
 
-require_once 'database/connect.php';
-require 'vendor/autoload.php';
-
 $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
 $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
