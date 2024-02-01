@@ -19,7 +19,7 @@ class loginController
     public function login()
     {
         session_start();
-        print_r($_SESSION);
+        // print_r($_SESSION);
         echo $this->twig->render('login/login.html.twig');
         if (isset($_POST['submit'])) {
             $username_ = $_POST['username'];

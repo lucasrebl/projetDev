@@ -57,64 +57,9 @@ body.night {
   right: 0px;
   width: 45%;
   height: auto;
+  border-radius: 50px 0 0 0;
 }
 
-/* HEADER */
-
-header {
-  /* overflow: hidden; */
-  border-radius: 170px;
-  border: 1px solid #4A3321;
-  background: rgba(239, 248, 255, 0.05);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 90%;
-  height: 55px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px 0 20px;
-  margin: 10px 40px 40px 40px;
-  box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.25);
-  z-index: 1;
-}
-
-header a {
-  text-align: center;
-  text-decoration: none;
-  font-size: 20px;
-  padding: 0 40px;
-  color: #4A3321;
-}
-
-header a:active {
-  filter: drop-shadow(3px 4px 4px rgba(255, 255, 255, 0.60));
-}
-
-.navbar{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.navbar .links {
-  display: flex;
-  gap: 4rem;
-}
-.navbar .action-btn{
-  color: #4A3321;
-  cursor: pointer;
-  display: none;
-}
-
-li{
-  list-style: none;
-}
-
-a:hover{
-  color: aqua;
-}
 
 body.night header a {
   color: white; 

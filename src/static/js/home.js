@@ -1,6 +1,6 @@
 var content = document.getElementsByTagName("body")[0];
 var darkMode = document.getElementById("dark-change");
-var modeImage = document.getElementById("modeImage");
+let modeImage = document.querySelector("#modeImage");
 const actionBtn = document.querySelector('.action-btn');
 const actionBtnIcon = document.querySelector('.action-btn i');
 const dropDownMenu = document.querySelector('.dropdown_menu');
@@ -20,11 +20,13 @@ darkMode.addEventListener('click', function () {
     toggleImage();
 });
 
+
+
 function toggleImage() {
     if (darkMode.classList.contains('active')) {
-        modeImage.src = '/../../static/asset/darkmode.png';
+        modeImage.src = '/static/asset/darkmode.png';
     } else {
-        modeImage.src = '/../../static/asset/lightmode.png';
+        modeImage.src = '/static/asset/lightmode.png';
     }
 }
 

@@ -1,0 +1,55 @@
+.container-right img {
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    width: 45%;
+    height: auto;
+    border-radius: 50px 0 0 0;
+}
+
+body.night .container-left button {
+    border-radius: 90px;
+    border-top: 11px solid #FFF;
+    border-right: 8px solid #FFF;
+    border-bottom: 1px solid #FFF;
+    background: #000;
+    color: #FFF;
+    /* Set the text color to white */
+}
+
+.container-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    margin: 10rem 10rem 0 10rem;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+form input {
+    border-radius: 90px;
+    border-top: 11px solid #4A3321;
+    border-right: 8px solid #4A3321;
+    border-bottom: 1px solid #4A3321;
+    background: #FFF;
+    width: 12rem;
+    height: fit-content;
+    margin: 2rem 0 0.5rem 0;
+    padding: 1rem;
+}
+
+body.night form input {
+    border-radius: 90px;
+    border-top: 11px solid #FFF;
+    border-right: 8px solid #FFF;
+    border-bottom: 1px solid #FFF;
+    background: #000;
+    color: #FFF;
+    /* Set the text color to white */
+}
