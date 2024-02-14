@@ -1,5 +1,6 @@
-<?php 
-class router{
+<?php
+class router
+{
     private $request;
     private $routes = [
         'home' => ['controller' => 'homeController', 'method' => 'home'],
@@ -15,14 +16,17 @@ class router{
         'mWork' => ['controller' => 'summaryController', 'method' => 'modify'],
         'getImage' => ['controller' => 'summaryController', 'method' => 'getImage'],
         'aWork' => ['controller' => 'worksController', 'method' => 'add'],
+        'getUserImage' => ['controller' => 'profilController', 'method' => 'getImage'],
+        'mUser' => ['controller' => 'profilController', 'method' => 'updateUser'],
     ];
     public function __construct($request)
     {
         $this->request = $request;
     }
-    public function renderController(){
+    public function renderController()
+    {
         $request = $this->request;
-        if(key_exists($request, $this->routes)){
+        if (key_exists($request, $this->routes)) {
             $controller = $this->routes[$request]['controller'];
             $method = $this->routes[$request]['method'];
             $currentController = new $controller();
@@ -32,4 +36,3 @@ class router{
         }
     }
 }
-?>

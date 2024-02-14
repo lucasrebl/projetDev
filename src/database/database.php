@@ -1,7 +1,9 @@
-<?php 
-class database{
-    function createDatabase(){
-        
+<?php
+class database
+{
+    function createDatabase()
+    {
+
         $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
         $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -69,7 +71,7 @@ class database{
             `nameWorks` varchar(255) DEFAULT NULL,
             `status` varchar(255) DEFAULT NULL,
             `image` LONGBLOB DEFAULT NULL,
-            `summary` varchar(255) DEFAULT NULL,
+            `summary` LONGTEXT DEFAULT NULL,
             `numberOfEpisodes` int(11) DEFAULT NULL,
             `numberOfSeason` int(11) DEFAULT NULL,
             `numberOfTome` int(11) DEFAULT NULL,
@@ -132,7 +134,8 @@ class database{
         $dsn->exec($createTable);
     }
 
-    function connect(){
+    function connect()
+    {
         $servername = "mysql";
         $username = "my_user";
         $password = "my_password";
@@ -149,4 +152,3 @@ class database{
         return $pdo;
     }
 }
-?>

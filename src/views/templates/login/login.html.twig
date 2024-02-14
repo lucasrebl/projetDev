@@ -5,4 +5,15 @@
 {% block stylesheets %}
 	<link href="/../public/css/login.css" rel="stylesheet">
 {% endblock %}
-{% block body %}page de connexion{% endblock %}
+{% block body %}
+	<h3>page de connexion</h3>
+	<form action="/connexion" method="post">
+		<label for="username">nom d'utilisateur</label>
+		<input type="text" name="username" required>
+
+		<label for="passwordUser">mot de passe</label>
+		<input type="password" name="passwordUser" required>
+
+		<input type="submit" name="submit" value="se connecter">
+	</form>
+{% endblock %}
