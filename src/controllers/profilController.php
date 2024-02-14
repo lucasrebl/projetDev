@@ -22,8 +22,10 @@ class profilController
             header("Location: /connexion");
         } else {
             $UM = new userManager();
+            $SM = new solunaslistManager();
             $user = $UM->SelectOnebyID($_SESSION["idUser"]);
-            echo $this->twig->render('profil/profil.html.twig', ["User" => $user, "IDuser" => $_SESSION["idUser"]]);
+            $SL = $SM->selectAllByIdUser($_SESSION["idUser"]);
+            echo $this->twig->render('profil/profil.html.twig', ["User" => $user, "IDuser" => $_SESSION["idUser"], "SLs" => $SL]);
         }
     }
     public function getImage()

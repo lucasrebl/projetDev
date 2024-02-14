@@ -18,7 +18,7 @@ class registerController
 
     public function register()
     {
-        echo $this->twig->render('register/register.html.twig');
+
         if (isset($_POST['submit'])) {
             $username_ = $_POST['username'];
             $email_ = $_POST['email'];
@@ -29,6 +29,8 @@ class registerController
 
             include __DIR__ . '/../models/registerModel.php';
             addUser($username_, $email_, $hashed_passwordUser, $age_);
+        } else {
+            echo $this->twig->render('register/register.html.twig');
         }
     }
 }

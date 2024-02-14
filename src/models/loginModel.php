@@ -17,7 +17,7 @@ if (!function_exists('logUSer')) {
             if (password_verify($passwordUser_, $user['passwordUser'])) {
                 $_SESSION['idUser'] = $user['idUser'];
 
-                echo '<script>window.location.replace("/profil");</script>';
+                echo '<script>window.location.replace("/oeuvres");</script>';
             } else {
                 echo "mot de passe incorrect";
             }

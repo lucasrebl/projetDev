@@ -18,6 +18,9 @@ class router
         'aWork' => ['controller' => 'worksController', 'method' => 'add'],
         'getUserImage' => ['controller' => 'profilController', 'method' => 'getImage'],
         'mUser' => ['controller' => 'profilController', 'method' => 'updateUser'],
+        'addList' => ['controller' => 'solunaslistController', 'method' => 'addList'],
+        'deleteList' => ['controller' => 'solunaslistController', 'method' => 'deleteList'],
+        'addToList' => ['controller' => 'solunaslistController', 'method' => 'addToList'],
     ];
     public function __construct($request)
     {

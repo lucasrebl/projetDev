@@ -54,36 +54,56 @@
         		</form>
 			</div>
 			<div class="List">
+				{% if SLs|length < 1 %}
+					<p>aucune Listes</p>
+				{% else %}
+				{% for SL in SLs %}
 				<ul>
-					<li>Nom liste</li>
+					<li>{{ SL.Name }}</li>
 					<li>Nombre oeuvres</li>
 					<li>Nombre likes</li>
 					<li>Eye</li>
 					<li>Pen</li>
-					<li>Trash</li>
+					<li><a href="/deleteList?list={{ SL.ID }}">Trash</a></li>
 				<ul>
+				{% endfor %}
+			{% endif %}
 			</div>
 			<div class="LKT">
 				Mes Listes Likés
 			</div>
 			<div class="List_like">
+				{% if SLl|length < 1 %}
+					<p>aucune Listes</p>
+				{% else %}
+				{% for SL in SLl %}
 				<ul>
-					<li>Nom Personne</li>
-					<li>Nom liste</li>
+					<li>{{ SL.username }}</li>
+					<li>{{ SL.Name }}</li>
 					<li>Nombre oeuvres</li>
-					<li>Trash</li>
+					<li>Nombre likes</li>
+					<li><a href="/toggleLike?list={{ SL.ID }}">Trash</a></li>
 				<ul>
+				{% endfor %}
+			{% endif %}
 			</div>
 			<div class="LFT">
 				Mes Listes Favorites
 			</div>
 			<div class="List_Favorites">
+				{% if SLf|length < 1 %}
+					<p>aucune Listes</p>
+				{% else %}
+				{% for SL in SLf %}
 				<ul>
-					<li>Nom Personne</li>
-					<li>Nom liste</li>
+					<li>{{ SL.username }}</li>
+					<li>{{ SL.Name }}</li>
 					<li>Nombre oeuvres</li>
-					<li>Trash</li>
+					<li>Nombre likes</li>
+					<li><a href="/toggleFavorite?list={{ SL.ID }}">Trash</a></li>
 				<ul>
+				{% endfor %}
+			{% endif %}
 			</div>
 			<div class="FollowersT">
 				Mes Abonnés
