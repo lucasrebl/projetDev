@@ -56,7 +56,7 @@ body {
 header {
     /* overflow: hidden; */
     border-radius: 170px;
-    border: 1px solid #4A3321;
+    border: 1px solid var(--primary-dark);
     background: rgba(239, 248, 255, 0.05);
     position: fixed;
     top: 0;
@@ -71,13 +71,17 @@ header {
     box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.25);
     z-index: 1;
   }
+
+  body.night header {
+    border: 1px solid #ffffff;
+  }
   
   header a {
     text-align: center;
     text-decoration: none;
     font-size: 20px;
     padding: 0 40px;
-    color: #4A3321;
+    color: var(--primary-dark);
     transition: transform 0.3s ease;
   }
   
@@ -96,9 +100,13 @@ header {
     gap: 4rem 2rem;
   }
   .navbar .action-btn{
-    color: #4A3321;
+    color: var(--primary-dark);
     cursor: pointer;
     display: none;
+  }
+
+  body.night .navbar .action-btn{
+    color: white ;
   }
   
   li{
