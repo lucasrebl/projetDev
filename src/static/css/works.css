@@ -1,0 +1,51 @@
+.container {
+    display: flex;
+    align-items: flex-start;
+    margin: 100px 40px;
+}
+
+.filters {
+    width: 200px;
+    margin-right: 20px;
+}
+
+.works-container {
+    flex-grow: 1;
+}
+
+.work {
+    margin: 0 25px 25px;
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.45);
+    border-radius: 35px;
+    background-color: rgba(239, 248, 255, 0.05);
+}
+
+body.night .work{
+    border: 1px solid rgba(255, 255, 255, 0.45);
+}
+
+.work img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.form {
+    display: none;
+    margin: 100px 100px 50px 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-link {
+    text-decoration: none; 
+    color: black; 
+}
+
+body.night p {
+    color: white;
+  }
