@@ -4,9 +4,29 @@
     margin: 100px 40px;
 }
 
+.custom-fieldset {
+    margin: 0 25px 25px;
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.45);
+    border-radius: 35px;
+    background-color: rgba(239, 248, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+body.night .custom-fieldset {
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 35px;
+}
+
 .filters {
-    width: 200px;
-    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5 auto;
+    width: 20%;
+
 }
 
 .works-container {
@@ -19,9 +39,20 @@
     border: 1px solid rgba(0, 0, 0, 0.45);
     border-radius: 35px;
     background-color: rgba(239, 248, 255, 0.05);
+    display: flex;
+    flex-direction: column;
 }
 
-body.night .work{
+.works {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 80%;
+}
+
+body.night .work {
     border: 1px solid rgba(255, 255, 255, 0.45);
 }
 
@@ -42,10 +73,114 @@ body.night .work{
 }
 
 .no-link {
-    text-decoration: none; 
-    color: black; 
+    text-decoration: none;
+    color: black;
 }
 
 body.night p {
     color: white;
-  }
+}
+
+button.add {
+    border-radius: 90px;
+    border-top: 11px solid #4A3321;
+    border-right: 8px solid #4A3321;
+    border-bottom: 1px solid #4A3321;
+    background: #FFF;
+    width: 12rem;
+    height: fit-content;
+    margin: 2rem;
+    padding: 1rem;
+    transition: .3s linear;
+}
+
+button.add:hover {
+    border-radius: 90px;
+    border-top-width: 0;
+    border-bottom: 1px solid #4A3321;
+    background: #FFF;
+    width: 12rem;
+    height: fit-content;
+    margin: 2rem;
+    padding: 1rem;
+    border-right-width: 0;
+}
+
+body.night button.add:hover {
+    border-radius: 90px;
+    border-top-width: 0;
+    border-bottom: 1px solid white;
+    width: 12rem;
+    height: fit-content;
+    margin: 2rem;
+    padding: 1rem;
+    border-right-width: 0;
+}
+
+body.night button.add {
+    border-radius: 90px;
+    border-top: 11px solid #FFF;
+    border-right: 8px solid #FFF;
+    border-bottom: 1px solid #FFF;
+    background: #000;
+    color: #FFF;
+    transition: .3s linear;
+}
+
+/* Styles pour les boutons personnalisés */
+.custom-button {
+    border-radius: 90px;
+    border-top: 11px solid #4A3321;
+    border-right: 8px solid #4A3321;
+    border-bottom: 1px solid #4A3321;
+    background: #FFF;
+    width: 12rem;
+    height: fit-content;
+    margin: 2rem;
+    padding: 1rem;
+    transition: .3s linear;
+}
+
+.custom-button:hover {
+    border-radius: 90px;
+    border-top-width: 0;
+    border-bottom: 1px solid #4A3321;
+    background: #FFF;
+    width: 12rem;
+    height: fit-content;
+    margin: 2rem;
+    padding: 1rem;
+    border-right-width: 0;
+}
+
+body.night .custom-button:hover {
+    border-radius: 90px;
+    border-top-width: 0;
+    border-bottom: 1px solid white;
+    width: 12rem;
+    height: fit-content;
+    margin: 2rem;
+    padding: 1rem;
+    border-right-width: 0;
+}
+
+body.night .custom-button {
+    border-radius: 90px;
+    border-top: 11px solid #FFF;
+    border-right: 8px solid #FFF;
+    border-bottom: 1px solid #FFF;
+    background: #000;
+    color: #FFF;
+    transition: .3s linear;
+}
+
+/* Styles pour l'icône */
+.custom-button i {
+    margin-right: 5px;
+    /* Ajoute un espace entre l'icône et le texte */
+}
+
+
+button.add i {
+    margin-right: 5px;
+}
