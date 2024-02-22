@@ -5,4 +5,21 @@
 {% block stylesheets %}
 	<link href="/../public/css/register.css" rel="stylesheet">
 {% endblock %}
-{% block body %}page de creation de compte{% endblock %}
+{% block body %}
+	<h3>page de creation de compte</h3>
+	<form action="/inscription" method="post">
+		<label for="username">nom d'utilisateur</label>
+		<input type="text" name="username" required>
+
+		<label for="email">email</label>
+		<input type="email" name="email"  required>
+
+		<label for="passwordUser">mot de passe</label>
+		<input type="password" name="passwordUser" minlength="8" required>
+
+		<label for="age">age</label>
+		<input type="number" name="age" min="10" max="100" required>
+
+		<input type="submit" name="submit" value="submit">
+	</form>
+{% endblock %}
