@@ -28,11 +28,15 @@ class dashboardController
         } else {
             include __DIR__ . '/../models/dashboardModel.php';
             $this->crudUser();
-            echo $this->twig->render('dashboard/dashboard.html.twig');
+            $result = $this->readUser();
+            echo $this->twig->render('dashboard/dashboard.html.twig', [
+                'userDetails' => $result
+            ]);
         }
     }
 
-    public function crudUser() {
+    public function crudUser()
+    {
         // condition delete user
         if (isset($_POST['delete'])) {
             $user_username_delete = $_POST['username'];
@@ -66,5 +70,23 @@ class dashboardController
                 echo "Erreur lors du téléchargement de l'image.";
             }
         }
+    }
+
+    public function readUser()
+    {
+        $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+        $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $stmt = $dsn->prepare("SELECT * FROM user");
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as &$user) {
+            if ($user['pictures'] !== null) {
+                $user['pictures'] = base64_encode($user['pictures']);
+            } else {
+                $user['pictures'] = '';
+            }
+        }
+        return $result;
     }
 }

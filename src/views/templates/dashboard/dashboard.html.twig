@@ -48,4 +48,19 @@
 			<input type="submit" name="update2" value="update pictures" id="submitUpdate">
 		</form>
 	</div>
+	<div class="crudUser2">
+		<div class="readUSer">
+			{% for user in userDetails %}
+				<div class="read">
+					<p id="read">id: {{user.idUser}}</p>
+					<p id="read">username: {{user.username}}</p>
+					<p id="read">email: {{user.email}}</p>
+					<p id="read">password: {{user.passwordUser}}</p>
+					<p id="read">age: {{user.age}}</p>
+					<p id="read">isAdmin: {{user.isAdmin}}</p>
+					<img id="image" src="data:image;base64,{{user.pictures}}" alt="Image">
+				</div>
+			{% endfor %}
+		</div>
+	</div>
 {% endblock %}
