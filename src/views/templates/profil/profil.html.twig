@@ -40,8 +40,7 @@
 			</form>
 			<button class="cancel">Annuler</button>
 		</div>
-		<div class="listes">
-			<h2 id="title">Listes</h2>
+		<div class="Mylist">
 			<div class="addList">
 				Mes Listes
 				<button id="toggleButton">+</button>
@@ -63,12 +62,14 @@
 					<li>Nombre oeuvres</li>
 					<li>Nombre likes</li>
 					<li>Eye</li>
-					<li>Pen</li>
+					<li><a href="/viewList?list={{ SL.ID }}">Pen</a></li>
 					<li><a href="/deleteList?list={{ SL.ID }}">Trash</a></li>
 				<ul>
 				{% endfor %}
 			{% endif %}
 			</div>
+		</div>
+		<div class="MyLike">
 			<div class="LKT">
 				Mes Listes Likés
 			</div>
@@ -87,6 +88,8 @@
 				{% endfor %}
 			{% endif %}
 			</div>
+		</div>
+		<div class="MyFavorites">
 			<div class="LFT">
 				Mes Listes Favorites
 			</div>
@@ -105,6 +108,8 @@
 				{% endfor %}
 			{% endif %}
 			</div>
+		</div>
+		<div class="Myfollowers">
 			<div class="FollowersT">
 				Mes Abonnés
 			</div>
@@ -113,6 +118,8 @@
 				<p>Nom</p>
 				<button>Suivre</button>
 			</div>
+		</div>
+		<div class="Myfollowing">
 			<div class="FollowingT">
 				Mes Abonnements
 			</div>
@@ -121,6 +128,14 @@
 				<p>Nom</p>
 				<button>Ne Plus Suivre</button>
 			</div>
+		</div>
+		<div class="selection">
+			<p id="infos">Informations</p>
+			<p id="listM">Mes listes</p>
+			<p id="listL">Mes listes Likés</p>
+			<p id="listF">Mes listes Favorites</p>
+			<p id="follow">Mes Abonnés</p>
+			<p id="followi">Mes Abonnements</p>
 		</div>
 	</div>
 	<script src="/static/js/profil.js"></script>

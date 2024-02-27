@@ -17,13 +17,7 @@ if ($_SESSION['initD'] == null) {
     $query = $connection->prepare("SELECT * FROM Category");
     $query->execute();
     if ($query->rowCount() <= 0) {
-        $query2 = $connection->prepare("INSERT INTO tag(nameTag) VALUES('Action');
-        INSERT INTO tag(nameTag) VALUES('Comédie');
-        INSERT INTO tag(nameTag) VALUES('Horreur');
-        INSERT INTO Category(nameCategory) VALUES('Series');
-        INSERT INTO Category(nameCategory) VALUES('Films');
-        INSERT INTO Category(nameCategory) VALUES('Livres');");
-        $query2->execute();
+        $database->init();
     }
     $_SESSION['initD'] = 0;
 }

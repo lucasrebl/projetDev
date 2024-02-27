@@ -12,6 +12,7 @@ class router
         'profil' => ['controller' => 'profilController', 'method' => 'profil'],
         'recommande' => ['controller' => 'recommendedController', 'method' => 'recommended'],
         'solunasList' => ['controller' => 'solunaslistController', 'method' => 'solunaslist'],
+        'viewList' => ['controller' => 'solunaslistController', 'method' => 'solunasview'],
         'deconnexion' => ['controller' => 'logOutController', 'method' => 'logOut'],
         'mWork' => ['controller' => 'summaryController', 'method' => 'modify'],
         'getImage' => ['controller' => 'summaryController', 'method' => 'getImage'],
@@ -21,6 +22,7 @@ class router
         'addList' => ['controller' => 'solunaslistController', 'method' => 'addList'],
         'deleteList' => ['controller' => 'solunaslistController', 'method' => 'deleteList'],
         'addToList' => ['controller' => 'solunaslistController', 'method' => 'addToList'],
+        'deleteFromList' => ['controller' => 'solunaslistController', 'method' => 'deleteFromList'],
     ];
     public function __construct($request)
     {
