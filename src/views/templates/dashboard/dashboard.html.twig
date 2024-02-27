@@ -5,4 +5,47 @@
 {% block stylesheets %}
 	<link href="/../public/css/dashboard.css" rel="stylesheet">
 {% endblock %}
-{% block body %}page du panel admin{% endblock %}
+{% block body %}page du panel admin
+	<h3>crudUser</h3>
+	<div class="crudUser">
+		<form action="/panelAdmin" method="post" id="deleteUser">
+			<label for="delete">username:</label>
+        	<input type="text" name="username" id="delete" required>
+
+        	<input type="submit" name="delete" value="delete user" id="delete">
+		</form>
+
+		<form action="/panelAdmin" method="post" id="updateUser">
+			<label for="update">selectionné le nom d'utilisateur:</label>
+        	<input type="text" name="usernameSelect" id="update" >
+
+			<label for="update">username:</label>
+			<input type="text" name="username" id="update">
+
+			<label for="update">email:</label>
+			<input type="text" name="email" id="update">
+
+			<label for="update">password:</label>
+			<input type="text" name="password" id="update">
+
+			<label for="update">isAdmin:</label>
+			<input type="number" name="isAdmin" min="0" max="1" id="update">
+
+			<label for="update">age:</label>
+			<input type="number" name="age" min="10" max="100" id="update">
+
+			<input type="submit" name="update" value="update info user" id="update">
+			<input type="submit" name="submit" value="add user" id="submit">
+		</form>
+
+		<form action="/panelAdmin" method="post" enctype="multipart/form-data" id="updateUser">
+			<label for="update">selectionné le nom d'utilisateur:</label>
+			<input type="text" name="usernameSelect" id="update" required>
+
+			<label for="pictures">pictures:</label>
+			<input type="file" name="pictures" id="pictures" required>
+
+			<input type="submit" name="update2" value="update pictures" id="submitUpdate">
+		</form>
+	</div>
+{% endblock %}
