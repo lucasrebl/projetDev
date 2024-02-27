@@ -50,7 +50,8 @@ class dashboardController
             $user_password_update = $_POST['password'];
             $user_isAdmin_update = $_POST['isAdmin'];
             $user_age_update = $_POST['age'];
-            updateUser($user_username_select, $user_username_update, $user_email_update, $user_password_update, $user_isAdmin_update, $user_age_update);
+            $hashed_password_update = password_hash($user_password_update, PASSWORD_DEFAULT);
+            updateUser($user_username_select, $user_username_update, $user_email_update, $hashed_password_update, $user_isAdmin_update, $user_age_update);
         }
         // condition add user
         else if (isset($_POST['submit'])) {
@@ -58,7 +59,8 @@ class dashboardController
             $user_email_add = $_POST['email'];
             $user_password_add = $_POST['password'];
             $user_age_add = $_POST['age'];
-            addUser($user_username_add, $user_email_add, $user_password_add, $user_age_add);
+            $hashed_password_add = password_hash($user_password_add, PASSWORD_DEFAULT);
+            addUser($user_username_add, $user_email_add, $hashed_password_add, $user_age_add);
         }
         // condittion update pictures user
         else if (isset($_POST['update2'])) {

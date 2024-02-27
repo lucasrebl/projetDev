@@ -24,7 +24,7 @@ if (!function_exists('deleteUser')) {
 }
 
 if (!function_exists('updateUser')) {
-    function updateUser($user_username_select, $user_username_update, $user_email_update, $user_password_update, $user_isAdmin_update, $user_age_update)
+    function updateUser($user_username_select, $user_username_update, $user_email_update, $hashed_password_update, $user_isAdmin_update, $user_age_update)
     {
         try {
             $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
@@ -34,7 +34,7 @@ if (!function_exists('updateUser')) {
             $stmt->bindParam(':usernameSelect', $user_username_select);
             $stmt->bindParam(':username', $user_username_update);
             $stmt->bindParam(':email', $user_email_update);
-            $stmt->bindParam(':password', $user_password_update);
+            $stmt->bindParam(':password', $hashed_password_update);
             $stmt->bindParam(':isAdmin', $user_isAdmin_update);
             $stmt->bindParam(':age', $user_age_update);
             if ($stmt->execute()) {
@@ -50,7 +50,7 @@ if (!function_exists('updateUser')) {
 }
 
 if (!function_exists('addUser')) {
-    function addUser($user_username_add, $user_email_add, $user_password_add, $user_age_add)
+    function addUser($user_username_add, $user_email_add, $hashed_password_add, $user_age_add)
     {
         try {
             $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
@@ -59,7 +59,7 @@ if (!function_exists('addUser')) {
             $stmt = $dsn->prepare("INSERT INTO user (username, email, passwordUser, age) VALUES (:username, :email, :password, :age)");
             $stmt->bindParam(':username', $user_username_add);
             $stmt->bindParam(':email', $user_email_add);
-            $stmt->bindParam(':password', $user_password_add);
+            $stmt->bindParam(':password', $hashed_password_add);
             $stmt->bindParam(':age', $user_age_add);
             if ($stmt->execute()) {
                 echo "ajout réussis";
