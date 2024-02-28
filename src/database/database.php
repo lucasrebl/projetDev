@@ -69,10 +69,11 @@ class database{
             `nameWorks` varchar(255) DEFAULT NULL,
             `status` varchar(255) DEFAULT NULL,
             `image` LONGBLOB DEFAULT NULL,
-            `summary` varchar(255) DEFAULT NULL,
+            `summary` TEXT DEFAULT NULL,
             `numberOfEpisodes` int(11) DEFAULT NULL,
             `numberOfSeason` int(11) DEFAULT NULL,
             `numberOfTome` int(11) DEFAULT NULL,
+            `isNsfw` tinyint(1) DEFAULT '0',
             PRIMARY key (`idWorks`),
             CONSTRAINT unique_nameWorks UNIQUE (`nameWorks`)
         ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1");
@@ -147,6 +148,19 @@ class database{
             echo 'connection failed: ' . $e->getMessage();
         }
         return $pdo;
+    }
+
+    function init()
+    {
+        $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+        $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = $dsn->prepare("INSERT INTO tag(nameTag) VALUES('Action');
+        INSERT INTO tag(nameTag) VALUES('Comédie');
+        INSERT INTO tag(nameTag) VALUES('Horreur');
+        INSERT INTO Category(nameCategory) VALUES('Series');
+        INSERT INTO Category(nameCategory) VALUES('Films');
+        INSERT INTO Category(nameCategory) VALUES('Livres');");
+        $query->execute();
     }
 }
 ?>

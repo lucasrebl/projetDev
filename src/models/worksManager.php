@@ -79,7 +79,8 @@ class worksManager{
         VALUES('$nameWorks','$status','','$summary',$episodes,$season,$tome)");
         $result->execute();
         } catch (PDOException $e){
-            header("Location: /oeuvres");
+            echo $e->getMessage();
+            //header("Location: /oeuvres");
         }
 }
 

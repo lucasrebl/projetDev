@@ -90,30 +90,6 @@ button {
   height: fit-content;
   margin: 2rem;
   padding: 1rem;
-  transition: .3s linear;
-}
-
-button:hover {
-  border-radius: 90px;
-  border-top-width: 0; 
-  border-bottom: 1px solid #4A3321;
-  background: #FFF;
-  width: 12rem;
-  height: fit-content;
-  margin: 2rem;
-  padding: 1rem;
-  border-right-width: 0; 
-}
-
-body.night .container-left button:hover {
-  border-radius: 90px;
-  border-top-width: 0; 
-  border-bottom: 1px solid white;
-  width: 12rem;
-  height: fit-content;
-  margin: 2rem;
-  padding: 1rem;
-  border-right-width: 0;
 }
 
 body.night .container-left button {
@@ -122,8 +98,7 @@ body.night .container-left button {
   border-right: 8px solid #FFF;
   border-bottom: 1px solid #FFF;
   background: #000;
-  color: #FFF; 
-  transition: .3s linear;
+  color: #FFF; /* Set the text color to white */
 }
 
 /* DROPDOWN MENU */

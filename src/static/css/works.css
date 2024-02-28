@@ -34,13 +34,14 @@ body.night .custom-fieldset {
 }
 
 .work {
-    margin: 0 25px 25px;
+    margin: 0 25px 100px;
     padding: 20px;
     border: 1px solid rgba(0, 0, 0, 0.45);
     border-radius: 35px;
     background-color: rgba(239, 248, 255, 0.05);
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .works {
@@ -49,7 +50,18 @@ body.night .custom-fieldset {
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    width: 80%;
+    max-width: 40%;
+}
+
+.works a{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.work p{
+    max-width: 50%;
 }
 
 body.night .work {
@@ -57,7 +69,7 @@ body.night .work {
 }
 
 .work img {
-    max-width: 100%;
+    max-width: 40%;
     height: auto;
     display: block;
     margin-bottom: 10px;

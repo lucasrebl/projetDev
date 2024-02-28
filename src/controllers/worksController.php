@@ -35,6 +35,7 @@ class worksController
     }
 
     public function add(){
+        
         $name = $_POST["name"] ?? "";
         $summary = $_POST["summary"] ?? "";
         $episodes = $_POST["episodes"] ?? 0;
@@ -42,10 +43,15 @@ class worksController
         $season = $_POST["season"] ?? 0;
         $tome = $_POST["tome"] ?? 0;
         $category = $_POST["category"] ?? "";
+        if(empty($episodes)){
+            $episodes = 0;
+        }
+        if(empty($season)){
+            $season = 0;
+        }
         if(empty($tome)){
             $tome = 0;
         }
-
         $MW = new worksManager();
         $FW = new filterManager();
         $bdd = new database();
