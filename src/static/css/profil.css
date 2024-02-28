@@ -18,14 +18,42 @@
     width: auto;
     display: flex;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row-reverse;
+    margin: 15rem 10rem 0 -40rem;
+    justify-content: center;
 }
 
 .userinfo img{
     max-width: 30%;
+    border-radius: 360%;
 }
 
 .userinfo{
     display: flex;
     align-items: center;
+    flex-direction: column;
+}
+
+li {
+    margin: 25px;
+}
+.custom-fieldset {
+    margin: 0 10rem 0 20rem;;
+    padding: 20px 40px 20px 20px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 35px;
+    background-color: rgba(255, 255, 255, 0.25);
+    display: flex;
+    flex-direction: column;
+}
+
+body.night .custom-fieldset {
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 35px;
+}
+
+.selection{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }

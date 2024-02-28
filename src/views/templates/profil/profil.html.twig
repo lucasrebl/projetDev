@@ -11,29 +11,30 @@
 {% endblock %}
 {% block body %}
 {% include "header.html.twig" %}
-	<div class="container">
-		<div class="userinfo">
-			<img src = "data:image/png;base64,{{ User.picture }}"/>
-			<button id="toggleButton">+</button>
-			<p id="name">{{ User.username }}</p>
-			{% if User.ID == IDuser %}
-				<button class="modify">Modifier</button>
-			{% endif %}
-			<br/>
-			<p for="subscribers">Abonnés</p>
-			<p id="subscribers">0</p>
-			<p for="solunaslist">Listes</p>
-			<p id="solunaslist">0</p>
-			<p for="following">Abonnements</p>
-			<p id="following">0</p>
-		</div>
-		<div class="formUser" style="display: none;">
-			<form enctype="multipart/form-data" action="/getUserImage?id={{ User.ID }}" method="post" style="display: none;">
-				<p for="picture">Image : </p>
-				<input type="file" id="picture" name="picture" accept="image/jpg, image/png"></input>
-				<input type="submit" value="get" hidden/>
-			</form>
-			<form action="/mUser" method="post">
+<div class="container">
+	<div class="userinfo">
+		<img src="data:image/png;base64,{{ User.picture }}" />
+		<button id="toggleButton">+</button>
+		<p id="name">{{ User.username }}</p>
+		{% if User.ID == IDuser %}
+		<button class="modify">Modifier</button>
+		{% endif %}
+		<br />
+		<p for="subscribers">Abonnés</p>
+		<p id="subscribers">0</p>
+		<p for="solunaslist">Listes</p>
+		<p id="solunaslist">0</p>
+		<p for="following">Abonnements</p>
+		<p id="following">0</p>
+	</div>
+	<div class="formUser" style="display: none;">
+		<form enctype="multipart/form-data" action="/getUserImage?id={{ User.ID }}" method="post"
+			style="display: none;">
+			<p for="picture">Image : </p>
+			<input type="file" id="picture" name="picture" accept="image/jpg, image/png"></input>
+			<input type="submit" value="get" hidden />
+		</form>
+		<form action="/mUser" method="post">
 			<input type="text" id="id" name="id" value="{{User.ID}}" hidden></input>
 			<p for="name">Pseudo : </p>
 			<input type="text" id="nameUser" name="name" value="{{ User.username }}"></input>
@@ -42,24 +43,23 @@
 			<p for="NP">Nouveau Mot de passe : </p>
 			<input type="password" id="NP" name="NP" value=""></input>
 			<button type="submit">Valider</button>
-			</form>
-			<button class="cancel">Annuler</button>
+		</form>
+		<button class="cancel">Annuler</button>
+	</div>
+	<div class="Mylist">
+		<div class="addList">
+			Mes Listes
+			<button id="toggleButton">+</button>
 		</div>
-		<div class="Mylist">
-			<div class="addList">
-				Mes Listes
-				<button id="toggleButton">+</button>
-			</div>
-			<div class="FormList">
-				<form id="myForm" class="Form_hidden" action="/addList" method="post">
+		<div class="FormList">
+			<form id="myForm" class="Form_hidden" action="/addList" method="post">
 				<p for="name">Nom :</p>
 				<input type="text" id="nameList" name="name" required>
 				<input type="submit" value="Soumettre">
-        		</form>
-			</div>
-			<div class="List">
-				{% if SLs|length < 1 %}
-					<p>aucune Listes</p>
+			</form>
+		</div>
+		<div class="List">
+			{% if SLs|length < 1 %} <p>aucune Listes</p>
 				{% else %}
 				{% for SL in SLs %}
 				<ul>
@@ -69,18 +69,17 @@
 					<li>Eye</li>
 					<li><a href="/viewList?list={{ SL.ID }}">Pen</a></li>
 					<li><a href="/deleteList?list={{ SL.ID }}">Trash</a></li>
-				<ul>
-				{% endfor %}
-			{% endif %}
-			</div>
+					<ul>
+						{% endfor %}
+						{% endif %}
 		</div>
-		<div class="MyLike">
-			<div class="LKT">
-				Mes Listes Likés
-			</div>
-			<div class="List_like">
-				{% if SLl|length < 1 %}
-					<p>aucune Listes</p>
+	</div>
+	<div class="MyLike">
+		<div class="LKT">
+			Mes Listes Likés
+		</div>
+		<div class="List_like">
+			{% if SLl|length < 1 %} <p>aucune Listes</p>
 				{% else %}
 				{% for SL in SLl %}
 				<ul>
@@ -89,18 +88,17 @@
 					<li>Nombre oeuvres</li>
 					<li>Nombre likes</li>
 					<li><a href="/toggleLike?list={{ SL.ID }}">Trash</a></li>
-				<ul>
-				{% endfor %}
-			{% endif %}
-			</div>
+					<ul>
+						{% endfor %}
+						{% endif %}
 		</div>
-		<div class="MyFavorites">
-			<div class="LFT">
-				Mes Listes Favorites
-			</div>
-			<div class="List_Favorites">
-				{% if SLf|length < 1 %}
-					<p>aucune Listes</p>
+	</div>
+	<div class="MyFavorites">
+		<div class="LFT">
+			Mes Listes Favorites
+		</div>
+		<div class="List_Favorites">
+			{% if SLf|length < 1 %} <p>aucune Listes</p>
 				{% else %}
 				{% for SL in SLf %}
 				<ul>
@@ -109,41 +107,55 @@
 					<li>Nombre oeuvres</li>
 					<li>Nombre likes</li>
 					<li><a href="/toggleFavorite?list={{ SL.ID }}">Trash</a></li>
-				<ul>
-				{% endfor %}
-			{% endif %}
-			</div>
-		</div>
-		<div class="Myfollowers">
-			<div class="FollowersT">
-				Mes Abonnés
-			</div>
-			<div class="Followers">
-				<img src=""></img>
-				<p>Nom</p>
-				<button>Suivre</button>
-			</div>
-		</div>
-		<div class="Myfollowing">
-			<div class="FollowingT">
-				Mes Abonnements
-			</div>
-			<div class="Following">
-				<img src=""></img>
-				<p>Nom</p>
-				<button>Ne Plus Suivre</button>
-			</div>
-		</div>
-		<div class="selection">
-			<p id="infos">Informations</p>
-			<p id="listM">Mes listes</p>
-			<p id="listL">Mes listes Likés</p>
-			<p id="listF">Mes listes Favorites</p>
-			<p id="follow">Mes Abonnés</p>
-			<p id="followi">Mes Abonnements</p>
+					<ul>
+						{% endfor %}
+						{% endif %}
 		</div>
 	</div>
-	<script src="/static/js/profil.js"></script>
-	<script src="/static/js/home.js"></script>
+	<div class="Myfollowers">
+		<div class="FollowersT">
+			Mes Abonnés
+		</div>
+		<div class="Followers">
+			<img src=""></img>
+			<p>Nom</p>
+			<button>Suivre</button>
+		</div>
+	</div>
+	<div class="Myfollowing">
+		<div class="FollowingT">
+			Mes Abonnements
+		</div>
+		<div class="Following">
+			<img src=""></img>
+			<p>Nom</p>
+			<button>Ne Plus Suivre</button>
+		</div>
+	</div>
+	<fieldset class="custom-fieldset">
+		<ul class="selection">
+			<li>
+				<p class="fa-solid fa-user" id="infos">Informations</p>
+			</li>
+			<li>
+				<p class="fa-solid fa-clipboard-list" id="listM">Mes listes</p>
+			</li>
+			<li>
+				<p class="fa-solid fa-heart" id="listL">Mes listes Likés</p>
+			</li>
+			<li>
+				<p class="fa-solid fa-star" id="listF">Mes listes Favorites</p>
+			</li>
+			<li>
+				<p class="fa-solid fa-user-plus" id="follow">Mes Abonnés</p>
+			</li>
+			<li>
+				<p class="fa-solid fa-users" id="followi">Mes Abonnements</p>
+			</li>
+		</ul>
+	</fieldset>
+</div>
+<script src="/static/js/profil.js"></script>
+<script src="/static/js/home.js"></script>
 
 {% endblock %}
