@@ -103,11 +103,11 @@ class dashboardController
     {
         // conditions delete oeuvres
         if (isset($_POST['delete2'])) {
-            $oeuvres_id_delete = $_POST['id'];
+            $oeuvres_id_delete = $_POST['idSelect'];
             deleteOeuvres($oeuvres_id_delete);
         }
         // conditions update oeuvres
-        else if (isset($_POST['update3'])) {
+        else if (isset($_POST['update2'])) {
             $oeuvres_id_select = $_POST['idSelect'];
             $oeuvres_nameWorks_update = $_POST['nameWorks'];
             $oeuvres_status_update = $_POST['status'];

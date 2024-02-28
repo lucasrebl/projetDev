@@ -8,14 +8,6 @@
 {% block body %}page du panel admin
 	<h3>crudUser</h3>
 	<div class="crudUser">
-		<h3>form delete user</h3>
-		<form action="/panelAdmin" method="post">
-			<label for="delete">username:</label>
-        	<input type="text" name="username" required>
-
-        	<input type="submit" name="delete" value="delete user">
-		</form>
-
 		<h3>form update and add user</h3>
 		<form action="/panelAdmin" method="post" enctype="multipart/form-data">
 			<label for="update">selectionné le nom d'utilisateur:</label>
@@ -41,6 +33,7 @@
 
 			<input type="submit" name="update" value="update info user">
 			<input type="submit" name="submit" value="add user">
+        	<input type="submit" name="delete" value="delete user">
 		</form>
 	</div>
 
@@ -62,14 +55,6 @@
 
 	<h3>crud Oeuvres</h3>
 	<div class="crudOeuvres">
-		<h3>form delete oeuvres</h3>
-		<form action="/panelAdmin" method="post">
-			<label for="delete">id:</label>
-        	<input type="number" name="id" min="1" required>
-
-        	<input type="submit" name="delete2" value="delete Oeuvres">
-		</form>
-
 		<h3>form update and add oeuvres</h3>
 		<form action="/panelAdmin" method="post" enctype="multipart/form-data">
 			<label for="update">selectionné l'id de l'oeuvres:</label>
@@ -96,8 +81,9 @@
 			<label for="image">image:</label>
 			<input type="file" name="image">
 
-			<input type="submit" name="update3" value="update info oeuvres">
+			<input type="submit" name="update2" value="update info oeuvres">
 			<input type="submit" name="submit2" value="add oeuvres">
+        	<input type="submit" name="delete2" value="delete Oeuvres">
 		</form>
 	</div>
 
