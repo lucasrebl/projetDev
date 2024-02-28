@@ -85,17 +85,18 @@ if (!function_exists('updateUser')) {
 }
 
 if (!function_exists('addUser')) {
-    function addUser($user_username_add, $user_email_add, $hashed_password_add, $user_age_add)
+    function addUser($user_username_add, $user_email_add, $hashed_password_add, $user_age_add, $user_image_add)
     {
         try {
             $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
             $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $stmt = $dsn->prepare("INSERT INTO user (username, email, passwordUser, age) VALUES (:username, :email, :password, :age)");
+            $stmt = $dsn->prepare("INSERT INTO user (username, email, passwordUser, age, pictures) VALUES (:username, :email, :password, :age, :pictures)");
             $stmt->bindParam(':username', $user_username_add);
             $stmt->bindParam(':email', $user_email_add);
             $stmt->bindParam(':password', $hashed_password_add);
             $stmt->bindParam(':age', $user_age_add);
+            $stmt->bindParam(':pictures', $user_image_add, PDO::PARAM_LOB);
             if ($stmt->execute()) {
                 echo "ajout réussis";
             } else {

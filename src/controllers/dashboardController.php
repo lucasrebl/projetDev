@@ -65,9 +65,13 @@ class dashboardController
             if (empty($user_username_add) || empty($user_email_add) || empty($user_password_add) || empty($user_age_add)) {
                 echo "Veuillez remplir les champs suivant: username, email, password, age";
             } else {
-                $hashed_password_add = password_hash($user_password_add, PASSWORD_DEFAULT);
-                addUser($user_username_add, $user_email_add, $hashed_password_add, $user_age_add);
-                echo "Utilisateur ajouté avec succès!";
+                if (isset($_FILES["pictures"]) && $_FILES["pictures"]["error"] == UPLOAD_ERR_OK) {
+                    $user_image_add = file_get_contents($_FILES["pictures"]["tmp_name"]);
+                    $hashed_password_add = password_hash($user_password_add, PASSWORD_DEFAULT);
+                    addUser($user_username_add, $user_email_add, $hashed_password_add, $user_age_add, $user_image_add);
+                } else {
+                    echo "Erreur lors du téléchargement de l'image.";
+                }
             }
         }
         // condittion update pictures user

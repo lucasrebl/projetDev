@@ -8,44 +8,50 @@
 {% block body %}page du panel admin
 	<h3>crudUser</h3>
 	<div class="crudUser">
-		<form action="/panelAdmin" method="post" id="deleteUser">
+		<h3>form delete user</h3>
+		<form action="/panelAdmin" method="post">
 			<label for="delete">username:</label>
-        	<input type="text" name="username" id="delete" required>
+        	<input type="text" name="username" required>
 
-        	<input type="submit" name="delete" value="delete user" id="delete">
+        	<input type="submit" name="delete" value="delete user">
 		</form>
 
-		<form action="/panelAdmin" method="post" id="updateUser">
+		<h3>form update and add user</h3>
+		<form action="/panelAdmin" method="post" enctype="multipart/form-data">
 			<label for="update">selectionné le nom d'utilisateur:</label>
-        	<input type="text" name="usernameSelect" id="update" >
+        	<input type="text" name="usernameSelect">
 
 			<label for="update">username:</label>
-			<input type="text" name="username" id="update">
+			<input type="text" name="username">
 
 			<label for="update">email:</label>
-			<input type="text" name="email" id="update">
+			<input type="text" name="email">
 
 			<label for="update">password:</label>
-			<input type="password" name="password" id="update">
+			<input type="password" name="password">
 
 			<label for="update">isAdmin:</label>
-			<input type="number" name="isAdmin" min="0" max="1" id="update">
+			<input type="number" name="isAdmin" min="0" max="1">
 
 			<label for="update">age:</label>
-			<input type="number" name="age" min="10" max="100" id="update">
-
-			<input type="submit" name="update" value="update info user" id="update">
-			<input type="submit" name="submit" value="add user" id="submit">
-		</form>
-
-		<form action="/panelAdmin" method="post" enctype="multipart/form-data" id="updateUser">
-			<label for="update">selectionné le nom d'utilisateur:</label>
-			<input type="text" name="usernameSelect" id="update" required>
+			<input type="number" name="age" min="10" max="100">
 
 			<label for="pictures">pictures:</label>
-			<input type="file" name="pictures" id="pictures" required>
+			<input type="file" name="pictures">
 
-			<input type="submit" name="update2" value="update pictures" id="updtae">
+			<input type="submit" name="update" value="update info user">
+			<input type="submit" name="submit" value="add user">
+		</form>
+
+		<h3>form update image user</h3>
+		<form action="/panelAdmin" method="post" enctype="multipart/form-data">
+			<label for="update">selectionné le nom d'utilisateur:</label>
+			<input type="text" name="usernameSelect" required>
+
+			<label for="pictures">pictures:</label>
+			<input type="file" name="pictures" required>
+
+			<input type="submit" name="update2" value="update pictures">
 		</form>
 	</div>
 
@@ -67,50 +73,53 @@
 
 	<h3>crud Oeuvres</h3>
 	<div class="crudOeuvres">
-		<form action="/panelAdmin" method="post" id="deleteUser">
+		<h3>form delete oeuvres</h3>
+		<form action="/panelAdmin" method="post">
 			<label for="delete">id:</label>
-        	<input type="number" name="id" min="1" id="delete" required>
+        	<input type="number" name="id" min="1" required>
 
-        	<input type="submit" name="delete2" value="delete Oeuvres" id="delete">
+        	<input type="submit" name="delete2" value="delete Oeuvres">
 		</form>
 
-		<form action="/panelAdmin" method="post" id="updateOeuvres" enctype="multipart/form-data">
+		<h3>form update and add oeuvres</h3>
+		<form action="/panelAdmin" method="post" enctype="multipart/form-data">
 			<label for="update">selectionné l'id de l'oeuvres:</label>
-        	<input type="text" name="idSelect" id="update">
+        	<input type="text" name="idSelect">
 
 			<label for="update">nameWorks:</label>
-			<input type="text" name="nameWorks" id="update">
+			<input type="text" name="nameWorks">
 
 			<label for="update">status:</label>
-			<input type="text" name="status" id="update">
+			<input type="text" name="status">
 
 			<label for="update">summary:</label>
-			<input type="text" name="summary" id="update">
+			<input type="text" name="summary">
 
 			<label for="update">numberOfEpisodes:</label>
-			<input type="number" name="numberOfEpisodes" id="update">
+			<input type="number" name="numberOfEpisodes">
 
 			<label for="update">numberOfSeason:</label>
-			<input type="number" name="numberOfSeason" id="update">
+			<input type="number" name="numberOfSeason">
 
 			<label for="update">numberOfTome:</label>
-			<input type="number" name="numberOfTome" id="update">
+			<input type="number" name="numberOfTome">
 
 			<label for="image">image:</label>
-			<input type="file" name="image" id="image">
+			<input type="file" name="image">
 
-			<input type="submit" name="update3" value="update info oeuvres" id="update">
-			<input type="submit" name="submit2" value="add oeuvres" id="submit">
+			<input type="submit" name="update3" value="update info oeuvres">
+			<input type="submit" name="submit2" value="add oeuvres">
 		</form>
 
-		<form action="/panelAdmin" method="post" enctype="multipart/form-data" id="updateUser">
+		<h3>form update image oeuvres</h3>
+		<form action="/panelAdmin" method="post" enctype="multipart/form-data">
 			<label for="update">selectionné l'id de l'oeuvres:</label>
-        	<input type="text" name="idSelect" id="update">
+        	<input type="text" name="idSelect">
 
 			<label for="image">image:</label>
-			<input type="file" name="image" id="image" required>
+			<input type="file" name="image" required>
 
-			<input type="submit" name="update4" value="update image" id="update">
+			<input type="submit" name="update4" value="update image">
 		</form>
 	</div>
 
