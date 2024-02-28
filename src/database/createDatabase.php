@@ -10,6 +10,7 @@ $createTable = ("CREATE TABLE IF NOT EXISTS
     `email` varchar(255) DEFAULT NULL,
     `passwordUser` varchar(255) DEFAULT NULL,
     `age` int(11) DEFAULT NULL,
+    `pictures` LONGBLOB DEFAULT NULL,
     `isAdmin` tinyint(1) DEFAULT '0',
     PRIMARY KEY (`idUser`),
     CONSTRAINT unique_key UNIQUE (`username`, `email`)
@@ -90,6 +91,7 @@ $createTable = ("CREATE TABLE IF NOT EXISTS
 `tag` (
     `idTag` int(11) NOT NULL AUTO_INCREMENT,
     `nameTag` varchar(255) DEFAULT NULL,
+    `pictures` LONGBLOB DEFAULT NULL,
     PRIMARY key (`idTag`),
     CONSTRAINT unique_nameTag UNIQUE (`nameTag`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 14 DEFAULT CHARSET = latin1");
@@ -99,6 +101,7 @@ $createTable = ("CREATE TABLE IF NOT EXISTS
 `Category` (
     `idCategory` int(11) NOT NULL AUTO_INCREMENT,
     `nameCategory` varchar(255) DEFAULT NULL,
+    `pictures` LONGBLOB DEFAULT NULL,
     PRIMARY key (`idCategory`),
     CONSTRAINT unique_nameCategory UNIQUE (`nameCategory`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 14 DEFAULT CHARSET = latin1");

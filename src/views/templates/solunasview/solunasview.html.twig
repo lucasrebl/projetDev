@@ -1,0 +1,23 @@
+{% extends "default.html.twig" %}
+
+{% block title %}Liste N°{{ soluna.ID }}
+{% endblock %}
+{% block stylesheets %}
+	<link href="/../public/css/logOut.css" rel="stylesheet">
+{% endblock %}
+{% block body %}
+	<div class="container">
+		<div class="List">
+			<h2>{{ soluna.name }}</h2>
+			{% for Work in soluna.Works %}
+			<ul>
+				<li><img src="data:image/png;base64,{{ Work.picture }}" /></li>
+				<li><p>{{ Work.name }}</p></li>
+				<li><a href="/deleteFromList?list={{ soluna.ID }}&work={{ Work.id }}">Trash</a></li>
+			</ul>
+			{% endfor %}
+			<p>Total : 	{{ soluna.Works|length }}</p>
+			<p>Likes : {{ soluna.Works|length }}</p>
+		</div>
+	</div>
+{% endblock %}

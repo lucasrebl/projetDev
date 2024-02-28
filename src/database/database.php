@@ -1,7 +1,9 @@
-<?php 
-class database{
-    function createDatabase(){
-        
+<?php
+class database
+{
+    function createDatabase()
+    {
+
         $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
         $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -42,7 +44,7 @@ class database{
         $dsn->exec($createTable);
 
         $createTable = ("CREATE TABLE IF NOT EXISTS
-        `like` (
+        `likes` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             `idUser` int(11) DEFAULT NULL,
             `idList` int(11) DEFAULT NULL,
@@ -131,9 +133,21 @@ class database{
             CONSTRAINT fk_idTag_in_worksCategory FOREIGN KEY (`idCategory`) REFERENCES Category(`idCategory`)
         ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1");
         $dsn->exec($createTable);
+
+        $default = ("CREATE TABLE IF NOT EXISTS
+        `worksCategory` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `idWorks` int(11) DEFAULT NULL,
+            `idCategory` int(11) DEFAULT NULL,
+            PRIMARY key (`id`),
+            CONSTRAINT fk_idWorks_in_worksCategory FOREIGN KEY (`idWorks`) REFERENCES works(`idWorks`),
+            CONSTRAINT fk_idTag_in_worksCategory FOREIGN KEY (`idCategory`) REFERENCES Category(`idCategory`)
+        ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1");
+        $dsn->exec($default);
     }
 
-    function connect(){
+    function connect()
+    {
         $servername = "mysql";
         $username = "my_user";
         $password = "my_password";

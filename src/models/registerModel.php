@@ -23,10 +23,10 @@ if (!function_exists('addUser')) {
                 $stmt2->bindParam(':passwordUser', $hashed_passwordUser);
                 $stmt2->bindParam(':age', $age_);
                 $stmt2->execute();
-                echo "vous avez bien créer votre compte";
+                header("Location: /connexion");
             }
         } catch (PDOException $e) {
-            $error  = "error: " . $e->getMessage();
+            echo "error: " . $e->getMessage();
         }
     }
 }

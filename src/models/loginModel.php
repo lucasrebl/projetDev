@@ -16,13 +16,8 @@ if (!function_exists('logUSer')) {
 
             if (password_verify($passwordUser_, $user['passwordUser'])) {
                 $_SESSION['idUser'] = $user['idUser'];
-                $_SESSION['username'] = $user['username'];
-                $_SESSION['email'] = $user['email'];
-                $_SESSION['passwordUser'] = $user['passwordUser'];
-                $_SESSION['age'] = $user['age'];
-                $_SESSION['isAdmin'] = $user['isAdmin'];
 
-                echo '<script>window.location.replace("/resume");</script>';
+                echo '<script>window.location.replace("/oeuvres");</script>';
             } else {
                 echo "mot de passe incorrect";
             }

@@ -18,14 +18,13 @@ class loginController
 
     public function login()
     {
-        session_start();
+        // session_start();
         // print_r($_SESSION);
         echo $this->twig->render('login/login.html.twig');
         if (isset($_POST['submit'])) {
             $username_ = $_POST['username'];
             $passwordUser_ = $_POST['passwordUser'];
-            echo $username_;
-            echo $passwordUser_;
+            echo $passwordUser_ . "; ";
             if (empty($username_) || empty($passwordUser_)) {
                 echo "veuiller remplir tous les champs";
             }

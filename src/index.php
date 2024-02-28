@@ -6,14 +6,19 @@ MyAutoLoad::start();
 
 //$_SESSION['initD'] = null;
 
-if (empty($_SESSION['initD'])){
+if (empty($_SESSION['initD'])) {
     $_SESSION['initD'] = null;
 }
 
-if ($_SESSION['initD'] == null){
+if ($_SESSION['initD'] == null) {
     $database = new database();
     $database->createDatabase();
-    //$database->init();
+    $connection = $database->connect();
+    $query = $connection->prepare("SELECT * FROM Category");
+    $query->execute();
+    if ($query->rowCount() <= 0) {
+        $database->init();
+    }
     $_SESSION['initD'] = 0;
 }
 

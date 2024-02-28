@@ -28,6 +28,18 @@
 				</div>
 			<button class="modify">Modifier</button>
 			</div>
+			<div class="lists">
+				<h2>Mes Listes</h2>
+				{% if SLs|length < 1 %}
+					<p>aucunes</p>
+				{% else %}
+				{% for SL in SLs %}
+				<ul>
+					<li><a href="/addToList?list={{ SL.ID }}&work={{ Work.ID }}">{{ SL.Name }}</a></li>
+				<ul>
+				{% endfor %}
+			{% endif %}
+			</div>
 		<div class="form" style="display: none;">
 			<form enctype="multipart/form-data" action="/getImage?id={{ Work.ID }}" method="post">
 				<label for="picture">Image : </label>

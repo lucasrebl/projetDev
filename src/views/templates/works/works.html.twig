@@ -18,22 +18,23 @@
 			<fieldset class="custom-fieldset">
 				<legend>
 					Filtres:
-				</legend>
-				Catégories :
-				{% for Category in Categories %}
-				<p>
-					<input class="category" type="radio" name="option" value="{{ Category.ID }}">
-					{{ Category.Name }}
-				</p>
-				{% endfor %}
-				{% for tag in Tags %}
-				<p>
-					<input class="tag" type="checkbox" name="tag" value="{{ tag.ID }}">
-					{{ tag.Name }}
-				</p>
-				{% endfor %}
-				<div class="part2" style="display: none;">
-					<p for="episodes">Nombre d'épisodes : </p>
+					</legend>
+					Catégories :
+					{% for Category in Categories %}
+						<label>
+							<input class="category" type="radio" name="option" value="{{ Category.ID }}">
+							{{ Category.Name }}
+						</label>
+					{% endfor %}
+					Tags :
+					{% for tag in Tags %}
+						<label>
+							<input class="tag" type="checkbox" name="tag" value="{{ tag.ID }}">
+							{{ tag.Name }}
+						</label>
+					{% endfor %}
+					<div class="part2" style="display: none;">
+					<label for="episodes">Nombre d'épisodes : </label>
 					<input type="text" id="episodes" name="episodes" value=""></input>
 				</div>
 				<div class="part3" style="display: none;">
