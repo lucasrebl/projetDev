@@ -13,3 +13,19 @@
     align-items: center;
     gap: 10px;
 }
+
+.container {
+    width: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.userinfo img{
+    max-width: 30%;
+}
+
+.userinfo{
+    display: flex;
+    align-items: center;
+}

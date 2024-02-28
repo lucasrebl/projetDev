@@ -5,9 +5,18 @@ body {
     --bg-dark: #030102;
   
     /* css style */
-    background-color: var(--bg-light);
     margin: 0;
     padding: 0;
+    background: rgb(237,193,195);
+    background: linear-gradient(45deg, rgb(237,193,195,1), rgba(252,244,141,1)),
+                linear-gradient(-45deg, rgb(237,193,195,1), rgba(252,244,141,1)),
+                linear-gradient(135deg, rgb(237,193,195,1), rgba(252,244,141,1)),
+                linear-gradient(-135deg, rgba(237,193,195,1), rgba(252,244,141,1)),
+                linear-gradient(180deg, rgba(237,193,195,1), rgba(252,244,141,1)),
+                linear-gradient(-180deg, rgba(237,193,195,1), rgba(252,244,141,1));
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+
   }
   
   /* BOUTON LIGHT/DARK MODE */
@@ -47,7 +56,8 @@ body {
   }
   
   body.night {
-    background: var(--bg-dark);
+    background: rgb(3,1,2);
+    background: linear-gradient(0deg, rgba(23,47,171,1) 0%, rgba(3,1,2,1) 100%);
     color: white;
   }
 

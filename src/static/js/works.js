@@ -58,7 +58,7 @@ add.addEventListener('click', function() {
 })
 
 cancel.addEventListener('click', function() {
-    container.style.display = "block"
+    container.style.display = "flex"
     form.style.display = "none"
 })
 

@@ -20,8 +20,6 @@ darkMode.addEventListener('click', function () {
     toggleImage();
 });
 
-
-
 function toggleImage() {
     if (darkMode.classList.contains('active')) {
         modeImage.src = '/static/asset/darkmode.png';
