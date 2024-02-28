@@ -24,7 +24,7 @@ if (!function_exists('deleteUser')) {
 }
 
 if (!function_exists('updateUser')) {
-    function updateUser($user_username_select, $user_username_update, $user_email_update, $hashed_password_update, $user_isAdmin_update, $user_age_update)
+    function updateUser($user_username_select, $user_username_update, $user_email_update, $hashed_password_update, $user_isAdmin_update, $user_age_update, $user_pictures_update = null)
     {
         try {
             $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
@@ -45,6 +45,9 @@ if (!function_exists('updateUser')) {
             }
             if (!empty($user_age_update)) {
                 $setClauses[] = "age = :age";
+            }
+            if (!is_null($user_pictures_update)) {
+                $setClauses[] = "pictures = :pictures";
             }
 
             if (empty($setClauses)) {
@@ -70,6 +73,9 @@ if (!function_exists('updateUser')) {
             }
             if (!empty($user_age_update)) {
                 $stmt->bindParam(':age', $user_age_update);
+            }
+            if (!is_null($user_pictures_update)) {
+                $stmt->bindParam(':pictures', $user_pictures_update, PDO::PARAM_LOB);
             }
 
             if ($stmt->execute()) {
@@ -109,28 +115,6 @@ if (!function_exists('addUser')) {
     }
 }
 
-if (!function_exists('updateUserPictures')) {
-    function updateUserPictures($user_username_select, $user_pictures_update)
-    {
-        try {
-            $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
-            $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            $stmt = $dsn->prepare("UPDATE user SET pictures = :pictures WHERE username = :usernameSelect");
-            $stmt->bindParam(':usernameSelect', $user_username_select);
-            $stmt->bindParam(':pictures', $user_pictures_update, PDO::PARAM_LOB);
-            if ($stmt->execute()) {
-                echo "update réussis";
-            } else {
-                echo "echec update";
-            }
-        } catch (PDOException $e) {
-            $error = "Error: " . $e->getMessage();
-            echo $error;
-        }
-    }
-}
-
 if (!function_exists('deleteOeuvres')) {
     function deleteOeuvres($oeuvres_id_delete)
     {
@@ -153,7 +137,7 @@ if (!function_exists('deleteOeuvres')) {
 }
 
 if (!function_exists('updateOeuvres')) {
-    function updateOeuvres($oeuvres_id_select, $oeuvres_nameWorks_update, $oeuvres_status_update, $oeuvres_summary_update, $oeuvres_numberOfEpisodes_update, $oeuvres_numberOfSeason_update, $oeuvres_numberOfTome_update)
+    function updateOeuvres($oeuvres_id_select, $oeuvres_nameWorks_update, $oeuvres_status_update, $oeuvres_summary_update, $oeuvres_numberOfEpisodes_update, $oeuvres_numberOfSeason_update, $oeuvres_numberOfTome_update, $oeuvres_image_update = null)
     {
         try {
             $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
@@ -177,6 +161,9 @@ if (!function_exists('updateOeuvres')) {
             }
             if (!empty($oeuvres_numberOfTome_update)) {
                 $setClauses[] = "numberOfTome = :numberOfTome";
+            }
+            if (!is_null($oeuvres_image_update)) {
+                $setClauses[] = "image = :image";
             }
 
             if (empty($setClauses)) {
@@ -208,6 +195,9 @@ if (!function_exists('updateOeuvres')) {
             }
             if (!empty($oeuvres_numberOfTome_update)) {
                 $stmt->bindParam(':numberOfTome', $oeuvres_numberOfTome_update);
+            }
+            if (!is_null($oeuvres_image_update)) {
+                $stmt->bindParam(':image', $oeuvres_image_update, PDO::PARAM_LOB);
             }
 
             if ($stmt->execute()) {
@@ -243,28 +233,6 @@ if (!function_exists('addOeuvres')) {
                 echo "ajout non réussis";
             }
 
-        } catch (PDOException $e) {
-            $error = "Error: " . $e->getMessage();
-            echo $error;
-        }
-    }
-}
-
-if (!function_exists('updateOeuvresImage')) {
-    function updateOeuvresImage($oeuvres_id_select, $oeuvres_image_update)
-    {
-        try {
-            $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
-            $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            $stmt = $dsn->prepare("UPDATE works SET image = :image WHERE idWorks = :idWorks");
-            $stmt->bindParam(':idWorks', $oeuvres_id_select);
-            $stmt->bindParam(':image', $oeuvres_image_update, PDO::PARAM_LOB);
-            if ($stmt->execute()) {
-                echo "update image réussis";
-            } else {
-                echo "echec update";
-            }
         } catch (PDOException $e) {
             $error = "Error: " . $e->getMessage();
             echo $error;

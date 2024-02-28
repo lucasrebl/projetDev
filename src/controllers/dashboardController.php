@@ -54,7 +54,12 @@ class dashboardController
             $user_isAdmin_update = $_POST['isAdmin'];
             $user_age_update = $_POST['age'];
             $hashed_password_update = !empty($user_password_update) ? password_hash($user_password_update, PASSWORD_DEFAULT) : null;
-            updateUser($user_username_select, $user_username_update, $user_email_update, $hashed_password_update, $user_isAdmin_update, $user_age_update);
+            if (isset($_FILES["pictures"]) && $_FILES["pictures"]["error"] == UPLOAD_ERR_OK) {
+                $user_pictures_update = file_get_contents($_FILES["pictures"]["tmp_name"]);
+                updateUser($user_username_select, $user_username_update, $user_email_update, $hashed_password_update, $user_isAdmin_update, $user_age_update, $user_pictures_update);
+            } else {
+                updateUser($user_username_select, $user_username_update, $user_email_update, $hashed_password_update, $user_isAdmin_update, $user_age_update);
+            }
         }
         // condition add user
         if (isset($_POST['submit'])) {
@@ -72,16 +77,6 @@ class dashboardController
                 } else {
                     echo "Erreur lors du téléchargement de l'image.";
                 }
-            }
-        }
-        // condittion update pictures user
-        else if (isset($_POST['update2'])) {
-            $user_username_select = $_POST['usernameSelect'];
-            if (isset($_FILES["pictures"]) && $_FILES["pictures"]["error"] == UPLOAD_ERR_OK) {
-                $user_pictures_update = file_get_contents($_FILES["pictures"]["tmp_name"]);
-                updateUserPictures($user_username_select, $user_pictures_update);
-            } else {
-                echo "Erreur lors du téléchargement de l'image.";
             }
         }
     }
@@ -120,8 +115,12 @@ class dashboardController
             $oeuvres_numberOfEpisodes_update = $_POST['numberOfEpisodes'];
             $oeuvres_numberOfSeason_update = $_POST['numberOfSeason'];
             $oeuvres_numberOfTome_update = $_POST['numberOfTome'];
-            $oeuvres_image_update = $_FILES['image'];
-            updateOeuvres($oeuvres_id_select, $oeuvres_nameWorks_update, $oeuvres_status_update, $oeuvres_summary_update, $oeuvres_numberOfEpisodes_update, $oeuvres_numberOfSeason_update, $oeuvres_numberOfTome_update);
+            if (isset($_FILES["image"]) && $_FILES["image"]["error"] == UPLOAD_ERR_OK) {
+                $oeuvres_image_update = file_get_contents($_FILES["image"]["tmp_name"]);
+                updateOeuvres($oeuvres_id_select, $oeuvres_nameWorks_update, $oeuvres_status_update, $oeuvres_summary_update, $oeuvres_numberOfEpisodes_update, $oeuvres_numberOfSeason_update, $oeuvres_numberOfTome_update, $oeuvres_image_update);
+            } else {
+                updateOeuvres($oeuvres_id_select, $oeuvres_nameWorks_update, $oeuvres_status_update, $oeuvres_summary_update, $oeuvres_numberOfEpisodes_update, $oeuvres_numberOfSeason_update, $oeuvres_numberOfTome_update);
+            }
         }
         // conditions add oeuvres
         if (isset($_POST['submit2'])) {
@@ -140,16 +139,6 @@ class dashboardController
                 } else {
                     echo "Erreur lors du téléchargement de l'image.";
                 }
-            }
-        }
-        // condittion update pictures user
-        if (isset($_POST['update4'])) {
-            $oeuvres_id_select = $_POST['idSelect'];
-            if (isset($_FILES["image"]) && $_FILES["image"]["error"] == UPLOAD_ERR_OK) {
-                $oeuvres_image_update = file_get_contents($_FILES["image"]["tmp_name"]);
-                updateOeuvresImage($oeuvres_id_select, $oeuvres_image_update);
-            } else {
-                echo "Erreur lors du téléchargement de l'image.";
             }
         }
     }
