@@ -45,9 +45,10 @@
 			<label for="pictures">pictures:</label>
 			<input type="file" name="pictures" id="pictures" required>
 
-			<input type="submit" name="update2" value="update pictures" id="submitUpdate">
+			<input type="submit" name="update2" value="update pictures" id="updtae">
 		</form>
 	</div>
+
 	<div class="crudUser2">
 		<div class="readUSer">
 			{% for user in userDetails %}
@@ -63,4 +64,70 @@
 			{% endfor %}
 		</div>
 	</div>
+
+	<h3>crud Oeuvres</h3>
+	<div class="crudOeuvres">
+		<form action="/panelAdmin" method="post" id="deleteUser">
+			<label for="delete">id:</label>
+        	<input type="number" name="id" min="1" id="delete" required>
+
+        	<input type="submit" name="delete2" value="delete Oeuvres" id="delete">
+		</form>
+
+		<form action="/panelAdmin" method="post" id="updateOeuvres" enctype="multipart/form-data">
+			<label for="update">selectionné l'id de l'oeuvres:</label>
+        	<input type="text" name="idSelect" id="update">
+
+			<label for="update">nameWorks:</label>
+			<input type="text" name="nameWorks" id="update">
+
+			<label for="update">status:</label>
+			<input type="text" name="status" id="update">
+
+			<label for="update">summary:</label>
+			<input type="text" name="summary" id="update">
+
+			<label for="update">numberOfEpisodes:</label>
+			<input type="number" name="numberOfEpisodes" id="update">
+
+			<label for="update">numberOfSeason:</label>
+			<input type="number" name="numberOfSeason" id="update">
+
+			<label for="update">numberOfTome:</label>
+			<input type="number" name="numberOfTome" id="update">
+
+			<label for="image">image:</label>
+			<input type="file" name="image" id="image">
+
+			<input type="submit" name="update3" value="update info oeuvres" id="update">
+			<input type="submit" name="submit2" value="add oeuvres" id="submit">
+		</form>
+
+		<form action="/panelAdmin" method="post" enctype="multipart/form-data" id="updateUser">
+			<label for="update">selectionné l'id de l'oeuvres:</label>
+        	<input type="text" name="idSelect" id="update">
+
+			<label for="image">image:</label>
+			<input type="file" name="image" id="image" required>
+
+			<input type="submit" name="update4" value="update image" id="update">
+		</form>
+	</div>
+
+	<div class="crudOeuvres">
+		<div class="readOeuvres">
+			{% for works in oeuvresDetails %}
+				<div class="read">
+					<p id="read">id: {{works.idWorks}}</p>
+					<p id="read">name: {{works.nameWorks}}</p>
+					<p id="read">status: {{works.status}}</p>
+					<p id="read">summary: {{works.summary}}</p>
+					<p id="read">numberOfEpisodes: {{works.numberOfEpisodes}}</p>
+					<p id="read">numberOfSeason: {{works.numberOfSeason}}</p>
+					<p id="read">numberOfTome: {{works.numberOfTome}}</p>
+					<img id="image" src="data:image;base64,{{works.image}}" alt="Image">
+				</div>
+			{% endfor %}
+		</div>
+	</div>	
 {% endblock %}
