@@ -50,18 +50,24 @@ class dashboardController
             $user_password_update = $_POST['password'];
             $user_isAdmin_update = $_POST['isAdmin'];
             $user_age_update = $_POST['age'];
-            $hashed_password_update = password_hash($user_password_update, PASSWORD_DEFAULT);
+            $hashed_password_update = !empty($user_password_update) ? password_hash($user_password_update, PASSWORD_DEFAULT) : null;
             updateUser($user_username_select, $user_username_update, $user_email_update, $hashed_password_update, $user_isAdmin_update, $user_age_update);
         }
         // condition add user
-        else if (isset($_POST['submit'])) {
+        if (isset($_POST['submit'])) {
             $user_username_add = $_POST['username'];
             $user_email_add = $_POST['email'];
             $user_password_add = $_POST['password'];
             $user_age_add = $_POST['age'];
-            $hashed_password_add = password_hash($user_password_add, PASSWORD_DEFAULT);
-            addUser($user_username_add, $user_email_add, $hashed_password_add, $user_age_add);
+            if (empty($user_username_add) || empty($user_email_add) || empty($user_password_add) || empty($user_age_add)) {
+                echo "Veuillez remplir les champs suivant: username, email, password, age";
+            } else {
+                $hashed_password_add = password_hash($user_password_add, PASSWORD_DEFAULT);
+                addUser($user_username_add, $user_email_add, $hashed_password_add, $user_age_add);
+                echo "Utilisateur ajouté avec succès!";
+            }
         }
+        
         // condittion update pictures user
         else if (isset($_POST['update2'])) {
             $user_username_select = $_POST['usernameSelect'];

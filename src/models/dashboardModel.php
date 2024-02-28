@@ -30,20 +30,55 @@ if (!function_exists('updateUser')) {
             $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
             $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $stmt = $dsn->prepare("UPDATE user SET username = :username, email = :email, passwordUser = :password, isAdmin = :isAdmin, age = :age WHERE username = :usernameSelect");
+            $setClauses = [];
+            if (!empty($user_username_update)) {
+                $setClauses[] = "username = :username";
+            }
+            if (!empty($user_email_update)) {
+                $setClauses[] = "email = :email";
+            }
+            if (!empty($hashed_password_update)) {
+                $setClauses[] = "passwordUser = :password";
+            }
+            if (!empty($user_isAdmin_update)) {
+                $setClauses[] = "isAdmin = :isAdmin";
+            }
+            if (!empty($user_age_update)) {
+                $setClauses[] = "age = :age";
+            }
+
+            if (empty($setClauses)) {
+                echo "Aucun champ à mettre à jour.";
+                return;
+            }
+
+            $query = "UPDATE user SET " . implode(', ', $setClauses) . " WHERE username = :usernameSelect";
+            $stmt = $dsn->prepare($query);
+
             $stmt->bindParam(':usernameSelect', $user_username_select);
-            $stmt->bindParam(':username', $user_username_update);
-            $stmt->bindParam(':email', $user_email_update);
-            $stmt->bindParam(':password', $hashed_password_update);
-            $stmt->bindParam(':isAdmin', $user_isAdmin_update);
-            $stmt->bindParam(':age', $user_age_update);
+            if (!empty($user_username_update)) {
+                $stmt->bindParam(':username', $user_username_update);
+            }
+            if (!empty($user_email_update)) {
+                $stmt->bindParam(':email', $user_email_update);
+            }
+            if (!empty($hashed_password_update)) {
+                $stmt->bindParam(':password', $hashed_password_update);
+            }
+            if (!empty($user_isAdmin_update)) {
+                $stmt->bindParam(':isAdmin', $user_isAdmin_update);
+            }
+            if (!empty($user_age_update)) {
+                $stmt->bindParam(':age', $user_age_update);
+            }
+
             if ($stmt->execute()) {
-                echo "update réussis";
+                echo "Mise à jour réussie.";
             } else {
-                echo "echec update";
+                echo "Échec de la mise à jour.";
             }
         } catch (PDOException $e) {
-            $error = "Error: " . $e->getMessage();
+            $error = "Erreur : " . $e->getMessage();
             echo $error;
         }
     }
