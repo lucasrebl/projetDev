@@ -26,30 +26,77 @@ body.night .container-left button {
     margin: 10rem 10rem 0 10rem;
 }
 
-form {
+.myForm {
     display: flex;
     align-items: center;
     flex-direction: column;
+    border: 1px solid rgba(0, 0, 0, 0.45);
+    border-radius: 35px;
+    background-color: rgba(239, 248, 255, 0.05);
+    padding: 40px;
 }
 
-form input {
-    border-radius: 90px;
-    border-top: 11px solid #4A3321;
-    border-right: 8px solid #4A3321;
-    border-bottom: 1px solid #4A3321;
-    background: #FFF;
-    width: 12rem;
-    height: fit-content;
-    margin: 2rem 0 0.5rem 0;
+.champ {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+input {
+    border: solid 1.5px #ffffff;
+    border-radius: 1rem;
+    background: none;
     padding: 1rem;
+    font-size: 1rem;
+    color: #000000;
+    transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-body.night form input {
-    border-radius: 90px;
-    border-top: 11px solid #FFF;
-    border-right: 8px solid #FFF;
-    border-bottom: 1px solid #FFF;
-    background: #000;
-    color: #FFF;
-    /* Set the text color to white */
+body.night input {
+    color: #ffffff;
+}
+
+.custom-label {
+    position: absolute;
+    left: 15px;
+    color: #ebebebeb;
+    pointer-events: none;
+    transform: translateY(1rem);
+    transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 1.2rem;
+}
+
+body.night .custom-label {
+    color: rgb(189, 189, 189);
+}
+
+input:focus,
+input:valid {
+    outline: none;
+    border: 1.5px solid #000000;
+}
+
+body.night input:focus,
+body.night input:valid {
+    outline: none;
+    border: 1.5px solid #ffffff;
+}
+
+input:focus~.custom-label,
+input:valid~.custom-label {
+    transform: translateY(-50%) scale(0.8);
+    background-color: rgb(254, 233, 234);
+    padding: 1em;
+    color: #000000;
+    border-radius: 200%;
+}
+
+body.night input:focus~.custom-label,
+body.night input:valid~.custom-label {
+    transform: translateY(-50%) scale(0.8);
+    background-color: rgba(23, 47, 171, 1);
+    padding: 1em;
+    color: #ffffff;
+    border-radius: 200%;
 }
