@@ -193,4 +193,34 @@
 			{% endfor %}
 		</div>
 	</div>
+
+	<h3>crud category des oeuvres</h3>
+	<div class="CrudWorksCategory">
+		<form action="/panelAdmin" method="post">
+			<label for="update">selectionné l'id:</label>
+        	<input type="number" name="idSelect">
+
+			<label for="update">idWorks:</label>
+        	<input type="number" min="1" name="idWorks">
+
+			<label for="update">idCategory:</label>
+			<input type="number" min="1" name="idCategory">
+
+			<input type="submit" name="update6" value="update WorksCategory">
+			<input type="submit" name="submit6" value="add WorksCategory">
+        	<input type="submit" name="delete6" value="delete WorksCategory">
+		</form>
+	</div>
+
+	<div class="CrudWorksCategory2">
+		<div class="readWorksCategory">
+			{% for worksCategory in worksCategoryDetails %}
+				<div class="read">
+					<p id="read">id: {{worksCategory.id}}</p>
+					<p id="read">idWorks: {{worksCategory.idWorks}}</p>
+					<p id="read">idCategory: {{worksCategory.idCategory}}</p>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
 {% endblock %}

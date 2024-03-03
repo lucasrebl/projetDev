@@ -37,12 +37,15 @@ class dashboardController
             $result4 = $this->readCategory();
             $this->crudList();
             $result5 = $this->readList();
+            $this->crudWorksCategory();
+            $result6 = $this->readWorksCategory();
             echo $this->twig->render('dashboard/dashboard.html.twig', [
                 'userDetails' => $result,
                 'oeuvresDetails' => $result2,
                 'tagDetails' => $result3,
                 'categoryDetails' => $result4,
-                'listDetails' => $result5
+                'listDetails' => $result5,
+                'worksCategoryDetails' => $result6
             ]);
         }
     }
@@ -309,5 +312,42 @@ class dashboardController
         $stmt->execute();
         $result5 = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result5;
+    }
+
+    public function crudWorksCategory()
+    {
+        // condition delete worksCategory
+        if (isset($_POST['delete6'])) {
+            $worksCategory_id_select = $_POST['idSelect'];
+            deleteWorksCategory($worksCategory_id_select);
+        }
+        // conditions update worksCategory
+        if (isset($_POST['update6'])) {
+            $worksCategory_id_select = $_POST['idSelect'];
+            $worksCategory_idWorks_update = $_POST['idWorks'];
+            $worksCategory_idCategory_update = $_POST['idCategory'];
+            updateWorksCategory($worksCategory_id_select, $worksCategory_idWorks_update,  $worksCategory_idCategory_update);
+        }
+        // conditions add worksCategory
+        if (isset($_POST['submit6'])) {
+            $worksCategory_idWorks_add = $_POST['idWorks'];
+            $worksCategory_idCategory_add = $_POST['idCategory'];
+            if (empty($worksCategory_idWorks_add) || empty($worksCategory_idCategory_add)) {
+                echo "Tous les champs doivent être remplis.";
+            } else {
+                addWorksCategory($worksCategory_idWorks_add, $worksCategory_idCategory_add);
+            }
+        }
+    }
+
+    public function readWorksCategory()
+    {
+        $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+        $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $stmt = $dsn->prepare("SELECT * FROM worksCategory");
+        $stmt->execute();
+        $result6 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result6;
     }
 }

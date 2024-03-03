@@ -530,3 +530,128 @@ if (!function_exists('addList')) {
         }
     }
 }
+
+if (!function_exists('deleteWorksCategory')) {
+    function deleteWorksCategory($worksCategory_id_select)
+    {
+        try {
+            $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+            $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $stmt = $dsn->prepare("DELETE FROM worksCategory WHERE id = :id");
+            $stmt->bindParam(':id', $worksCategory_id_select);
+            if ($stmt->execute()) {
+                echo "suppression worksCategory réussis";
+            } else {
+                echo "echec de la suppression";
+            }
+        } catch (PDOException $e) {
+            $error = "Error: " . $e->getMessage();
+            echo $error;
+        }
+    }
+}
+
+if (!function_exists('updateWorksCategory')) {
+    function updateWorksCategory($worksCategory_id_select, $worksCategory_idWorks_update,  $worksCategory_idCategory_update)
+    {
+        try {
+            $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+            $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $setClauses = [];
+            if (!empty($worksCategory_idWorks_update)) {
+                $checkUserQuery = "SELECT COUNT(*) FROM works WHERE idWorks = :idWorks";
+                $checkUserStmt = $dsn->prepare($checkUserQuery);
+                $checkUserStmt->bindParam(':idWorks', $worksCategory_idWorks_update);
+                $checkUserStmt->execute();
+
+                if ($checkUserStmt->fetchColumn() > 0) {
+                    $setClauses[] = "idWorks = :idWorks";
+                } else {
+                    echo "L'oeuvres avec l'ID $worksCategory_idWorks_update n'existe pas. Mise à jour annulée.";
+                    return;
+                }
+            }
+
+            if (!empty($worksCategory_idCategory_update)) {
+                $checkUserQuery2 = "SELECT COUNT(*) FROM Category WHERE idCategory = :idCategory";
+                $checkUserStmt2 = $dsn->prepare($checkUserQuery2);
+                $checkUserStmt2->bindParam(':idCategory', $worksCategory_idCategory_update);
+                $checkUserStmt2->execute();
+
+                if ($checkUserStmt2->fetchColumn() > 0) {
+                    $setClauses[] = "idCategory = :idCategory";
+                } else {
+                    echo "La category avec l'ID $worksCategory_idCategory_update n'existe pas. Mise à jour annulée.";
+                    return;
+                }
+            }
+
+            if (empty($setClauses)) {
+                echo "Aucun champ à mettre à jour.";
+                return;
+            }
+
+            $query = "UPDATE worksCategory SET " . implode(', ', $setClauses) . " WHERE id = :idWorksCategorySelect ";
+            $stmt = $dsn->prepare($query);
+
+            $stmt->bindParam(':idWorksCategorySelect', $worksCategory_id_select);
+            if (!empty($worksCategory_id_select)) {
+                $stmt->bindParam(':idWorksCategorySelect', $worksCategory_id_select);
+            }
+            if (!empty($worksCategory_idWorks_update)) {
+                $stmt->bindParam(':idWorks', $worksCategory_idWorks_update);
+            }
+            if (!empty($worksCategory_idCategory_update)) {
+                $stmt->bindParam(':idCategory', $worksCategory_idCategory_update);
+            }
+
+            if ($stmt->execute()) {
+                echo "Mise à jour list réussie.";
+            } else {
+                echo "Échec de la mise à jour.";
+            }
+        } catch (PDOException $e) {
+            $error = "Error: " . $e->getMessage();
+            echo $error;
+        }
+    }
+}
+
+if (!function_exists('addWorksCategory')) {
+    function addWorksCategory($worksCategory_idWorks_add, $worksCategory_idCategory_add)
+    {
+        try {
+            $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+            $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $checkWorksQuery = $dsn->prepare("SELECT * FROM works WHERE idWorks = :idWorks");
+            $checkWorksQuery->bindParam(':idWorks', $worksCategory_idWorks_add);
+            $checkWorksQuery->execute();
+
+            $checkCategoryQuery = $dsn->prepare("SELECT * FROM Category WHERE idCategory = :idCategory");
+            $checkCategoryQuery->bindParam(':idCategory', $worksCategory_idCategory_add);
+            $checkCategoryQuery->execute();
+
+            if ($checkWorksQuery->rowCount() > 0 && $checkCategoryQuery->rowCount() > 0) {
+                $insertWorksCategoryQuery = $dsn->prepare("INSERT INTO worksCategory (idWorks, idCategory) VALUES (:idWorks, :idCategory)");
+                $insertWorksCategoryQuery->bindParam(':idWorks', $worksCategory_idWorks_add);
+                $insertWorksCategoryQuery->bindParam(':idCategory', $worksCategory_idCategory_add);
+
+                if ($insertWorksCategoryQuery->execute()) {
+                    echo "WorksCategory insérée avec succès";
+                } else {
+                    echo "Erreur lors de l'insertion de la WorksCategory";
+                }
+            } else {
+                echo "L'ID $worksCategory_idWorks_add n'existe pas dans la table works.
+                    ou L'ID $worksCategory_idCategory_add n'existe pas dans la table Category.";
+            }
+
+        } catch (PDOException $e) {
+            $error = "Error: " . $e->getMessage();
+            echo $error;
+        }
+    }
+}
