@@ -419,3 +419,114 @@ if (!function_exists('addCategory')) {
         }
     }
 }
+
+if (!function_exists('deleteList')) {
+    function deleteList($list_id_select)
+    {
+        try {
+            $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+            $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $stmt = $dsn->prepare("DELETE FROM list WHERE idList = :id");
+            $stmt->bindParam(':id', $list_id_select);
+            if ($stmt->execute()) {
+                echo "suppression list réussis";
+            } else {
+                echo "echec de la suppression";
+            }
+        } catch (PDOException $e) {
+            $error = "Error: " . $e->getMessage();
+            echo $error;
+        }
+    }
+}
+
+if (!function_exists('updateList')) {
+    function updateList($list_id_select, $list_nameList_update,  $list_idUser_update)
+    {
+        try {
+            $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+            $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $setClauses = [];
+            if (!empty($list_nameList_update)) {
+                $setClauses[] = "nameList = :nameList";
+            }
+
+            if (!empty($list_idUser_update)) {
+                $checkUserQuery = "SELECT COUNT(*) FROM user WHERE idUser = :idUser";
+                $checkUserStmt = $dsn->prepare($checkUserQuery);
+                $checkUserStmt->bindParam(':idUser', $list_idUser_update);
+                $checkUserStmt->execute();
+
+                if ($checkUserStmt->fetchColumn() > 0) {
+                    $setClauses[] = "idUser = :idUser";
+                } else {
+                    echo "L'utilisateur avec l'ID $list_idUser_update n'existe pas. Mise à jour annulée.";
+                    return;
+                }
+            }
+
+            if (empty($setClauses)) {
+                echo "Aucun champ à mettre à jour.";
+                return;
+            }
+
+            $query = "UPDATE list SET " . implode(', ', $setClauses) . " WHERE idList = :idListSelect ";
+            $stmt = $dsn->prepare($query);
+
+            $stmt->bindParam(':idListSelect', $list_id_select);
+            if (!empty($list_id_select)) {
+                $stmt->bindParam(':idListSelect', $list_id_select);
+            }
+            if (!empty($list_nameList_update)) {
+                $stmt->bindParam(':nameList', $list_nameList_update);
+            }
+            if (!empty($list_idUser_update)) {
+                $stmt->bindParam(':idUser', $list_idUser_update);
+            }
+
+            if ($stmt->execute()) {
+                echo "Mise à jour list réussie.";
+            } else {
+                echo "Échec de la mise à jour.";
+            }
+        } catch (PDOException $e) {
+            $error = "Error: " . $e->getMessage();
+            echo $error;
+        }
+    }
+}
+
+
+if (!function_exists('addList')) {
+    function addList($list_name_add, $list_idUser_add)
+    {
+        try {
+            $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+            $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $checkUserQuery = $dsn->prepare("SELECT * FROM user WHERE idUser = :idUser");
+            $checkUserQuery->bindParam(':idUser', $list_idUser_add);
+            $checkUserQuery->execute();
+
+            if ($checkUserQuery->rowCount() > 0) {
+                $insertListQuery = $dsn->prepare("INSERT INTO list (nameList, idUser) VALUES (:nameList, :idUser)");
+                $insertListQuery->bindParam(':nameList', $list_name_add);
+                $insertListQuery->bindParam(':idUser', $list_idUser_add);
+
+                if ($insertListQuery->execute()) {
+                    echo "Liste insérée avec succès";
+                } else {
+                    echo "Erreur lors de l'insertion de la liste";
+                }
+            } else {
+                echo "L'utilisateur avec l'ID $list_idUser_add n'existe pas dans la table user.";
+            }
+
+        } catch (PDOException $e) {
+            $error = "Error: " . $e->getMessage();
+            echo $error;
+        }
+    }
+}

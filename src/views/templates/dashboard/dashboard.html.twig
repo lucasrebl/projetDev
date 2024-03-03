@@ -163,4 +163,34 @@
 			{% endfor %}
 		</div>
 	</div>
+
+	<h3>crud list</h3>
+	<div class="CrudList">
+		<form action="/panelAdmin" method="post">
+			<label for="update">selectionné l'id de la list:</label>
+        	<input type="number" name="idSelect">
+
+			<label for="update">nom de la list:</label>
+        	<input type="text" name="nameList">
+
+			<label for="update">idUser:</label>
+			<input type="number" min="1" name="idUser">
+
+			<input type="submit" name="update5" value="update list">
+			<input type="submit" name="submit5" value="add list">
+        	<input type="submit" name="delete5" value="delete list">
+		</form>
+	</div>
+
+	<div class="CrudList2">
+		<div class="readList">
+			{% for list in listDetails %}
+				<div class="read">
+					<p id="read">id: {{list.idList}}</p>
+					<p id="read">name: {{list.nameList}}</p>
+					<p id="read">idUser: {{list.idUser}}</p>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
 {% endblock %}

@@ -35,11 +35,14 @@ class dashboardController
             $result3 = $this->readTag();
             $this->crudCategory();
             $result4 = $this->readCategory();
+            $this->crudList();
+            $result5 = $this->readList();
             echo $this->twig->render('dashboard/dashboard.html.twig', [
                 'userDetails' => $result,
                 'oeuvresDetails' => $result2,
                 'tagDetails' => $result3,
-                'categoryDetails' => $result4
+                'categoryDetails' => $result4,
+                'listDetails' => $result5
             ]);
         }
     }
@@ -221,12 +224,12 @@ class dashboardController
 
     public function crudCategory()
     {
-        // conditions delete tag
+        // conditions delete category
         if (isset($_POST['delete4'])) {
             $category_name_select = $_POST['nameCategorySelect'];
             deleteCategory($category_name_select);
         }
-        // conditions update tag
+        // conditions update category
         if (isset($_POST['update4'])) {
             $category_name_select = $_POST['nameCategorySelect'];
             $category_name_update = $_POST['nameCategory'];
@@ -237,7 +240,7 @@ class dashboardController
                 updateCategory($category_name_select, $category_name_update);
             }
         }
-        // conditions add tag
+        // conditions add category
         if (isset($_POST['submit4'])) {
             $category_name_add = $_POST['nameCategory'];
             if (empty($category_name_add)) {
@@ -269,5 +272,42 @@ class dashboardController
             }
         }
         return $result4;
+    }
+
+    public function crudList()
+    {
+        // condition delete list
+        if (isset($_POST['delete5'])) {
+            $list_id_select = $_POST['idSelect'];
+            deleteList($list_id_select);
+        }
+        // conditions update list
+        if (isset($_POST['update5'])) {
+            $list_id_select = $_POST['idSelect'];
+            $list_nameList_update = $_POST['nameList'];
+            $list_idUser_update = $_POST['idUser'];
+            updateList($list_id_select, $list_nameList_update,  $list_idUser_update);
+        }
+        // conditions add list
+        if (isset($_POST['submit5'])) {
+            $list_name_add = $_POST['nameList'];
+            $list_idUser_add = $_POST['idUser'];
+            if (empty($list_name_add) || empty($list_idUser_add)) {
+                echo "Tous les champs doivent être remplis.";
+            } else {
+                addList($list_name_add, $list_idUser_add);
+            }
+        }
+    }
+
+    public function readList()
+    {
+        $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+        $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $stmt = $dsn->prepare("SELECT * FROM list");
+        $stmt->execute();
+        $result5 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result5;
     }
 }
