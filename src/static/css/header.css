@@ -86,17 +86,13 @@ body.night header {
   border: 1px solid #ffffff;
 }
 
-header a {
+header .home a, .recommand a, .lists a, .profile a, .admin a, .logout a {
   text-align: center;
   text-decoration: none;
   font-size: 20px;
   padding: 0 30px;
   color: var(--primary-dark);
   transition: transform 0.3s ease;
-}
-
-header a:active {
-  filter: drop-shadow(3px 4px 4px rgba(255, 255, 255, 0.60));
 }
 
 .navbar {
@@ -125,15 +121,6 @@ li {
   list-style: none;
 }
 
-a:hover {
-  transform: scale(1.3);
-  filter: drop-shadow(5px 10px 4px black);
-}
-
-a:not(:hover) {
-  transform: scale(1.0);
-}
-
 .links .soluna-icon {
   width: 50px;
   height: 50px;
@@ -146,10 +133,51 @@ body.night .links .soluna-icon {
   filter: brightness(0) invert(1);
 }
 
-
-body.night a:hover {
+/* Réglez les couleurs de fond et les ombres portées au survol */
+.home:hover li,
+.home:hover li i {
+  color: #FF6E9C;
+  text-shadow: 2px 2px 4px #F1C6D4;
   transform: scale(1.3);
-  filter: drop-shadow(5px 10px 4px #aa8162);
+}
+
+.recommand:hover li,
+.recommand:hover li i {
+  color: #6E7DFF;
+  text-shadow: 2px 2px 4px #AFB7FF;
+  transform: scale(1.3);
+}
+
+.lists:hover li,
+.lists:hover li i {
+  color: #6ED3FF;
+  text-shadow: 2px 2px 4px #9FE2FF;
+  transform: scale(1.3);
+}
+
+.profile:hover li,
+.profile:hover li i {
+  color: #FFB46E;
+  text-shadow: 2px 2px 4px #FFC187;
+  transform: scale(1.3);
+}
+
+.admin:hover li,
+.admin:hover li i {
+  color: #FFF96E;
+  text-shadow: 2px 2px 4px #FFFA8D;
+  transform: scale(1.3);
+}
+
+.logout:hover li,
+.logout:hover li i {
+  color: #FF6E6E;
+  text-shadow: 2px 2px 4px #FF8E8E;
+  transform: scale(1.3);
+}
+
+i {
+  margin: 10px;
 }
 
 body.night a:not(:hover) {
@@ -183,7 +211,7 @@ main {
 }
 
 .dropdown_menu.open {
-  height: 500px;
+  height: auto;
 }
 
 .dropdown_menu li {
@@ -200,6 +228,66 @@ main {
 @media (max-width: 1472px) {
   .navbar .links {
     display: none;
+  }
+
+  .navbar .links.open {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .navbar .links.open a {
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .home:hover li,
+  .home:hover li i {
+    color: #FF6E9C;
+    text-shadow: 2px 2px 4px #F1C6D4;
+    transform: scale(1.3);
+  }
+
+  .recommand:hover li,
+  .recommand:hover li i {
+    color: #6E7DFF;
+    text-shadow: 2px 2px 4px #AFB7FF;
+    transform: scale(1.3);
+  }
+
+  .lists:hover li,
+  .lists:hover li i {
+    color: #6ED3FF;
+    text-shadow: 2px 2px 4px #9FE2FF;
+    transform: scale(1.3);
+  }
+
+  .profile:hover li,
+  .profile:hover li i {
+    color: #FFB46E;
+    text-shadow: 2px 2px 4px #FFC187;
+    transform: scale(1.3);
+  }
+
+  .admin:hover li,
+  .admin:hover li i {
+    color: #FFF96E;
+    text-shadow: 2px 2px 4px #FFFA8D;
+    transform: scale(1.3);
+  }
+
+  .logout:hover li,
+  .logout:hover li i {
+    color: #FF6E6E;
+    text-shadow: 2px 2px 4px #FF8E8E;
+    transform: scale(1.3);
+    transform: scale(1.3);
+  }
+
+  /* Réglez les couleurs de fond et les ombres portées au survol en mode responsive */
+  .dropdown_menu li:hover {
+    transform: scale(1.3);
   }
 
   .navbar .action-btn {
@@ -220,14 +308,30 @@ main {
     background-size: cover;
     background-repeat: no-repeat;
     margin: 50%;
+
+  }
+
+  .home:hover li,
+  .home:hover li i,
+  .recommand:hover li,
+  .recommand:hover li i,
+  .lists:hover li,
+  .lists:hover li i,
+  .profile:hover li,
+  .profile:hover li i,
+  .admin:hover li,
+  .admin:hover li i,
+  .logout:hover li,
+  .logout:hover li i {
+    color: inherit;
+    text-shadow: none;
+    transform: scale(1.0);
   }
 
   body.night .logo {
     filter: brightness(0) invert(1);
+  }
 }
-}
-
-
 
 /* RESPONSIVE */
 @media (max-width: 1000px) {
@@ -252,6 +356,20 @@ main {
     background-repeat: no-repeat;
   }
 
-
-  
+  .home:hover li,
+  .home:hover li i,
+  .recommand:hover li,
+  .recommand:hover li i,
+  .lists:hover li,
+  .lists:hover li i,
+  .profile:hover li,
+  .profile:hover li i,
+  .admin:hover li,
+  .admin:hover li i,
+  .logout:hover li,
+  .logout:hover li i {
+    color: inherit;
+    text-shadow: none;
+    transform: scale(1.0);
+  }
 }
