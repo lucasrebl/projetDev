@@ -122,13 +122,43 @@
 		</form>
 	</div>
 
-	<div class="crudTag">
+	<div class="crudTag2">
 		<div class="readTag">
 			{% for tag in tagDetails %}
 				<div class="read">
 					<p id="read">id: {{tag.idTag}}</p>
 					<p id="read">name: {{tag.nameTag}}</p>
 					<img id="image" src="data:image;base64,{{tag.pictures}}" alt="Image">
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+
+	<h3>crud Category</h3>
+	<div class="CrudCategory">
+		<form action="/panelAdmin" method="post" enctype="multipart/form-data">
+			<label for="update">selectionné le nom de la category:</label>
+        	<input type="text" name="nameCategorySelect">
+
+			<label for="update">nom de la category:</label>
+        	<input type="text" name="nameCategory">
+
+			<label for="image">pictures:</label>
+			<input type="file" name="pictures">
+
+			<input type="submit" name="update4" value="update Category">
+			<input type="submit" name="submit4" value="add Category">
+        	<input type="submit" name="delete4" value="delete Category">
+		</form>
+	</div>
+
+	<div class="CrudCategory2">
+		<div class="readCategory">
+			{% for Category in categoryDetails %}
+				<div class="read">
+					<p id="read">id: {{Category.idCategory}}</p>
+					<p id="read">name: {{Category.nameCategory}}</p>
+					<img id="image" src="data:image;base64,{{Category.pictures}}" alt="Image">
 				</div>
 			{% endfor %}
 		</div>

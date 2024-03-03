@@ -33,10 +33,13 @@ class dashboardController
             $result2 = $this->readOeuvres();
             $this->crudTag();
             $result3 = $this->readTag();
+            $this->crudCategory();
+            $result4 = $this->readCategory();
             echo $this->twig->render('dashboard/dashboard.html.twig', [
                 'userDetails' => $result,
                 'oeuvresDetails' => $result2,
-                'tagDetails' => $result3
+                'tagDetails' => $result3,
+                'categoryDetails' => $result4
             ]);
         }
     }
@@ -214,5 +217,57 @@ class dashboardController
             }
         }
         return $result3;
+    }
+
+    public function crudCategory()
+    {
+        // conditions delete tag
+        if (isset($_POST['delete4'])) {
+            $category_name_select = $_POST['nameCategorySelect'];
+            deleteCategory($category_name_select);
+        }
+        // conditions update tag
+        if (isset($_POST['update4'])) {
+            $category_name_select = $_POST['nameCategorySelect'];
+            $category_name_update = $_POST['nameCategory'];
+            if (isset($_FILES["pictures"]) && $_FILES["pictures"]["error"] == UPLOAD_ERR_OK) {
+                $category_image_update = file_get_contents($_FILES["pictures"]["tmp_name"]);
+                updateCategory($category_name_select, $category_name_update, $category_image_update);
+            } else {
+                updateCategory($category_name_select, $category_name_update);
+            }
+        }
+        // conditions add tag
+        if (isset($_POST['submit4'])) {
+            $category_name_add = $_POST['nameCategory'];
+            if (empty($category_name_add)) {
+                echo "Tous les champs doivent être remplis.";
+            } else {
+                if (isset($_FILES["pictures"]) && $_FILES["pictures"]["error"] == UPLOAD_ERR_OK) {
+                    $category_image_add = file_get_contents($_FILES["pictures"]["tmp_name"]);
+                    addCategory($category_name_add, $category_image_add);
+                } else {
+                    echo "Erreur lors du téléchargement de l'image.";
+                }
+            }
+        }
+    }
+
+    public function readCategory()
+    {
+        $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+        $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $stmt = $dsn->prepare("SELECT * FROM Category");
+        $stmt->execute();
+        $result4 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result4 as &$user) {
+            if ($user['pictures'] !== null) {
+                $user['pictures'] = base64_encode($user['pictures']);
+            } else {
+                $user['pictures'] = '';
+            }
+        }
+        return $result4;
     }
 }

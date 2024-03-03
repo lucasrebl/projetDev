@@ -329,3 +329,93 @@ if (!function_exists('addTag')) {
         }
     }
 }
+
+if (!function_exists('deleteCategory')) {
+    function deleteCategory($category_name_select)
+    {
+        try {
+            $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+            $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $stmt = $dsn->prepare("DELETE FROM Category WHERE nameCategory = :name");
+            $stmt->bindParam(':name', $category_name_select);
+            if ($stmt->execute()) {
+                echo "suppression Category réussis";
+            } else {
+                echo "echec de la suppression";
+            }
+        } catch (PDOException $e) {
+            $error = "Error: " . $e->getMessage();
+            echo $error;
+        }
+    }
+}
+
+if (!function_exists('updateCategory')) {
+    function updateCategory($category_name_select, $category_name_update,  $category_image_update = null)
+    {
+        try {
+            $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+            $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $setClauses = [];
+            if (!empty($category_name_update)) {
+                $setClauses[] = "nameCategory = :nameCategory";
+            }
+            if (!is_null($category_image_update)) {
+                $setClauses[] = "pictures = :pictures";
+            }
+
+            if (empty($setClauses)) {
+                echo "Aucun champ à mettre à jour.";
+                return;
+            }
+
+            $query = "UPDATE Category SET " . implode(', ', $setClauses) . " WHERE nameCategory = :nameCategorySelect ";
+            $stmt = $dsn->prepare($query);
+
+            $stmt->bindParam(':nameCategorySelect', $category_name_select);
+            if (!empty($category_name_select)) {
+                $stmt->bindParam(':nameCategorySelect', $category_name_select);
+            }
+            if (!empty($category_name_update)) {
+                $stmt->bindParam(':nameCategory', $category_name_update);
+            }
+            if (!is_null($category_image_update)) {
+                $stmt->bindParam(':pictures', $category_image_update, PDO::PARAM_LOB);
+            }
+
+            if ($stmt->execute()) {
+                echo "Mise à jour Category réussie.";
+            } else {
+                echo "Échec de la mise à jour.";
+            }
+        } catch (PDOException $e) {
+            $error = "Error: " . $e->getMessage();
+            echo $error;
+        }
+    }
+}
+
+if (!function_exists('addCategory')) {
+    function addCategory($category_name_add, $category_image_add)
+    {
+        try {
+            $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+            $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $stmt = $dsn->prepare("INSERT INTO Category (nameCategory, pictures) VALUES (:nameCategory, :pictures)");
+            $stmt->bindParam(':nameCategory', $category_name_add);
+            $stmt->bindParam(':pictures', $category_image_add, PDO::PARAM_LOB);
+            if ($stmt->execute()) {
+                echo "ajout Category réussis";
+            } else {
+                echo "ajout non réussis";
+            }
+
+        } catch (PDOException $e) {
+            $error = "Error: " . $e->getMessage();
+            echo $error;
+        }
+    }
+}
