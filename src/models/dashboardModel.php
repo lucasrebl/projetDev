@@ -239,3 +239,93 @@ if (!function_exists('addOeuvres')) {
         }
     }
 }
+
+if (!function_exists('deleteTag')) {
+    function deleteTag($tag_name_select)
+    {
+        try {
+            $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+            $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $stmt = $dsn->prepare("DELETE FROM tag WHERE nameTag = :name");
+            $stmt->bindParam(':name', $tag_name_select);
+            if ($stmt->execute()) {
+                echo "suppression tag réussis";
+            } else {
+                echo "echec de la suppression";
+            }
+        } catch (PDOException $e) {
+            $error = "Error: " . $e->getMessage();
+            echo $error;
+        }
+    }
+}
+
+if (!function_exists('updateTag')) {
+    function updateTag($tag_name_select, $tag_nameTag_update,  $tag_image_update = null)
+    {
+        try {
+            $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+            $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $setClauses = [];
+            if (!empty($tag_nameTag_update)) {
+                $setClauses[] = "nameTag = :nameTag";
+            }
+            if (!is_null($tag_image_update)) {
+                $setClauses[] = "pictures = :pictures";
+            }
+
+            if (empty($setClauses)) {
+                echo "Aucun champ à mettre à jour.";
+                return;
+            }
+
+            $query = "UPDATE tag SET " . implode(', ', $setClauses) . " WHERE nameTag = :nameTagSelect ";
+            $stmt = $dsn->prepare($query);
+
+            $stmt->bindParam(':nameTagSelect', $tag_name_select);
+            if (!empty($tag_name_select)) {
+                $stmt->bindParam(':nameTagSelect', $tag_name_select);
+            }
+            if (!empty($tag_nameTag_update)) {
+                $stmt->bindParam(':nameTag', $tag_nameTag_update);
+            }
+            if (!is_null($tag_image_update)) {
+                $stmt->bindParam(':pictures', $tag_image_update, PDO::PARAM_LOB);
+            }
+
+            if ($stmt->execute()) {
+                echo "Mise à jour tag réussie.";
+            } else {
+                echo "Échec de la mise à jour.";
+            }
+        } catch (PDOException $e) {
+            $error = "Error: " . $e->getMessage();
+            echo $error;
+        }
+    }
+}
+
+if (!function_exists('addTag')) {
+    function addTag($tag_name_add, $tag_image_add)
+    {
+        try {
+            $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+            $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $stmt = $dsn->prepare("INSERT INTO tag (nameTag, pictures) VALUES (:nameTag, :pictures)");
+            $stmt->bindParam(':nameTag', $tag_name_add);
+            $stmt->bindParam(':pictures', $tag_image_add, PDO::PARAM_LOB);
+            if ($stmt->execute()) {
+                echo "ajout tag réussis";
+            } else {
+                echo "ajout non réussis";
+            }
+
+        } catch (PDOException $e) {
+            $error = "Error: " . $e->getMessage();
+            echo $error;
+        }
+    }
+}

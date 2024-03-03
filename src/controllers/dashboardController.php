@@ -31,9 +31,12 @@ class dashboardController
             $result = $this->readUser();
             $this->crudOeuvres();
             $result2 = $this->readOeuvres();
+            $this->crudTag();
+            $result3 = $this->readTag();
             echo $this->twig->render('dashboard/dashboard.html.twig', [
                 'userDetails' => $result,
-                'oeuvresDetails' => $result2
+                'oeuvresDetails' => $result2,
+                'tagDetails' => $result3
             ]);
         }
     }
@@ -159,5 +162,57 @@ class dashboardController
             }
         }
         return $result2;
+    }
+
+    public function crudTag()
+    {
+        // conditions delete tag
+        if (isset($_POST['delete3'])) {
+            $tag_name_select = $_POST['nameTagSelect'];
+            deleteTag($tag_name_select);
+        }
+        // conditions update tag
+        if (isset($_POST['update3'])) {
+            $tag_name_select = $_POST['nameTagSelect'];
+            $tag_nameTag_update = $_POST['nameTag'];
+            if (isset($_FILES["pictures"]) && $_FILES["pictures"]["error"] == UPLOAD_ERR_OK) {
+                $tag_image_update = file_get_contents($_FILES["pictures"]["tmp_name"]);
+                updateTag($tag_name_select, $tag_nameTag_update, $tag_image_update);
+            } else {
+                updateTag($tag_name_select, $tag_nameTag_update);
+            }
+        }
+        // conditions add tag
+        if (isset($_POST['submit3'])) {
+            $tag_name_add = $_POST['nameTag'];
+            if (empty($tag_name_add)) {
+                echo "Tous les champs doivent être remplis.";
+            } else {
+                if (isset($_FILES["pictures"]) && $_FILES["pictures"]["error"] == UPLOAD_ERR_OK) {
+                    $tag_image_add = file_get_contents($_FILES["pictures"]["tmp_name"]);
+                    addTag($tag_name_add, $tag_image_add);
+                } else {
+                    echo "Erreur lors du téléchargement de l'image.";
+                }
+            }
+        }
+    }
+
+    public function readTag()
+    {
+        $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+        $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $stmt = $dsn->prepare("SELECT * FROM tag");
+        $stmt->execute();
+        $result3 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result3 as &$user) {
+            if ($user['pictures'] !== null) {
+                $user['pictures'] = base64_encode($user['pictures']);
+            } else {
+                $user['pictures'] = '';
+            }
+        }
+        return $result3;
     }
 }

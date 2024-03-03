@@ -87,7 +87,7 @@
 		</form>
 	</div>
 
-	<div class="crudOeuvres">
+	<div class="crudOeuvres2">
 		<div class="readOeuvres">
 			{% for works in oeuvresDetails %}
 				<div class="read">
@@ -102,5 +102,35 @@
 				</div>
 			{% endfor %}
 		</div>
-	</div>	
+	</div>
+
+	<h3>crud Tag</h3>
+	<div class="CrudTag">
+		<form action="/panelAdmin" method="post" enctype="multipart/form-data">
+			<label for="update">selectionné le nom du tag:</label>
+        	<input type="text" name="nameTagSelect">
+
+			<label for="update">nom du tag:</label>
+        	<input type="text" name="nameTag">
+
+			<label for="image">pictures:</label>
+			<input type="file" name="pictures">
+
+			<input type="submit" name="update3" value="update tag">
+			<input type="submit" name="submit3" value="add tag">
+        	<input type="submit" name="delete3" value="delete tag">
+		</form>
+	</div>
+
+	<div class="crudTag">
+		<div class="readTag">
+			{% for tag in tagDetails %}
+				<div class="read">
+					<p id="read">id: {{tag.idTag}}</p>
+					<p id="read">name: {{tag.nameTag}}</p>
+					<img id="image" src="data:image;base64,{{tag.pictures}}" alt="Image">
+				</div>
+			{% endfor %}
+		</div>
+	</div>
 {% endblock %}
