@@ -7,14 +7,8 @@ body {
   /* css style */
   margin: 0;
   padding: 0;
-  background: rgb(237, 193, 195);
-  background: linear-gradient(45deg, rgb(237, 193, 195, 1), rgba(252, 244, 141, 1)),
-    linear-gradient(-45deg, rgb(237, 193, 195, 1), rgba(252, 244, 141, 1)),
-    linear-gradient(135deg, rgb(237, 193, 195, 1), rgba(252, 244, 141, 1)),
-    linear-gradient(-135deg, rgba(237, 193, 195, 1), rgba(252, 244, 141, 1)),
-    linear-gradient(180deg, rgba(237, 193, 195, 1), rgba(252, 244, 141, 1)),
-    linear-gradient(-180deg, rgba(237, 193, 195, 1), rgba(252, 244, 141, 1));
-  background-size: 100% 100%;
+    background-image: url("../asset/test.png") ;
+    background-attachment: fixed;
   background-repeat: no-repeat;
 
 }
@@ -56,9 +50,11 @@ label.active:before {
 }
 
 body.night {
-  background: rgb(3, 1, 2);
-  background: linear-gradient(0deg, rgba(23, 47, 171, 1) 0%, rgba(3, 1, 2, 1) 100%);
-  color: white;
+  margin: 0;
+  padding: 0;
+    background-image: url("../asset/nighttheme.png") ;
+    background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 /* HEADER */
