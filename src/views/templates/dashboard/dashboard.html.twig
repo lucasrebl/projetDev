@@ -253,4 +253,34 @@
 			{% endfor %}
 		</div>
 	</div>
+
+	<h3>crud list de works</h3>
+	<div class="CrudListWorks">
+		<form action="/panelAdmin" method="post">
+			<label for="update">selectionné l'id:</label>
+        	<input type="number" name="idSelect">
+
+			<label for="update">idWorks:</label>
+        	<input type="number" min="1" name="idWorks">
+
+			<label for="update">idList:</label>
+			<input type="number" min="1" name="idList">
+
+			<input type="submit" name="update8" value="update listWorks">
+			<input type="submit" name="submit8" value="add listWorks">
+        	<input type="submit" name="delete8" value="delete listWorks">
+		</form>
+	</div>
+
+	<div class="CrudListWorks2">
+		<div class="readListWorks">
+			{% for listWorks in listWorksDetails %}
+				<div class="read">
+					<p id="read">id: {{listWorks.id}}</p>
+					<p id="read">idWorks: {{listWorks.idWorks}}</p>
+					<p id="read">idList: {{listWorks.idList}}</p>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
 {% endblock %}

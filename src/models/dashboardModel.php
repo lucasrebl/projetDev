@@ -767,11 +767,136 @@ if (!function_exists('addWorksTag')) {
                 if ($insertWorksTagQuery->execute()) {
                     echo "WorksTag insérée avec succès";
                 } else {
-                    echo "Erreur lors de l'insertion de la WorksCategory";
+                    echo "Erreur lors de l'insertion de la WorksTag";
                 }
             } else {
                 echo "L'ID $worksTag_idWorks_add n'existe pas dans la table works.
                     ou L'ID $worksTag_idTag_add n'existe pas dans la table Tag.";
+            }
+
+        } catch (PDOException $e) {
+            $error = "Error: " . $e->getMessage();
+            echo $error;
+        }
+    }
+}
+
+if (!function_exists('deleteListWorks')) {
+    function deleteListWorks($listWorks_id_select)
+    {
+        try {
+            $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+            $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $stmt = $dsn->prepare("DELETE FROM listWorks WHERE id = :id");
+            $stmt->bindParam(':id', $listWorks_id_select);
+            if ($stmt->execute()) {
+                echo "suppression listWorks réussis";
+            } else {
+                echo "echec de la suppression";
+            }
+        } catch (PDOException $e) {
+            $error = "Error: " . $e->getMessage();
+            echo $error;
+        }
+    }
+}
+
+if (!function_exists('updateListWorks')) {
+    function updateListWorks($listWorks_id_select, $listWorks_idWorks_update,  $listWorks_idList_update)
+    {
+        try {
+            $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+            $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $setClauses = [];
+            if (!empty($listWorks_idWorks_update)) {
+                $checkWorksQuery = "SELECT COUNT(*) FROM works WHERE idWorks = :idWorks";
+                $checkWorksStmt = $dsn->prepare($checkWorksQuery);
+                $checkWorksStmt->bindParam(':idWorks', $listWorks_idWorks_update);
+                $checkWorksStmt->execute();
+
+                if ($checkWorksStmt->fetchColumn() > 0) {
+                    $setClauses[] = "idWorks = :idWorks";
+                } else {
+                    echo "L'oeuvres avec l'ID $listWorks_idWorks_update n'existe pas. Mise à jour annulée.";
+                    return;
+                }
+            }
+
+            if (!empty($listWorks_idList_update)) {
+                $checkListQuery = "SELECT COUNT(*) FROM list WHERE idList = :idList";
+                $checkListStmt = $dsn->prepare($checkListQuery);
+                $checkListStmt->bindParam(':idList', $listWorks_idList_update);
+                $checkListStmt->execute();
+
+                if ($checkListStmt->fetchColumn() > 0) {
+                    $setClauses[] = "idList = :idList";
+                } else {
+                    echo "La list avec l'ID $listWorks_idList_update n'existe pas. Mise à jour annulée.";
+                    return;
+                }
+            }
+
+            if (empty($setClauses)) {
+                echo "Aucun champ à mettre à jour.";
+                return;
+            }
+
+            $query = "UPDATE listWorks SET " . implode(', ', $setClauses) . " WHERE id = :idListWorksSelect ";
+            $stmt = $dsn->prepare($query);
+
+            $stmt->bindParam(':idListWorksSelect', $listWorks_id_select);
+            if (!empty($listWorks_id_select)) {
+                $stmt->bindParam(':idListWorksSelect', $listWorks_id_select);
+            }
+            if (!empty($listWorks_idWorks_update)) {
+                $stmt->bindParam(':idWorks', $listWorks_idWorks_update);
+            }
+            if (!empty($listWorks_idList_update)) {
+                $stmt->bindParam(':idList', $listWorks_idList_update);
+            }
+
+            if ($stmt->execute()) {
+                echo "Mise à jour listWorks réussie.";
+            } else {
+                echo "Échec de la mise à jour.";
+            }
+        } catch (PDOException $e) {
+            $error = "Error: " . $e->getMessage();
+            echo $error;
+        }
+    }
+}
+
+if (!function_exists('addListWorks')) {
+    function addListWorks($listWorks_idWorks_add, $listWorks_idList_add)
+    {
+        try {
+            $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+            $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $checkWorksQuery = $dsn->prepare("SELECT * FROM works WHERE idWorks = :idWorks");
+            $checkWorksQuery->bindParam(':idWorks', $listWorks_idWorks_add);
+            $checkWorksQuery->execute();
+
+            $checkListQuery = $dsn->prepare("SELECT * FROM list WHERE idList = :idList");
+            $checkListQuery->bindParam(':idList', $listWorks_idList_add);
+            $checkListQuery->execute();
+
+            if ($checkWorksQuery->rowCount() > 0 && $checkListQuery->rowCount() > 0) {
+                $insertListWorksQuery = $dsn->prepare("INSERT INTO listWorks (idWorks, idList) VALUES (:idWorks, :idList)");
+                $insertListWorksQuery->bindParam(':idWorks', $listWorks_idWorks_add);
+                $insertListWorksQuery->bindParam(':idList', $listWorks_idList_add);
+
+                if ($insertListWorksQuery->execute()) {
+                    echo "listWorks insérée avec succès";
+                } else {
+                    echo "Erreur lors de l'insertion de la listWorks";
+                }
+            } else {
+                echo "L'ID $listWorks_idWorks_add n'existe pas dans la table works.
+                    ou L'ID $listWorks_idList_add n'existe pas dans la table List.";
             }
 
         } catch (PDOException $e) {

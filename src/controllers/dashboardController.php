@@ -41,6 +41,8 @@ class dashboardController
             $result6 = $this->readWorksCategory();
             $this->crudWorksTag();
             $result7 = $this->readWorksTag();
+            $this->crudListWorks();
+            $result8 = $this->readListWorks();
             echo $this->twig->render('dashboard/dashboard.html.twig', [
                 'userDetails' => $result,
                 'oeuvresDetails' => $result2,
@@ -48,7 +50,8 @@ class dashboardController
                 'categoryDetails' => $result4,
                 'listDetails' => $result5,
                 'worksCategoryDetails' => $result6,
-                'worksTagDetails' => $result7
+                'worksTagDetails' => $result7,
+                'listWorksDetails' => $result8
             ]);
         }
     }
@@ -389,5 +392,42 @@ class dashboardController
         $stmt->execute();
         $result7 = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result7;
+    }
+
+    public function crudListWorks()
+    {
+        // condition delete listWorks
+        if (isset($_POST['delete8'])) {
+            $listWorks_id_select = $_POST['idSelect'];
+            deleteListWorks($listWorks_id_select);
+        }
+        // conditions update listWorks
+        if (isset($_POST['update8'])) {
+            $listWorks_id_select = $_POST['idSelect'];
+            $listWorks_idWorks_update = $_POST['idWorks'];
+            $listWorks_idList_update = $_POST['idList'];
+            updateListWorks($listWorks_id_select, $listWorks_idWorks_update,  $listWorks_idList_update);
+        }
+        // condition add listWorks
+        if (isset($_POST['submit8'])) {
+            $listWorks_idWorks_add = $_POST['idWorks'];
+            $listWorks_idList_add = $_POST['idList'];
+            if (empty($listWorks_idWorks_add) || empty($listWorks_idList_add)) {
+                echo "Tous les champs doivent être remplis.";
+            } else {
+                addListWorks($listWorks_idWorks_add, $listWorks_idList_add);
+            }
+        }
+    }
+
+    public function readListWorks()
+    {
+        $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+        $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $stmt = $dsn->prepare("SELECT * FROM listWorks");
+        $stmt->execute();
+        $result8 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result8;
     }
 }
