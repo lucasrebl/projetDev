@@ -223,4 +223,34 @@
 			{% endfor %}
 		</div>
 	</div>
+
+	<h3>crud tag des oeuvres</h3>
+	<div class="CrudWorksTag">
+		<form action="/panelAdmin" method="post">
+			<label for="update">selectionné l'id:</label>
+        	<input type="number" name="idSelect">
+
+			<label for="update">idWorks:</label>
+        	<input type="number" min="1" name="idWorks">
+
+			<label for="update">idTag:</label>
+			<input type="number" min="1" name="idTag">
+
+			<input type="submit" name="update7" value="update worksTag">
+			<input type="submit" name="submit7" value="add worksTag">
+        	<input type="submit" name="delete7" value="delete worksTag">
+		</form>
+	</div>
+
+	<div class="CrudWorksTag2">
+		<div class="readWorksTag">
+			{% for worksTag in worksTagDetails %}
+				<div class="read">
+					<p id="read">id: {{worksTag.id}}</p>
+					<p id="read">idWorks: {{worksTag.idWorks}}</p>
+					<p id="read">idTag: {{worksTag.idTag}}</p>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
 {% endblock %}

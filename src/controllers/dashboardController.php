@@ -39,13 +39,16 @@ class dashboardController
             $result5 = $this->readList();
             $this->crudWorksCategory();
             $result6 = $this->readWorksCategory();
+            $this->crudWorksTag();
+            $result7 = $this->readWorksTag();
             echo $this->twig->render('dashboard/dashboard.html.twig', [
                 'userDetails' => $result,
                 'oeuvresDetails' => $result2,
                 'tagDetails' => $result3,
                 'categoryDetails' => $result4,
                 'listDetails' => $result5,
-                'worksCategoryDetails' => $result6
+                'worksCategoryDetails' => $result6,
+                'worksTagDetails' => $result7
             ]);
         }
     }
@@ -349,5 +352,42 @@ class dashboardController
         $stmt->execute();
         $result6 = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result6;
+    }
+
+    public function crudWorksTag()
+    {
+        // condition delete worksTag
+        if (isset($_POST['delete7'])) {
+            $worksTag_id_select = $_POST['idSelect'];
+            deleteWorksTag($worksTag_id_select);
+        }
+        // conditions update worksTag
+        if (isset($_POST['update7'])) {
+            $worksTag_id_select = $_POST['idSelect'];
+            $worksTag_idWorks_update = $_POST['idWorks'];
+            $worksTag_idTag_update = $_POST['idTag'];
+            updateWorksTag($worksTag_id_select, $worksTag_idWorks_update,  $worksTag_idTag_update);
+        }
+        // condition add worksTag
+        if (isset($_POST['submit7'])) {
+            $worksTag_idWorks_add = $_POST['idWorks'];
+            $worksTag_idTag_add = $_POST['idTag'];
+            if (empty($worksTag_idWorks_add) || empty($worksTag_idTag_add)) {
+                echo "Tous les champs doivent être remplis.";
+            } else {
+                addWorksTag($worksTag_idWorks_add, $worksTag_idTag_add);
+            }
+        }
+    }
+
+    public function readWorksTag()
+    {
+        $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+        $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $stmt = $dsn->prepare("SELECT * FROM worksTag");
+        $stmt->execute();
+        $result7 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result7;
     }
 }

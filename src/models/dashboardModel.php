@@ -561,12 +561,12 @@ if (!function_exists('updateWorksCategory')) {
 
             $setClauses = [];
             if (!empty($worksCategory_idWorks_update)) {
-                $checkUserQuery = "SELECT COUNT(*) FROM works WHERE idWorks = :idWorks";
-                $checkUserStmt = $dsn->prepare($checkUserQuery);
-                $checkUserStmt->bindParam(':idWorks', $worksCategory_idWorks_update);
-                $checkUserStmt->execute();
+                $checkWorksQuery = "SELECT COUNT(*) FROM works WHERE idWorks = :idWorks";
+                $checkWorksStmt = $dsn->prepare($checkWorksQuery);
+                $checkWorksStmt->bindParam(':idWorks', $worksCategory_idWorks_update);
+                $checkWorksStmt->execute();
 
-                if ($checkUserStmt->fetchColumn() > 0) {
+                if ($checkWorksStmt->fetchColumn() > 0) {
                     $setClauses[] = "idWorks = :idWorks";
                 } else {
                     echo "L'oeuvres avec l'ID $worksCategory_idWorks_update n'existe pas. Mise à jour annulée.";
@@ -575,12 +575,12 @@ if (!function_exists('updateWorksCategory')) {
             }
 
             if (!empty($worksCategory_idCategory_update)) {
-                $checkUserQuery2 = "SELECT COUNT(*) FROM Category WHERE idCategory = :idCategory";
-                $checkUserStmt2 = $dsn->prepare($checkUserQuery2);
-                $checkUserStmt2->bindParam(':idCategory', $worksCategory_idCategory_update);
-                $checkUserStmt2->execute();
+                $checkCategoryQuery = "SELECT COUNT(*) FROM Category WHERE idCategory = :idCategory";
+                $checkCategoryStmt = $dsn->prepare($checkCategoryQuery);
+                $checkCategoryStmt->bindParam(':idCategory', $worksCategory_idCategory_update);
+                $checkCategoryStmt->execute();
 
-                if ($checkUserStmt2->fetchColumn() > 0) {
+                if ($checkCategoryStmt->fetchColumn() > 0) {
                     $setClauses[] = "idCategory = :idCategory";
                 } else {
                     echo "La category avec l'ID $worksCategory_idCategory_update n'existe pas. Mise à jour annulée.";
@@ -608,7 +608,7 @@ if (!function_exists('updateWorksCategory')) {
             }
 
             if ($stmt->execute()) {
-                echo "Mise à jour list réussie.";
+                echo "Mise à jour worksCategory réussie.";
             } else {
                 echo "Échec de la mise à jour.";
             }
@@ -647,6 +647,131 @@ if (!function_exists('addWorksCategory')) {
             } else {
                 echo "L'ID $worksCategory_idWorks_add n'existe pas dans la table works.
                     ou L'ID $worksCategory_idCategory_add n'existe pas dans la table Category.";
+            }
+
+        } catch (PDOException $e) {
+            $error = "Error: " . $e->getMessage();
+            echo $error;
+        }
+    }
+}
+
+if (!function_exists('deleteWorksTag')) {
+    function deleteWorksTag($worksTag_id_select)
+    {
+        try {
+            $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+            $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $stmt = $dsn->prepare("DELETE FROM worksTag WHERE id = :id");
+            $stmt->bindParam(':id', $worksTag_id_select);
+            if ($stmt->execute()) {
+                echo "suppression worksTag réussis";
+            } else {
+                echo "echec de la suppression";
+            }
+        } catch (PDOException $e) {
+            $error = "Error: " . $e->getMessage();
+            echo $error;
+        }
+    }
+}
+
+if (!function_exists('updateWorksTag')) {
+    function updateWorksTag($worksTag_id_select, $worksTag_idWorks_update,  $worksTag_idTag_update)
+    {
+        try {
+            $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+            $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $setClauses = [];
+            if (!empty($worksTag_idWorks_update)) {
+                $checkWorksQuery = "SELECT COUNT(*) FROM works WHERE idWorks = :idWorks";
+                $checkWorksStmt = $dsn->prepare($checkWorksQuery);
+                $checkWorksStmt->bindParam(':idWorks', $worksTag_idWorks_update);
+                $checkWorksStmt->execute();
+
+                if ($checkWorksStmt->fetchColumn() > 0) {
+                    $setClauses[] = "idWorks = :idWorks";
+                } else {
+                    echo "L'oeuvres avec l'ID $worksTag_idWorks_update n'existe pas. Mise à jour annulée.";
+                    return;
+                }
+            }
+
+            if (!empty($worksTag_idTag_update)) {
+                $checkTagQuery = "SELECT COUNT(*) FROM tag WHERE idTag = :idTag";
+                $checkTagStmt = $dsn->prepare($checkTagQuery);
+                $checkTagStmt->bindParam(':idTag', $worksTag_idTag_update);
+                $checkTagStmt->execute();
+
+                if ($checkTagStmt->fetchColumn() > 0) {
+                    $setClauses[] = "idTag = :idTag";
+                } else {
+                    echo "Le tag avec l'ID $worksTag_idTag_update n'existe pas. Mise à jour annulée.";
+                    return;
+                }
+            }
+
+            if (empty($setClauses)) {
+                echo "Aucun champ à mettre à jour.";
+                return;
+            }
+
+            $query = "UPDATE worksTag SET " . implode(', ', $setClauses) . " WHERE id = :idWorksTagSelect ";
+            $stmt = $dsn->prepare($query);
+
+            $stmt->bindParam(':idWorksTagSelect', $worksTag_id_select);
+            if (!empty($worksTag_id_select)) {
+                $stmt->bindParam(':idWorksTagSelect', $worksTag_id_select);
+            }
+            if (!empty($worksTag_idWorks_update)) {
+                $stmt->bindParam(':idWorks', $worksTag_idWorks_update);
+            }
+            if (!empty($worksTag_idTag_update)) {
+                $stmt->bindParam(':idTag', $worksTag_idTag_update);
+            }
+
+            if ($stmt->execute()) {
+                echo "Mise à jour worksTag réussie.";
+            } else {
+                echo "Échec de la mise à jour.";
+            }
+        } catch (PDOException $e) {
+            $error = "Error: " . $e->getMessage();
+            echo $error;
+        }
+    }
+}
+
+if (!function_exists('addWorksTag')) {
+    function addWorksTag($worksTag_idWorks_add, $worksTag_idTag_add)
+    {
+        try {
+            $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+            $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $checkWorksQuery = $dsn->prepare("SELECT * FROM works WHERE idWorks = :idWorks");
+            $checkWorksQuery->bindParam(':idWorks', $worksTag_idWorks_add);
+            $checkWorksQuery->execute();
+
+            $checkTagQuery = $dsn->prepare("SELECT * FROM tag WHERE idTag = :idTag");
+            $checkTagQuery->bindParam(':idTag', $worksTag_idTag_add);
+            $checkTagQuery->execute();
+
+            if ($checkWorksQuery->rowCount() > 0 && $checkTagQuery->rowCount() > 0) {
+                $insertWorksTagQuery = $dsn->prepare("INSERT INTO worksTag (idWorks, idTag) VALUES (:idWorks, :idTag)");
+                $insertWorksTagQuery->bindParam(':idWorks', $worksTag_idWorks_add);
+                $insertWorksTagQuery->bindParam(':idTag', $worksTag_idTag_add);
+
+                if ($insertWorksTagQuery->execute()) {
+                    echo "WorksTag insérée avec succès";
+                } else {
+                    echo "Erreur lors de l'insertion de la WorksCategory";
+                }
+            } else {
+                echo "L'ID $worksTag_idWorks_add n'existe pas dans la table works.
+                    ou L'ID $worksTag_idTag_add n'existe pas dans la table Tag.";
             }
 
         } catch (PDOException $e) {
