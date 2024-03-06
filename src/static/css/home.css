@@ -57,12 +57,20 @@ body.night {
   right: 0px;
   width: 45%;
   height: auto;
-  border-radius: 50px 0 0 0;
+}
+
+body.night .container-right img {
+  position: fixed;
+  bottom: 40px;
+  right: 0px;
+  /* top: 10px; */
+  width: 60%;
+  height: auto;
 }
 
 
 body.night header a {
-  color: white; 
+  color: white;
 }
 
 main {
@@ -78,27 +86,64 @@ main {
   flex-direction: column;
   align-items: center;
   margin: 10rem 10rem 10rem 15rem;
+  background: rgb(255 255 255 / 15%);
+  padding: 2rem;
+  border: #FFFFFF 1px solid;
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
 }
 
 button {
-  border-radius: 90px;
-  border-top: 11px solid #4A3321;
-  border-right: 8px solid #4A3321;
-  border-bottom: 1px solid #4A3321;
-  background: #FFF;
-  width: 12rem;
-  height: fit-content;
+  background-color: #d20f4500;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+  cursor: pointer;
+  box-shadow: 0 2px 4px 0 rgb(255, 255, 255);
+  transition: 0.3s;
+  backdrop-filter: blur(10px);
+  /* width: 12rem;
+    height: fit-content; */
   margin: 2rem;
   padding: 1rem;
 }
 
+button:hover {
+  background-image: radial-gradient(circle at 80% 20%, #ff3600 0%, #E7E7E7 100%);
+  /* Fond radial dégradé */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* Ombre subtile */
+}
+
+
 body.night .container-left button {
-  border-radius: 90px;
-  border-top: 11px solid #FFF;
-  border-right: 8px solid #FFF;
-  border-bottom: 1px solid #FFF;
-  background: #000;
-  color: #FFF; /* Set the text color to white */
+  background-color: #d20f4500;
+  color: #ffffff;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+  cursor: pointer;
+  box-shadow: 0 2px 4px 0 rgb(255, 255, 255);
+  transition: 0.3s;
+  backdrop-filter: blur(10px);
+  /* width: 12rem;
+    height: fit-content; */
+  margin: 2rem;
+  padding: 1rem;
+}
+
+body.night .container-left button:hover {
+  background-image: radial-gradient(circle at 80% 20%, rgb(159 177 225) 0%, #E7E7E7 100%);
+  /* Fond radial dégradé */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* Ombre subtile */
 }
 
 /* DROPDOWN MENU */
@@ -107,7 +152,7 @@ body.night .container-left button {
   position: absolute;
   top: 60px;
   height: 0;
-  width:300px;
+  width: 300px;
   background: rgba(239, 248, 255, 0.05);
   backdrop-filter: blur(15px);
   border-radius: 10px;
@@ -121,7 +166,7 @@ body.night .container-left button {
 
 .dropdown_menu li {
   padding: 1rem;
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
@@ -139,13 +184,15 @@ body.night .container-left button {
   }
 
   label#dark-change {
-    display: block; /* Add this to make the label visible */
-    margin-top: 10px; /* Adjust the margin as needed */
+    display: block;
+    /* Add this to make the label visible */
+    margin-top: 10px;
+    /* Adjust the margin as needed */
   }
 }
 
 @media (max-width: 1472px) {
-  .dropdown_menu{
+  .dropdown_menu {
     left: 2rem;
     width: unset;
   }

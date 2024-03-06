@@ -7,10 +7,17 @@ body {
   /* css style */
   margin: 0;
   padding: 0;
-    background-image: url("../asset/test.png") ;
-    background-attachment: fixed;
+
+  /* Set the background image */
+  background-image: url("../asset/test.png");
+  background-attachment: fixed;
   background-repeat: no-repeat;
 
+  /* Ensure background covers full viewport height and width */
+  background-size: cover;
+
+  /* Optionally set a background color if needed */
+  background-color: #F9FAF5; /* Light gray fallback */
 }
 
 /* BOUTON LIGHT/DARK MODE */
@@ -52,9 +59,12 @@ label.active:before {
 body.night {
   margin: 0;
   padding: 0;
-    background-image: url("../asset/nighttheme.png") ;
-    background-attachment: fixed;
+
+  background-image: url("../asset/nighttheme.png");
+  background-attachment: fixed;
   background-repeat: no-repeat;
+
+  background-size: cover;
 }
 
 /* HEADER */
