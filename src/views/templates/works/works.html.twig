@@ -21,16 +21,20 @@
 				</legend>
 				Catégories :
 				{% for Category in Categories %}
-				<p>
-					<input class="category" type="radio" name="option" value="{{ Category.ID }}">
-					{{ Category.Name }}
-				</p>
+				<div class="myFilter">
+					<p>
+						<input class="category" type="radio" name="option" value="{{ Category.ID }}">
+						{{ Category.Name }}
+					</p>
+				</div>
 				{% endfor %}
 				{% for tag in Tags %}
-				<p>
-					<input class="tag" type="checkbox" name="tag" value="{{ tag.ID }}">
-					{{ tag.Name }}
-				</p>
+				<div class="myFilter">
+					<p>
+						<input class="tag" type="checkbox" name="tag" value="{{ tag.ID }}">
+						{{ tag.Name }}
+					</p>
+				</div>
 				{% endfor %}
 				<div class="part2" style="display: none;">
 					<p for="episodes">Nombre d'épisodes :
@@ -46,86 +50,78 @@
 			</fieldset>
 		</form>
 	</div>
-	{# <div class="works"> #}
-		{# {% for work in Works %}
+	<div class="works">
+		{% for work in Works %}
 		<a href="/resume?id={{ work.ID }}">
 			<div class="work">
-				<img src="data:image/png;base64,{{ work.Image }}" />
-				<p class="title no-link">{{ work.Name }}</p>
-				<p class="summary no-link">Résumé :
-					{{ work.Summary }}</p>
-				<p class="status no-link">Status :
-					{{ work.Status }}</p>
-				{% if work.Category == "Series" %}
-				<p class="episodes no-link">Nombre d'épisodes :
-					{{ work.NbEpisodes }}</p>
-				{% endif %}
-				{% if work.Category == "Livres" %}
-				<p class="tome no-link">Nombre de tomes :
-					{{ work.NbTome }}</p>
-				{% endif %}
-			</div> #}
-			<div class="works">
-				{% for work in Works %}
-				<a href="/resume?id={{ work.ID }}">
-					<div class="work">
-						<div class="circle"></div>
-						<div class="circle"></div>
-						<div class="work-inner">
-							<div class="left-inner">
-								<img src="data:image/png;base64,{{ work.Image }}" />
-								<p class="title no-link">{{ work.Name }}</p>
-							</div>
-							<div class="right-inner">
-								<p class="summary no-link">Résumé :
-									{{ work.Summary }}</p>
-								<p class="status no-link">Status :
-									{{ work.Status }}</p>
-								{% if work.Category == "Series" %}
-								<p class="episodes no-link">Nombre d'épisodes :
-									{{ work.NbEpisodes }}</p>
-								{% endif %}
-								{% if work.Category == "Livres" %}
-								<p class="tome no-link">Nombre de tomes :
-									{{ work.NbTome }}</p>
-								{% endif %}
-							</div>
-						</div>
+				<div class="circle"></div>
+				<div class="circle"></div>
+				<div class="work-inner">
+					<div class="left-inner">
+						<img src="data:image/png;base64,{{ work.Image }}" />
+						<p class="title no-link">{{ work.Name }}</p>
 					</div>
-				</a>
-				{% endfor %}
+					<div class="right-inner">
+						<div class="categ">
+							<p class="summary no-link">Résumé :</p>
+							<p>{{ work.Summary }}</p>
+						</div>
+						<div class="categ">
+							<p class="status no-link">Status :</p>
+							<p>{{ work.Status }}</p>
+						</div>
+						{% if work.Category == "Series" %}
+						<div class="categ">
+							<p class="episodes no-link">Nombre d'épisodes :</p>
+							<p>{{ work.NbEpisodes }}</p>
+						</div>
+						{% endif %}
+						{% if work.Category == "Livres" %}
+						<div class="categ">
+							<p class="tome no-link">Nombre de tomes :</p>
+							<p>{{ work.NbTome }}</p>
+						</div>
+						{% endif %}
+					</div>
+				</div>
 			</div>
-			<button id="add" class="add">
-				<i class="fas fa-plus"></i>
-				Ajouter une oeuvre</button>
+		</a>
+		{% endfor %}
 	</div>
-	<div class="form" style="display: none;">
-		<form action="/aWork" method="post">
-			<p for="name">Titre :
-			</p>
-			<input type="text" id="name" name="name" value=""></input>
-			<p for="summary">Résumé :</p>
-			<textarea type="text" id="summary" name="summary"></textarea>
-			<p for="status">Status :</p><input type="text" id="status" name="status" value=""></input>
-			<p for="category">Category :</p>
-			<selectlist="category" id="category" name="category">{# <option value="0">Sélectionner une catégorie
-				</option> #}{% for Category in Categories %}
-				<option value="{{ Category.ID }}">{{ Category.Name }}</option>
-				{% endfor %}</select>
-				<div class="part2" style="display: none;">
-					<p for="episodes">Nombre d'épisodes :</p><input type="text" id="episodes" name="episodes"
-						value=""></input>
-					<p for="season">Nombre de Saisons :</p><input type="text" id="season" name="season"
-						value=""></input>
-				</div>
-				<div class="part3" style="display: none;">
-					<p for="tome">Nombre de Tomes :</p><input type="text" id="tome" name="tome" value=""></input>
-				</div>
-				<div class="tagsM"></div><select class="NewTag">
-					<option value="0">Ajouter un tag</option>{% for tag in Tags %}<option value="{{ tag.ID }}">{{
-						tag.Name }}</option>{% endfor %}
-				</select><input type="submit" value="Valider"></input>
-		</form><button id="cancel">Annuler</button>
-	</div>
-	<script src="/static/js/works.js"></script>
-	<script src="/static/js/home.js"></script>{% endblock %}
+	<button id="add" class="add">
+		<i class="fas fa-plus"></i>
+		Ajouter une oeuvre</button>
+</div>
+<div class="form" style="display: none;">
+	<form action="/aWork" method="post">
+		<p for="name">Titre</p>
+		<input type="text" id="name" name="name" value=""></input>
+		<p for="summary">Résumé</p>
+		<textarea type="text" id="summary" name="summary"></textarea>
+		<p for="status">Status</p><input type="text" id="status" name="status" value=""></input>
+		<p for="category">Categorie</p>
+		<selectlist="category" id="category" name="category">
+			{# <option value="0">Sélectionner une catégorie</option> #}
+			{% for Category in Categories %}
+			<option value="{{ Category.ID }}">{{ Category.Name }}</option>
+			{% endfor %}
+			</selectlist>
+			<div class="part2" style="display: none;">
+				<p for="episodes">Nombre d'épisodes</p>
+				<input type="text" id="episodes" name="episodes" value=""></input>
+				<p for="season">Nombre de Saisons :</p><input type="text" id="season" name="season" value=""></input>
+			</div>
+			<div class="part3" style="display: none;">
+				<p for="tome">Nombre de Tomes :</p><input type="text" id="tome" name="tome" value=""></input>
+			</div>
+			<div class="tagsM"></div>
+			<select class="NewTag">
+				<option value="0">Ajouter un tag</option>{% for tag in Tags %}<option value="{{ tag.ID }}">{{
+					tag.Name }}</option>{% endfor %}
+			</select>
+			<input type="submit" value="Valider"></input>
+	</form>
+	<button id="cancel">Annuler</button>
+</div>
+<script src="/static/js/works.js"></script>
+<script src="/static/js/home.js"></script>{% endblock %}

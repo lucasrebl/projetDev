@@ -18,7 +18,7 @@ let FilClick = filters.querySelector('input[type="submit"]')
 
 let Tags = [];
 
-summary.forEach((element) => element.textContent = element.textContent.substring(0,100) + "...")
+summary.forEach((element) => element.textContent = element.textContent.substring(0,100))
 
 for(let c = 0; c < FilTag.length; c++){
     // FilTag[c].setAttribute("name",`tag${c + 1}`)

@@ -7,16 +7,16 @@
 .custom-fieldset {
   margin: 0 25px 25px;
   padding: 20px;
-  border: 1px solid rgba(0, 0, 0, 0.45);
+  border: 1px solid rgb(255 255 255 / 50%);
   border-radius: 35px;
   background-color: rgba(255, 255, 255, 0.25);
   display: flex;
   flex-direction: column;
+  position: fixed;
 }
 
-body.night .custom-fieldset {
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  border-radius: 35px;
+#filters {
+  margin-right: 25rem;
 }
 
 .filters {
@@ -33,17 +33,6 @@ body.night .custom-fieldset {
   flex-grow: 1;
 }
 
-/* .work {
-    margin: 0 25px 100px;
-    padding: 20px;
-    border: 1px solid rgba(0, 0, 0, 0.45);
-    border-radius: 35px;
-    background-color: rgba(239, 248, 255, 0.05);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-} */
-
 .works {
   display: flex;
   flex-direction: column;
@@ -53,36 +42,6 @@ body.night .custom-fieldset {
   max-width: 40%;
 }
 
-/* .work {
-    margin: 0 25px 50px;
-    position: relative;
-    width: 190px;
-    height: 254px;
-    background: linear-gradient(137deg, rgb(255, 0, 179) 0%, rgba(0,212,255,1) 100%);
-    transition: 0.3s ease;
-    border-radius: 30px;
-    overflow: hidden; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .work::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgb(255 247 200 / 82%);
-    z-index: 1;
-  }
-
-  body.night   .work::before {
-    background-color: rgba(0, 0, 0, 0.95);
-
-  } */
-
 .work:hover {
   filter: drop-shadow(0px 0px 30px rgb(255, 255, 255));
 }
@@ -91,24 +50,11 @@ body.night .work:hover {
   filter: drop-shadow(0px 0px 30px rgb(38, 81, 209));
 }
 
-/* .work a {
-    position: relative; 
-    z-index: 2;
-  }
-  
-  .work p {
-    position: relative; 
-    z-index: 2; 
-  }
-  
-  .work img {
-    max-width: 40%;
-    max-height: 40%;
-    display: block;
-    margin-bottom: 10px;
-    position: relative;
-    z-index: 2;
-  }  */
+.right-inner .categ {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
 
 .work-inner a {
   position: relative;
@@ -126,14 +72,16 @@ body.night .work:hover {
 }
 
 .work-inner img {
-  max-width: 40%;
-  max-height: 40%;
+  max-width: 60%;
   display: block;
   margin-bottom: 10px;
   position: relative;
   z-index: 2;
 }
 
+a {
+  text-decoration: none;
+}
 
 .work {
   width: fit-content;
@@ -154,8 +102,8 @@ body.night .work {
 }
 
 .work-inner {
-  width: inherit;
-  height: inherit;
+  width: 50rem;
+  height: max-content;
   background: rgba(255, 255, 255, 0.05);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(10px);
@@ -245,8 +193,8 @@ body.night p {
   text-shadow: 0 0 2px black;
 }
 
-button.add, .custom-button {
-  background-color: #d20f4500;
+button.add,
+.custom-button {
   color: #FFFFFF;
   border: none;
   border-radius: 25px;
@@ -255,21 +203,24 @@ button.add, .custom-button {
   font-weight: bold;
   width: 12rem;
   cursor: pointer;
-  box-shadow: 0 2px 4px 0 rgb(255, 255, 255);
+  background-image: radial-gradient(circle at 80% 20%, #ff3600 0%, #E7E7E7 100%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
   backdrop-filter: blur(10px);
   margin: 2rem;
   padding: 1rem;
 }
 
-button.add:hover, .custom-button:hover {
-  background-image: radial-gradient(circle at 80% 20%, #ff3600 0%, #E7E7E7 100%);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+button.add:hover,
+.custom-button:hover,
+body.night button.add:hover,
+body.night .custom-button:hover {
+  box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.4);
 }
 
 
-body.night button.add, body.night .custom-button {
-  background-color: #d20f4500;
+body.night button.add,
+body.night .custom-button {
   color: #ffffff;
   border: none;
   border-radius: 25px;
@@ -278,18 +229,33 @@ body.night button.add, body.night .custom-button {
   font-weight: bold;
   width: 12rem;
   cursor: pointer;
-  box-shadow: 0 2px 4px 0 rgb(255, 255, 255);
+  background-image: radial-gradient(circle at 80% 20%, rgb(159 177 225) 0%, #E7E7E7 100%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
   backdrop-filter: blur(10px);
   margin: 2rem;
   padding: 1rem;
 }
 
-body.night button.add:hover, body.night .custom-button:hover {
-  background-image: radial-gradient(circle at 80% 20%, rgb(159 177 225) 0%, #E7E7E7 100%);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.custom-button i,
+button.add i {
+  margin-right: 5px;
 }
 
-.custom-button i, button.add i {
-  margin-right: 5px;
+
+
+.myFilter {
+  background: rgb(255 255 255 / 50%);
+  border-radius: 80px;
+  box-shadow: 10px 10px 10px rgb(132 132 132 / 40%), 20px 20px 19px #ffffff00;
+  margin: 1rem;
+}
+
+.myFilter:hover,
+.myFilter:checked {
+  background: rgb(255 255 255 / 50%);
+  border-radius: 80px;
+  box-shadow: inset 5px 5px 10px rgb(132 132 132 / 40%), inset 25px 25px 24px #ffffff00;
+  margin: 1rem;
+  border: 1px solid white;
 }

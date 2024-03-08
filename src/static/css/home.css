@@ -93,7 +93,6 @@ main {
 }
 
 button {
-  background-color: #d20f4500;
   color: #FFFFFF;
   border: none;
   border-radius: 25px;
@@ -102,21 +101,19 @@ button {
   font-weight: bold;
   width: 100%;
   cursor: pointer;
-  box-shadow: 0 2px 4px 0 rgb(255, 255, 255);
+  background-image: radial-gradient(circle at 80% 20%, #ff3600 0%, #E7E7E7 100%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
   backdrop-filter: blur(10px);
   margin: 2rem;
   padding: 1rem;
 }
 
-button:hover {
-  background-image: radial-gradient(circle at 80% 20%, #ff3600 0%, #E7E7E7 100%);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+button:hover, body.night .container-left button:hover {
+  box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.4); 
 }
 
-
 body.night .container-left button {
-  background-color: #d20f4500;
   color: #ffffff;
   border: none;
   border-radius: 25px;
@@ -125,16 +122,12 @@ body.night .container-left button {
   font-weight: bold;
   width: 100%;
   cursor: pointer;
-  box-shadow: 0 2px 4px 0 rgb(255, 255, 255);
+  background-image: radial-gradient(circle at 80% 20%, rgb(159 177 225) 0%, #E7E7E7 100%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
   backdrop-filter: blur(10px);
   margin: 2rem;
   padding: 1rem;
-}
-
-body.night .container-left button:hover {
-  background-image: radial-gradient(circle at 80% 20%, rgb(159 177 225) 0%, #E7E7E7 100%);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 /* DROPDOWN MENU */
