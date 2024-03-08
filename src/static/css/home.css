@@ -61,11 +61,10 @@ body.night {
 
 body.night .container-right img {
   position: fixed;
-  bottom: 40px;
-  right: 0px;
-  /* top: 10px; */
-  width: 60%;
-  height: auto;
+    bottom: -20px;
+    right: -120px;
+    width: 60%;
+    height: auto;
 }
 
 
@@ -106,17 +105,13 @@ button {
   box-shadow: 0 2px 4px 0 rgb(255, 255, 255);
   transition: 0.3s;
   backdrop-filter: blur(10px);
-  /* width: 12rem;
-    height: fit-content; */
   margin: 2rem;
   padding: 1rem;
 }
 
 button:hover {
   background-image: radial-gradient(circle at 80% 20%, #ff3600 0%, #E7E7E7 100%);
-  /* Fond radial dégradé */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  /* Ombre subtile */
 }
 
 
@@ -133,17 +128,13 @@ body.night .container-left button {
   box-shadow: 0 2px 4px 0 rgb(255, 255, 255);
   transition: 0.3s;
   backdrop-filter: blur(10px);
-  /* width: 12rem;
-    height: fit-content; */
   margin: 2rem;
   padding: 1rem;
 }
 
 body.night .container-left button:hover {
   background-image: radial-gradient(circle at 80% 20%, rgb(159 177 225) 0%, #E7E7E7 100%);
-  /* Fond radial dégradé */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  /* Ombre subtile */
 }
 
 /* DROPDOWN MENU */
@@ -185,9 +176,7 @@ body.night .container-left button:hover {
 
   label#dark-change {
     display: block;
-    /* Add this to make the label visible */
     margin-top: 10px;
-    /* Adjust the margin as needed */
   }
 }
 

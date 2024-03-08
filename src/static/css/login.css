@@ -7,16 +7,6 @@
     border-radius: 50px 0 0 0;
 }
 
-body.night .container-left button {
-    border-radius: 90px;
-    border-top: 11px solid #FFF;
-    border-right: 8px solid #FFF;
-    border-bottom: 1px solid #FFF;
-    background: #000;
-    color: #FFF;
-    /* Set the text color to white */
-}
-
 .container-left {
     display: flex;
     flex-direction: column;
@@ -43,7 +33,7 @@ body.night .container-left button {
     margin: 20px;
 }
 
-input {
+/* input {
     border: solid 1.5px #ffffff;
     border-radius: 1rem;
     background: none;
@@ -55,7 +45,53 @@ input {
 
 body.night input {
     color: #ffffff;
-}
+} */
+
+
+input #log {
+    background-color: #d20f4500;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+    cursor: pointer;
+    box-shadow: 0 2px 4px 0 rgb(255, 255, 255);
+    transition: 0.3s;
+    backdrop-filter: blur(10px);
+    margin: 2rem;
+    padding: 1rem;
+  }
+  
+  input #log:hover {
+    background-image: radial-gradient(circle at 80% 20%, #ff3600 0%, #E7E7E7 100%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+  body.night input #log {
+    background-color: #d20f4500;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+    cursor: pointer;
+    box-shadow: 0 2px 4px 0 rgb(255, 255, 255);
+    transition: 0.3s;
+    backdrop-filter: blur(10px);
+    margin: 2rem;
+    padding: 1rem;
+  }
+  
+  body.night input #log:hover {
+    background-image: radial-gradient(circle at 80% 20%, rgb(159 177 225) 0%, #E7E7E7 100%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
 
 .custom-label {
     position: absolute;
