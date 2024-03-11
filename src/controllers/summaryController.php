@@ -55,14 +55,20 @@ class summaryController
         $MW->updateOne($id, $name, $status, $summary, $episodes, $season, $tome);
         $FW->updateCategory($id, $category);
         $data = $bdd->connect();
+        // print_r($_POST["tag" . 3]);
         if (count($_POST) > 8) {
             $data->prepare("DELETE FROM worksTag WHERE idWorks = $id")->execute();
             for ($c = 0; $c < count($_POST) - 8; $c++) {
-                $tag = $_POST["tag" . $c + 1] ?? "";
-                $data->prepare("INSERT INTO worksTag(idWorks,idTag) VALUES($id,$tag)")->execute();
+                //$tag = $_POST["tag" . $c + 1] ?? "";
+                if (empty($_POST["tag" . $c + 1])) {
+                    $tag = "";
+                    $data->prepare("DELETE From worksTag where idWorks == $id")->execute();
+                } else {
+                    $tag = $_POST["tag" . $c + 1];
+                    $data->prepare("INSERT INTO worksTag(idWorks,idTag) VALUES($id,$tag)")->execute();
+                }
             }
         }
-
         header("location: /resume?id=$id");
     }
 

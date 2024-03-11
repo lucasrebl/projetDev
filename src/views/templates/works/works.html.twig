@@ -100,12 +100,14 @@
 		<textarea type="text" id="summary" name="summary"></textarea>
 		<p for="status">Status</p><input type="text" id="status" name="status" value=""></input>
 		<p for="category">Categorie</p>
-		<selectlist="category" id="category" name="category">
+		<select list="category" id="category" name="category">
 			{# <option value="0">Sélectionner une catégorie</option> #}
 			{% for Category in Categories %}
-			<option value="{{ Category.ID }}">{{ Category.Name }}</option>
+			<option value="{{ Category.ID }}">
+				{{ Category.Name }}
+				</option>
 			{% endfor %}
-			</selectlist>
+			</select>
 			<div class="part2" style="display: none;">
 				<p for="episodes">Nombre d'épisodes</p>
 				<input type="text" id="episodes" name="episodes" value=""></input>
@@ -116,8 +118,12 @@
 			</div>
 			<div class="tagsM"></div>
 			<select class="NewTag">
-				<option value="0">Ajouter un tag</option>{% for tag in Tags %}<option value="{{ tag.ID }}">{{
-					tag.Name }}</option>{% endfor %}
+				<option value="0">Ajouter un tag</option>
+				{% for tag in Tags %}
+					<option value="{{ tag.ID }}">
+						{{ tag.Name }}
+					</option>
+				{% endfor %}
 			</select>
 			<input type="submit" value="Valider"></input>
 	</form>

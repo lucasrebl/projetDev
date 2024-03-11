@@ -81,8 +81,8 @@ class worksManager
         try {
             $result = $this->db->prepare("INSERT INTO works(nameWorks,status,image,summary,numberOfEpisodes,numberOfSeason,numberOfTome) 
         VALUES('$nameWorks','$status','','$summary',$episodes,$season,$tome)");
-        $result->execute();
-        } catch (PDOException $e){
+            $result->execute();
+        } catch (PDOException $e) {
             echo $e->getMessage();
             //header("Location: /oeuvres");
         }
@@ -142,6 +142,9 @@ class worksManager
             $tag = (object) array('id' => $row['idTag'], 'name' => $row['nameTag']);
             $Tags[] = $tag;
         };
+        if ($result->rowCount() == 0) {
+            $Tags = "";
+        }
         $work->setTags($Tags);
         return $work;
     }

@@ -108,10 +108,10 @@ a {
   text-decoration: none;
 }
 
-input[type="checkbox"] {
-  /* visibility: hidden; */
-  /* width: 50px;
-  height: 50px; */
+input[type="checkbox"],
+input[type="radio"] {
+  visibility: hidden;
+  /* width: 50px; */
 }
 
 .work {
@@ -283,7 +283,7 @@ button.add i {
 }
 
 .myFilter:hover,
-input[type="checkbox"]:checked {
+.myFilter[checked] {
   background: rgb(255 255 255 / 50%);
   border-radius: 80px;
   box-shadow: inset 5px 5px 10px rgb(132 132 132 / 40%), inset 25px 25px 24px #ffffff00;

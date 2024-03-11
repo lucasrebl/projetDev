@@ -44,7 +44,7 @@ class database
         $dsn->exec($createTable);
 
         $createTable = ("CREATE TABLE IF NOT EXISTS
-        `like` (
+        `likes` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             `idUser` int(11) DEFAULT NULL,
             `idList` int(11) DEFAULT NULL,
@@ -177,4 +177,3 @@ class database
         $query->execute();
     }
 }
-?>
