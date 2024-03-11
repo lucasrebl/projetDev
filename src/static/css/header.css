@@ -17,7 +17,8 @@ body {
   background-size: cover;
 
   /* Optionally set a background color if needed */
-  background-color: #F9FAF5; /* Light gray fallback */
+  background-color: #F9FAF5;
+  /* Light gray fallback */
 }
 
 /* BOUTON LIGHT/DARK MODE */
@@ -81,7 +82,7 @@ header {
   height: 55px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0 20px 0 20px;
   margin: 10px 40px 40px 40px;
   box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.25);
@@ -92,7 +93,12 @@ body.night header {
   border: 1px solid #ffffff;
 }
 
-header .home a, .recommand a, .lists a, .profile a, .admin a, .logout a {
+header .home a,
+.recommand a,
+.lists a,
+.profile a,
+.admin a,
+.logout a {
   text-align: center;
   text-decoration: none;
   font-size: 20px;
@@ -109,9 +115,19 @@ header .home a, .recommand a, .lists a, .profile a, .admin a, .logout a {
 
 .navbar .links {
   display: flex;
-  gap: 4rem 2rem;
+  gap: 10rem 13rem;
   align-items: center;
 }
+
+.navbar .links a li span {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.navbar .links a li:hover span {
+  opacity: 1;
+}
+
 
 .navbar .action-btn {
   color: whitesmoke;
@@ -125,6 +141,18 @@ body.night .navbar .action-btn {
 
 li {
   list-style: none;
+  font-size: 25px;
+}
+
+li:hover {
+  background: linear-gradient(135deg, rgb(153 182 250) 0%, rgb(255 101 53) 100%);
+  border-radius: 15px;
+  filter: drop-shadow(0px 6px 50px #000000);
+}
+
+body.night li:hover {
+  background: linear-gradient(135deg, #FDACA9 0%, #99B6FA 100%);
+  filter: drop-shadow(0px 6px 50px #ffffff);
 }
 
 .links .soluna-icon {
@@ -140,47 +168,8 @@ body.night .links .soluna-icon {
 }
 
 /* Réglez les couleurs de fond et les ombres portées au survol */
-.home:hover li,
-.home:hover li i {
-  color: #FF6E9C;
-  text-shadow: 2px 2px 4px #F1C6D4;
-  transform: scale(1.3);
-}
 
-.recommand:hover li,
-.recommand:hover li i {
-  color: #6E7DFF;
-  text-shadow: 2px 2px 4px #AFB7FF;
-  transform: scale(1.3);
-}
 
-.lists:hover li,
-.lists:hover li i {
-  color: #6ED3FF;
-  text-shadow: 2px 2px 4px #9FE2FF;
-  transform: scale(1.3);
-}
-
-.profile:hover li,
-.profile:hover li i {
-  color: #FFB46E;
-  text-shadow: 2px 2px 4px #FFC187;
-  transform: scale(1.3);
-}
-
-.admin:hover li,
-.admin:hover li i {
-  color: #FFF96E;
-  text-shadow: 2px 2px 4px #FFFA8D;
-  transform: scale(1.3);
-}
-
-.logout:hover li,
-.logout:hover li i {
-  color: #FF6E6E;
-  text-shadow: 2px 2px 4px #FF8E8E;
-  transform: scale(1.3);
-}
 
 i {
   margin: 10px;
@@ -246,49 +235,6 @@ main {
   .navbar .links.open a {
     text-align: center;
     padding: 10px 0;
-  }
-
-  .home:hover li,
-  .home:hover li i {
-    color: #FF6E9C;
-    text-shadow: 2px 2px 4px #F1C6D4;
-    transform: scale(1.3);
-  }
-
-  .recommand:hover li,
-  .recommand:hover li i {
-    color: #6E7DFF;
-    text-shadow: 2px 2px 4px #AFB7FF;
-    transform: scale(1.3);
-  }
-
-  .lists:hover li,
-  .lists:hover li i {
-    color: #6ED3FF;
-    text-shadow: 2px 2px 4px #9FE2FF;
-    transform: scale(1.3);
-  }
-
-  .profile:hover li,
-  .profile:hover li i {
-    color: #FFB46E;
-    text-shadow: 2px 2px 4px #FFC187;
-    transform: scale(1.3);
-  }
-
-  .admin:hover li,
-  .admin:hover li i {
-    color: #FFF96E;
-    text-shadow: 2px 2px 4px #FFFA8D;
-    transform: scale(1.3);
-  }
-
-  .logout:hover li,
-  .logout:hover li i {
-    color: #FF6E6E;
-    text-shadow: 2px 2px 4px #FF8E8E;
-    transform: scale(1.3);
-    transform: scale(1.3);
   }
 
   /* Réglez les couleurs de fond et les ombres portées au survol en mode responsive */
