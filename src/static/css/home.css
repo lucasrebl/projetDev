@@ -1,62 +1,13 @@
-body {
-  --text-light: white;
-  --primary-dark: #4A3321;
-  --bg-light: #F9FAF5;
-  --bg-dark: #030102;
-
-  /* css style */
-  background-color: var(--bg-light);
-  margin: 0;
-  padding: 0;
-}
-
-/* BOUTON LIGHT/DARK MODE */
-label {
-  position: absolute;
-  width: 45px;
-  height: 22px;
-  right: 20px;
-  border: 1px solid;
-  border-color: white;
-  border-radius: 20px;
-  background-image: url(https://i.postimg.cc/857jHw2q/Screenshot-2020-04-16-at-1-07-06-PM.png);
-  background-size: cover;
-}
-
-label.active {
-  background-image: url(https://i.postimg.cc/Hn0nstVK/Screenshot-2020-04-16-at-1-07-19-PM.png);
-  background-size: cover;
-}
-
-label:before {
-  position: absolute;
-  content: "";
-  width: 20px;
-  height: 20px;
-  left: 1px;
-  top: 1px;
-  cursor: pointer;
-  background-color: white;
-  transition: 0.4s;
-  border-radius: 50%;
-}
-
-label.active:before {
-  left: 24px;
-  background: white;
-}
-
-body.night {
-  background: var(--bg-dark);
-  color: white;
-}
-
 .container-right img {
   position: fixed;
   bottom: 0px;
   right: 0px;
   width: 45%;
   height: auto;
+}
+
+.container-left h1 {
+  font-family: "Komigo";
 }
 
 body.night .container-right img {
@@ -128,54 +79,4 @@ body.night .container-left button {
   backdrop-filter: blur(10px);
   margin: 2rem;
   padding: 1rem;
-}
-
-/* DROPDOWN MENU */
-
-.dropdown_menu {
-  position: absolute;
-  top: 60px;
-  height: 0;
-  width: 300px;
-  background: rgba(239, 248, 255, 0.05);
-  backdrop-filter: blur(15px);
-  border-radius: 10px;
-  overflow: hidden;
-  transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.dropdown_menu.open {
-  height: 500px;
-}
-
-.dropdown_menu li {
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-
-/* RESPONSIVE */
-
-@media (max-width: 1472px) {
-  .navbar .links {
-    display: none;
-  }
-
-  .navbar .action-btn {
-    display: block;
-  }
-
-  label#dark-change {
-    display: block;
-    margin-top: 10px;
-  }
-}
-
-@media (max-width: 1472px) {
-  .dropdown_menu {
-    left: 2rem;
-    width: unset;
-  }
 }

@@ -23,7 +23,7 @@
 				{% for Category in Categories %}
 				<div class="myFilter">
 					<p>
-						<input class="category" type="radio" name="option" value="{{ Category.ID }}">
+						<input class="category" type="radio" name="option" value="{{ Category.ID }}"/>
 						{{ Category.Name }}
 					</p>
 				</div>
@@ -31,7 +31,7 @@
 				{% for tag in Tags %}
 				<div class="myFilter">
 					<p>
-						<input class="tag" type="checkbox" name="tag" value="{{ tag.ID }}">
+						<input class="tag" type="checkbox" name="tag" value="{{ tag.ID }}" />
 						{{ tag.Name }}
 					</p>
 				</div>

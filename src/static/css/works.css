@@ -1,3 +1,28 @@
+@font-face {
+  font-family: "Hey Comic";
+  src: url(../font/Hey\ Comic.ttf);
+}
+
+@font-face {
+  font-family: "Anime Ace Regular";
+  src: url(../font/animeace/animeace2_reg.ttf);
+}
+
+@font-face {
+  font-family: "Anime Ace Bold";
+  src: url(../font/animeace/animeace2_bld.ttf);
+}
+
+@font-face {
+  font-family: "Anime Ace Italic";
+  src: url(../font/animeace/animeace2_ital.ttf);
+}
+
+@font-face {
+  font-family: "Komigo";
+  src: url(../font/Komigo3D-Regular.ttf);
+}
+
 .container {
   display: flex;
   align-items: flex-start;
@@ -53,7 +78,7 @@ body.night .work:hover {
 .right-inner .categ {
   display: flex;
   flex-direction: column;
-  margin: 20px;
+  margin: 5px;
 }
 
 .work-inner a {
@@ -64,11 +89,11 @@ body.night .work:hover {
 .work-inner p {
   position: relative;
   z-index: 2;
-  padding: 10px;
   color: rgb(0, 0, 0);
   color: rgb(0, 0, 0);
   text-shadow: white;
-  font-size: 20px;
+  font-size: 15px;
+  font-family: "Anime Ace Regular";
 }
 
 .work-inner img {
@@ -81,6 +106,12 @@ body.night .work:hover {
 
 a {
   text-decoration: none;
+}
+
+input[type="checkbox"] {
+  /* visibility: hidden; */
+  /* width: 50px;
+  height: 50px; */
 }
 
 .work {
@@ -252,10 +283,10 @@ button.add i {
 }
 
 .myFilter:hover,
-.myFilter:checked {
+input[type="checkbox"]:checked {
   background: rgb(255 255 255 / 50%);
   border-radius: 80px;
   box-shadow: inset 5px 5px 10px rgb(132 132 132 / 40%), inset 25px 25px 24px #ffffff00;
-  margin: 1rem;
+  /* margin: 1rem; */
   border: 1px solid white;
 }
