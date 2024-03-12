@@ -14,18 +14,26 @@
 <div class="container">
 	<div class="userinfo">
 		<img src="data:image/png;base64,{{ User.picture }}" />
-		<button id="toggleButton">+</button>
+		<button id="toggleButton"><i class="fa-solid fa-pen"></i></button>
 		<p id="name">{{ User.username }}</p>
 		{% if User.ID == IDuser %}
-		<button class="modify">Modifier</button>
+		<button class="modify"><i class="fa-solid fa-pen"></i></button>
 		{% endif %}
 		<br />
-		<p for="subscribers">Abonnés</p>
-		<p id="subscribers">0</p>
-		<p for="solunaslist">Listes</p>
-		<p id="solunaslist">0</p>
-		<p for="following">Abonnements</p>
-		<p id="following">0</p>
+		<div class="subinfo">
+			<div class="abo">
+				<p for="subscribers">Abonnés</p>
+				<p id="subscribers">0</p>
+			</div>
+			<div class="abo">
+				<p for="solunaslist">Listes</p>
+				<p id="solunaslist">0</p>
+			</div>
+			<div class="abo">
+				<p for="following">Abonnements</p>
+				<p id="following">0</p>
+			</div>
+		</div>
 	</div>
 	<div class="formUser" style="display: none;">
 		<form enctype="multipart/form-data" action="/getUserImage?id={{ User.ID }}" method="post"
@@ -66,10 +74,11 @@
 					<li>{{ SL.Name }}</li>
 					<li>Nombre oeuvres</li>
 					<li>Nombre likes</li>
-					<li>Eye</li>
-					<li><a href="/viewList?list={{ SL.ID }}">Pen</a></li>
-					<li><a href="/deleteList?list={{ SL.ID }}">Trash</a></li>
-					<ul>
+					<li><i class="fa-solid fa-eye"></i></li>
+					<li><a href="/viewList?list={{ SL.ID }}"><i class="fa-solid fa-pen"></i></a></li>
+					<li><a href="/deleteList?list={{ SL.ID }}"><i class="fa-solid fa-trash"></i></a></li>
+				</ul>
+					
 						{% endfor %}
 						{% endif %}
 		</div>
