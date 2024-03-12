@@ -45,7 +45,7 @@ toggleButton.addEventListener("click", function () {
     myForm.classList.toggle("Form_hidden");
     myForm.classList.toggle("Form_visible");
     if (myForm.classList.value == "Form_visible") {
-        myForm.style.maxHeight = "100px"
+        myForm.style.maxHeight = "200px"
     } else {
         myForm.style.maxHeight = "0px"
     }
