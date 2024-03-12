@@ -14,12 +14,15 @@
 			<img src="data:image/png;base64,{{ User.picture }}"/>
 			<button id="toggleButton">
 				<i class="fa-solid fa-pen"></i>
+				Modifier ma photo de profil
 			</button>
 			<p id="name">{{ User.username }}</p>
 			{% if User.ID == IDuser %}
-				<button class="modify">
+				<button class="modify" style="padding: 10px 15px;">
 					<i class="fa-solid fa-pen"></i>
+					Modifier mes informations
 				</button>
+
 			{% endif %}
 			<br/>
 			<div class="subinfo">
@@ -55,9 +58,9 @@
 <p for="NP">Nouveau Mot de passe :
 </p>
 <input type="password" id="NP" name="NP" value=""></input><button type="submit">Valider</button></form><button class="cancel">Annuler</button></div><div class="Mylist"><div class="addList" style="
-	    font-size: 30px;
-	    font-family: 'Hey Comic';
-	">Mes Listes<button id="toggleButton">+</button></div><div class="FormList"><form id="myForm" class="Form_hidden" action="/addList" method="post">
+			    font-size: 30px;
+			    font-family: 'Hey Comic';
+			">Mes Listes<button id="toggleButton">+</button></div><div class="FormList"><form id="myForm" class="Form_hidden" action="/addList" method="post">
 <p for="name">Nom :</p>
 <input type="text" id="nameList" name="name" required>
 <input type="submit" value="Soumettre"></form></div><div class="List">{% if SLs|length < 1 %}
@@ -66,11 +69,14 @@
 	<ul>
 		<li>{{ SL.Name }}</li>
 		<li>0</li>
-		
-		<li><div class="heart"><p>0</p>
-			<i class="fa-solid fa-heart"></i></div>
+
+		<li>
+			<div class="heart">
+				<p>0</p>
+				<i class="fa-solid fa-heart"></i>
+			</div>
 		</li>
-		
+
 		<li>
 			<i class="fa-solid fa-eye"></i>
 		</li>
