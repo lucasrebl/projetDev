@@ -30,7 +30,13 @@ class registerController
             include __DIR__ . '/../models/registerModel.php';
             addUser($username_, $email_, $hashed_passwordUser, $age_);
         } else {
-            echo $this->twig->render('register/register.html.twig');
+            $UM = new userManager();
+            if (empty($_SESSION['idUser'])) {
+                $user = "";
+            } else {
+                $user = $UM->SelectOnebyID(($_SESSION['idUser']));
+            }
+            echo $this->twig->render('register/register.html.twig', ["User" => $user]);
         }
     }
 }

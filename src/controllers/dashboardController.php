@@ -15,15 +15,12 @@ class dashboardController
         $this->loader = new FilesystemLoader(__DIR__ . '/../views/templates');
         $this->twig = new Environment($this->loader);
     }
-    
+
     public function dashboard()
     {
-        session_start();
-        var_dump($_SESSION);
-        $user = [
-            'isAdmin' => $_SESSION['isAdmin']
-        ];
-        if ($user['isAdmin'] != 1) {
+        $UM = new userManager;
+        $user = $UM->SelectOnebyID($_SESSION['idUser']);
+        if ($user->isAdmin != 1) {
             echo '<script>window.location.replace("/");</script>';
         } else {
             include __DIR__ . '/../models/dashboardModel.php';

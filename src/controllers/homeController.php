@@ -1,6 +1,8 @@
 <?php
+
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
+
 class homeController
 {
     protected $twig;
@@ -14,6 +16,12 @@ class homeController
 
     public function home()
     {
-        echo $this->twig->render('home/home.html.twig');
+        $UM = new userManager();
+        if (empty($_SESSION['idUser'])) {
+            $user = "";
+        } else {
+            $user = $UM->SelectOnebyID(($_SESSION['idUser']));
+        }
+        echo $this->twig->render('home/home.html.twig', ["User" => $user]);
     }
 }

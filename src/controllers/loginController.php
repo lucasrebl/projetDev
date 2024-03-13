@@ -18,9 +18,13 @@ class loginController
 
     public function login()
     {
-        // session_start();
-        // print_r($_SESSION);
-        echo $this->twig->render('login/login.html.twig');
+        $UM = new userManager();
+        if (empty($_SESSION['idUser'])) {
+            $user = "";
+        } else {
+            $user = $UM->SelectOnebyID(($_SESSION['idUser']));
+        }
+        echo $this->twig->render('login/login.html.twig', ["User" => $user]);
         if (isset($_POST['submit'])) {
             $username_ = $_POST['username'];
             $passwordUser_ = $_POST['passwordUser'];

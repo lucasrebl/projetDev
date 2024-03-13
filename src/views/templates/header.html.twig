@@ -45,6 +45,7 @@
 					</li>
 				</a>
 			</div>
+			{% if User.isAdmin %}
 			<div class="admin">
 				<a href="/panelAdmin">
 					<li>
@@ -52,7 +53,8 @@
 						<span data-text="CheatMode"></span>
 					</li>
 				</a>
-			</div>
+				</div>
+			{% endif %}
 			<div class="logout">
 				<a href="/deconnexion">
 					<li>
@@ -98,6 +100,7 @@
 				</li>
 			</a>
 		</div>
+		{% if User.isAdmin %}
 		<div class="admin">
 			<a href="/panelAdmin">
 				<li>
@@ -105,6 +108,7 @@
 				</li>
 			</a>
 		</div>
+	{% endif %}
 		<div class="logout">
 			<a href="/deconnexion">
 				<li>

@@ -22,6 +22,7 @@ class summaryController
 
     public function summary()
     {
+
         $idUser = $_SESSION["idUser"] ?? 0;
         $Workid = $_GET['id'];
         $WM = new worksManager;
@@ -31,7 +32,13 @@ class summaryController
         $tags = $FM->selectAll("tag");
         $SM = new solunaslistManager();
         $list = $SM->selectAllByIdUser($idUser);
-        echo $this->twig->render('summary/summary.html.twig', ['Work' => $work, "Categories" => $categories, "Tags" => $tags, "SLs" => $list]);
+        $UM = new userManager();
+        if (empty($_SESSION['idUser'])) {
+            $user = "";
+        } else {
+            $user = $UM->SelectOnebyID(($_SESSION['idUser']));
+        }
+        echo $this->twig->render('summary/summary.html.twig', ['Work' => $work, "Categories" => $categories, "Tags" => $tags, "SLs" => $list, "User" => $user]);
     }
 
     public function modify()
