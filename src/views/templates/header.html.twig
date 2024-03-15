@@ -4,7 +4,7 @@
 			<i class="fa-solid fa-bars"></i>
 		</div>
 		<ul class="links">
-			<a href="/oeuvres" style="
+			<a href="/" style="
 			position: absolute;
 			width: 45px;
 			height: 22px;
@@ -14,7 +14,7 @@
 				<li class="soluna-icon"></li>
 			</a>
 			<div class="home">
-				<a class="active" href="/">
+				<a class="active" href="/oeuvres">
 					<li>
 						<i class="fa-solid fa-house"></i>
 						<span data-text="Menu"></span>
@@ -66,27 +66,27 @@
 		</ul>
 		<label id="dark-change"></label>
 	</div>
-	<div class="logo">
-		<a href="/oeuvres">
+	<div class="logo" href="/">
+		<a href="/">
 			<li class="soluna-logo"></li>
 		</a>
 	</div>
 	<div class="dropdown_menu">
 		<div class="home">
-			<a class="active" href="/">
+			<a class="active" href="/oeuvres">
 				<li>
 					<i class="fa-solid fa-house"></i>Home
 				</li>
 			</a>
 		</div>
-		<div class="recommand">
+		<div class="recommand" hidden>
 			<a href="/recommande">
 				<li>
 					<i class="fa-solid fa-book-journal-whills"></i>Recommander
 				</li>
 			</a>
 		</div>
-		<div class="lists">
+		<div class="lists" hidden>
 			<a href="/solunasList">
 				<li>
 					<i class="fa-solid fa-book-open-reader"></i>Watchlists
@@ -109,7 +109,7 @@
 			</a>
 		</div>
 	{% endif %}
-		<div class="logout">
+		<div class="logout" {% if not User %} hidden{% endif %}>
 			<a href="/deconnexion">
 				<li>
 					<i class="fa-solid fa-arrow-right-from-bracket"></i>Se déconnecter
