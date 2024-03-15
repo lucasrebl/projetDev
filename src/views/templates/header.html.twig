@@ -21,7 +21,7 @@
 					</li>
 				</a>
 			</div>
-			<div class="recommand">
+			<div class="recommand" hidden>
 				<a href="/recommande">
 					<li>
 						<i class="fa-solid fa-book-journal-whills"></i>
@@ -29,7 +29,7 @@
 					</li>
 				</a>
 			</div>
-			<div class="lists">
+			<div class="lists" hidden>
 				<a href="/solunasList">
 					<li>
 						<i class="fa-solid fa-book-open-reader"></i>
@@ -46,7 +46,7 @@
 				</a>
 			</div>
 			{% if User.isAdmin %}
-			<div class="admin">
+			<div class="admin" {% if not User.isAdmin %} hidden{% endif %}>
 				<a href="/panelAdmin">
 					<li>
 						<i class="fa-solid fa-key"></i>
@@ -55,7 +55,7 @@
 				</a>
 				</div>
 			{% endif %}
-			<div class="logout">
+			<div class="logout" {% if not User %} hidden{% endif %}>
 				<a href="/deconnexion">
 					<li>
 						<i class="fa-solid fa-arrow-right-from-bracket"></i>
