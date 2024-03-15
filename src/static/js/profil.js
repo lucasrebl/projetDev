@@ -34,7 +34,7 @@ mUser.addEventListener('click', function () {
     formUser.style.display = "block"
 })
 cancel.addEventListener('click', function () {
-    userInfo.style.display = "block"
+    userInfo.style.display = "flex"
     Selection.style.display = "block"
     formUser.style.display = "none"
 })
@@ -55,7 +55,7 @@ toggleButton2.addEventListener("click", function () {
 });
 
 infos.addEventListener('click', function () {
-    userInfo.style.display = "block"
+    userInfo.style.display = "flex"
     listeDiv.style.display = "none"
     listeLDiv.style.display = "none"
     listeFDiv.style.display = "none"
@@ -65,7 +65,7 @@ infos.addEventListener('click', function () {
 
 listM.addEventListener('click', function () {
     userInfo.style.display = "none"
-    listeDiv.style.display = "block"
+    listeDiv.style.display = "flex"
     listeLDiv.style.display = "none"
     listeFDiv.style.display = "none"
     FollowersDiv.style.display = "none"
@@ -75,7 +75,7 @@ listM.addEventListener('click', function () {
 listL.addEventListener('click', function () {
     userInfo.style.display = "none"
     listeDiv.style.display = "none"
-    listeLDiv.style.display = "block"
+    listeLDiv.style.display = "flex"
     listeFDiv.style.display = "none"
     FollowersDiv.style.display = "none"
     FollowingDiv.style.display = "none"
@@ -85,7 +85,7 @@ listF.addEventListener('click', function () {
     userInfo.style.display = "none"
     listeDiv.style.display = "none"
     listeLDiv.style.display = "none"
-    listeFDiv.style.display = "block"
+    listeFDiv.style.display = "flex"
     FollowersDiv.style.display = "none"
     FollowingDiv.style.display = "none"
 })
@@ -95,7 +95,7 @@ follow.addEventListener('click', function () {
     listeDiv.style.display = "none"
     listeLDiv.style.display = "none"
     listeFDiv.style.display = "none"
-    FollowersDiv.style.display = "block"
+    FollowersDiv.style.display = "flex"
     FollowingDiv.style.display = "none"
 })
 
@@ -105,5 +105,5 @@ followi.addEventListener('click', function () {
     listeLDiv.style.display = "none"
     listeFDiv.style.display = "none"
     FollowersDiv.style.display = "none"
-    FollowingDiv.style.display = "block"
+    FollowingDiv.style.display = "flex"
 })
