@@ -76,18 +76,15 @@ label.active:before {
 body.night {
   margin: 0;
   padding: 0;
-
   background-image: url("../asset/nighttheme.png");
   background-attachment: fixed;
   background-repeat: no-repeat;
-
   background-size: cover;
 }
 
 /* HEADER */
 
 header {
-  /* overflow: hidden; */
   border-radius: 170px;
   border: 1px solid whitesmoke;
   background: rgba(239, 248, 255, 0.05);
@@ -184,16 +181,8 @@ body.night .links .soluna-icon {
   filter: brightness(0) invert(1);
 }
 
-/* Réglez les couleurs de fond et les ombres portées au survol */
-
-
-
 i {
   margin: 10px;
-}
-
-body.night a:not(:hover) {
-  transform: scale(1.0);
 }
 
 body.night header a {
@@ -280,23 +269,6 @@ main {
 
   }
 
-  .home:hover li,
-  .home:hover li i,
-  .recommand:hover li,
-  .recommand:hover li i,
-  .lists:hover li,
-  .lists:hover li i,
-  .profile:hover li,
-  .profile:hover li i,
-  .admin:hover li,
-  .admin:hover li i,
-  .logout:hover li,
-  .logout:hover li i {
-    color: inherit;
-    text-shadow: none;
-    transform: scale(1.0);
-  }
-
   body.night .logo {
     filter: brightness(0) invert(1);
   }
@@ -323,22 +295,5 @@ main {
     background-image: url('/static/asset/soluna.svg');
     background-size: contain;
     background-repeat: no-repeat;
-  }
-
-  .home:hover li,
-  .home:hover li i,
-  .recommand:hover li,
-  .recommand:hover li i,
-  .lists:hover li,
-  .lists:hover li i,
-  .profile:hover li,
-  .profile:hover li i,
-  .admin:hover li,
-  .admin:hover li i,
-  .logout:hover li,
-  .logout:hover li i {
-    color: inherit;
-    text-shadow: none;
-    transform: scale(1.0);
   }
 }

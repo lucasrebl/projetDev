@@ -1,3 +1,79 @@
+.myForm {
+    display: flex;
+    width: 520px;
+    height: 500px;
+    max-width: 99%;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background-color: #ffffff25;
+    border-radius: 15px;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.03);
+    border: 0.1px solid rgba(128, 128, 128, 0.178);
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    backdrop-filter: blur(20px);
+    position: relative;
+  }
+  
+
+  
+  
+  input,
+  button {
+    background: rgba(253, 253, 253, 0);
+    outline: none;
+    border: 1px solid rgba(255, 0, 0, 0);
+    border-radius: 0.5rem;
+    padding: 10px;
+    margin: 10px auto;
+    width: 80%;
+    display: block;
+    color: #172b66;
+    font-weight: 500;
+    font-size: 1.1em;
+  }
+
+  body.night input, button {
+    color: #f5411f;
+  }
+
+  h1, h3 {
+    color: white;
+  }
+  
+  .champ {
+    position: relative;
+  }
+  
+  span {
+    position: absolute;
+    left: 15%;
+    top: 37%;
+    pointer-events: none;
+    color: gray;
+  }
+  
+  input:focus + span,
+  input:valid + span {
+    transform: translateY(-140%) scale(0.9);
+    transition: all 0.4s;
+  }
+  
+  input {
+    box-shadow: inset 4px 4px 4px rgba(165, 163, 163, 0.315),
+      4px 4px 4px rgba(218, 218, 218, 0.13);
+  }
+
+
 .container-right img {
     position: fixed;
     bottom: 0px;
@@ -16,123 +92,3 @@
     margin: 10rem 10rem 0 10rem;
 }
 
-.myForm {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    border: 1px solid rgba(0, 0, 0, 0.45);
-    border-radius: 35px;
-    background-color: rgba(239, 248, 255, 0.05);
-    padding: 40px;
-}
-
-.champ {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    margin: 20px;
-}
-
-/* input {
-    border: solid 1.5px #ffffff;
-    border-radius: 1rem;
-    background: none;
-    padding: 1rem;
-    font-size: 1rem;
-    color: #000000;
-    transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-body.night input {
-    color: #ffffff;
-} */
-
-
-input #log {
-    background-color: #d20f4500;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 25px;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    width: 100%;
-    cursor: pointer;
-    box-shadow: 0 2px 4px 0 rgb(255, 255, 255);
-    transition: 0.3s;
-    backdrop-filter: blur(10px);
-    margin: 2rem;
-    padding: 1rem;
-  }
-  
-  input #log:hover {
-    background-image: radial-gradient(circle at 80% 20%, #ff3600 0%, #E7E7E7 100%);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  
-  body.night input #log {
-    background-color: #d20f4500;
-    color: #ffffff;
-    border: none;
-    border-radius: 25px;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    width: 100%;
-    cursor: pointer;
-    box-shadow: 0 2px 4px 0 rgb(255, 255, 255);
-    transition: 0.3s;
-    backdrop-filter: blur(10px);
-    margin: 2rem;
-    padding: 1rem;
-  }
-  
-  body.night input #log:hover {
-    background-image: radial-gradient(circle at 80% 20%, rgb(159 177 225) 0%, #E7E7E7 100%);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-
-.custom-label {
-    position: absolute;
-    left: 15px;
-    color: #ebebebeb;
-    pointer-events: none;
-    transform: translateY(1rem);
-    transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-    font-size: 1.2rem;
-}
-
-body.night .custom-label {
-    color: rgb(189, 189, 189);
-}
-
-input:focus,
-input:valid {
-    outline: none;
-    border: 1.5px solid #000000;
-}
-
-body.night input:focus,
-body.night input:valid {
-    outline: none;
-    border: 1.5px solid #ffffff;
-}
-
-input:focus~.custom-label,
-input:valid~.custom-label {
-    transform: translateY(-50%) scale(0.8);
-    background-color: rgb(254, 233, 234);
-    padding: 1em;
-    color: #000000;
-    border-radius: 200%;
-}
-
-body.night input:focus~.custom-label,
-body.night input:valid~.custom-label {
-    transform: translateY(-50%) scale(0.8);
-    background-color: rgba(23, 47, 171, 1);
-    padding: 1em;
-    color: #ffffff;
-    border-radius: 200%;
-}
