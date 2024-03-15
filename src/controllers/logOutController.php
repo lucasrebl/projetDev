@@ -18,6 +18,12 @@ class logOutController
 
     public function logOut()
     {
-        echo $this->twig->render('logOut/logOut.html.twig');
+        $_SESSION['idUser'] = null;
+        $_SESSION['username'] = null;
+        $_SESSION['email'] = null;
+        $_SESSION['passwordUser'] = null;
+        $_SESSION['age'] = null;
+        $_SESSION['isAdmin'] = null;
+        header("location: /home");
     }
 }
