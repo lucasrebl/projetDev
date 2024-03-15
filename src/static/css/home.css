@@ -35,12 +35,13 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10rem 10rem 10rem 15rem;
+  margin: 50% 10rem 10rem 15rem;
   background: rgb(255 255 255 / 15%);
   padding: 2rem;
   border: #FFFFFF 1px solid;
   border-radius: 50px;
   backdrop-filter: blur(10px);
+  position: fixed;
 }
 
 button {
@@ -50,7 +51,6 @@ button {
   padding: 10px 20px;
   font-size: 16px;
   font-weight: bold;
-  width: 100%;
   cursor: pointer;
   background-image: radial-gradient(circle at 80% 20%, #ff3600 0%, #E7E7E7 100%);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -79,4 +79,20 @@ body.night .container-left button {
   backdrop-filter: blur(10px);
   margin: 2rem;
   padding: 1rem;
+}
+
+.mylogo {
+  width: 150px;
+  height: 150px;
+  background-image: url(/static/asset/soluna.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+body.night .mylogo {
+  filter: brightness(0) invert(1);
+}
+
+p{
+  font-family: "FF";
 }

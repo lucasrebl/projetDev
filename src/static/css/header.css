@@ -28,13 +28,18 @@ body {
 }
 
 @font-face {
+  font-family: "FF";
+  src: url(../font/finalf.ttf);
+}
+
+@font-face {
   font-family: "Anime Ace Italic";
   src: url(../font/animeace/animeace2_ital.ttf);
 }
 
 @font-face {
   font-family: "Komigo";
-  src: url(../font/Komigo3D-Regular.ttf);
+  src: url(../font/Moonstar.ttf);
 }
 
 /* BOUTON LIGHT/DARK MODE */
@@ -266,7 +271,6 @@ main {
     background-size: cover;
     background-repeat: no-repeat;
     margin: 50%;
-
   }
 
   body.night .logo {
