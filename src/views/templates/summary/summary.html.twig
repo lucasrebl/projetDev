@@ -35,14 +35,14 @@
 	</div>
 	<div class="listss">
 		<h2>Mes Listes</h2>
-		{% if SLs|length < 1 %} <p>aucunes</p>
-			{% else %}
+		{% if SLs|length < 1 %} <p>Aucunes Listes</p>
+		{% else %}
 			{% for SL in SLs %}
 			<ul>
 				<li><a href="/addToList?list={{ SL.ID }}&work={{ Work.ID }}">{{ SL.Name }}</a></li>
-				<ul>
-					{% endfor %}
-					{% endif %}
+			</ul>
+			{% endfor %}
+		{% endif %}
 	</div>
 	<div class="form" style="display: none;">
 		<form enctype="multipart/form-data" action="/getImage?id={{ Work.ID }}" method="post">

@@ -5,7 +5,8 @@ window.onload = function () {
     const actionBtn = document.querySelector('.action-btn');
     const actionBtnIcon = document.querySelector('.action-btn i');
     const dropDownMenu = document.querySelector('.dropdown_menu');
-
+    // var reader = new FileReader();
+    // let theme = reader.readAsText("/static/theme/theme.txt");
     actionBtn.onclick = function () {
         dropDownMenu.classList.toggle('open')
         const isOpen = dropDownMenu.classList.contains('open')
@@ -28,5 +29,5 @@ window.onload = function () {
             modeImage.src = '/static/asset/lightmode.png';
         }
     }
-    console.log(modeImage)
+    console.log(theme)
 }

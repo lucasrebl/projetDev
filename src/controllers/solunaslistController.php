@@ -42,7 +42,7 @@ class solunaslistController
         $work = $_GET["work"] ?? " ";
         $SM = new solunaslistManager();
         $SM->addWorkToList($list, $work);
-        header("Location: /profil");
+        header("Location: /viewList?list=$list");
     }
 
     public function deleteList()
