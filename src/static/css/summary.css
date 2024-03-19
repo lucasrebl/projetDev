@@ -65,9 +65,11 @@ button:hover {
     display: flex;
     flex-direction: row;
     align-items: center;
-} 
-  
-input, textarea, select {
+}
+
+input,
+textarea,
+select {
     border: 1px solid rgb(255 255 255 / 15%);
     border-radius: 35px;
     background-color: rgba(255, 255, 255, 0.65);
@@ -81,15 +83,15 @@ input, textarea, select {
     right: 0;
     font-size: 50px;
     color: white;
-    z-index: 1; 
+    z-index: 1;
     transform: rotate(90deg);
     transition: transform 0.6s ease;
-  }
-  
-  .modify:hover {
-    transform: rotate(360deg);
-  }
+}
 
-  img {
+.modify:hover {
+    transform: rotate(360deg);
+}
+
+img {
     max-width: 40%;
-  }
+}
