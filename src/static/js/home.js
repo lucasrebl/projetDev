@@ -21,7 +21,8 @@ function getCookie(cname) {
     return "";
 }
 
-let content = document.querySelector("body");
+let content = document.getElementsByTagName("body")[0];
+let darkMode = document.getElementById("dark-change");
 let theme = getCookie("theme");
 document.addEventListener('DOMContentLoaded', () => {
     if (theme == "night") {
@@ -30,11 +31,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 window.onload = function () {
-    let darkMode = document.getElementById("dark-change");
     let modeImage = document.querySelector("#modeImage");
     const actionBtn = document.querySelector('.action-btn');
     const actionBtnIcon = document.querySelector('.action-btn i');
     const dropDownMenu = document.querySelector('.dropdown_menu');
+
+
+    function toggleImage() {
+        if (darkMode.classList.contains('active')) {
+            modeImage.src = '/static/asset/darkmode.png';
+        } else {
+            modeImage.src = '/static/asset/lightmode.png';
+        }
+    }
 
     console.log(theme)
 
@@ -60,11 +69,8 @@ window.onload = function () {
         toggleImage();
     });
 
-    function toggleImage() {
-        if (darkMode.classList.contains('active')) {
-            modeImage.src = '/static/asset/darkmode.png';
-        } else {
-            modeImage.src = '/static/asset/lightmode.png';
-        }
+    if (theme == "night") {
+        toggleImage()
     }
+
 }
