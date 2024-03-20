@@ -22,7 +22,6 @@
 					<i class="fa-solid fa-pen"></i>
 					Modifier mes informations
 				</button>
-
 			{% endif %}
 			<br/>
 			<div class="subinfo">
@@ -45,99 +44,112 @@
 				<p for="picture">Image :
 				</p>
 				<input type="file" id="picture" name="picture" accept="image/jpg, image/png"></input>
-			<input type="submit" value="get" hidden/>
-		</form>
-		<form action="/mUser" method="post">
-			<input type="text" id="id" name="id" value="{{User.ID}}" hidden></input>
-		<p for="name">Pseudo :
-		</p>
-		<input type="text" id="nameUser" name="name" value="{{ User.username }}"></input>
-	<p for="OP">Ancien Mot de passe :
-	</p>
-	<input type="password" id="OP" name="OP" value=""></input>
-<p for="NP">Nouveau Mot de passe :
-</p>
-<input type="password" id="NP" name="NP" value=""></input><button type="submit">Valider</button></form><button class="cancel">Annuler</button></div><div class="Mylist" style="display: flex;flex-direction: column;"><div class="addList" style="
-			    font-size: 30px;
-			    font-family: 'Hey Comic';
-			">Mes Listes<button id="toggleButton">+</button></div><div class="FormList"><form id="myForm" class="Form_hidden" action="/addList" method="post">
-<p for="name">Nom :</p>
-<input type="text" id="nameList" name="name" required>
-<input type="submit" value="Soumettre" />
-</form>
-</div>
-<div class="List">
-	{% if SLs|length < 1 %}
-		<p>aucune Listes</p>
-	{% else %}
-		{% for SL in SLs %}
-			<ul>
-				<li>{{ SL.Name }}</li>
-				<li>{{ SL.Works|length }}</li>
-				<li>
-					<div class="heart">
-						<p>0</p>
-						<i class="fa-solid fa-heart"></i>
-					</div>
-				</li>
+				<input type="submit" value="get" hidden/>
+			</form>
+			<form action="/mUser" method="post">
+				<input type="text" id="id" name="id" value="{{User.ID}}" hidden></input>
+				<p for="name">Pseudo : </p>
+				<input type="text" id="nameUser" name="name" value="{{ User.username }}"></input>
+				<p for="OP">Ancien Mot de passe : </p>
+				<input type="password" id="OP" name="OP" value=""></input>
+				<p for="NP">Nouveau Mot de passe : </p>
+				<input type="password" id="NP" name="NP" value=""></input>
+				<button type="submit">Valider</button>
+			</form>
+			<button class="cancel">Annuler</button>
+		</div>
+		<div class="Mylist" style="display: flex; flex-direction: column;">
+			<div class="addList" style="font-size: 30px; 
+			font-family: 'Hey Comic';">
+				Mes Listes
+				<button id="toggleButton">+</button>
+			</div>
+			<div class="FormList">
+				<form id="myForm" class="Form_hidden" action="/addList" method="post">
+					<p for="name">Nom :</p>
+					<input type="text" id="nameList" name="name" required>
+					<input type="submit" value="Soumettre" />
+				</form>
+			</div>
+		<div class="List">
+			{% if SLs|length < 1 %}
+				<p>aucune Listes</p>
+			{% else %}
+				{% for SL in SLs %}
+					<ul>
+						<li>{{ SL.Name }}</li>
+						<li>{{ SL.Works|length }}</li>
+						<li>
+							<div class="heart">
+								<p>0</p>
+								<i class="fa-solid fa-heart"></i>
+							</div>
+						</li>
 
-				<li class="View" num="{{ SL.ID }}">
-					{% if SL.isPublic %}
-						<i class="fa-solid fa-eye"></i>
-					{% else %}
-						<i class="fa-solid fa-eye-slash"></i>
-					{% endif %}
-				</li>
-				<li>
-					<a href="/viewList?list={{ SL.ID }}">
-						<i class="fa-solid fa-pen"></i>
-					</a>
-				</li>
-				<li>
-					<a href="/deleteList?list={{ SL.ID }}">
-						<i class="fa-solid fa-trash"></i>
-					</a>
-				</li>
-			</ul>
-
-		{% endfor %}
-	{% endif %}
-</div></div><div class="MyLike"><div class="LKT">Mes Listes Likés</div><div class="List_like">{% if SLl|length < 1 %}
-<p>aucune Listes</p>{% else %}
-{% for SL in SLl %}
-	<ul>
-		<li>{{ SL.username }}</li>
-		<li>{{ SL.Name }}</li>
-		<li>Nombre oeuvres</li>
-		<li>Nombre likes</li>
-		<li>
-			<a href="/toggleLike?list={{ SL.ID }}">Trash</a>
-		</li>
-		<ul>
-		{% endfor %}
-	{% endif %}
-</div></div><div class="MyFavorites">
-<div class="LFT">
-	Mes Listes Favorites
-</div>
-<div class="List_Favorites">
-	{% if SLf|length < 1 %}
-		<p>aucune Listes</p>
-	{% else %}
-		{% for SL in SLf %}
-			<ul>
-				<li>{{ SL.username }}</li>
-				<li>{{ SL.Name }}</li>
-				<li>Nombre oeuvres</li>
-				<li>Nombre likes</li>
-				<li>
-					<a href="/toggleFavorite?list={{ SL.ID }}">Trash</a>
-				</li>
-				<ul>
+						<li class="View" num="{{ SL.ID }}">
+							{% if SL.isPublic %}
+								<i class="fa-solid fa-eye"></i>
+							{% else %}
+								<i class="fa-solid fa-eye-slash"></i>
+							{% endif %}
+						</li>
+						<li>
+							<a href="/viewList?list={{ SL.ID }}">
+								<i class="fa-solid fa-pen"></i>
+							</a>
+						</li>
+						<li>
+							<a href="/deleteList?list={{ SL.ID }}">
+								<i class="fa-solid fa-trash"></i>
+							</a>
+						</li>
+					</ul>
 				{% endfor %}
 			{% endif %}
 		</div>
 	</div>
+	<div class="MyLike">
+		<div class="LKT">Mes Listes Likés</div>
+		<div class="List_like">
+			{% if SLl|length < 1 %}
+				<p>aucune Listes</p>
+			{% else %}
+				{% for SL in SLl %}
+					<ul>
+						<li>{{ SL.username }}</li>
+						<li>{{ SL.Name }}</li>
+						<li>Nombre oeuvres</li>
+						<li>Nombre likes</li>
+						<li>
+							<a href="/toggleLike?list={{ SL.ID }}">Trash</a>
+						</li>
+						<ul>
+				{% endfor %}
+			{% endif %}
+		</div>
+	</div>
+	<div class="MyFavorites">
+	<div class="LFT">
+		Mes Listes Favorites
+	</div>
+	<div class="List_Favorites">
+		{% if SLf|length < 1 %}
+			<p>aucune Listes</p>
+		{% else %}
+			{% for SL in SLf %}
+				<ul>
+					<li>{{ SL.username }}</li>
+					<li>{{ SL.Name }}</li>
+					<li>Nombre oeuvres</li>
+					<li>Nombre likes</li>
+					<li>
+						<a href="/toggleFavorite?list={{ SL.ID }}">Trash</a>
+					</li>
+				<ul>
+			{% endfor %}
+		{% endif %}
+	</div>
+</div>
 	<div class="Myfollowers">
 		<div class="FollowersT">
 			Mes Abonnés
@@ -156,7 +168,10 @@
 		<img src=""></img>
 	<p>Nom</p>
 	<button>Ne Plus Suivre</button>
-</div></div><fieldset class="custom-fieldset">
+</div>
+</div>
+
+<fieldset class="custom-fieldset">
 <ul class="selection">
 	<li>
 		<div class="containall" id="infos">

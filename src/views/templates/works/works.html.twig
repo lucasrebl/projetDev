@@ -11,7 +11,6 @@
 {% endblock %}
 {% block body %}
 {% include "header.html.twig" %}
-{# page d'une oeuvres scpécifique #}
 <div class="container">
 	<div class="filters">
 		<form id="filters" action="/oeuvres" method="post">
@@ -88,9 +87,10 @@
 		</a>
 		{% endfor %}
 	</div>
-	<button id="add" class="add">
+	<button id="add" class="add" {% if not User %} hidden{% endif %}>
 		<i class="fas fa-plus"></i>
-		Ajouter une oeuvre</button>
+		Ajouter une oeuvre
+	</button>
 </div>
 <div class="form" style="display: none;">
 	<form action="/aWork" method="post">

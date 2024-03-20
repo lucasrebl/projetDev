@@ -7,6 +7,7 @@ class solunaslistModel
     public $username;
     public $Works;
     public $isPublic;
+    public $userpicture;
 
     /**
      * Get the value of ID
@@ -112,6 +113,24 @@ class solunaslistModel
     public function setIsPublic($isPublic): self
     {
         $this->isPublic = $isPublic;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of userpicture
+     */
+    public function getUserpicture()
+    {
+        return $this->userpicture;
+    }
+
+    /**
+     * Set the value of userpicture
+     */
+    public function setUserpicture($userpicture): self
+    {
+        $this->userpicture = $userpicture;
 
         return $this;
     }

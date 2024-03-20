@@ -3,6 +3,56 @@
 {% block title %}soluna's List
 {% endblock %}
 {% block stylesheets %}
-	<link href="/../public/css/solunaslist.css" rel="stylesheet">
+	<link href="/static/css/solunaslist.css" rel="stylesheet">
+	{# <link href="/static/css/header.css" rel="stylesheet"> #}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+	integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
-{% block body %}page de toutes les soluna's List public{% endblock %}
+{% block body %}
+	{% include "header.html.twig" %}
+	<div class="container">
+		<div class="SearchBarres">
+			<input list="Soluna" id="SL" name="SL" class="input-text" placeholder="Chercher Une SolunaList">
+				<datalist id="Soluna">
+					{% for soluna in solunas %}
+						{% if soluna.isPublic %}
+							<option value="{{ soluna.name }}"/>
+						{% endif %}
+					{% endfor %}
+				</datalist>
+			</input>
+			<input list="Users" id="Usa" name="Usa" class="input-text" placeholder="Chercher Un Utilisateur">
+				<datalist id="Users">
+					{% for soluna in solunas %}
+						{% if soluna.isPublic %}
+							<option value="{{ soluna.username }}"/>
+						{% endif %}
+					{% endfor %}
+				</datalist>
+			</input>
+		</div>
+		<div class="Solunas_list">
+			{% if solunas|length < 1 %}
+				<p>aucunes Listes</p>
+			{% else %}
+				{% for soluna in solunas %}
+					{% if soluna.isPublic %}
+						<ul>
+							<li><img src="data:image/png;base64,{{ soluna.userpicture }}"/></li>
+							<li>{{ soluna.username }}</li>
+							<li>{{ soluna.Name }}</li>
+							<li>{{ soluna.Works|length }}</li>
+							<li>
+								<div class="heart">
+									<p>0</p>
+									<i class="fa-solid fa-heart"></i>
+								</div>
+							</li>
+						</ul>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

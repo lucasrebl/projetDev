@@ -18,7 +18,9 @@ class solunaslistController
 
     public function solunaslist()
     {
-        echo $this->twig->render('solunaslist/solunaslist.html.twig');
+        $SM = new solunaslistManager();
+        $soluna = $SM->selectAll();
+        echo $this->twig->render('solunaslist/solunaslist.html.twig', ["solunas" => $soluna]);
     }
     public function solunasview()
     {

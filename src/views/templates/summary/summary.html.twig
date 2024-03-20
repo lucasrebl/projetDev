@@ -13,7 +13,7 @@
 {% include "header.html.twig" %}
 <div class="container">
 	<div class="work">
-		<b class="modify"><i class="fa-solid fa-gear"></i></b>
+		<b class="modify">{% if User %}<i class="fa-solid fa-gear"></i>{% endif %}</b>
 		<img src="data:image/png;base64,{{ Work.Image }}" />
 		<p id="name">{{ Work.Name }}</p>
 		<p id="summary">Résumé : {{ Work.Summary }}</p>
@@ -27,7 +27,6 @@
 		{% endif %}
 		<p id="category">{{ Work.Category }}</p>
 		<div class="tags">
-			{# {{ dump(Work.Tags) }} #}
 			{% for tag in Work.Tags %}
 			<p class="tag">{{ tag.name }}</p>
 			{% endfor %}
