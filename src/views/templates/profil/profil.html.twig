@@ -32,7 +32,7 @@
 				</div>
 				<div class="abo">
 					<p for="solunaslist">Listes</p>
-					<p id="solunaslist">0</p>
+					<p id="solunaslist">{{ SLs|length }}</p>
 				</div>
 				<div class="abo">
 					<p for="following">Abonnements</p>
@@ -63,36 +63,46 @@
 			">Mes Listes<button id="toggleButton">+</button></div><div class="FormList"><form id="myForm" class="Form_hidden" action="/addList" method="post">
 <p for="name">Nom :</p>
 <input type="text" id="nameList" name="name" required>
-<input type="submit" value="Soumettre"></form></div><div class="List">{% if SLs|length < 1 %}
-<p>aucune Listes</p>{% else %}
-{% for SL in SLs %}
-	<ul>
-		<li>{{ SL.Name }}</li>
-		<li>0</li>
+<input type="submit" value="Soumettre" />
+</form>
+</div>
+<div class="List">
+	{% if SLs|length < 1 %}
+		<p>aucune Listes</p>
+	{% else %}
+		{% for SL in SLs %}
+			<ul>
+				<li>{{ SL.Name }}</li>
+				<li>{{ SL.Works|length }}</li>
+				<li>
+					<div class="heart">
+						<p>0</p>
+						<i class="fa-solid fa-heart"></i>
+					</div>
+				</li>
 
-		<li>
-			<div class="heart">
-				<p>0</p>
-				<i class="fa-solid fa-heart"></i>
-			</div>
-		</li>
+				<li class="View" num="{{ SL.ID }}">
+					{% if SL.isPublic %}
+						<i class="fa-solid fa-eye"></i>
+					{% else %}
+						<i class="fa-solid fa-eye-slash"></i>
+					{% endif %}
+				</li>
+				<li>
+					<a href="/viewList?list={{ SL.ID }}">
+						<i class="fa-solid fa-pen"></i>
+					</a>
+				</li>
+				<li>
+					<a href="/deleteList?list={{ SL.ID }}">
+						<i class="fa-solid fa-trash"></i>
+					</a>
+				</li>
+			</ul>
 
-		<li>
-			<i class="fa-solid fa-eye"></i>
-		</li>
-		<li>
-			<a href="/viewList?list={{ SL.ID }}">
-				<i class="fa-solid fa-pen"></i>
-			</a>
-		</li>
-		<li>
-			<a href="/deleteList?list={{ SL.ID }}">
-				<i class="fa-solid fa-trash"></i>
-			</a>
-		</li>
-	</ul>
-
-{% endfor %}{% endif %}</div></div><div class="MyLike"><div class="LKT">Mes Listes Likés</div><div class="List_like">{% if SLl|length < 1 %}
+		{% endfor %}
+	{% endif %}
+</div></div><div class="MyLike"><div class="LKT">Mes Listes Likés</div><div class="List_like">{% if SLl|length < 1 %}
 <p>aucune Listes</p>{% else %}
 {% for SL in SLl %}
 	<ul>
@@ -197,4 +207,9 @@
 			<p>Mes abonnements</p>
 		</div>
 	</li>
-</ul></fieldset></div><script src="/static/js/profil.js"></script><script src="/static/js/home.js"></script>{% endblock %}
+</ul>
+</fieldset>
+</div>
+<script src="/static/js/profil.js"></script>
+<script src="/static/js/home.js"></script>
+{% endblock %}

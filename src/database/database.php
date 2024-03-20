@@ -38,6 +38,7 @@ class database
             `idList` int(11) NOT NULL AUTO_INCREMENT,
             `nameList` varchar(255) DEFAULT NULL,
             `idUser` int(11) DEFAULT NULL,
+            `isPublic` tinyint(1) DEFAULT '1',
             PRIMARY key (`idList`),
             CONSTRAINT fk_idUser_in_list FOREIGN KEY (`idUser`) REFERENCES user(`idUser`)
         ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1");

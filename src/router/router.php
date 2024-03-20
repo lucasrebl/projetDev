@@ -23,6 +23,7 @@ class router
         'deleteList' => ['controller' => 'solunaslistController', 'method' => 'deleteList'],
         'addToList' => ['controller' => 'solunaslistController', 'method' => 'addToList'],
         'deleteFromList' => ['controller' => 'solunaslistController', 'method' => 'deleteFromList'],
+        'tview' => ['controller' => 'solunaslistController', 'method' => 'setView'],
     ];
     public function __construct($request)
     {

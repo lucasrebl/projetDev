@@ -64,7 +64,7 @@
 					<div class="right-inner">
 						<div class="categ">
 							<p class="summary no-link">Résumé :</p>
-							<p>{{ work.Summary }}</p>
+							<p class="sum">{{ work.Summary }}</p>
 						</div>
 						<div class="categ">
 							<p class="status no-link">Status :</p>
@@ -101,7 +101,7 @@
 		<p for="status">Status</p><input type="text" id="status" name="status" value=""></input>
 		<p for="category">Categorie</p>
 		<select list="category" id="category" name="category">
-			{# <option value="0">Sélectionner une catégorie</option> #}
+			<option value="0">Sélectionner une catégorie</option>
 			{% for Category in Categories %}
 			<option value="{{ Category.ID }}">
 				{{ Category.Name }}

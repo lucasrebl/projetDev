@@ -25,6 +25,7 @@ class profilController
             $SM = new solunaslistManager();
             $user = $UM->SelectOnebyID($_SESSION["idUser"]);
             $SL = $SM->selectAllByIdUser($_SESSION["idUser"]);
+            // print_r(($SL[0]));
             echo $this->twig->render('profil/profil.html.twig', ["User" => $user, "IDuser" => $_SESSION["idUser"], "SLs" => $SL]);
         }
     }

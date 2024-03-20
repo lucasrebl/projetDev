@@ -6,7 +6,7 @@ class solunaslistModel
     public $userID;
     public $username;
     public $Works;
-
+    public $isPublic;
 
     /**
      * Get the value of ID
@@ -94,6 +94,24 @@ class solunaslistModel
     public function setWorks($Works): self
     {
         $this->Works = $Works;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of isPublic
+     */
+    public function getIsPublic()
+    {
+        return $this->isPublic;
+    }
+
+    /**
+     * Set the value of isPublic
+     */
+    public function setIsPublic($isPublic): self
+    {
+        $this->isPublic = $isPublic;
 
         return $this;
     }

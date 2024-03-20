@@ -1,4 +1,4 @@
-// INFO Utilisateur
+
 let userInfo = document.querySelector('.userinfo');
 let formUser = document.querySelector('.formUser');
 let listeDiv = document.querySelector('.Mylist')
@@ -19,6 +19,7 @@ let listL = Selection.querySelector("#listL")
 let listF = Selection.querySelector("#listF")
 let follow = Selection.querySelector("#follow")
 let followi = Selection.querySelector("#followi")
+let view = document.querySelectorAll(".View")
 
 document.addEventListener("DOMContentLoaded", (event) => {
     listeDiv.style.display = "none"
@@ -107,3 +108,28 @@ followi.addEventListener('click', function () {
     FollowersDiv.style.display = "none"
     FollowingDiv.style.display = "flex"
 })
+
+
+
+view.forEach(element => {
+    element.addEventListener('click', function () {
+        r = element.getAttribute('num')
+        fetch(`/tview?list=${r}`)
+        r2 = element.querySelector("i").className
+        if (r2 == "fa-solid fa-eye") {
+            element.querySelector("i").className = "fa-solid fa-eye-slash"
+        } else {
+            element.querySelector("i").className = "fa-solid fa-eye"
+        }
+    })
+}
+)
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     view.forEach((element) => {
+//         element.addEventListener('click', function () {
+//             let r = element.getAttribute("num");
+//             console.log(1);
+//         });
+//     });
+// });

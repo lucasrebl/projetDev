@@ -25,7 +25,6 @@ class solunaslistController
         $IDlist = $_GET["list"] ?? " ";
         $SM = new solunaslistManager();
         $soluna = $SM->selectOneById($IDlist);
-        //print_r($soluna);
         echo $this->twig->render('solunasview/solunasview.html.twig', ["soluna" => $soluna]);
     }
     public function addList()
@@ -42,7 +41,8 @@ class solunaslistController
         $work = $_GET["work"] ?? " ";
         $SM = new solunaslistManager();
         $SM->addWorkToList($list, $work);
-        header("Location: /viewList?list=$list");
+        // header("Location: /viewList?list=$list");
+        header("Location: /profil");
     }
 
     public function deleteList()
@@ -60,5 +60,12 @@ class solunaslistController
         $SM = new solunaslistManager();
         $SM->deleteWorkFromList($list, $work);
         header("Location: /viewList?list=$list");
+    }
+    public function setView()
+    {
+        $list = $_GET["list"] ?? 0;
+        $SM = new solunaslistManager();
+        $SM->toogleView($list);
+        header("Location: /profil");
     }
 }

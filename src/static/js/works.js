@@ -3,7 +3,7 @@ let form = document.querySelector('.form')
 let filters = document.querySelector('.filters')
 let tags = document.querySelector('.tagsM');
 let add = container.querySelector('button')
-let summary = container.querySelectorAll('.summary')
+let summary = container.querySelectorAll('.sum')
 let cancel = form.querySelector('button')
 let category = form.querySelector('#category')
 let category2 = filters.querySelectorAll('.category')
@@ -22,7 +22,7 @@ let Tags = [];
 
 console.log(myFilter[5])
 
-summary.forEach((element) => element.textContent = element.textContent.substring(0, 100))
+summary.forEach((element) => element.textContent = element.textContent.substring(0, 100) + "...")
 
 myFilter.forEach((element) => {
     element.id = id

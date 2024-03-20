@@ -40,6 +40,8 @@ class solunaslistManager
             $list->setName($row['nameList']);
             $list->setUserID($row['idUser']);
             $list->setUsername($row['username']);
+            $list->setIsPublic($row['isPublic']);
+            $Works = [];
             $result2 = $this->db->prepare("SELECT listWorks.*, works.* from listWorks
             join works on works.idWorks = listWorks.idWorks
             where listWorks.idList = $list->ID");
@@ -51,7 +53,7 @@ class solunaslistManager
             $list->setWorks($Works ?? "");
             $lists[] = $list;
         }
-        return $lists ?? "";
+        return $lists ?? [];
     }
     function selectOneById($id)
     {
@@ -65,6 +67,7 @@ class solunaslistManager
             $list->setName($row['nameList']);
             $list->setUserID($row['idUser']);
             $list->setUsername($row['username']);
+            $list->setIsPublic($row['isPublic']);
             $result2 = $this->db->prepare("SELECT listWorks.*, works.* from listWorks
             join works on works.idWorks = listWorks.idWorks
             where listWorks.idList = $list->ID");
@@ -93,6 +96,23 @@ class solunaslistManager
             $result->execute();
         } catch (PDOException $e) {
             header("Location: /viewList?list=$idList");
+        }
+    }
+    function toogleView($idlist)
+    {
+        try {
+            $result = $this->db->prepare("SELECT isPublic FROM list WHERE idList = $idlist");
+            $result->execute();
+            $view = $result->fetch(PDO::FETCH_ASSOC)["isPublic"];
+            if ($view == 0) {
+                $view = 1;
+            } else {
+                $view = 0;
+            }
+            $result2 = $this->db->prepare("UPDATE list SET isPublic = $view WHERE idList = $idlist");
+            $result2->execute();
+        } catch (PDOException $e) {
+            header("Location: /profil");
         }
     }
 }
