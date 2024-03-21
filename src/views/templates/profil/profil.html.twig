@@ -12,10 +12,12 @@
 	<div class="container">
 		<div class="userinfo">
 			<img src="data:image/png;base64,{{ User.picture }}"/>
+			{% if User.ID == IDuser %}
 			<button id="toggleButton">
 				<i class="fa-solid fa-pen"></i>
 				Modifier ma photo de profil
 			</button>
+			{% endif %}
 			<p id="name">{{ User.username }}</p>
 			{% if User.ID == IDuser %}
 				<button class="modify" style="padding: 10px 15px;">
@@ -85,7 +87,7 @@
 								<i class="fa-solid fa-heart"></i>
 							</div>
 						</li>
-
+						{% if User.ID == IDuser %}
 						<li class="View" num="{{ SL.ID }}">
 							{% if SL.isPublic %}
 								<i class="fa-solid fa-eye"></i>
@@ -93,15 +95,20 @@
 								<i class="fa-solid fa-eye-slash"></i>
 							{% endif %}
 						</li>
+						{% endif %}
 						<li>
+							{% if User.ID == IDuser %}
 							<a href="/viewList?list={{ SL.ID }}">
 								<i class="fa-solid fa-pen"></i>
 							</a>
+							{% endif %}
 						</li>
 						<li>
+							{% if User.ID == IDuser %}
 							<a href="/deleteList?list={{ SL.ID }}">
 								<i class="fa-solid fa-trash"></i>
 							</a>
+							{% endif %}
 						</li>
 					</ul>
 				{% endfor %}

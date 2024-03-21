@@ -25,7 +25,6 @@ class profilController
             $SM = new solunaslistManager();
             $user = $UM->SelectOnebyID($_SESSION["idUser"]);
             $SL = $SM->selectAllByIdUser($_SESSION["idUser"]);
-            // print_r(($SL[0]));
             echo $this->twig->render('profil/profil.html.twig', ["User" => $user, "IDuser" => $_SESSION["idUser"], "SLs" => $SL]);
         }
     }
@@ -52,5 +51,15 @@ class profilController
             echo "Mauvais Mot de passe, désolé";
             echo password_hash($NP, PASSWORD_DEFAULT);
         }
+    }
+    public function showProfil()
+    {
+        // header("location: https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+        $id = $_GET['id'] ?? 0;
+        $UM = new userManager();
+        $SM = new solunaslistManager();
+        $user = $UM->SelectOnebyID($id);
+        $SL = $SM->selectAllByIdUser($id);
+        echo $this->twig->render('profil/profil.html.twig', ["User" => $user, "IDuser" => $_SESSION["idUser"], "SLs" => $SL]);
     }
 }

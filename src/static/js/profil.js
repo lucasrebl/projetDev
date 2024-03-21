@@ -29,19 +29,23 @@ document.addEventListener("DOMContentLoaded", (event) => {
     FollowingDiv.style.display = "none"
 });
 
-mUser.addEventListener('click', function () {
-    userInfo.style.display = "none"
-    Selection.style.display = "none"
-    formUser.style.display = "block"
-})
+if (mUser != null) {
+    mUser.addEventListener('click', function () {
+        userInfo.style.display = "none"
+        Selection.style.display = "none"
+        formUser.style.display = "block"
+    })
+}
 cancel.addEventListener('click', function () {
     userInfo.style.display = "flex"
     Selection.style.display = "block"
     formUser.style.display = "none"
 })
-picture.addEventListener('change', function () {
-    formUser.querySelector("input[type='submit']").click();
-})
+if (mUser != null) {
+    picture.addEventListener('change', function () {
+        formUser.querySelector("input[type='submit']").click();
+    })
+}
 toggleButton.addEventListener("click", function () {
     myForm.classList.toggle("Form_hidden");
     myForm.classList.toggle("Form_visible");
@@ -51,10 +55,11 @@ toggleButton.addEventListener("click", function () {
         myForm.style.maxHeight = "0px"
     }
 });
-toggleButton2.addEventListener("click", function () {
-    picture.click();
-});
-
+if (mUser != null) {
+    toggleButton2.addEventListener("click", function () {
+        picture.click();
+    });
+}
 infos.addEventListener('click', function () {
     userInfo.style.display = "flex"
     listeDiv.style.display = "none"
@@ -109,8 +114,6 @@ followi.addEventListener('click', function () {
     FollowingDiv.style.display = "flex"
 })
 
-
-
 view.forEach(element => {
     element.addEventListener('click', function () {
         r = element.getAttribute('num')
@@ -124,12 +127,3 @@ view.forEach(element => {
     })
 }
 )
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     view.forEach((element) => {
-//         element.addEventListener('click', function () {
-//             let r = element.getAttribute("num");
-//             console.log(1);
-//         });
-//     });
-// });
