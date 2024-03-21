@@ -70,4 +70,17 @@ class solunaslistController
         $SM->toogleView($list);
         header("Location: /profil");
     }
+
+    public function getByNameJson()
+    {
+        $name = $_GET["listname"] ?? "";
+        $bar = $_GET["bar"] ?? "";
+        $SM = new solunaslistManager();
+        if ($name != "") {
+            $result = json_encode($SM->selectAllByName($name, $bar));
+        } else {
+            $result = json_encode($SM->selectAll());
+        }
+        echo $result;
+    }
 }

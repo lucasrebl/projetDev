@@ -24,6 +24,7 @@ class router
         'addToList' => ['controller' => 'solunaslistController', 'method' => 'addToList'],
         'deleteFromList' => ['controller' => 'solunaslistController', 'method' => 'deleteFromList'],
         'tview' => ['controller' => 'solunaslistController', 'method' => 'setView'],
+        'getJSOName' => ['controller' => 'solunaslistController', 'method' => 'getByNameJson'],
     ];
     public function __construct($request)
     {

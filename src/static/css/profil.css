@@ -24,9 +24,9 @@ button {
 }
 
 body.night button {
-    
+
     background-image: radial-gradient(circle at 80% 20%, rgb(159 177 225) 0%, #E7E7E7 100%);
-    
+
 }
 
 button:hover {
@@ -110,11 +110,13 @@ body.night .containall {
 }
 
 li a {
-    color:black;
+    color: black;
+    text-decoration: none;
 }
 
 body.night li a {
     color: white;
+    text-decoration: none;
 }
 
 .heart {
@@ -122,6 +124,7 @@ body.night li a {
     flex-direction: row;
     align-items: center;
 }
+
 .custom-fieldset {
     margin: 0 6.5rem 0 50rem;
     padding: 20px 40px 20px 20px;
@@ -208,7 +211,8 @@ body.night .custom-fieldset {
     font-size: 1.7rem;
 }
 
-body.night .userinfo p, body.night .Mylist {
+body.night .userinfo p,
+body.night .Mylist {
     color: white;
     text-shadow: 0 0 2px black;
 }
