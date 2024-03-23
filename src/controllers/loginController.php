@@ -37,4 +37,15 @@ class loginController
             logUSer($username_, $passwordUser_);
         }
     }
+
+    public function myUser()
+    {
+        $UM = new userManager();
+        if (empty($_SESSION['idUser'])) {
+            $user = "";
+        } else {
+            $user = $UM->SelectOnebyID(($_SESSION['idUser']));
+        }
+        echo json_encode($user);
+    }
 }

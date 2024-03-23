@@ -18,9 +18,15 @@ class solunaslistController
 
     public function solunaslist()
     {
+        $UM = new userManager();
+        if (empty($_SESSION['idUser'])) {
+            $user = "";
+        } else {
+            $user = $UM->SelectOnebyID(($_SESSION['idUser']));
+        }
         $SM = new solunaslistManager();
         $soluna = $SM->selectAll();
-        echo $this->twig->render('solunaslist/solunaslist.html.twig', ["solunas" => $soluna]);
+        echo $this->twig->render('solunaslist/solunaslist.html.twig', ["solunas" => $soluna, "User" => $user]);
     }
     public function solunasview()
     {
@@ -82,5 +88,19 @@ class solunaslistController
             $result = json_encode($SM->selectAll());
         }
         echo $result;
+    }
+
+    public function toogleLike()
+    {
+        $IDlist = $_GET['list'] ?? 0;
+        $LFM = new likeFavManager();
+        $myLike = $LFM->selectLikebyUserlistID($_SESSION['idUser'], $IDlist);
+        if (count($myLike) > 0) {
+            $LFM->deleteLike($_SESSION['idUser'], $IDlist);
+        } else {
+            $LFM->addLike($_SESSION['idUser'], $IDlist);
+        }
+        $likes = $LFM->selectLikebyListID($IDlist);
+        echo json_encode($likes);
     }
 }

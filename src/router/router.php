@@ -24,8 +24,10 @@ class router
         'addToList' => ['controller' => 'solunaslistController', 'method' => 'addToList'],
         'deleteFromList' => ['controller' => 'solunaslistController', 'method' => 'deleteFromList'],
         'tview' => ['controller' => 'solunaslistController', 'method' => 'setView'],
+        'tlike' => ['controller' => 'solunaslistController', 'method' => 'toogleLike'],
         'getJSOName' => ['controller' => 'solunaslistController', 'method' => 'getByNameJson'],
         'displayProfil' => ['controller' => 'profilController', 'method' => 'showProfil'],
+        'myUser' => ['controller' => 'loginController', 'method' => 'myUser'],
     ];
     public function __construct($request)
     {

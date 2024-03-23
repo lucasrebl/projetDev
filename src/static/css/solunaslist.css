@@ -49,7 +49,7 @@ body.night .containall {
     border-radius: 35px;
     background-color: rgba(255, 255, 255, 0.25);
     padding: 25px;
-    width: 700px;
+    width: 50%;
     margin-top: 5%;
 }
 
@@ -71,7 +71,23 @@ body.night .containall {
     flex-direction: column;
     align-items: center;
     margin-right: 2rem;
-    padding-right: 2rem;
+    padding-right: 2%;
     border-right: 1px solid rgba(255, 255, 255, 0.5);
     white-space: pre-wrap;
+}
+
+#like {
+    color: red;
+}
+
+#fav {
+    color: yellow;
+}
+
+body.night #like {
+    color: white;
+}
+
+body.night #fav {
+    color: white;
 }
