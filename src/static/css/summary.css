@@ -95,3 +95,15 @@ select {
 img {
     max-width: 40%;
 }
+
+a {
+    text-decoration: none;
+}
+
+li#no_check i {
+    color: red;
+}
+
+li#check i {
+    color: green;
+}

@@ -103,4 +103,16 @@ class solunaslistController
         $likes = $LFM->selectLikebyListID($IDlist);
         echo json_encode($likes);
     }
+
+    public function toogleFav()
+    {
+        $IDlist = $_GET['list'] ?? 0;
+        $LFM = new likeFavManager();
+        $myLike = $LFM->selectFavbyUserlistID($_SESSION['idUser'], $IDlist);
+        if (count($myLike) > 0) {
+            $LFM->deleteFav($_SESSION['idUser'], $IDlist);
+        } else {
+            $LFM->addFav($_SESSION['idUser'], $IDlist);
+        }
+    }
 }

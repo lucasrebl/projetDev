@@ -4,30 +4,47 @@ let Search = document.querySelectorAll('.input-text')
 let LikeButton = document.querySelectorAll('#like')
 let FavButton = document.querySelectorAll('#fav')
 
+let HF = `<i class="fa-solid fa-heart"></i>`
+let HE = `<i class="fa-regular fa-heart"></i>`
+let SF = `<i class="fa-solid fa-star"></i>`
+let SE = `<i class="fa-regular fa-star"></i>`
+
 function JSOName(name, bar) {
     fetch(`/getJSOName?listname=${name}&bar=${bar}`).then((res) => {
         return res.json()
     }).then((data) => {
         div_list.innerHTML = ""
+        let islike = ""
+        let isfav = ""
         data.forEach(element => {
+            if (element.isLike > 0) {
+                islike = HF
+            } else {
+                islike = HE
+            }
+            if (element.isFav > 0) {
+                isfav = SF
+            } else {
+                isfav = SE
+            }
             if (element.isPublic == 1) {
                 let soluna = `
-                <ul class="soluna">
+                <ul class="soluna" num="${element.ID}">
                     <li id="pic"><img src="data:image/png;base64,${element.userpicture}"/></li>
                     <li id="username"><a href="/displayProfil?id=${element.userID}">${element.username}</a></li>
                     <li id="name"><a href="/viewList?list=${element.ID}">${element.name}</a></li>
                     <li id="len">${element.Works.length}</li>
                     <li>
                         <div class="heart">
-                            <p>0</p>
-                            <i class="fa-solid fa-heart"></i>
+                            <p>${element.like.length}</p>
+                            ${HF}
                         </div>
                     </li>
                     <li id="like" num="${element.ID}">
-                        <i class="fa-regular fa-heart"></i>
+                        ${islike}
                     </li>
                     <li id="fav" num="${element.ID}">
-                        <i class="fa-regular fa-star"></i>
+                        ${isfav}
                     </li>
                 </ul>`
                 div_list.innerHTML += soluna
@@ -64,6 +81,25 @@ function toogleLike(element) {
     })
 }
 
+function toogleFav(element) {
+    fetch(`/myUser`).then((res) => {
+        return res.json()
+    }).then((user) => {
+        if (user == "") {
+            alert("Connectez-vous pour utiliser cette fonctionnalité")
+        } else {
+            let id = element.getAttribute("num")
+            let type = element.querySelector('i').className
+            if (type == "fa-regular fa-star") {
+                element.querySelector('i').className = "fa-solid fa-star"
+            } else {
+                element.querySelector('i').className = "fa-regular fa-star"
+            }
+            fetch(`/tfav?list=${id}`)
+        }
+    })
+}
+
 Search[0].addEventListener('input', function () {
     JSOName(Search[0].value, 0)
 })
@@ -80,13 +116,7 @@ function likefav() {
     }))
 
     FavButton.forEach(element => element.addEventListener('click', function () {
-        let id = element.getAttribute("num")
-        let type = element.querySelector('i').className
-        if (type == "fa-regular fa-star") {
-            element.querySelector('i').className = "fa-solid fa-star"
-        } else {
-            element.querySelector('i').className = "fa-regular fa-star"
-        }
+        toogleFav(element)
     }))
 }
 

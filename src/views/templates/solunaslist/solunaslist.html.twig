@@ -45,15 +45,23 @@
 							<li id="len">{{ soluna.Works|length }}</li>
 							<li>
 								<div class="heart">
-									<p>0</p>
+									<p>{{ soluna.like|length }}</p>
 									<i class="fa-solid fa-heart"></i>
 								</div>
 							</li>
 							<li id="like" num="{{ soluna.ID }}">
-								<i class="fa-regular fa-heart"></i>
+								{% if soluna.isLike %}
+									<i class="fa-solid fa-heart"></i>
+								{% else %}
+									<i class="fa-regular fa-heart"></i>
+								{% endif %}
 							</li>
 							<li id="fav" num="{{ soluna.ID }}">
-								<i class="fa-regular fa-star"></i>
+								{% if soluna.isFav %}
+									<i class="fa-solid fa-star"></i>
+								{% else %}
+									<i class="fa-regular fa-star"></i>
+								{% endif %}
 							</li>
 						</ul>
 					{% endif %}

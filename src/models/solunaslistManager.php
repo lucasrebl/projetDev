@@ -30,6 +30,7 @@ class solunaslistManager
 
     function selectAll()
     {
+        $user = $_SESSION['idUser'] ?? 0;
         $result = $this->db->prepare("SELECT list.*, user.username, user.pictures as UP from list
          join user on user.idUser = list.idUser");
         $result->execute();
@@ -41,6 +42,11 @@ class solunaslistManager
             $list->setUsername($row['username']);
             $list->setIsPublic($row['isPublic']);
             $list->setUserpicture($row['UP']);
+            $LFM = new likeFavManager();
+            $list->setLike($LFM->selectLikebyListID($list->ID));
+            $list->setisLike(count($LFM->selectLikebyUserlistID($user, $list->ID)));
+            $list->setFav($LFM->selectFavbyListID($list->ID));
+            $list->setIsFav(count($LFM->selectFavbyUserlistID($user, $list->ID)));
             $Works = [];
             $result2 = $this->db->prepare("SELECT listWorks.*, works.* from listWorks
             join works on works.idWorks = listWorks.idWorks
@@ -58,6 +64,7 @@ class solunaslistManager
 
     function selectAllByIdUser($iduser)
     {
+        $user = $_SESSION['idUser'] ?? 0;
         $result = $this->db->prepare("SELECT list.*, user.username from list
          join user on user.idUser = $iduser
          where list.idUser = $iduser");
@@ -69,6 +76,11 @@ class solunaslistManager
             $list->setUserID($row['idUser']);
             $list->setUsername($row['username']);
             $list->setIsPublic($row['isPublic']);
+            $LFM = new likeFavManager();
+            $list->setLike($LFM->selectLikebyListID($list->ID));
+            $list->setisLike(count($LFM->selectLikebyUserlistID($user, $list->ID)));
+            $list->setFav($LFM->selectFavbyListID($list->ID));
+            $list->setIsFav(count($LFM->selectFavbyUserlistID($user, $list->ID)));
             $Works = [];
             $result2 = $this->db->prepare("SELECT listWorks.*, works.* from listWorks
             join works on works.idWorks = listWorks.idWorks
@@ -85,6 +97,7 @@ class solunaslistManager
     }
     function selectOneById($id)
     {
+        $user = $_SESSION['idUser'] ?? 0;
         $result = $this->db->prepare("SELECT list.*, user.username from list
          join user on user.idUser = list.idUser
          where list.idList = $id");
@@ -96,6 +109,11 @@ class solunaslistManager
             $list->setUserID($row['idUser']);
             $list->setUsername($row['username']);
             $list->setIsPublic($row['isPublic']);
+            $LFM = new likeFavManager();
+            $list->setLike($LFM->selectLikebyListID($list->ID));
+            $list->setisLike(count($LFM->selectLikebyUserlistID($user, $list->ID)));
+            $list->setFav($LFM->selectFavbyListID($list->ID));
+            $list->setIsFav(count($LFM->selectFavbyUserlistID($user, $list->ID)));
             $result2 = $this->db->prepare("SELECT listWorks.*, works.* from listWorks
             join works on works.idWorks = listWorks.idWorks
             where listWorks.idList = $list->ID");
@@ -146,6 +164,7 @@ class solunaslistManager
 
     function selectAllByName($name, $bar)
     {
+        $user = $_SESSION['idUser'] ?? 0;
         if ($bar == 0) {
             $result = $this->db->prepare("SELECT list.*, user.username, user.pictures as UP from list
          join user on user.idUser = list.idUser
@@ -164,6 +183,11 @@ class solunaslistManager
             $list->setUsername($row['username']);
             $list->setIsPublic($row['isPublic']);
             $list->setUserpicture($row['UP']);
+            $LFM = new likeFavManager();
+            $list->setLike($LFM->selectLikebyListID($list->ID));
+            $list->setisLike(count($LFM->selectLikebyUserlistID($user, $list->ID)));
+            $list->setFav($LFM->selectFavbyListID($list->ID));
+            $list->setIsFav(count($LFM->selectFavbyUserlistID($user, $list->ID)));
             $Works = [];
             $result2 = $this->db->prepare("SELECT listWorks.*, works.* from listWorks
             join works on works.idWorks = listWorks.idWorks

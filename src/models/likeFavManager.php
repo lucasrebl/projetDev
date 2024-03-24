@@ -58,9 +58,72 @@ class likeFavManager
         }
         return $likes ?? [];
     }
-    public function selectAll()
+    public function selectAllLike()
     {
         $result = $this->db->prepare("SELECT * FROM `like`");
+        $result->execute();
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            $like = new likeFavModel();
+            $like->setID($row['id']);
+            $like->setIDuser($row['idUser']);
+            $like->setIDlist($row['idList']);
+            $likes[] = $like;
+        }
+        return $likes ?? [];
+    }
+
+    public function addFav($iduser, $idlist)
+    {
+        $result = $this->db->prepare("INSERT INTO `favorites`(idUser,idList) VALUES('$iduser',$idlist)");
+        $result->execute();
+    }
+    public function deleteFav($iduser, $idlist)
+    {
+        $result = $this->db->prepare("DELETE FROM `favorites` WHERE idUser = $iduser AND idList = $idlist");
+        $result->execute();
+    }
+    public function selectFavbyUserlistID($iduser, $idlist)
+    {
+        $result = $this->db->prepare("SELECT * FROM `favorites` WHERE idUser = $iduser AND idList = $idlist");
+        $result->execute();
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            $like = new likeFavModel();
+            $like->setID($row['id']);
+            $like->setIDuser($row['idUser']);
+            $like->setIDlist($row['idList']);
+            $likes[] = $like;
+        }
+        return $likes ?? [];
+    }
+    public function selectFavbyUserID($iduser)
+    {
+        $result = $this->db->prepare("SELECT * FROM `favorites` WHERE idUser = $iduser");
+        $result->execute();
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            $like = new likeFavModel();
+            $like->setID($row['id']);
+            $like->setIDuser($row['idUser']);
+            $like->setIDlist($row['idList']);
+            $likes[] = $like;
+        }
+        return $likes ?? [];
+    }
+    public function selectFavbyListID($idlist)
+    {
+        $result = $this->db->prepare("SELECT * FROM `favorites` WHERE idList = $idlist");
+        $result->execute();
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            $like = new likeFavModel();
+            $like->setID($row['id']);
+            $like->setIDuser($row['idUser']);
+            $like->setIDlist($row['idList']);
+            $likes[] = $like;
+        }
+        return $likes ?? [];
+    }
+    public function selectAllFav()
+    {
+        $result = $this->db->prepare("SELECT * FROM `favorites`");
         $result->execute();
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             $like = new likeFavModel();

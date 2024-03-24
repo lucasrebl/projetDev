@@ -16,7 +16,8 @@
 		<b class="modify">{% if User %}<i class="fa-solid fa-gear"></i>{% endif %}</b>
 		<img src="data:image/png;base64,{{ Work.Image }}" />
 		<p id="name">{{ Work.Name }}</p>
-		<p id="summary">Résumé : {{ Work.Summary }}</p>
+		<p id="summary">Résumé :</p>
+		<p id="summary2">{{ Work.Summary }}</p>
 		<p id="status">Status : {{ Work.Status }}</p>
 		{% if Work.Category == "Series" %}
 		<p id="episodes">Nombre d'épisodes : {{ Work.NbEpisodes }}</p>
@@ -25,20 +26,23 @@
 		{% if Work.Category == "Livres" %}
 		<p id="tome">Nombre de Tomes : {{ Work.NbTome }}</p>
 		{% endif %}
-		<p id="category">{{ Work.Category }}</p>
+		<p id="category">Catégorie : {{ Work.Category }}</p>
 		<div class="tags">
+			<p style="font-weight: bold; text-decoration: underline">Tags : </p>
 			{% for tag in Work.Tags %}
 			<p class="tag">{{ tag.name }}</p>
 			{% endfor %}
 		</div>	
 	</div>
 	<div class="listss">
-		<h2>Mes Listes</h2>
+		<h2>Ajouter à Mes Listes</h2>
 		{% if SLs|length < 1 %} <p>Aucunes Listes</p>
 		{% else %}
 			{% for SL in SLs %}
 			<ul>
-				<li><a href="/addToList?list={{ SL.ID }}&work={{ Work.ID }}">{{ SL.Name }}</a></li>
+				<li class="list" id="no_check"><a href="/addToList?list={{ SL.ID }}&work={{ Work.ID }}"><x>{{ SL.Name }}</x></a>
+				<i class="fa-solid fa-xmark"></i>
+				</li>
 			</ul>
 			{% endfor %}
 		{% endif %}
