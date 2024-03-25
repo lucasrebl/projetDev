@@ -12,6 +12,7 @@ class solunaslistModel
     public $fav;
     public $isLike;
     public $isFav;
+    public $isAdded;
 
     /**
      * Get the value of ID
@@ -207,6 +208,24 @@ class solunaslistModel
     public function setIsFav($isFav): self
     {
         $this->isFav = $isFav;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of isAdded
+     */
+    public function getIsAdded()
+    {
+        return $this->isAdded;
+    }
+
+    /**
+     * Set the value of isAdded
+     */
+    public function setIsAdded($isAdded): self
+    {
+        $this->isAdded = $isAdded;
 
         return $this;
     }

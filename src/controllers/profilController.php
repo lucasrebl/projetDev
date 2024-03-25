@@ -25,7 +25,8 @@ class profilController
             $SM = new solunaslistManager();
             $user = $UM->SelectOnebyID($_SESSION["idUser"]);
             $SL = $SM->selectAllByIdUser($_SESSION["idUser"]);
-            echo $this->twig->render('profil/profil.html.twig', ["User" => $user, "IDuser" => $_SESSION["idUser"], "SLs" => $SL]);
+            $SLl = $SM->selectAllByLikeIdUser($_SESSION["idUser"]);
+            echo $this->twig->render('profil/profil.html.twig', ["User" => $user, "IDuser" => $_SESSION["idUser"], "SLs" => $SL, "SLl" => $SLl]);
         }
     }
     public function getImage()

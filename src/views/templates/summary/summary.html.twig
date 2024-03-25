@@ -40,9 +40,17 @@
 		{% else %}
 			{% for SL in SLs %}
 			<ul>
-				<li class="list" id="no_check"><a href="/addToList?list={{ SL.ID }}&work={{ Work.ID }}"><x>{{ SL.Name }}</x></a>
-				<i class="fa-solid fa-xmark"></i>
-				</li>
+				{% if SL.isAdded %}
+					<li class="list" id="check" num="{{ SL.ID }}">
+						<x>{{ SL.Name }}</x>
+						<i class="fa-solid fa-check" title="Enlever de la liste ?"></i>
+					</li>
+				{% else %}
+					<li class="list" id="no_check" num="{{ SL.ID }}">
+						<x>{{ SL.Name }}</x>
+						<i class="fa-solid fa-xmark" title="Ajouter à la liste ?"></i>
+					</li>
+				{% endif %}
 			</ul>
 			{% endfor %}
 		{% endif %}
@@ -50,7 +58,7 @@
 	<div class="form" style="display: none;">
 		<form enctype="multipart/form-data" action="/getImage?id={{ Work.ID }}" method="post">
 			<p for="picture">Image : </p>
-			<input type="file" id="picture" name="picture" accept="image/*" <i class="fa-solid fa-plus"></i></input>
+			<input type="file" id="picture" name="picture" accept="image/*"><i class="fa-solid fa-plus"></i></input>
 			<input type="submit" value="get" hidden />
 		</form>
 		<form action="/mWork" method="post">
@@ -95,9 +103,11 @@
 			</select>
 			<div class="myBtn">
 				<button type="submit">Valider</button>
-		</form>
-		<button class="cancel" style="visibility: hidden;">Annuler</button>
 			</div>
+		</form>
+		<div class="myBtn">
+			<button class="cancel" style="visibility: hidden;">Annuler</button>
+		</div>
 	</div>
 </div>
 <div style="display: none;">

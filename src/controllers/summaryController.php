@@ -31,7 +31,7 @@ class summaryController
         $categories = $FM->selectAll("Category");
         $tags = $FM->selectAll("tag");
         $SM = new solunaslistManager();
-        $list = $SM->selectAllByIdUser($idUser);
+        $list = $SM->selectAllSummary($idUser, $Workid);
         $UM = new userManager();
         if (empty($_SESSION['idUser'])) {
             $user = "";

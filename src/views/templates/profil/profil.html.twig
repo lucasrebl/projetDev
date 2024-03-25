@@ -83,7 +83,7 @@
 						<li>{{ SL.Works|length }}</li>
 						<li>
 							<div class="heart">
-								<p>0</p>
+								<p>{{ SL.like|length }}</p>
 								<i class="fa-solid fa-heart"></i>
 							</div>
 						</li>
@@ -115,7 +115,7 @@
 			{% endif %}
 		</div>
 	</div>
-	<div class="MyLike">
+	<div class="MyLike" style="display: flex; flex-direction: column;">
 		<div class="LKT">Mes Listes Likés</div>
 		<div class="List_like">
 			{% if SLl|length < 1 %}
@@ -125,12 +125,18 @@
 					<ul>
 						<li>{{ SL.username }}</li>
 						<li>{{ SL.Name }}</li>
-						<li>Nombre oeuvres</li>
-						<li>Nombre likes</li>
+						<li>{{ SL.Works|length }}</li>
 						<li>
-							<a href="/toggleLike?list={{ SL.ID }}">Trash</a>
+							<div class="heart">
+								<p>{{ SL.like|length }}</p>
+								<i class="fa-solid fa-heart"></i>
+							</div>
 						</li>
-						<ul>
+						<li>
+							{# <a href="/toggleLike?list={{ SL.ID }}">Trash</a> #}
+							<i class="fa-solid fa-heart"></i>
+						</li>
+					</ul>
 				{% endfor %}
 			{% endif %}
 		</div>

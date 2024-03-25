@@ -28,6 +28,13 @@ class solunaslistManager
         }
     }
 
+    function isAdded($idlist, $idwork)
+    {
+        $result = $this->db->prepare("SELECT * FROM listWorks WHERE idList = $idlist AND idWorks = $idwork");
+        $result->execute();
+        return $result->rowCount();
+    }
+
     function selectAll()
     {
         $user = $_SESSION['idUser'] ?? 0;
@@ -64,7 +71,6 @@ class solunaslistManager
 
     function selectAllByIdUser($iduser)
     {
-        $user = $_SESSION['idUser'] ?? 0;
         $result = $this->db->prepare("SELECT list.*, user.username from list
          join user on user.idUser = $iduser
          where list.idUser = $iduser");
@@ -78,9 +84,9 @@ class solunaslistManager
             $list->setIsPublic($row['isPublic']);
             $LFM = new likeFavManager();
             $list->setLike($LFM->selectLikebyListID($list->ID));
-            $list->setisLike(count($LFM->selectLikebyUserlistID($user, $list->ID)));
+            $list->setisLike(count($LFM->selectLikebyUserlistID($iduser, $list->ID)));
             $list->setFav($LFM->selectFavbyListID($list->ID));
-            $list->setIsFav(count($LFM->selectFavbyUserlistID($user, $list->ID)));
+            $list->setIsFav(count($LFM->selectFavbyUserlistID($iduser, $list->ID)));
             $Works = [];
             $result2 = $this->db->prepare("SELECT listWorks.*, works.* from listWorks
             join works on works.idWorks = listWorks.idWorks
@@ -91,6 +97,22 @@ class solunaslistManager
                 $Works[] = $work;
             };
             $list->setWorks($Works ?? "");
+            $lists[] = $list;
+        }
+        return $lists ?? [];
+    }
+    function selectAllSummary($iduser, $idwork)
+    {
+        $result = $this->db->prepare("SELECT list.*, user.username from list
+         join user on user.idUser = $iduser
+         where list.idUser = $iduser");
+        $result->execute();
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            $list = new solunaslistModel();
+            $list->setID($row['idList']);
+            $list->setName($row['nameList']);
+            $list->setUserID($row['idUser']);
+            $list->setIsAdded($this->isAdded($list->ID, $idwork));
             $lists[] = $list;
         }
         return $lists ?? [];
@@ -188,6 +210,71 @@ class solunaslistManager
             $list->setisLike(count($LFM->selectLikebyUserlistID($user, $list->ID)));
             $list->setFav($LFM->selectFavbyListID($list->ID));
             $list->setIsFav(count($LFM->selectFavbyUserlistID($user, $list->ID)));
+            $Works = [];
+            $result2 = $this->db->prepare("SELECT listWorks.*, works.* from listWorks
+            join works on works.idWorks = listWorks.idWorks
+            where listWorks.idList = $list->ID");
+            $result2->execute();
+            while ($row2 = $result2->fetch(PDO::FETCH_ASSOC)) {
+                $work = (object) array('id' => $row2['idWorks'], 'name' => $row2['nameWorks'], 'picture' => $row2['image']);
+                $Works[] = $work;
+            };
+            $list->setWorks($Works ?? "");
+            $lists[] = $list;
+        }
+        return $lists ?? [];
+    }
+    function selectAllByLikeIdUser($iduser)
+    {
+        $result = $this->db->prepare("SELECT DISTINCT `like`.*, list.*, user.username, user.pictures as UP from `like` 
+        join list on list.idList = `like`.idList
+        join user on user.idUser = `like`.idUser
+        WHERE `like`.idUser = $iduser;");
+        $result->execute();
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            $list = new solunaslistModel();
+            $list->setID($row['idList']);
+            $list->setName($row['nameList']);
+            $list->setUserID($row['idUser']);
+            $list->setUsername($row['username']);
+            $list->setIsPublic($row['isPublic']);
+            $list->setUserpicture($row['UP']);
+            $LFM = new likeFavManager();
+            $list->setLike($LFM->selectLikebyListID($list->ID));
+            $list->setFav($LFM->selectFavbyListID($list->ID));
+            $Works = [];
+            $result2 = $this->db->prepare("SELECT listWorks.*, works.* from listWorks
+            join works on works.idWorks = listWorks.idWorks
+            where listWorks.idList = $list->ID");
+            $result2->execute();
+            while ($row2 = $result2->fetch(PDO::FETCH_ASSOC)) {
+                $work = (object) array('id' => $row2['idWorks'], 'name' => $row2['nameWorks'], 'picture' => $row2['image']);
+                $Works[] = $work;
+            };
+            $list->setWorks($Works ?? "");
+            $lists[] = $list;
+        }
+        return $lists ?? [];
+    }
+
+    function selectAllByFavIdUser($iduser)
+    {
+        $result = $this->db->prepare("SELECT list.*, user.username from list
+         join user on user.idUser = $iduser
+         where list.idUser = $iduser");
+        $result->execute();
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            $list = new solunaslistModel();
+            $list->setID($row['idList']);
+            $list->setName($row['nameList']);
+            $list->setUserID($row['idUser']);
+            $list->setUsername($row['username']);
+            $list->setIsPublic($row['isPublic']);
+            $LFM = new likeFavManager();
+            $list->setLike($LFM->selectLikebyListID($list->ID));
+            $list->setisLike(count($LFM->selectLikebyUserlistID($iduser, $list->ID)));
+            $list->setFav($LFM->selectFavbyListID($list->ID));
+            $list->setIsFav(count($LFM->selectFavbyUserlistID($iduser, $list->ID)));
             $Works = [];
             $result2 = $this->db->prepare("SELECT listWorks.*, works.* from listWorks
             join works on works.idWorks = listWorks.idWorks

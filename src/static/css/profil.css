@@ -224,3 +224,34 @@ body.night .Mylist {
     flex-direction: row;
     align-items: center;
 }
+
+.List_like ul {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    border: 1px solid rgb(255 255 255 / 15%);
+    border-radius: 35px;
+    background-color: rgba(255, 255, 255, 0.25);
+    padding: 25px;
+    display: flex;
+    justify-content: space-between;
+    width: fit-content;
+    align-items: center;
+}
+
+.MyLike {
+    max-height: 600px;
+    overflow-y: scroll;
+    flex-grow: 1;
+    /* Allow .Mylist to fill remaining space */
+}
+
+.List_like li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 2rem;
+    padding-right: 4rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.5);
+    white-space: pre-wrap;
+}

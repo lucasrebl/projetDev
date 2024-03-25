@@ -107,3 +107,7 @@ li#no_check i {
 li#check i {
     color: green;
 }
+
+body.night x {
+    color: white;
+}
