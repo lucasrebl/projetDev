@@ -10,6 +10,7 @@
 {% block body %}
 	{% include "header.html.twig" %}
 	<div class="container">
+		<div class="nul"></div>
 		<div class="userinfo">
 			<img src="data:image/png;base64,{{ User.picture }}"/>
 			{% if User.ID == IDuser %}
@@ -79,7 +80,7 @@
 			{% else %}
 				{% for SL in SLs %}
 					<ul>
-						<li>{{ SL.Name }}</li>
+						<li><a href="/viewList?list={{ SL.ID }}">{{ SL.Name }}</a></li>
 						<li>{{ SL.Works|length }}</li>
 						<li>
 							<div class="heart">
@@ -96,35 +97,42 @@
 							{% endif %}
 						</li>
 						{% endif %}
-						<li>
-							{% if User.ID == IDuser %}
-							<a href="/viewList?list={{ SL.ID }}">
-								<i class="fa-solid fa-pen"></i>
-							</a>
-							{% endif %}
-						</li>
-						<li>
-							{% if User.ID == IDuser %}
-							<a href="/deleteList?list={{ SL.ID }}">
-								<i class="fa-solid fa-trash"></i>
-							</a>
-							{% endif %}
-						</li>
+						{% if User.ID == IDuser %}
+							<li>
+								<a href="/viewList?list={{ SL.ID }}">
+									<i class="fa-solid fa-pen"></i>
+								</a>
+							</li>
+						{% else %}
+							<li>
+								<a href="/viewList?list={{ SL.ID }}">
+									<i class="fa-solid fa-pen"></i>
+								</a>
+							</li>
+						{% endif %}
+						{% if User.ID == IDuser %}
+							<li>
+								<a href="/deleteList?list={{ SL.ID }}">
+									<i class="fa-solid fa-trash"></i>
+								</a>
+							</li>
+						{% endif %}
 					</ul>
 				{% endfor %}
 			{% endif %}
 		</div>
 	</div>
 	<div class="MyLike" style="display: flex; flex-direction: column;">
-		<div class="LKT">Mes Listes Likés</div>
+		<div class="LKT"><p>Mes Listes Likés</p></div>
 		<div class="List_like">
 			{% if SLl|length < 1 %}
 				<p>aucune Listes</p>
 			{% else %}
 				{% for SL in SLl %}
-					<ul>
+					<ul num="{{ SL.ID }}">
+						<li id="pic"><img src="data:image/png;base64,{{ SL.userpicture }}"/></li>
 						<li>{{ SL.username }}</li>
-						<li>{{ SL.Name }}</li>
+						<li><a href="/viewList?list={{ SL.ID }}">{{ SL.Name }}</a></li>
 						<li>{{ SL.Works|length }}</li>
 						<li>
 							<div class="heart">
@@ -132,18 +140,31 @@
 								<i class="fa-solid fa-heart"></i>
 							</div>
 						</li>
-						<li>
-							{# <a href="/toggleLike?list={{ SL.ID }}">Trash</a> #}
-							<i class="fa-solid fa-heart"></i>
+						{# {% if User.ID == IDuser %} #}
+						<li class="ltl" num="{{ SL.ID }}">
+							{% if SL.isLike %}
+								<i class="fa-solid fa-heart" title="Délikez la liste?"></i>
+							{% else %}
+								{{ SL.isLike }}
+								<i class="fa-regular fa-heart" title="Likez la liste?"></i>
+							{% endif %}
 						</li>
+						<li class="ltf" num="{{ SL.ID }}">
+							{% if SL.isFav %}
+								<i class="fa-solid fa-star" title="Retirez des favoris?"></i>
+							{% else %}
+								<i class="fa-regular fa-star" title="Ajouter aux favoris?"></i>
+							{% endif %}
+						</li>
+						{# {% endif %} #}
 					</ul>
 				{% endfor %}
 			{% endif %}
 		</div>
 	</div>
-	<div class="MyFavorites">
+	<div class="MyFavorites" style="flex-direction: column;">
 	<div class="LFT">
-		Mes Listes Favorites
+		<p>Mes Listes Favorites</p>
 	</div>
 	<div class="List_Favorites">
 		{% if SLf|length < 1 %}
@@ -151,38 +172,66 @@
 		{% else %}
 			{% for SL in SLf %}
 				<ul>
-					<li>{{ SL.username }}</li>
-					<li>{{ SL.Name }}</li>
-					<li>Nombre oeuvres</li>
-					<li>Nombre likes</li>
-					<li>
-						<a href="/toggleFavorite?list={{ SL.ID }}">Trash</a>
-					</li>
-				<ul>
+						<li id="pic"><img src="data:image/png;base64,{{ SL.userpicture }}"/></li>
+						<li>{{ SL.username }}</li>
+						<li><a href="/viewList?list={{ SL.ID }}">{{ SL.Name }}</a></li>
+						<li>{{ SL.Works|length }}</li>
+						<li>
+							<div class="heart">
+								<p>{{ SL.like|length }}</p>
+								<i class="fa-solid fa-heart"></i>
+							</div>
+						</li>
+						{% if User.ID == IDuser %}
+						<li class="ftl" num="{{ SL.ID }}">
+							{# <a href="/toggleLike?list={{ SL.ID }}">Trash</a> #}
+							{% if SL.isLike %}
+								<i class="fa-solid fa-heart" title="Délikez la liste?"></i>
+							{% else %}
+								<i class="fa-regular fa-heart" title="Likez la liste?"></i>
+							{% endif %}
+						</li>
+						<li class="ftf" num="{{ SL.ID }}">
+							{% if SL.isFav %}
+								<i class="fa-solid fa-star" title="Retirez des favoris?"></i>
+							{% else %}
+								<i class="fa-regular fa-star" title="Ajouter aux favoris?"></i>
+							{% endif %}
+						</li>
+						{% endif %}
+					</ul>
 			{% endfor %}
 		{% endif %}
 	</div>
 </div>
 	<div class="Myfollowers">
 		<div class="FollowersT">
-			Mes Abonnés
+			<p>Mes Abonnés</p>
 		</div>
 		<div class="Followers">
+			{% for abo in followers %}
 			<img src=""></img>
-		<p>Nom</p>
-		<button>Suivre</button>
+			<p>Nom</p>
+			{% if User.ID == IDuser %}
+				<button>Suivre</button>
+			{% endif %}
+			{% endfor %}
+		</div>
 	</div>
-</div>
-<div class="Myfollowing">
-	<div class="FollowingT">
-		Mes Abonnements
+	<div class="Myfollowing">
+		<div class="FollowingT">
+			<p>Mes Abonnements</p>
+		</div>
+		<div class="Following">
+			{% for abo in followers %}
+				<img src=""></img>
+				<p>Nom</p>
+				{% if User.ID == IDuser %}
+					<button>Ne Plus Suivre</button>
+				{% endif %}
+			{% endfor %}
+		</div>
 	</div>
-	<div class="Following">
-		<img src=""></img>
-	<p>Nom</p>
-	<button>Ne Plus Suivre</button>
-</div>
-</div>
 
 <fieldset class="custom-fieldset">
 <ul class="selection">

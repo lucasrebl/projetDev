@@ -30,7 +30,7 @@ class likeFavManager
             $like->setIDlist($row['idList']);
             $likes[] = $like;
         }
-        return $likes ?? [];
+        return $likes;
     }
     public function selectLikebyUserID($iduser)
     {

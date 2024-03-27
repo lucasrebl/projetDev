@@ -4,7 +4,10 @@ class subcriberModel
     public $ID;
     public $UserID;
     public $SubcriberID;
+    public $UserName;
     public $SubcriberName;
+    public $UserPicture;
+    public $SubcriberPicture;
 
     /**
      * Get the value of ID
@@ -74,6 +77,24 @@ class subcriberModel
     public function setSubcriberName($SubcriberName): self
     {
         $this->SubcriberName = $SubcriberName;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of SubcriberPicture
+     */
+    public function getSubcriberPicture()
+    {
+        return $this->SubcriberPicture;
+    }
+
+    /**
+     * Set the value of SubcriberPicture
+     */
+    public function setSubcriberPicture($SubcriberPicture): self
+    {
+        $this->SubcriberPicture = $SubcriberPicture;
 
         return $this;
     }
