@@ -25,6 +25,8 @@ let like_TL = listeLDiv.querySelectorAll('.ltl')
 let like_TF = listeLDiv.querySelectorAll('.ltf')
 let fav_TL = listeFDiv.querySelectorAll('.ftl')
 let fav_TF = listeFDiv.querySelectorAll('.ftf')
+let my_TL = listeDiv.querySelectorAll('.mtl')
+let my_TF = listeDiv.querySelectorAll('.mtf')
 
 
 function refreshMessage() {
@@ -196,6 +198,22 @@ if (fav_TL != null) {
 
 if (fav_TF != null) {
     fav_TF.forEach(element => {
+        element.addEventListener('click', function () {
+            toogleFav(element)
+        })
+    })
+}
+
+if (my_TL != null) {
+    my_TL.forEach(element => {
+        element.addEventListener('click', function () {
+            toogleLike(element)
+        })
+    })
+}
+
+if (my_TF != null) {
+    my_TF.forEach(element => {
         element.addEventListener('click', function () {
             toogleFav(element)
         })

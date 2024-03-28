@@ -23,6 +23,7 @@ class likeFavManager
     {
         $result = $this->db->prepare("SELECT * FROM `like` WHERE idUser = $iduser AND idList = $idlist");
         $result->execute();
+        // print_r($result->rowCount());
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             $like = new likeFavModel();
             $like->setID($row['id']);
@@ -30,7 +31,7 @@ class likeFavManager
             $like->setIDlist($row['idList']);
             $likes[] = $like;
         }
-        return $likes;
+        return $likes ?? [];
     }
     public function selectLikebyUserID($iduser)
     {

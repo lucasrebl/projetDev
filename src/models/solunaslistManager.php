@@ -71,6 +71,7 @@ class solunaslistManager
 
     function selectAllByIdUser($iduser)
     {
+        $user = $_SESSION['idUser'] ?? 0;
         $result = $this->db->prepare("SELECT list.*, user.username from list
          join user on user.idUser = $iduser
          where list.idUser = $iduser");
@@ -84,9 +85,9 @@ class solunaslistManager
             $list->setIsPublic($row['isPublic']);
             $LFM = new likeFavManager();
             $list->setLike($LFM->selectLikebyListID($list->ID));
-            $list->setisLike(count($LFM->selectLikebyUserlistID($iduser, $list->ID)));
+            $list->setisLike(count($LFM->selectLikebyUserlistID($user, $list->ID)));
             $list->setFav($LFM->selectFavbyListID($list->ID));
-            $list->setIsFav(count($LFM->selectFavbyUserlistID($iduser, $list->ID)));
+            $list->setIsFav(count($LFM->selectFavbyUserlistID($user, $list->ID)));
             $Works = [];
             $result2 = $this->db->prepare("SELECT listWorks.*, works.* from listWorks
             join works on works.idWorks = listWorks.idWorks
@@ -229,7 +230,7 @@ class solunaslistManager
         $UID = $_SESSION['idUser'] ?? 0;
         $result = $this->db->prepare("SELECT DISTINCT `like`.*, list.*, user.username, user.pictures as UP from `like` 
         join list on list.idList = `like`.idList
-        join user on user.idUser = `like`.idUser
+        join user on user.idUser = `list`.idUser
         WHERE `like`.idUser = $iduser;");
         $result->execute();
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
@@ -242,7 +243,7 @@ class solunaslistManager
             $list->setUserpicture($row['UP']);
             $LFM = new likeFavManager();
             $list->setLike($LFM->selectLikebyListID($list->ID));
-            $list->setIsLike(count($LFM->selectFavbyUserlistID($UID, $list->ID)));
+            $list->setIsLike(count($LFM->selectLikebyUserlistID($UID, $list->ID)));
             $list->setFav($LFM->selectFavbyListID($list->ID));
             $list->setIsFav(count($LFM->selectFavbyUserlistID($UID, $list->ID)));
             $Works = [];

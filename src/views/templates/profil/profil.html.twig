@@ -104,10 +104,12 @@
 								</a>
 							</li>
 						{% else %}
-							<li>
-								<a href="/viewList?list={{ SL.ID }}">
-									<i class="fa-solid fa-pen"></i>
-								</a>
+							<li class="mtl" num="{{ SL.ID }}">
+								{% if SL.isLike %}
+									<i class="fa-solid fa-heart"></i>
+								{% else %}
+									<i class="fa-regular fa-heart"></i>
+								{% endif %}
 							</li>
 						{% endif %}
 						{% if User.ID == IDuser %}
@@ -115,6 +117,14 @@
 								<a href="/deleteList?list={{ SL.ID }}">
 									<i class="fa-solid fa-trash"></i>
 								</a>
+							</li>
+						{% else %}
+							<li class="mtf" num="{{ SL.ID }}">
+								{% if SL.isFav %}
+									<i class="fa-solid fa-star"></i>
+								{% else %}
+									<i class="fa-regular fa-star"></i>
+								{% endif %}
 							</li>
 						{% endif %}
 					</ul>
@@ -131,7 +141,7 @@
 				{% for SL in SLl %}
 					<ul num="{{ SL.ID }}">
 						<li id="pic"><img src="data:image/png;base64,{{ SL.userpicture }}"/></li>
-						<li>{{ SL.username }}</li>
+						<li><a href="/displayProfil?id={{ SL.userID }}">{{ SL.username }}</a></li>
 						<li><a href="/viewList?list={{ SL.ID }}">{{ SL.Name }}</a></li>
 						<li>{{ SL.Works|length }}</li>
 						<li>
@@ -145,7 +155,7 @@
 							{% if SL.isLike %}
 								<i class="fa-solid fa-heart" title="Délikez la liste?"></i>
 							{% else %}
-								{{ SL.isLike }}
+								{# {{ SL.isLike }} #}
 								<i class="fa-regular fa-heart" title="Likez la liste?"></i>
 							{% endif %}
 						</li>
@@ -173,7 +183,7 @@
 			{% for SL in SLf %}
 				<ul>
 						<li id="pic"><img src="data:image/png;base64,{{ SL.userpicture }}"/></li>
-						<li>{{ SL.username }}</li>
+						<li><a href="/displayProfil?id={{ SL.userID }}">{{ SL.username }}</a></li>
 						<li><a href="/viewList?list={{ SL.ID }}">{{ SL.Name }}</a></li>
 						<li>{{ SL.Works|length }}</li>
 						<li>
@@ -182,9 +192,8 @@
 								<i class="fa-solid fa-heart"></i>
 							</div>
 						</li>
-						{% if User.ID == IDuser %}
+						{# {% if User.ID == IDuser %} #}
 						<li class="ftl" num="{{ SL.ID }}">
-							{# <a href="/toggleLike?list={{ SL.ID }}">Trash</a> #}
 							{% if SL.isLike %}
 								<i class="fa-solid fa-heart" title="Délikez la liste?"></i>
 							{% else %}
@@ -198,7 +207,7 @@
 								<i class="fa-regular fa-star" title="Ajouter aux favoris?"></i>
 							{% endif %}
 						</li>
-						{% endif %}
+						{# {% endif %} #}
 					</ul>
 			{% endfor %}
 		{% endif %}
