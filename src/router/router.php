@@ -26,6 +26,7 @@ class router
         'tview' => ['controller' => 'solunaslistController', 'method' => 'setView'],
         'tlike' => ['controller' => 'solunaslistController', 'method' => 'toogleLike'],
         'tfav' => ['controller' => 'solunaslistController', 'method' => 'toogleFav'],
+        'newlistname' => ['controller' => 'solunaslistController', 'method' => 'modifName'],
         'getJSOName' => ['controller' => 'solunaslistController', 'method' => 'getByNameJson'],
         'displayProfil' => ['controller' => 'profilController', 'method' => 'showProfil'],
         'myUser' => ['controller' => 'loginController', 'method' => 'myUser'],

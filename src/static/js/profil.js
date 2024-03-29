@@ -27,6 +27,7 @@ let fav_TL = listeFDiv.querySelectorAll('.ftl')
 let fav_TF = listeFDiv.querySelectorAll('.ftf')
 let my_TL = listeDiv.querySelectorAll('.mtl')
 let my_TF = listeDiv.querySelectorAll('.mtf')
+let pen = listeDiv.querySelectorAll('.pen')
 
 
 function refreshMessage() {
@@ -36,6 +37,14 @@ function refreshMessage() {
     nul.appendChild(paragraph)
 }
 
+function modifName(element) {
+    let id = element.getAttribute("num")
+    let name = prompt('Tapez le nouveau nom de la liste')
+    if (name != null) {
+        fetch(`/newlistname?list=${id}&name=${name}`)
+        window.location.replace(`/newlistname?list=${id}&name=${name}`)
+    }
+}
 
 function toogleLike(element) {
     let id = element.getAttribute("num")
@@ -216,6 +225,14 @@ if (my_TF != null) {
     my_TF.forEach(element => {
         element.addEventListener('click', function () {
             toogleFav(element)
+        })
+    })
+}
+
+if (pen != null) {
+    pen.forEach(element => {
+        element.addEventListener('click', function () {
+            modifName(element)
         })
     })
 }

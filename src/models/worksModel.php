@@ -1,5 +1,6 @@
-<?php 
-class worksModel{
+<?php
+class worksModel
+{
     public $ID;
     public $Name;
     public $Status;
@@ -10,6 +11,7 @@ class worksModel{
     public $NbTome;
     public $Category;
     public $Tags;
+    public $isNsfw;
 
 
     /**
@@ -191,5 +193,22 @@ class worksModel{
 
         return $this;
     }
+
+    /**
+     * Get the value of isNsfw
+     */
+    public function getIsNsfw()
+    {
+        return $this->isNsfw;
+    }
+
+    /**
+     * Set the value of isNsfw
+     */
+    public function setIsNsfw($isNsfw): self
+    {
+        $this->isNsfw = $isNsfw;
+
+        return $this;
+    }
 }
-?>

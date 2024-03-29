@@ -98,10 +98,8 @@
 						</li>
 						{% endif %}
 						{% if User.ID == IDuser %}
-							<li>
-								<a href="/viewList?list={{ SL.ID }}">
-									<i class="fa-solid fa-pen"></i>
-								</a>
+							<li class="pen" num="{{ SL.ID }}">
+								<i class="fa-solid fa-pen"></i>
 							</li>
 						{% else %}
 							<li class="mtl" num="{{ SL.ID }}">

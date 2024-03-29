@@ -115,4 +115,13 @@ class solunaslistController
             $LFM->addFav($_SESSION['idUser'], $IDlist);
         }
     }
+
+    public function modifName()
+    {
+        $list = $_GET['list'] ?? 0;
+        $name = $_GET['name'] ?? "";
+        $SM = new solunaslistManager();
+        $SM->modifName($list, $name);
+        header("location: /profil");
+    }
 }

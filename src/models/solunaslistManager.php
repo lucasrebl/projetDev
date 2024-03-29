@@ -296,4 +296,9 @@ class solunaslistManager
         }
         return $lists ?? [];
     }
+    function modifName($list, $name)
+    {
+        $result = $this->db->prepare("UPDATE list SET nameList = '$name' WHERE idList = $list");
+        $result->execute();
+    }
 }

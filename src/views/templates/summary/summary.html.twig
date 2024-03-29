@@ -69,6 +69,11 @@
 			<textarea type="text" id="summary" name="summary">{{ Work.Summary }}</textarea>
 			<p for="status">Status : </p>
 			<input type="text" id="status" name="status" value="{{ Work.Status }}"></input>
+			<p for="isnfsw">Contenu Mature?</p>
+			<select type="isnsfw" id="isnsfw" name="isnsfw">
+				<option value="0">Non</option>
+				<option value="1">Oui</option>
+			</select>
 			<p for="category">Category : </p>
 			<select list="category" id="category" name="category">
 				{% for Category in Categories %}

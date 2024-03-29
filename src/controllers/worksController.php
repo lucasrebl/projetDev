@@ -50,6 +50,7 @@ class worksController
         $season = $_POST["season"] ?? 0;
         $tome = $_POST["tome"] ?? 0;
         $category = $_POST["category"] ?? "";
+        $isnsfw = $_POST["isnsfw"] ?? 0;
         if (empty($episodes)) {
             $episodes = 0;
         }
@@ -62,7 +63,7 @@ class worksController
         $MW = new worksManager();
         $FW = new filterManager();
         $bdd = new database();
-        $MW->addOneM($name, $status, $summary, $episodes, $season, $tome);
+        $MW->addOneM($name, $status, $summary, $episodes, $season, $tome, $isnsfw);
         $Works = count($MW->selectAll());
         $FW->addCategory($Works, $category);
         $data = $bdd->connect();

@@ -79,8 +79,8 @@ class worksManager
             $text = $summary;
         }
         try {
-            $result = $this->db->prepare("INSERT INTO works(nameWorks,status,image,summary,numberOfEpisodes,numberOfSeason,numberOfTome) 
-        VALUES('$nameWorks','$status','','$summary',$episodes,$season,$tome)");
+            $result = $this->db->prepare("INSERT INTO works(nameWorks,status,image,summary,numberOfEpisodes,numberOfSeason,numberOfTome,isNsfw) 
+        VALUES('$nameWorks','$status','','$summary',$episodes,$season,$tome,isNsfw)");
             $result->execute();
         } catch (PDOException $e) {
             echo $e->getMessage();
@@ -129,6 +129,7 @@ class worksManager
             $work->setNbEpisodes($row['numberOfEpisodes']);
             $work->setNbSeason($row['numberOfSeason']);
             $work->setNbTome($row['numberOfTome']);
+            $work->setIsNsfw($row['isNsfw']);
         };
 
         $result = $this->db->prepare("SELECT distinct worksCategory.*, worksTag.*, Category.nameCategory, tag.nameTag from worksCategory
@@ -204,6 +205,7 @@ class worksManager
                     $work->setNbEpisodes($row['numberOfEpisodes']);
                     $work->setNbSeason($row['numberOfSeason']);
                     $work->setNbTome($row['numberOfTome']);
+                    $work->setIsNsfw($row['isNsfw']);
                     $result3 = $this->db->prepare("SELECT worksCategory.idCategory, Category.nameCategory from worksCategory
                     inner join Category on worksCategory.idCategory = Category.idCategory WHERE idWorks = $work->ID");
                     $result3->execute();
