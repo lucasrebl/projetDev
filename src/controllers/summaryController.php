@@ -51,6 +51,7 @@ class summaryController
         $season = $_POST["season"] ?? "";
         $tome = $_POST["tome"] ?? 0;
         $category = $_POST["category"] ?? "";
+        $isnsfw = $_POST["isnsfw"] ?? 0;
 
         if (empty($tome)) {
             $tome = 0;
@@ -59,7 +60,7 @@ class summaryController
         $MW = new worksManager();
         $FW = new filterManager();
         $bdd = new database();
-        $MW->updateOne($id, $name, $status, $summary, $episodes, $season, $tome);
+        $MW->updateOne($id, $name, $status, $summary, $episodes, $season, $tome, $isnsfw);
         $FW->updateCategory($id, $category);
         $data = $bdd->connect();
         // print_r($_POST["tag" . 3]);

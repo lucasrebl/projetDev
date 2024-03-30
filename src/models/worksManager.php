@@ -94,7 +94,7 @@ class worksManager
         $result->execute();
     }
 
-    public function updateOne($id, $name, $status, $summary, $episodes, $season, $tome)
+    public function updateOne($id, $name, $status, $summary, $episodes, $season, $tome, $isnsfw)
     {
         $db = $this->db;
         $texts = explode("'", $summary);
@@ -111,7 +111,8 @@ class worksManager
             $text = $summary;
         }
         $result = $db->prepare("UPDATE works SET nameWorks = '$name', status = '$status',
-    summary = '$summary', numberOfEpisodes = '$episodes', numberOfSeason = $season, numberOfTome = $tome WHERE idWorks = $id");
+    summary = '$summary', numberOfEpisodes = '$episodes', numberOfSeason = $season, numberOfTome = $tome, isNsfw = $isnsfw
+    WHERE idWorks = $id");
         $result->execute();
     }
 
