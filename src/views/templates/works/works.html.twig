@@ -11,16 +11,18 @@
 {% endblock %}
 {% block body %}
 {% include "header.html.twig" %}
+{# page d'une oeuvres scpécifique #}
 <div class="container">
 	<div class="filters">
 		<form id="filters" action="/oeuvres" method="post">
 			<fieldset class="custom-fieldset">
 				<legend>
-					<p>Filtres:</p>
+					Filtres:
 				</legend>
-				<p> Catégories : </p>
+				Catégories :
 				{% for Category in Categories %}
 				<div class="myFilter">
+					<img src = "data:image/png;base64, {{ Category.pictures}}"/>
 					<p>
 						<input class="category" type="radio" name="option" value="{{ Category.ID }}"/>
 						{{ Category.Name }}
@@ -29,6 +31,7 @@
 				{% endfor %}
 				{% for tag in Tags %}
 				<div class="myFilter">
+					<img src = "data:image/svg+xml;base64,{{ tag.Image}}" alt="Image"/>
 					<p>
 						<input class="tag" type="checkbox" name="tag" value="{{ tag.ID }}" />
 						{{ tag.Name }}
@@ -63,7 +66,7 @@
 					<div class="right-inner">
 						<div class="categ">
 							<p class="summary no-link">Résumé :</p>
-							<p class="sum">{{ work.Summary }}</p>
+							<p>{{ work.Summary }}</p>
 						</div>
 						<div class="categ">
 							<p class="status no-link">Status :</p>
@@ -89,24 +92,21 @@
 	</div>
 	<button id="add" class="add" {% if not User %} hidden{% endif %}>
 		<i class="fas fa-plus"></i>
-		Ajouter une oeuvre
-	</button>
+		Ajouter une oeuvre</button>
 </div>
 <div class="form" style="display: none;">
-	<form action="/aWork" method="post">
+	<form action="/aWork" method="post"    style= "display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;">
 		<p for="name">Titre</p>
 		<input type="text" id="name" name="name" value=""></input>
 		<p for="summary">Résumé</p>
 		<textarea type="text" id="summary" name="summary"></textarea>
 		<p for="status">Status</p><input type="text" id="status" name="status" value=""></input>
-		<p for="isnfsw">Contenu Mature?</p>
-		<select type="isnsfw" id="isnsfw" name="isnsfw">
-			<option value="0">Non</option>
-			<option value="1">Oui</option>
-		</select>
 		<p for="category">Categorie</p>
 		<select list="category" id="category" name="category">
-			<option value="0">Sélectionner une catégorie</option>
+			{# <option value="0">Sélectionner une catégorie</option> #}
 			{% for Category in Categories %}
 			<option value="{{ Category.ID }}">
 				{{ Category.Name }}
@@ -130,8 +130,10 @@
 					</option>
 				{% endfor %}
 			</select>
-			<input type="submit" value="Valider"></input>
+			<div class="align">
+			<button type="submit" value="Valider">Valider</button>
 	</form>
+	</div>
 	<button id="cancel">Annuler</button>
 </div>
 <script src="/static/js/works.js"></script>
