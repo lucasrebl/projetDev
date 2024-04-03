@@ -71,7 +71,7 @@ class dashboardController
             $hashed_password_update = !empty($user_password_update) ? password_hash($user_password_update, PASSWORD_DEFAULT) : null;
             if (isset($_FILES["pictures"]) && $_FILES["pictures"]["error"] == UPLOAD_ERR_OK) {
                 $user_pictures_update = file_get_contents($_FILES["pictures"]["tmp_name"]);
-                updateUser($user_username_select, $user_username_update, $user_email_update, $hashed_password_update, $user_isAdmin_update, $user_age_update, $user_pictures_update);
+                updateUser($user_username_select, $user_username_update, $user_email_update, $hashed_password_update, $user_isAdmin_update, $user_age_update, base64_encode($user_pictures_update));
             } else {
                 updateUser($user_username_select, $user_username_update, $user_email_update, $hashed_password_update, $user_isAdmin_update, $user_age_update);
             }
@@ -88,7 +88,7 @@ class dashboardController
                 if (isset($_FILES["pictures"]) && $_FILES["pictures"]["error"] == UPLOAD_ERR_OK) {
                     $user_image_add = file_get_contents($_FILES["pictures"]["tmp_name"]);
                     $hashed_password_add = password_hash($user_password_add, PASSWORD_DEFAULT);
-                    addUser($user_username_add, $user_email_add, $hashed_password_add, $user_age_add, $user_image_add);
+                    addUser($user_username_add, $user_email_add, $hashed_password_add, $user_age_add, base64_encode($user_image_add));
                 } else {
                     echo "Erreur lors du téléchargement de l'image.";
                 }
@@ -106,7 +106,7 @@ class dashboardController
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as &$user) {
             if ($user['pictures'] !== null) {
-                $user['pictures'] = base64_encode($user['pictures']);
+                // $user['pictures'] = base64_encode($user['pictures']);
             } else {
                 $user['pictures'] = '';
             }
@@ -132,7 +132,7 @@ class dashboardController
             $oeuvres_numberOfTome_update = $_POST['numberOfTome'];
             if (isset($_FILES["image"]) && $_FILES["image"]["error"] == UPLOAD_ERR_OK) {
                 $oeuvres_image_update = file_get_contents($_FILES["image"]["tmp_name"]);
-                updateOeuvres($oeuvres_id_select, $oeuvres_nameWorks_update, $oeuvres_status_update, $oeuvres_summary_update, $oeuvres_numberOfEpisodes_update, $oeuvres_numberOfSeason_update, $oeuvres_numberOfTome_update, $oeuvres_image_update);
+                updateOeuvres($oeuvres_id_select, $oeuvres_nameWorks_update, $oeuvres_status_update, $oeuvres_summary_update, $oeuvres_numberOfEpisodes_update, $oeuvres_numberOfSeason_update, $oeuvres_numberOfTome_update, base64_encode($oeuvres_image_update));
             } else {
                 updateOeuvres($oeuvres_id_select, $oeuvres_nameWorks_update, $oeuvres_status_update, $oeuvres_summary_update, $oeuvres_numberOfEpisodes_update, $oeuvres_numberOfSeason_update, $oeuvres_numberOfTome_update);
             }
@@ -150,7 +150,7 @@ class dashboardController
             } else {
                 if (isset($_FILES["image"]) && $_FILES["image"]["error"] == UPLOAD_ERR_OK) {
                     $oeuvres_image_add = file_get_contents($_FILES["image"]["tmp_name"]);
-                    addOeuvres($oeuvres_nameWorks_add, $oeuvres_status_add, $oeuvres_summary_add, $oeuvres_numberOfEpisodes_add, $oeuvres_numberOfSeason_add, $oeuvres_numberOfTome_add, $oeuvres_image_add);
+                    addOeuvres($oeuvres_nameWorks_add, $oeuvres_status_add, $oeuvres_summary_add, $oeuvres_numberOfEpisodes_add, $oeuvres_numberOfSeason_add, $oeuvres_numberOfTome_add, base64_encode($oeuvres_image_add));
                 } else {
                     echo "Erreur lors du téléchargement de l'image.";
                 }
@@ -189,7 +189,7 @@ class dashboardController
             $tag_nameTag_update = $_POST['nameTag'];
             if (isset($_FILES["pictures"]) && $_FILES["pictures"]["error"] == UPLOAD_ERR_OK) {
                 $tag_image_update = file_get_contents($_FILES["pictures"]["tmp_name"]);
-                updateTag($tag_name_select, $tag_nameTag_update, $tag_image_update);
+                updateTag($tag_name_select, $tag_nameTag_update, base64_encode($tag_image_update));
             } else {
                 updateTag($tag_name_select, $tag_nameTag_update);
             }
@@ -202,7 +202,7 @@ class dashboardController
             } else {
                 if (isset($_FILES["pictures"]) && $_FILES["pictures"]["error"] == UPLOAD_ERR_OK) {
                     $tag_image_add = file_get_contents($_FILES["pictures"]["tmp_name"]);
-                    addTag($tag_name_add, $tag_image_add);
+                    addTag($tag_name_add, base64_encode($tag_image_add));
                 } else {
                     echo "Erreur lors du téléchargement de l'image.";
                 }
@@ -241,7 +241,7 @@ class dashboardController
             $category_name_update = $_POST['nameCategory'];
             if (isset($_FILES["pictures"]) && $_FILES["pictures"]["error"] == UPLOAD_ERR_OK) {
                 $category_image_update = file_get_contents($_FILES["pictures"]["tmp_name"]);
-                updateCategory($category_name_select, $category_name_update, $category_image_update);
+                updateCategory($category_name_select, $category_name_update, base64_encode($category_image_update));
             } else {
                 updateCategory($category_name_select, $category_name_update);
             }
@@ -254,7 +254,7 @@ class dashboardController
             } else {
                 if (isset($_FILES["pictures"]) && $_FILES["pictures"]["error"] == UPLOAD_ERR_OK) {
                     $category_image_add = file_get_contents($_FILES["pictures"]["tmp_name"]);
-                    addCategory($category_name_add, $category_image_add);
+                    addCategory($category_name_add, base64_encode($category_image_add));
                 } else {
                     echo "Erreur lors du téléchargement de l'image.";
                 }
