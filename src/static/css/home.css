@@ -84,13 +84,9 @@ body.night .container-left button {
 .mylogo {
   width: 150px;
   height: 150px;
-  background-image: url(/static/asset/soluna.svg);
+  background-image: url(/static/asset/logocolo.svg);
   background-size: cover;
   background-repeat: no-repeat;
-}
-
-body.night .mylogo {
-  filter: brightness(0) invert(1);
 }
 
 p{

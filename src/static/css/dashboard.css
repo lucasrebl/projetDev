@@ -1,0 +1,31 @@
+.all {
+    margin: 7.5% 2% 0 2%;
+    display: flex;
+    flex-direction: row;
+}
+
+.Onglets {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.read {
+    border: 1px solid rgb(255 255 255 / 65%);
+    border-radius: 35px;
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 10%;
+    margin: 15%;
+    height: fit-content;
+    display: flex;
+    width: max-content;
+    flex-direction: column;
+    align-items: center;
+}

@@ -1,11 +1,21 @@
 {% extends "default.html.twig" %}
 
-{% block title %}panel admin
+{% block title %}CheatMode
 {% endblock %}
+
 {% block stylesheets %}
-	<link href="/../public/css/dashboard.css" rel="stylesheet">
+<link href="/static/css/dashboard.css" rel="stylesheet">
+<link href="/static/css/header.css" rel="stylesheet">
+<link href="/static/css/works.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+	integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
-{% block body %}page du panel admin
+
+{% block body %}
+
+{% include "header.html.twig" %}
+<div class="all">
 	<div class="Onglets" style="display: flex; gap: 10px">
 		<p class="onglet">Users</p>
 		<p class="onglet">Oeuvres</p>
@@ -16,40 +26,34 @@
 		<p class="onglet">Tag_Oeuvres</p>
 		<p class="onglet">List_Oeuvres</p>
 	</div>
-	<div class="crudUser">
-		<h3>crudUser</h3>
-		<h3>form update and add user</h3>
-		<form action="/panelAdmin" method="post" enctype="multipart/form-data">
-			<label for="update">selectionné le nom d'utilisateur:</label>
-        	<input type="text" name="usernameSelect" />
+	<div class="center">
+		<div class="crudUser">
+			<h3>crudUser</h3>
+			<h3>form update and add user</h3>
+			<form action="/panelAdmin" method="post" enctype="multipart/form-data">
+				<input for="update" type="text" placeholder="Selectionner username" name="usernameSelect" />
 
-			<label for="update">username:</label>
-			<input type="text" name="username" />
+				<input for="update" placeholder="Nouveau nom" type="text" name="username" />
 
-			<label for="update">email:</label>
-			<input type="text" name="email" />
+				<input for="update" placeholder="Nouvel email"type="text" name="email" />
 
-			<label for="update">password:</label>
-			<input type="password" name="password" />
+				<input for="update" placeholder="Nouveau mot de passe" type="password" name="password" />
 
-			<label for="update">isAdmin:</label>
-			<input type="number" name="isAdmin" min="0" max="1" />
+				<input for="update" type="number" placeholder="Mettre admin" name="isAdmin" min="0" max="1" />
 
-			<label for="update">age:</label>
-			<input type="number" name="age" min="10" max="100" />
+				<input for="update" type="number" placeholder="Âge" name="age" min="10" max="100" />
 
-			<label for="pictures">pictures:</label>
-			<input type="file" name="pictures" />
+				<input for="pictures" placeholder="Photo de profil" type="file" name="pictures" />
 
-			<input type="submit" name="update" value="update info user" />
-			<input type="submit" name="submit" value="add user" />
-        	<input type="submit" name="delete" value="delete user" />
-		</form>
-	</div>
+				<input type="submit" name="update" value="update info user" />
+				<input type="submit" name="submit" value="add user" />
+				<input type="submit" name="delete" value="delete user" />
+			</form>
+		</div>
 
-	<div class="crudUser">
-		<div class="readUSer">
-			{% for user in userDetails %}
+		<div class="crudUser">
+			<div class="readUSer">
+				{% for user in userDetails %}
 				<div class="read">
 					<p id="read">id: {{user.idUser}}</p>
 					<p id="read">username: {{user.username}}</p>
@@ -57,49 +61,43 @@
 					<p id="read">password: {{user.passwordUser}}</p>
 					<p id="read">age: {{user.age}}</p>
 					<p id="read">isAdmin: {{user.isAdmin}}</p>
-					<img id="image" src="data:image;base64,{{user.pictures}}" alt="Image"/>
+					<img id="image" src="data:image;base64,{{user.pictures}}" alt="Image" />
 				</div>
-			{% endfor %}
+				{% endfor %}
+			</div>
 		</div>
 	</div>
 
-	<div class="crudOeuvres">
-		<h3>crud Oeuvres</h3>
-		<h3>form update and add oeuvres</h3>
-		<form action="/panelAdmin" method="post" enctype="multipart/form-data">
-			<label for="update">selectionné l'id de l'oeuvres:</label>
-        	<input type="text" name="idSelect" />
+	<div class="center">
+		<div class="crudOeuvres">
+			<h3>crud Oeuvres</h3>
+			<h3>form update and add oeuvres</h3>
+			<form action="/panelAdmin" method="post" enctype="multipart/form-data">
+				<input for="update" type="text" placeholder="Id de l'oeuvre" name="idSelect" />
 
-			<label for="update">nameWorks:</label>
-			<input type="text" name="nameWorks" />
+				<input for="update" placeholder="nom de l'oeuvre" type="text" name="nameWorks" />
 
-			<label for="update">status:</label>
-			<input type="text" name="status" />
+				<input for="update" type="text" placeholder="Status" name="status" />
 
-			<label for="update">summary:</label>
-			<input type="text" name="summary" />
+				<input for="update" type="text" placeholder="Résumé" name="summary" />
 
-			<label for="update">numberOfEpisodes:</label>
-			<input type="number" name="numberOfEpisodes" />
+				<input for="update" type="number" placeholder="Nb d'épisodes" name="numberOfEpisodes" />
 
-			<label for="update">numberOfSeason:</label>
-			<input type="number" name="numberOfSeason" />
+				<input for="update" type="number" placeholder="Nb saisons" name="numberOfSeason" />
 
-			<label for="update">numberOfTome:</label>
-			<input type="number" name="numberOfTome" />
+				<input for="update" type="number" placeholder="Nb tomes" name="numberOfTome" />
 
-			<label for="image">image:</label>
-			<input type="file" name="image">
+				<input for="image" type="file" placeholder="Nouvelle image" name="image">
 
-			<input type="submit" name="update2" value="update info oeuvres">
-			<input type="submit" name="submit2" value="add oeuvres">
-        	<input type="submit" name="delete2" value="delete Oeuvres">
-		</form>
-	</div>
+				<input type="submit" name="update2" value="update info oeuvres">
+				<input type="submit" name="submit2" value="add oeuvres">
+				<input type="submit" name="delete2" value="delete Oeuvres">
+			</form>
+		</div>
 
-	<div class="crudOeuvres">
-		<div class="readOeuvres">
-			{% for works in oeuvresDetails %}
+		<div class="crudOeuvres">
+			<div class="readOeuvres">
+				{% for works in oeuvresDetails %}
 				<div class="read">
 					<p id="read">id: {{works.idWorks}}</p>
 					<p id="read">name: {{works.nameWorks}}</p>
@@ -110,188 +108,183 @@
 					<p id="read">numberOfTome: {{works.numberOfTome}}</p>
 					<img id="image" src="data:image/png;base64,{{works.image}}" alt="Image" />
 				</div>
-			{% endfor %}
+				{% endfor %}
+			</div>
 		</div>
 	</div>
 
-	<div class="CrudTag">
-		<h3>crud Tag</h3>
-		<form action="/panelAdmin" method="post" enctype="multipart/form-data">
-			<label for="update">selectionné le nom du tag:</label>
-        	<input type="text" name="nameTagSelect">
+	<div class="center">
+		<div class="CrudTag">
+			<h3>crud Tag</h3>
+			<form action="/panelAdmin" method="post" enctype="multipart/form-data">
+				<input placeholder="Nom du tag" for="update" type="text" name="nameTagSelect">
 
-			<label for="update">nom du tag:</label>
-        	<input type="text" name="nameTag">
+				<input for="update" placeholder="Nouveau nom" type="text" name="nameTag">
 
-			<label for="image">pictures:</label>
-			<input type="file" name="pictures">
+				<input for="image" placeholder="Nouvelle image"  type="file" name="pictures">
 
-			<input type="submit" name="update3" value="update tag">
-			<input type="submit" name="submit3" value="add tag">
-        	<input type="submit" name="delete3" value="delete tag">
-		</form>
-	</div>
+				<input type="submit" name="update3" value="update tag">
+				<input type="submit" name="submit3" value="add tag">
+				<input type="submit" name="delete3" value="delete tag">
+			</form>
+		</div>
 
-	<div class="CrudTag">
-		<div class="readTag">
-			{% for tag in tagDetails %}
+		<div class="CrudTag">
+			<div class="readTag">
+				{% for tag in tagDetails %}
 				<div class="read">
 					<p id="read">id: {{tag.idTag}}</p>
 					<p id="read">name: {{tag.nameTag}}</p>
 					<img id="image" src="data:image;base64,{{tag.pictures}}" alt="Image" />
 				</div>
-			{% endfor %}
+				{% endfor %}
+			</div>
 		</div>
 	</div>
 
-	<div class="CrudCategory">
-		<h3>crud Category</h3>
-		<form action="/panelAdmin" method="post" enctype="multipart/form-data">
-			<label for="update">selectionné le nom de la category:</label>
-        	<input type="text" name="nameCategorySelect">
+	<div class="center">
+		<div class="CrudCategory">
+			<h3>crud Category</h3>
+			<form action="/panelAdmin" method="post" enctype="multipart/form-data">
+				<input for="update" placeholder="Nom de la catégorie" type="text" name="nameCategorySelect">
 
-			<label for="update">nom de la category:</label>
-        	<input type="text" name="nameCategory">
+				<input for="update" placeholder="Nouveau nom" type="text" name="nameCategory">
 
-			<label for="image">pictures:</label>
-			<input type="file" name="pictures">
+				<input for="image" placeholder="Nouvelle image" type="file" name="pictures">
 
-			<input type="submit" name="update4" value="update Category">
-			<input type="submit" name="submit4" value="add Category">
-        	<input type="submit" name="delete4" value="delete Category">
-		</form>
-	</div>
+				<input type="submit" name="update4" value="update Category">
+				<input type="submit" name="submit4" value="add Category">
+				<input type="submit" name="delete4" value="delete Category">
+			</form>
+		</div>
 
-	<div class="CrudCategory">
-		<div class="readCategory">
-			{% for Category in categoryDetails %}
+		<div class="CrudCategory">
+			<div class="readCategory">
+				{% for Category in categoryDetails %}
 				<div class="read">
-					<p id="read">id: {{Category.idCategory}}</p>
-					<p id="read">name: {{Category.nameCategory}}</p>
+					<p id="read">Id: {{Category.idCategory}}</p>
+					<p id="read">Nom: {{Category.nameCategory}}</p>
 					<img id="image" src="data:image;base64,{{Category.pictures}}" alt="Image" />
 				</div>
-			{% endfor %}
+				{% endfor %}
+			</div>
 		</div>
 	</div>
 
-	<div class="CrudList">
-		<h3>crud list</h3>
-		<form action="/panelAdmin" method="post">
-			<label for="update">selectionné l'id de la list:</label>
-        	<input type="number" name="idSelect">
+	<div class="center">
+		<div class="CrudList">
+			<h3>crud list</h3>
+			<form action="/panelAdmin" method="post">
+				<input for="update" placeholder="Id de la liste"  type="number" name="idSelect">
 
-			<label for="update">nom de la list:</label>
-        	<input type="text" name="nameList">
+				<input for="update" placeholder="Nouveau nom" type="text" name="nameList">
 
-			<label for="update">idUser:</label>
-			<input type="number" min="1" name="idUser">
+				<input for="update" placeholder="Attribuer à un user" type="number" min="1" name="idUser">
 
-			<input type="submit" name="update5" value="update list">
-			<input type="submit" name="submit5" value="add list">
-        	<input type="submit" name="delete5" value="delete list">
-		</form>
-	</div>
+				<input type="submit" name="update5" value="update list">
+				<input type="submit" name="submit5" value="add list">
+				<input type="submit" name="delete5" value="delete list">
+			</form>
+		</div>
 
-	<div class="CrudList">
-		<div class="readList">
-			{% for list in listDetails %}
+		<div class="CrudList">
+			<div class="readList">
+				{% for list in listDetails %}
 				<div class="read">
-					<p id="read">id: {{list.idList}}</p>
-					<p id="read">name: {{list.nameList}}</p>
-					<p id="read">idUser: {{list.idUser}}</p>
+					<p id="read">Id: {{list.idList}}</p>
+					<p id="read">Nom: {{list.nameList}}</p>
+					<p id="read">Id User: {{list.idUser}}</p>
 				</div>
-			{% endfor %}
+				{% endfor %}
+			</div>
 		</div>
 	</div>
 
-	<div class="CrudWorksCategory">
-		<h3>crud category des oeuvres</h3>
-		<form action="/panelAdmin" method="post">
-			<label for="update">selectionné l'id:</label>
-        	<input type="number" name="idSelect">
+	<div class="center">
+		<div class="CrudWorksCategory">
+			<h3>crud category des oeuvres</h3>
+			<form action="/panelAdmin" method="post">
+				<input for="update" placeholder="Id de la catégorie" type="number" name="idSelect">
 
-			<label for="update">idWorks:</label>
-        	<input type="number" min="1" name="idWorks">
+				<input for="update" placeholder="Id oeuvre" type="number" min="1" name="idWorks">
 
-			<label for="update">idCategory:</label>
-			<input type="number" min="1" name="idCategory">
+				<input for="update" placeholder="Id catégorie" type="number" min="1" name="idCategory">
 
-			<input type="submit" name="update6" value="update WorksCategory">
-			<input type="submit" name="submit6" value="add WorksCategory">
-        	<input type="submit" name="delete6" value="delete WorksCategory">
-		</form>
-	</div>
+				<input type="submit" name="update6" value="update WorksCategory">
+				<input type="submit" name="submit6" value="add WorksCategory">
+				<input type="submit" name="delete6" value="delete WorksCategory">
+			</form>
+		</div>
 
-	<div class="CrudWorksCategory">
-		<div class="readWorksCategory">
-			{% for worksCategory in worksCategoryDetails %}
+		<div class="CrudWorksCategory">
+			<div class="readWorksCategory">
+				{% for worksCategory in worksCategoryDetails %}
 				<div class="read">
-					<p id="read">id: {{worksCategory.id}}</p>
-					<p id="read">idWorks: {{worksCategory.idWorks}}</p>
-					<p id="read">idCategory: {{worksCategory.idCategory}}</p>
+					<p id="read">Id: {{worksCategory.id}}</p>
+					<p id="read">Id Oeuvres: {{worksCategory.idWorks}}</p>
+					<p id="read">id Catégorie: {{worksCategory.idCategory}}</p>
 				</div>
-			{% endfor %}
+				{% endfor %}
+			</div>
 		</div>
 	</div>
 
-	<div class="CrudWorksTag">
-		<h3>crud tag des oeuvres</h3>
-		<form action="/panelAdmin" method="post">
-			<label for="update">selectionné l'id:</label>
-        	<input type="number" name="idSelect">
+	<div class="center">
+		<div class="CrudWorksTag">
+			<h3>crud tag des oeuvres</h3>
+			<form action="/panelAdmin" method="post">
+				<input for="update" placeholder="Id" type="number" name="idSelect">
 
-			<label for="update">idWorks:</label>
-        	<input type="number" min="1" name="idWorks">
+				<input for="update" placeholder="Id oeuvre" type="number" min="1" name="idWorks">
 
-			<label for="update">idTag:</label>
-			<input type="number" min="1" name="idTag">
+				<input for="update" placeholder="Id Tag" type="number" min="1" name="idTag">
 
-			<input type="submit" name="update7" value="update worksTag">
-			<input type="submit" name="submit7" value="add worksTag">
-        	<input type="submit" name="delete7" value="delete worksTag">
-		</form>
-	</div>
+				<input type="submit" name="update7" value="update worksTag">
+				<input type="submit" name="submit7" value="add worksTag">
+				<input type="submit" name="delete7" value="delete worksTag">
+			</form>
+		</div>
 
-	<div class="CrudWorksTag">
-		<div class="readWorksTag">
-			{% for worksTag in worksTagDetails %}
+		<div class="CrudWorksTag">
+			<div class="readWorksTag">
+				{% for worksTag in worksTagDetails %}
 				<div class="read">
 					<p id="read">id: {{worksTag.id}}</p>
 					<p id="read">idWorks: {{worksTag.idWorks}}</p>
 					<p id="read">idTag: {{worksTag.idTag}}</p>
 				</div>
-			{% endfor %}
+				{% endfor %}
+			</div>
 		</div>
 	</div>
 
-	<div class="CrudListWorks">
-		<h3>crud list de works</h3>
-		<form action="/panelAdmin" method="post">
-			<label for="update">selectionné l'id:</label>
-        	<input type="number" name="idSelect">
+	<div class="center">
+		<div class="CrudListWorks">
+			<h3>crud list de works</h3>
+			<form action="/panelAdmin" method="post">
+				<input for="update" placeholder="Id" type="number" name="idSelect">
 
-			<label for="update">idWorks:</label>
-        	<input type="number" min="1" name="idWorks">
+				<input for="update" placeholder="Id oeuvres" type="number" min="1" name="idWorks">
 
-			<label for="update">idList:</label>
-			<input type="number" min="1" name="idList">
+				<input for="update" placeholder="Id liste" type="number" min="1" name="idList">
 
-			<input type="submit" name="update8" value="update listWorks">
-			<input type="submit" name="submit8" value="add listWorks">
-        	<input type="submit" name="delete8" value="delete listWorks">
-		</form>
-	</div>
+				<input type="submit" name="update8" value="update listWorks">
+				<input type="submit" name="submit8" value="add listWorks">
+				<input type="submit" name="delete8" value="delete listWorks">
+			</form>
+		</div>
 
-	<div class="CrudListWorks">
-		<div class="readListWorks">
-			{% for listWorks in listWorksDetails %}
+		<div class="CrudListWorks">
+			<div class="readListWorks">
+				{% for listWorks in listWorksDetails %}
 				<div class="read">
-					<p id="read">id: {{listWorks.id}}</p>
-					<p id="read">idWorks: {{listWorks.idWorks}}</p>
-					<p id="read">idList: {{listWorks.idList}}</p>
+					<p id="read">Id: {{listWorks.id}}</p>
+					<p id="read">Id Oeuvres: {{listWorks.idWorks}}</p>
+					<p id="read">Id Soluna's list: {{listWorks.idList}}</p>
 				</div>
-			{% endfor %}
+				{% endfor %}
+			</div>
 		</div>
 	</div>
 	<script src="/static/js/dashboard.js"></script>
-{% endblock %}
+	{% endblock %}
