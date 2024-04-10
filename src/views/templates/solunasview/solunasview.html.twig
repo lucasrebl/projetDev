@@ -16,11 +16,13 @@
 	<div class="List">	
 		{% for Work in soluna.Works %}
 		<ul>
-			<li><img src="data:image/png;base64,{{ Work.picture }}" /></li>
+			<li><a href="/resume?id={{ Work.id }}"><img src="data:image/png;base64,{{ Work.picture }}" /></a></li>
 			<li>
-				<p>{{ Work.name }}</p>
+				<p><a href="/resume?id={{ Work.id }}">{{ Work.name }}</a></p>
 			</li>
-			<li><a href="/deleteFromList?list={{ soluna.ID }}&work={{ Work.id }}"><i class="fa-solid fa-trash"></i></a></li>
+			{% if soluna.userID == User.ID %}
+				<li><a href="/deleteFromList?list={{ soluna.ID }}&work={{ Work.id }}"><i class="fa-solid fa-trash"></i></a></li>
+			{% endif %}
 		</ul>
 		{% endfor %}
 		<p>Total : {{ soluna.Works|length }}</p>

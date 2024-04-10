@@ -48,7 +48,8 @@ class dashboardController
                 'listDetails' => $result5,
                 'worksCategoryDetails' => $result6,
                 'worksTagDetails' => $result7,
-                'listWorksDetails' => $result8
+                'listWorksDetails' => $result8,
+                'User' => $user
             ]);
         }
     }

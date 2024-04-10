@@ -31,6 +31,7 @@
 
 .custom-fieldset {
   min-width: 17.5%;
+  min-height: 17.5%;
   margin: 0 25px 25px;
   padding: 20px;
   border: 1px solid rgb(255 255 255 / 50%);
@@ -39,6 +40,8 @@
   display: flex;
   flex-direction: column;
   position: fixed;
+  overflow-y: auto;
+  height: 80%;
 }
 
 #filters {
@@ -285,10 +288,11 @@ button.add i {
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 
 .myFilter img {
-  max-width: 100px; 
+  max-width: 100px;
   margin: 0 15% 0 -30%;
 }
 
@@ -301,7 +305,9 @@ button.add i {
   border: 1px solid white;
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
   border: 1px solid rgb(255 255 255 / 15%);
   border-radius: 35px;
   background-color: rgba(255, 255, 255, 0.65);
@@ -317,5 +323,5 @@ textarea {
 #add {
   position: fixed;
   right: 0;
-  
+
 }

@@ -30,10 +30,17 @@ class solunaslistController
     }
     public function solunasview()
     {
+        $UM = new userManager();
+        if (empty($_SESSION['idUser'])) {
+            $user = "";
+        } else {
+            $user = $UM->SelectOnebyID(($_SESSION['idUser']));
+        }
         $IDlist = $_GET["list"] ?? " ";
+        $IDuser = $_SESSION['IDuser'] ?? 0;
         $SM = new solunaslistManager();
         $soluna = $SM->selectOneById($IDlist);
-        echo $this->twig->render('solunasview/solunasview.html.twig', ["soluna" => $soluna]);
+        echo $this->twig->render('solunasview/solunasview.html.twig', ["soluna" => $soluna, "User" => $user]);
     }
     public function addList()
     {
