@@ -25,7 +25,11 @@
     margin: 15%;
     height: fit-content;
     display: flex;
-    width: max-content;
+    max-width: max-content;
     flex-direction: column;
     align-items: center;
+}
+
+#image {
+    max-width: 100px;
 }

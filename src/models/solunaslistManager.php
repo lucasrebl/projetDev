@@ -47,7 +47,7 @@ class solunaslistManager
             $list->setName($row['nameList']);
             $list->setUserID($row['idUser']);
             $list->setUsername($row['username']);
-            $list->setIsPublic($row['isPublic']);
+            $list->setIsPublic($row['isPublic']);          
             $list->setUserpicture($row['UP']);
             $LFM = new likeFavManager();
             $list->setLike($LFM->selectLikebyListID($list->ID));
