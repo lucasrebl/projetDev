@@ -1,94 +1,121 @@
 .myForm {
-    display: flex;
-    width: 520px;
-    height: 500px;
-    max-width: 99%;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    background-color: #ffffff25;
-    border-radius: 15px;
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.03);
-    border: 0.1px solid rgba(128, 128, 128, 0.178);
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-    left: 0;
-    backdrop-filter: blur(20px);
-    position: relative;
-  }
-  
+  display: flex;
+  width: 520px;
+  height: 500px;
+  max-width: 99%;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background-color: #ffffff25;
+  border-radius: 15px;
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.03);
+  border: 0.1px solid rgba(128, 128, 128, 0.178);
+}
 
-  
-  
-  input,
-  button {
-    background: rgba(253, 253, 253, 0);
-    outline: none;
-    border: 1px solid rgba(255, 0, 0, 0);
-    border-radius: 0.5rem;
-    padding: 10px;
-    margin: 10px auto;
-    width: 80%;
-    display: block;
-    color: #172b66;
-    font-weight: 500;
-    font-size: 1.1em;
-  }
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  backdrop-filter: blur(20px);
+  position: relative;
+  align-items: center;
+}
 
-  body.night input, button {
-    color: #f5411f;
-  }
 
-  h1, h3 {
-    color: white;
-  }
-  
-  .champ {
-    position: relative;
-  }
-  
-  span {
-    position: absolute;
-    left: 15%;
-    top: 37%;
-    pointer-events: none;
-    color: gray;
-  }
-  
-  input:focus + span,
-  input:valid + span {
-    transform: translateY(-140%) scale(0.9);
-    transition: all 0.4s;
-  }
-  
-  input {
-    box-shadow: inset 4px 4px 4px rgba(165, 163, 163, 0.315),
-      4px 4px 4px rgba(218, 218, 218, 0.13);
-  }
+
+
+input {
+  background: rgba(253, 253, 253, 0.70);
+  outline: none;
+  border: 1px solid rgba(255, 0, 0, 0);
+  border-radius: 0.5rem;
+  padding: 10px;
+  margin: 20px auto;
+  width: 80%;
+  display: block;
+  color: #172b66;
+  font-weight: 500;
+  font-size: 1.5em;
+}
+
+button {
+  color: #FFFFFF;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  width: 12rem;
+  cursor: pointer;
+  background-image: linear-gradient(90deg, rgb(239 177 117) 0%, rgb(240 78 34) 100%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+  backdrop-filter: blur(10px);
+  margin: 0.5rem;
+  padding: 1rem;
+}
+
+body.night button {
+  background-image: linear-gradient(135deg, #FDACA9 0%, #99B6FA 100%);
+}
+
+button:hover,
+body.night button:hover {
+  transform: scale(1.15);
+}
+
+body.night input {
+  color: white;
+}
+
+
+h1,
+h3 {
+  color: white;
+}
+
+.champ {
+  position: relative;
+  width: inherit;
+}
+
+span {
+  position: absolute;
+  left: 15%;
+  top: 37%;
+  pointer-events: none;
+  color: gray;
+}
+
+input:focus+span,
+input:valid+span {
+  transform: translateY(-140%) scale(0.9);
+  transition: all 0.4s;
+}
+
+input {
+  box-shadow: inset 4px 4px 4px rgba(165, 163, 163, 0.315),
+    4px 4px 4px rgba(218, 218, 218, 0.13);
+}
 
 
 .container-right img {
-    position: fixed;
-    bottom: 0px;
-    right: 0px;
-    width: 45%;
-    height: auto;
-    border-radius: 50px 0 0 0;
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  width: 45%;
+  height: auto;
+  border-radius: 50px 0 0 0;
 }
 
 .container-left {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    margin: 5% 10rem 0 10rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  margin: 5% 10rem 0 10rem;
 }
-
