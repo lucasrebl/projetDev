@@ -60,7 +60,7 @@
 				<div class="circle"></div>
 				<div class="work-inner">
 					<div class="left-inner">
-						<img src="data:image/png;base64,{{ work.Image }}" />
+						<img src="data:image/png;base64,{{ work.Image }}" class="{% if work.isNsfw == 1 %}blurred{% endif %}"  />
 						<p class="title no-link">{{ work.Name }}</p>
 					</div>
 					<div class="right-inner">
