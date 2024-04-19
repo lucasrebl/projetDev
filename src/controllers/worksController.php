@@ -76,4 +76,16 @@ class worksController
         }
         header("Location: /oeuvres");
     }
+
+    public function getByNameJson()
+    {
+        $name = $_GET["workname"] ?? "";
+        // $SM = new solunaslistManager();
+        // if ($name != "") {
+        //     $result = json_encode($SM->selectAllByName($name, $bar));
+        // } else {
+        //     $result = json_encode($SM->selectAll());
+        // }
+        // echo $result;
+    }
 }

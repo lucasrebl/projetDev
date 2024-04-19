@@ -45,7 +45,50 @@ function createCookie(name, value, days) {
         escape(value) + expires + "; path=/oeuvres";
 }
 
-
+function JSOName(name) {
+    fetch(`/getJSOName?listname=${name}`).then((res) => {
+        return res.json()
+    }).then((data) => {
+        div_list.innerHTML = ""
+        let islike = ""
+        let isfav = ""
+        data.forEach(element => {
+            if (element.isLike > 0) {
+                islike = HF
+            } else {
+                islike = HE
+            }
+            if (element.isFav > 0) {
+                isfav = SF
+            } else {
+                isfav = SE
+            }
+            if (element.isPublic == 1) {
+                let soluna = `
+                <ul class="soluna" num="${element.ID}">
+                    <li id="pic"><img src="data:image/png;base64,${element.userpicture}"/></li>
+                    <li id="username"><a href="/displayProfil?id=${element.userID}">${element.username}</a></li>
+                    <li id="name"><a href="/viewList?list=${element.ID}">${element.name}</a></li>
+                    <li id="len">${element.Works.length}</li>
+                    <li>
+                        <div class="heart">
+                            <p>${element.like.length}</p>
+                            ${HF}
+                        </div>
+                    </li>
+                    <li id="like" num="${element.ID}">
+                        ${islike}
+                    </li>
+                    <li id="fav" num="${element.ID}">
+                        ${isfav}
+                    </li>
+                </ul>`
+                div_list.innerHTML += soluna
+                likefav()
+            }
+        });
+    })
+}
 
 add.addEventListener('click', function () {
     container.style.display = "none"
