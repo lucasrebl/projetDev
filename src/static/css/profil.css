@@ -95,7 +95,7 @@ form {
 
 .containall p {
     font-size: 20px;
-    font-family: "Hey Comic";
+    font-family: "Nunito";
 }
 
 .symbole p {
@@ -141,7 +141,7 @@ body.night .custom-fieldset {
 
 .selection {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
 }
 
@@ -206,8 +206,8 @@ body.night .custom-fieldset {
 }
 
 .userinfo p {
-    font-family: "Komigo";
-    font-size: 1.7rem;
+    font-size: 25px;
+    font-family: "Nunito", sans-serif;
 }
 
 body.night .userinfo p,
@@ -257,7 +257,7 @@ body.night .Mylist {
 
 .LKT {
     font-size: 30px;
-    font-family: "Hey Comic";
+    font-family: "Nunito", sans-serif;
 }
 
 .MyLike img {
@@ -299,7 +299,7 @@ body.night .Mylist {
 
 .LFT {
     font-size: 30px;
-    font-family: "Hey Comic";
+    font-family: "Nunito", sans-serif;
 }
 
 .MyFavorites img {

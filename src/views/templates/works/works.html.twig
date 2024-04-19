@@ -3,175 +3,128 @@
 {% block title %}oeuvres
 {% endblock %}
 {% block stylesheets %}
-<link href="/static/css/works.css" rel="stylesheet">
-<link href="/static/css/header.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-	integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-	crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link href="/static/css/works.css" rel="stylesheet">
+	<link href="/static/css/header.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 {% endblock %}
 {% block body %}
-{% include "header.html.twig" %}
-{# page d'une oeuvres scpécifique #}
-<div class="container">
-	<div class="filters">
-		<form id="filters" action="/oeuvres" method="post">
-			<fieldset class="custom-fieldset">
-				<legend>
-					Filtres:
-				</legend>
-				Catégories :
-				{% for Category in Categories %}
-				<div class="myFilter">
-					<img src = "data:image/png;base64, {{ Category.pictures}}"/>
-					<p>
-						<input class="category" type="radio" name="option" value="{{ Category.ID }}"/>
-						{{ Category.Name }}
-					</p>
-				</div>
-				{% endfor %}
-				{% for tag in Tags %}
-				<div class="myFilter">
-					<img src = "data:image/svg+xml;base64,{{ tag.Image}}" alt="Image"/>
-					<p>
-						<input class="tag" type="checkbox" name="tag" value="{{ tag.ID }}" />
-						{{ tag.Name }}
-					</p>
-				</div>
-				{% endfor %}
-				<div class="part2" style="display: none;">
-					<p for="episodes">Nombre d'épisodes :
-					</p>
-					<input type="text" id="episodes" name="episodes" value=""></input>
+	{% include "header.html.twig" %}
+	{# page d'une oeuvres scpécifique #}
+	<div class="container">
+		<div class="filters">
+			<form id="filters" action="/oeuvres" method="post">
+				<fieldset class="custom-fieldset">
+					<legend>
+						<p style="
+							    font-size: 25px;
+							    font-weight: 600;
+							">Filtres:</p>
+					</legend>
+					{% for Category in Categories %}
+						<div class="myFilter">
+							<img src="data:image/png;base64, {{ Category.pictures}}"/>
+							<p>
+								<input class="category" type="radio" name="option" value="{{ Category.ID }}"/>
+								{{ Category.Name }}
+							</p>
+						</div>
+					{% endfor %}
+					{% for tag in Tags %}
+						<div class="myFilter">
+							<img src="data:image/svg+xml;base64,{{ tag.Image}}" alt="Image"/>
+							<p>
+								<input class="tag" type="checkbox" name="tag" value="{{ tag.ID }}"/>
+								{{ tag.Name }}
+							</p>
+						</div>
+					{% endfor %}
+					<div class="part2" style="display: none;">
+						<p for="episodes">Nombre d'épisodes :
+						</p>
+						<input type="text" id="episodes" name="episodes" value=""></input>
 				</div>
 				<div class="part3" style="display: none;">
 					<p for="tome">Nombre de Tomes :
 					</p>
 					<input type="text" id="tome" name="tome" value=""></input>
-				</div>
-				<input type="submit" value="Valider" class="custom-button">
-			</fieldset>
-		</form>
-	</div>
-	
-	<div class="works">
+			</div>
+			<input type="submit" value="Valider" class="custom-button">
+		</fieldset>
+	</form>
+</div>
+
+<div class="works">
 	<div class="SearchBarres">
 		<input list="Soluna" id="SW" name="SW" class="input-text" placeholder="Chercher une oeuvre">
-		</input>
-		<button class="searchButton" href="#">
-			<svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
-				<g clip-path="url(#clip0_2_17)">
-					<g filter="url(#filter0_d_2_17)">
-						<path
-							d="M23.7953 23.9182L19.0585 19.1814M19.0585 19.1814C19.8188 18.4211 20.4219 17.5185 20.8333 16.5251C21.2448 15.5318 21.4566 14.4671 21.4566 13.3919C21.4566 12.3167 21.2448 11.252 20.8333 10.2587C20.4219 9.2653 19.8188 8.36271 19.0585 7.60242C18.2982 6.84214 17.3956 6.23905 16.4022 5.82759C15.4089 5.41612 14.3442 5.20435 13.269 5.20435C12.1938 5.20435 11.1291 5.41612 10.1358 5.82759C9.1424 6.23905 8.23981 6.84214 7.47953 7.60242C5.94407 9.13789 5.08145 11.2204 5.08145 13.3919C5.08145 15.5634 5.94407 17.6459 7.47953 19.1814C9.01499 20.7168 11.0975 21.5794 13.269 21.5794C15.4405 21.5794 17.523 20.7168 19.0585 19.1814Z"
-							stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
-							shape-rendering="crispEdges"></path>
-					</g>
+	</input>
+	<button class="searchButton" href="#">
+		<svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewbox="0 0 29 29" fill="none">
+			<g clip-path="url(#clip0_2_17)">
+				<g filter="url(#filter0_d_2_17)">
+					<path d="M23.7953 23.9182L19.0585 19.1814M19.0585 19.1814C19.8188 18.4211 20.4219 17.5185 20.8333 16.5251C21.2448 15.5318 21.4566 14.4671 21.4566 13.3919C21.4566 12.3167 21.2448 11.252 20.8333 10.2587C20.4219 9.2653 19.8188 8.36271 19.0585 7.60242C18.2982 6.84214 17.3956 6.23905 16.4022 5.82759C15.4089 5.41612 14.3442 5.20435 13.269 5.20435C12.1938 5.20435 11.1291 5.41612 10.1358 5.82759C9.1424 6.23905 8.23981 6.84214 7.47953 7.60242C5.94407 9.13789 5.08145 11.2204 5.08145 13.3919C5.08145 15.5634 5.94407 17.6459 7.47953 19.1814C9.01499 20.7168 11.0975 21.5794 13.269 21.5794C15.4405 21.5794 17.523 20.7168 19.0585 19.1814Z" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" shape-rendering="crispEdges"></path>
 				</g>
-				<defs>
-					<filter id="filter0_d_2_17" x="-0.418549" y="3.70435" width="29.7139" height="29.7139"
-						filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-						<feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
-						<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-							result="hardAlpha"></feColorMatrix>
-						<feOffset dy="4"></feOffset>
-						<feGaussianBlur stdDeviation="2"></feGaussianBlur>
-						<feComposite in2="hardAlpha" operator="out"></feComposite>
-						<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0">
-						</feColorMatrix>
-						<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2_17"></feBlend>
-						<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2_17" result="shape">
-						</feBlend>
-					</filter>
-					<clipPath id="clip0_2_17">
-						<rect width="28.0702" height="28.0702" fill="white" transform="translate(0.403503 0.526367)">
-						</rect>
-					</clipPath>
-				</defs>
-			</svg>
-		</button>
-	</div>
-		{% for work in Works %}
-		<a href="/resume?id={{ work.ID }}">
-			<div class="work">
-				<div class="circle"></div>
-				<div class="circle"></div>
-				<div class="work-inner">
-					<div class="left-inner">
-						<img src="data:image/png;base64,{{ work.Image }}" class="{% if work.isNsfw == 1 %}blurred{% endif %}"  />
-						<p class="title no-link">{{ work.Name }}</p>
+			</g>
+			<defs>
+				<filter id="filter0_d_2_17" x="-0.418549" y="3.70435" width="29.7139" height="29.7139" filterunits="userSpaceOnUse" color-interpolation-filters="sRGB">
+					<feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+					<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix>
+					<feOffset dy="4"></feOffset>
+					<feGaussianBlur stddeviation="2"></feGaussianBlur>
+					<feComposite in2="hardAlpha" operator="out"></feComposite>
+					<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"></feColorMatrix>
+					<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2_17"></feBlend>
+					<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2_17" result="shape"></feBlend>
+				</filter>
+				<clipPath id="clip0_2_17">
+					<rect width="28.0702" height="28.0702" fill="white" transform="translate(0.403503 0.526367)"></rect>
+				</clipPath>
+			</defs>
+		</svg>
+	</button>
+</div>
+{% for work in Works %}
+	<a href="/resume?id={{ work.ID }}">
+		<div class="work">
+			<div class="circle"></div>
+			<div class="circle"></div>
+			<div class="work-inner">
+				<div class="left-inner">
+					<img src="data:image/png;base64,{{ work.Image }}" class="{% if work.isNsfw == 1 %}blurred{% endif %}"/>
+					<p class="title no-link">{{ work.Name }}</p>
+				</div>
+				<div class="right-inner">
+					<div class="categ">
+						<p class="summary no-link">Résumé :</p>
+						<p>{{ work.Summary }}</p>
 					</div>
-					<div class="right-inner">
-						<div class="categ">
-							<p class="summary no-link">Résumé :</p>
-							<p>{{ work.Summary }}</p>
-						</div>
-						<div class="categ">
-							<p class="status no-link">Status :</p>
-							<p>{{ work.Status }}</p>
-						</div>
-						{% if work.Category == "Series" %}
+					<div class="categ">
+						<p class="status no-link">Status :</p>
+						<p>{{ work.Status }}</p>
+					</div>
+					{% if work.Category == "Series" %}
 						<div class="categ">
 							<p class="episodes no-link">Nombre d'épisodes :</p>
 							<p>{{ work.NbEpisodes }}</p>
 						</div>
-						{% endif %}
-						{% if work.Category == "Livres" %}
+					{% endif %}
+					{% if work.Category == "Livres" %}
 						<div class="categ">
 							<p class="tome no-link">Nombre de tomes :</p>
 							<p>{{ work.NbTome }}</p>
 						</div>
-						{% endif %}
-					</div>
+					{% endif %}
 				</div>
 			</div>
-		</a>
-		{% endfor %}
-	</div>
-	<button id="add" class="add" {% if not User %} hidden{% endif %}>
-		<i class="fas fa-plus"></i>
-		Ajouter une oeuvre</button>
-</div>
-<div class="form" style="display: none;">
-	<form action="/aWork" method="post"    style= "display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;">
-		<p for="name">Titre</p>
-		<input type="text" id="name" name="name" value=""></input>
-		<p for="summary">Résumé</p>
-		<textarea type="text" id="summary" name="summary"></textarea>
-		<p for="status">Status</p><input type="text" id="status" name="status" value=""></input>
-		<p for="category">Categorie</p>
-		<select list="category" id="category" name="category">
-			{# <option value="0">Sélectionner une catégorie</option> #}
-			{% for Category in Categories %}
-			<option value="{{ Category.ID }}">
-				{{ Category.Name }}
-				</option>
-			{% endfor %}
-			</select>
-			<div class="part2" style="display: none;">
-				<p for="episodes">Nombre d'épisodes</p>
-				<input type="text" id="episodes" name="episodes" value=""></input>
-				<p for="season">Nombre de Saisons :</p><input type="text" id="season" name="season" value=""></input>
-			</div>
-			<div class="part3" style="display: none;">
-				<p for="tome">Nombre de Tomes :</p><input type="text" id="tome" name="tome" value=""></input>
-			</div>
-			<div class="tagsM"></div>
-			<select class="NewTag">
-				<option value="0">Ajouter un tag</option>
-				{% for tag in Tags %}
-					<option value="{{ tag.ID }}">
-						{{ tag.Name }}
-					</option>
-				{% endfor %}
-			</select>
-			<div class="align">
-			<button type="submit" value="Valider">Valider</button>
-	</form>
-	</div>
-	<button id="cancel">Annuler</button>
-</div>
-<script src="/static/js/works.js"></script>
-<script src="/static/js/home.js"></script>{% endblock %}
+		</div>
+	</a>
+{% endfor %}</div><button id="add" class="add" {% if not User %} hidden {% endif %}>
+<i class="fas fa-plus"></i>
+Ajouter une oeuvre</button></div><div class="form" style="display: none;"><form action="/aWork" method="post" style="display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    flex-direction: column;">
+<p for="name">Titre</p>
+<input type="text" id="name" name="name" value=""></input><p for="summary">Résumé</p><textarea type="text" id="summary" name="summary"></textarea><p for="status">Status</p><input type="text" id="status" name="status" value=""></input><p for="category">Categorie</p><selectlist="category" id="category" name="category">{# <option value="0">Sélectionner une catégorie</option> #}{% for Category in Categories %}
+<option value="{{ Category.ID }}">
+	{{ Category.Name }}
+</option>{% endfor %}</select><div class="part2" style="display: none;"><p for="episodes">Nombre d'épisodes</p><input type="text" id="episodes" name="episodes" value=""></input><p for="season">Nombre de Saisons :</p><input type="text" id="season" name="season" value=""></input></div><div class="part3" style="display: none;"><p for="tome">Nombre de Tomes :</p><input type="text" id="tome" name="tome" value=""></input></div><div class="tagsM"></div><select class="NewTag"><option value="0">Ajouter un tag</option>{% for tag in Tags %}<option value="{{ tag.ID }}">{{ tag.Name }}</option>{% endfor %}</select><div class="align"><button type="submit" value="Valider">Valider</button></form></div><button id="cancel">Annuler</button></div><script src="/static/js/works.js"></script><script src="/static/js/home.js"></script>{% endblock %}

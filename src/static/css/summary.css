@@ -6,6 +6,7 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+    font-family: "Nunito", sans-serif;
 }
 
 .work,
@@ -23,15 +24,19 @@
     border: rgb(255 255 255 / 25%) 1px solid
 }
 
+body.night p, body.night h2 {
+    color: white;
+    text-shadow: 2px 2px 0px black;
+}
+
 p,
 h2 {
-    color: white;
-    text-shadow: 0 0 4px black;
+    color: black;
 }
 
 p {
-    font-size: 20px;
-    font-family: "Anime Ace Regular";
+    font-size: 25px;
+    font-family: "Nunito", sans-serif;
 }
 
 button {

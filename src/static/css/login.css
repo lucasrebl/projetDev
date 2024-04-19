@@ -46,7 +46,7 @@ button {
   color: #FFFFFF;
   border: none;
   border-radius: 25px;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   width: 12rem;
   cursor: pointer;
@@ -75,6 +75,12 @@ body.night input {
 h1,
 h3 {
   color: white;
+  font-weight: 600;
+  font-size: 25px;
+}
+
+h1{
+  font-size: 35px;
 }
 
 .champ {
@@ -117,5 +123,6 @@ input {
   align-items: center;
   flex-wrap: wrap;
   align-content: flex-start;
-  margin: 5% 10rem 0 10rem;
+  margin: 9.5% 10rem 0 10rem;
+  font-family: "Nunito", sans-serif;
 }

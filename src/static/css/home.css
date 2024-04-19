@@ -6,8 +6,9 @@
   height: auto;
 }
 
-.container-left h1 {
-  font-family: "Komigo";
+.container-left {
+  font-family: "Nunito", sans-serif;
+  font-size: 22.5px;
 }
 
 body.night .container-right img {
