@@ -52,8 +52,9 @@
 			</fieldset>
 		</form>
 	</div>
+	
+	<div class="works">
 	<div class="SearchBarres">
-
 		<input list="Soluna" id="SW" name="SW" class="input-text" placeholder="Chercher une oeuvre">
 		</input>
 		<button class="searchButton" href="#">
@@ -89,7 +90,6 @@
 			</svg>
 		</button>
 	</div>
-	<div class="works">
 		{% for work in Works %}
 		<a href="/resume?id={{ work.ID }}">
 			<div class="work">
