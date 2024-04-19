@@ -43,9 +43,6 @@ function addToList(element) {
     })
 }
 
-lists.forEach(element => element.addEventListener('click', function () {
-    addToList(element)
-}))
 
 
 for (let c = 0; c < tag.length; c++) {
@@ -113,3 +110,6 @@ category.addEventListener('change', function () {
 picture.addEventListener('change', function () {
     document.querySelector("input[type='submit']").click();
 })
+lists.forEach(element => element.addEventListener('click', function () {
+    addToList(element)
+}))

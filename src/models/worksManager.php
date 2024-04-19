@@ -64,7 +64,7 @@ class worksManager
         }
     }
 
-    function addOneM($nameWorks, $status, $summary, $episodes, $season, $tome)
+    function addOneM($nameWorks, $status, $images, $summary, $episodes, $season, $tome)
     {
         $texts = explode("'", $summary);
         if (count($texts) - 1 > 0) {
@@ -81,7 +81,7 @@ class worksManager
         }
         try {
             $result = $this->db->prepare("INSERT INTO works(nameWorks,status,image,summary,numberOfEpisodes,numberOfSeason,numberOfTome,isNsfw) 
-        VALUES('$nameWorks','$status','','$summary',$episodes,$season,$tome,isNsfw)");
+        VALUES('$nameWorks','$status','$images','$summary',$episodes,$season,$tome,isNsfw)");
             $result->execute();
         } catch (PDOException $e) {
             echo $e->getMessage();

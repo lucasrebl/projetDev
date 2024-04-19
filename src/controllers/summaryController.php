@@ -43,6 +43,7 @@ class summaryController
 
     public function modify()
     {
+        // print_r($_POST["category"]);
         $id = $_POST["id"] ?? "";
         $name = $_POST["name"] ?? "";
         $summary = $_POST["summary"] ?? "";

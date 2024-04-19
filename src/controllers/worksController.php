@@ -42,13 +42,17 @@ class worksController
 
     public function add()
     {
-
         $name = $_POST["name"] ?? "";
         $summary = $_POST["summary"] ?? "";
         $episodes = $_POST["episodes"] ?? 0;
         $status = $_POST["status"] ?? "";
         $season = $_POST["season"] ?? 0;
         $tome = $_POST["tome"] ?? 0;
+        if (empty($_FILES['picture'])) {
+            $image = "";
+        } else {
+            $image = file_get_contents($_FILES['picture']['tmp_name']);
+        }
         $category = $_POST["category"] ?? "";
         $isnsfw = $_POST["isnsfw"] ?? 0;
         if (empty($episodes)) {
@@ -63,7 +67,7 @@ class worksController
         $MW = new worksManager();
         $FW = new filterManager();
         $bdd = new database();
-        $MW->addOneM($name, $status, $summary, $episodes, $season, $tome, $isnsfw);
+        $MW->addOneM($name, $status, $image, $summary, $episodes, $season, $tome, $isnsfw);
         $Works = count($MW->selectAll());
         $FW->addCategory($Works, $category);
         $data = $bdd->connect();

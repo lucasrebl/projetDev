@@ -77,8 +77,7 @@ class database
             `numberOfSeason` int(11) DEFAULT NULL,
             `numberOfTome` int(11) DEFAULT NULL,
             `isNsfw` tinyint(1) DEFAULT '0',
-            PRIMARY key (`idWorks`),
-            CONSTRAINT unique_nameWorks UNIQUE (`nameWorks`)
+            PRIMARY key (`idWorks`)
         ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1");
         $dsn->exec($createTable);
 
@@ -143,6 +142,18 @@ class database
             PRIMARY key (`id`),
             CONSTRAINT fk_idWorks_in_worksCategory FOREIGN KEY (`idWorks`) REFERENCES works(`idWorks`),
             CONSTRAINT fk_idTag_in_worksCategory FOREIGN KEY (`idCategory`) REFERENCES Category(`idCategory`)
+        ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1");
+        $dsn->exec($default);
+
+        $default = ("CREATE TABLE IF NOT EXISTS
+        `Comments` (
+            `idComments` int(11) NOT NULL AUTO_INCREMENT,
+            `idWorks` int(11) DEFAULT NULL,
+            `idUser` int(11) DEFAULT NULL,
+            `content` TEXT DEFAULT NULL,
+            PRIMARY key (`idComments`),
+            FOREIGN KEY (`idWorks`) REFERENCES works(`idWorks`),
+            FOREIGN KEY (`idUser`) REFERENCES user(`idUser`)
         ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1");
         $dsn->exec($default);
     }
