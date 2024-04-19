@@ -28,7 +28,6 @@ class loginController
         if (isset($_POST['submit'])) {
             $username_ = $_POST['username'];
             $passwordUser_ = $_POST['passwordUser'];
-            echo $passwordUser_ . "; ";
             if (empty($username_) || empty($passwordUser_)) {
                 echo "veuiller remplir tous les champs";
             }
