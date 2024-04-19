@@ -14,7 +14,11 @@
 <div class="container">
 	<div class="work">
 		<b class="modify">{% if User %}<i class="fa-solid fa-gear"></i>{% endif %}</b>
-		<img src="data:image/png;base64,{{ Work.Image }}" />
+		{% if work.isNsfw == 1 %}
+		<img src="data:image/png;base64,{{ Work.Image }}" class="blurred"/>
+		{% else %}
+		<img src="data:image/png;base64,{{ Work.Image }}"/>
+		{% endif %}
 		<p id="name">{{ Work.Name }}</p>
 		<p id="summary">Résumé :</p>
 		<p id="summary2">{{ Work.Summary }}</p>

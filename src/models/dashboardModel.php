@@ -213,13 +213,13 @@ if (!function_exists('updateOeuvres')) {
 }
 
 if (!function_exists('addOeuvres')) {
-    function addOeuvres($oeuvres_nameWorks_add, $oeuvres_status_add, $oeuvres_summary_add, $oeuvres_numberOfEpisodes_add, $oeuvres_numberOfSeason_add, $oeuvres_numberOfTome_add, $oeuvres_image_add)
+    function addOeuvres($oeuvres_nameWorks_add, $oeuvres_status_add, $oeuvres_summary_add, $oeuvres_numberOfEpisodes_add, $oeuvres_numberOfSeason_add, $oeuvres_numberOfTome_add, $oeuvres_image_add, $isNsfw)
     {
         try {
             $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
             $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $stmt = $dsn->prepare("INSERT INTO works (nameWorks, status, image, summary, numberOfEpisodes, numberOfSeason, numberOfTome) VALUES (:nameWorks, :status, :image, :summary, :numberOfEpisodes, :numberOfSeason, :numberOfTome)");
+            $stmt = $dsn->prepare("INSERT INTO works (nameWorks, status, image, summary, numberOfEpisodes, numberOfSeason, numberOfTome, isNsfw) VALUES (:nameWorks, :status, :image, :summary, :numberOfEpisodes, :numberOfSeason, :numberOfTome, :isNsfw)");
             $stmt->bindParam(':nameWorks', $oeuvres_nameWorks_add);
             $stmt->bindParam(':status', $oeuvres_status_add);
             $stmt->bindParam(':summary', $oeuvres_summary_add);
@@ -227,12 +227,12 @@ if (!function_exists('addOeuvres')) {
             $stmt->bindParam(':numberOfSeason', $oeuvres_numberOfSeason_add);
             $stmt->bindParam(':numberOfTome', $oeuvres_numberOfTome_add);
             $stmt->bindParam(':image', $oeuvres_image_add, PDO::PARAM_LOB);
+            $stmt->bindParam(':isNsfw', $isNsfw);
             if ($stmt->execute()) {
                 echo "ajout réussis";
             } else {
                 echo "ajout non réussis";
             }
-
         } catch (PDOException $e) {
             $error = "Error: " . $e->getMessage();
             echo $error;
@@ -322,7 +322,6 @@ if (!function_exists('addTag')) {
             } else {
                 echo "ajout non réussis";
             }
-
         } catch (PDOException $e) {
             $error = "Error: " . $e->getMessage();
             echo $error;
@@ -412,7 +411,6 @@ if (!function_exists('addCategory')) {
             } else {
                 echo "ajout non réussis";
             }
-
         } catch (PDOException $e) {
             $error = "Error: " . $e->getMessage();
             echo $error;
@@ -523,7 +521,6 @@ if (!function_exists('addList')) {
             } else {
                 echo "L'utilisateur avec l'ID $list_idUser_add n'existe pas dans la table user.";
             }
-
         } catch (PDOException $e) {
             $error = "Error: " . $e->getMessage();
             echo $error;
@@ -648,7 +645,6 @@ if (!function_exists('addWorksCategory')) {
                 echo "L'ID $worksCategory_idWorks_add n'existe pas dans la table works.
                     ou L'ID $worksCategory_idCategory_add n'existe pas dans la table Category.";
             }
-
         } catch (PDOException $e) {
             $error = "Error: " . $e->getMessage();
             echo $error;
@@ -773,7 +769,6 @@ if (!function_exists('addWorksTag')) {
                 echo "L'ID $worksTag_idWorks_add n'existe pas dans la table works.
                     ou L'ID $worksTag_idTag_add n'existe pas dans la table Tag.";
             }
-
         } catch (PDOException $e) {
             $error = "Error: " . $e->getMessage();
             echo $error;
@@ -898,7 +893,6 @@ if (!function_exists('addListWorks')) {
                 echo "L'ID $listWorks_idWorks_add n'existe pas dans la table works.
                     ou L'ID $listWorks_idList_add n'existe pas dans la table List.";
             }
-
         } catch (PDOException $e) {
             $error = "Error: " . $e->getMessage();
             echo $error;

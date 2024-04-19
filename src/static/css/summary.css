@@ -110,3 +110,7 @@ li#check i {
 body.night x {
     color: white;
 }
+
+.blurred {
+    filter: blur(20px);
+  }

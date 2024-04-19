@@ -146,17 +146,18 @@ class dashboardController
             $oeuvres_numberOfEpisodes_add = $_POST['numberOfEpisodes'];
             $oeuvres_numberOfSeason_add = $_POST['numberOfSeason'];
             $oeuvres_numberOfTome_add = $_POST['numberOfTome'];
+            $isNsfw = isset($_POST['isNsfw']) ? $_POST['isNsfw'] : 0;
             if (empty($oeuvres_nameWorks_add) || empty($oeuvres_status_add) || empty($oeuvres_summary_add) || empty($oeuvres_numberOfEpisodes_add) || empty($oeuvres_numberOfSeason_add) || empty($oeuvres_numberOfTome_add)) {
                 echo "Tous les champs doivent être remplis.";
             } else {
                 if (isset($_FILES["image"]) && $_FILES["image"]["error"] == UPLOAD_ERR_OK) {
                     $oeuvres_image_add = file_get_contents($_FILES["image"]["tmp_name"]);
-                    addOeuvres($oeuvres_nameWorks_add, $oeuvres_status_add, $oeuvres_summary_add, $oeuvres_numberOfEpisodes_add, $oeuvres_numberOfSeason_add, $oeuvres_numberOfTome_add, base64_encode($oeuvres_image_add));
+                    addOeuvres($oeuvres_nameWorks_add, $oeuvres_status_add, $oeuvres_summary_add, $oeuvres_numberOfEpisodes_add, $oeuvres_numberOfSeason_add, $oeuvres_numberOfTome_add, base64_encode($oeuvres_image_add), $isNsfw);
                 } else {
                     echo "Erreur lors du téléchargement de l'image.";
                 }
             }
-        }
+        }        
     }
 
     public function readOeuvres()

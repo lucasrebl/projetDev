@@ -70,7 +70,7 @@ class summaryController
                 //$tag = $_POST["tag" . $c + 1] ?? "";
                 if (empty($_POST["tag" . $c + 1])) {
                     $tag = "";
-                    $data->prepare("DELETE From worksTag where idWorks == $id")->execute();
+                    $data->prepare("DELETE From worksTag where idWorks = $id")->execute();
                 } else {
                     $tag = $_POST["tag" . $c + 1];
                     $data->prepare("INSERT INTO worksTag(idWorks,idTag) VALUES($id,$tag)")->execute();

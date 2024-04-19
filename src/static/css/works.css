@@ -325,3 +325,7 @@ textarea {
   right: 0;
 
 }
+
+.blurred {
+  filter: blur(20px);
+}
