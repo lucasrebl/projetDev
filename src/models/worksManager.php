@@ -23,6 +23,7 @@ class worksManager
                 $work->setNbEpisodes($row['numberOfEpisodes']);
                 $work->setNbSeason($row['numberOfSeason']);
                 $work->setNbTome($row['numberOfTome']);
+                $work->setIsNsfw($row['isNsfw']);
                 $result2 = $this->db->prepare("SELECT worksCategory.idCategory, Category.nameCategory from worksCategory
             inner join Category on worksCategory.idCategory = Category.idCategory WHERE idWorks = $work->ID");
                 $result2->execute();
