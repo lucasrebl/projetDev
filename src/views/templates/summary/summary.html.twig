@@ -79,7 +79,8 @@
 				<option value="1">Oui</option>
 			</select>
 			<p for="category">Category : </p>
-			<select list="category" id="category" name="category">
+			<select list="category" id="category" name="category" required>
+				<option value="">Ajouter une Catégorie</option>
 				{% for Category in Categories %}
 				<option value="{{ Category.ID }}">{{ Category.Name }}</option>
 				{% endfor %}

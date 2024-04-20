@@ -70,8 +70,10 @@ class summaryController
             for ($c = 0; $c < count($_POST) - 8; $c++) {
                 //$tag = $_POST["tag" . $c + 1] ?? "";
                 if (empty($_POST["tag" . $c + 1])) {
-                    $tag = "";
-                    $data->prepare("DELETE From worksTag where idWorks = $id")->execute();
+                    // $tag = $_POST["tag" . $c + 1];
+                    // $data->prepare("DELETE From worksTag where idWorks = $id")->execute();
+                    // print_r($_POST);
+                    // $data->prepare("INSERT INTO worksTag(idWorks,idTag) VALUES($id,$tag)")->execute();
                 } else {
                     $tag = $_POST["tag" . $c + 1];
                     $data->prepare("INSERT INTO worksTag(idWorks,idTag) VALUES($id,$tag)")->execute();

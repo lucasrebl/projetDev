@@ -48,10 +48,10 @@ class worksController
         $status = $_POST["status"] ?? "";
         $season = $_POST["season"] ?? 0;
         $tome = $_POST["tome"] ?? 0;
-        if (empty($_FILES['picture'])) {
-            $image = "";
+        if (empty($_FILES['picture']['tmp_name'])) {
+            $image = base64_encode(file_get_contents('static/asset/pepehands.png'));
         } else {
-            $image = file_get_contents($_FILES['picture']['tmp_name']);
+            $image = base64_encode(file_get_contents($_FILES['picture']['tmp_name']));
         }
         $category = $_POST["category"] ?? "";
         $isnsfw = $_POST["isnsfw"] ?? 0;
@@ -75,7 +75,9 @@ class worksController
             // $data->prepare("DELETE FROM worksTag WHERE idWorks = $id")->execute();
             for ($c = 0; $c < count($_POST) - 7; $c++) {
                 $tag = $_POST["tag" . $c + 1] ?? "";
-                $data->prepare("INSERT INTO worksTag(idWorks,idTag) VALUES($Works,$tag)")->execute();
+                if (!empty($tag)) {
+                    $data->prepare("INSERT INTO worksTag(idWorks,idTag) VALUES($Works,$tag)")->execute();
+                }
             }
         }
         header("Location: /oeuvres");
@@ -84,12 +86,12 @@ class worksController
     public function getByNameJson()
     {
         $name = $_GET["workname"] ?? "";
-        // $SM = new solunaslistManager();
-        // if ($name != "") {
-        //     $result = json_encode($SM->selectAllByName($name, $bar));
-        // } else {
-        //     $result = json_encode($SM->selectAll());
-        // }
-        // echo $result;
+        $WM = new worksManager();
+        if ($name != "") {
+            $result = json_encode($WM->selectAllByName($name));
+        } else {
+            $result = json_encode($WM->selectAll());
+        }
+        echo $result;
     }
 }

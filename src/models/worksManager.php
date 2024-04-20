@@ -224,6 +224,37 @@ class worksManager
         return null;
     }
 
+    function selectAllByName($name)
+    {
+        $result = $this->db->prepare("SELECT * from works WHERE nameWorks LIKE '$name%'");
+        $result->execute();
+        if ($result->rowCount() > 0) {
+            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                $work = new worksModel();
+                $work->setID($row['idWorks']);
+                $work->setName($row['nameWorks']);
+                $work->setStatus($row['status']);
+                $work->setImage($row['image']);
+                $work->setSummary($row['summary']);
+                $work->setNbEpisodes($row['numberOfEpisodes']);
+                $work->setNbSeason($row['numberOfSeason']);
+                $work->setNbTome($row['numberOfTome']);
+                $work->setIsNsfw($row['isNsfw']);
+                $result2 = $this->db->prepare("SELECT worksCategory.idCategory, Category.nameCategory from worksCategory
+            inner join Category on worksCategory.idCategory = Category.idCategory WHERE idWorks = $work->ID");
+                $result2->execute();
+                if ($result2->rowCount() > 0) {
+                    while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
+                        $work->setCategory($row['nameCategory']);
+                    }
+                }
+                $works[] = $work;
+            };
+            return $works;
+        }
+        return null;
+    }
+
     function deleteOne($id)
     {
         $db = $this->db;

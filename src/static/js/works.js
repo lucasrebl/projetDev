@@ -17,12 +17,14 @@ let FilTag = filters.querySelectorAll('.tag')
 let FilForm = filters.querySelector('#filters')
 let FilClick = filters.querySelector('input[type="submit"]')
 let myFilter = document.querySelectorAll('.myFilter')
+let Search = document.querySelector('#SW');
+let Content = container.querySelector('.Content')
 let id = 1
 let Tags = [];
 
-console.log(cancel)
+console.log(Search)
 
-summary.forEach((element) => element.textContent = element.textContent.substring(0, 100))
+summary.forEach((element) => element.textContent = element.textContent.substring(0, 100) + "...")
 
 myFilter.forEach((element) => {
     element.id = id
@@ -46,47 +48,60 @@ function createCookie(name, value, days) {
 }
 
 function JSOName(name) {
-    fetch(`/getJSOName?listname=${name}`).then((res) => {
+    fetch(`/getJSONwork?workname=${name}`).then((res) => {
         return res.json()
     }).then((data) => {
-        div_list.innerHTML = ""
-        let islike = ""
-        let isfav = ""
+
+        console.log(data)
+        Content.innerHTML = ""
+        let image_class = ""
+        let categ = ""
         data.forEach(element => {
-            if (element.isLike > 0) {
-                islike = HF
+            if (element.isNsfw > 0) {
+                image_class = "blurred"
             } else {
-                islike = HE
+                image_class = "No-blurred"
             }
-            if (element.isFav > 0) {
-                isfav = SF
+            if (element.Category == "Series") {
+                categ = `<div class="categ">
+        					<p class="episodes no-link">Nombre d'épisodes :</p>
+        					<p>${element.NbEpisodes}</p>
+        				</div>`
+            } else if (element.Category == "Livres") {
+                categ = `<div class="categ">
+        					<p class="tome no-link">Nombre de tomes :</p>
+        					<p>${element.NbTome}</p>
+        				</div>`
             } else {
-                isfav = SE
+                categ = ``
             }
-            if (element.isPublic == 1) {
-                let soluna = `
-                <ul class="soluna" num="${element.ID}">
-                    <li id="pic"><img src="data:image/png;base64,${element.userpicture}"/></li>
-                    <li id="username"><a href="/displayProfil?id=${element.userID}">${element.username}</a></li>
-                    <li id="name"><a href="/viewList?list=${element.ID}">${element.name}</a></li>
-                    <li id="len">${element.Works.length}</li>
-                    <li>
-                        <div class="heart">
-                            <p>${element.like.length}</p>
-                            ${HF}
-                        </div>
-                    </li>
-                    <li id="like" num="${element.ID}">
-                        ${islike}
-                    </li>
-                    <li id="fav" num="${element.ID}">
-                        ${isfav}
-                    </li>
-                </ul>`
-                div_list.innerHTML += soluna
-                likefav()
-            }
+            let soluna = `
+                <a href="/resume?id=${element.ID}">
+        	<div class="work">
+        		<div class="circle"></div>
+        		<div class="circle"></div>
+        		<div class="work-inner">
+        			<div class="left-inner">
+        				<img src="data:image/png;base64,${element.Image}" class="${image_class}"  />
+        				<p class="title no-link">${element.Name}</p>
+        			</div>
+        			<div class="right-inner">
+        				<div class="categ">
+        					<p class="summarytitle no-link">Résumé :</p>
+        					<p class="summary">${element.Summary}</p>
+        				</div>
+        				<div class="categ">
+        					<p class="status no-link">Status :</p>
+        					<p>${element.Status}</p>
+        				</div>` + categ +
+                `</div>
+        		    </div>
+        	    </div>
+            </a>`
+            Content.innerHTML += soluna
         });
+        let summary = container.querySelectorAll('.summary')
+        summary.forEach((element) => element.textContent = element.textContent.substring(0, 100) + "...")
     })
 }
 
@@ -201,3 +216,7 @@ myFilter.forEach((element) => element.addEventListener('click', function () {
     }
     element.toggleAttribute("checked")
 }))
+
+Search.addEventListener('input', function () {
+    JSOName(Search.value)
+})

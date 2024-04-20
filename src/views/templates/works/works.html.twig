@@ -90,6 +90,7 @@
 			</svg>
 		</button>
 	</div>
+	<div class="Content">
 		{% for work in Works %}
 		<a href="/resume?id={{ work.ID }}">
 			<div class="work">
@@ -102,8 +103,8 @@
 					</div>
 					<div class="right-inner">
 						<div class="categ">
-							<p class="summary no-link">Résumé :</p>
-							<p>{{ work.Summary }}</p>
+							<p class="summarytitle no-link">Résumé :</p>
+							<p class="summary">{{ work.Summary }}</p>
 						</div>
 						<div class="categ">
 							<p class="status no-link">Status :</p>
@@ -126,16 +127,20 @@
 			</div>
 		</a>
 		{% endfor %}
+		</div>
 	</div>
 	<button id="add" class="add" {% if not User %} hidden{% endif %}>
 		<i class="fas fa-plus"></i>
 		Ajouter une oeuvre</button>
 </div>
 <div class="form" style="display: none;">
-	<form action="/aWork" method="post"    style= "display: flex;
+	<form action="/aWork" method="post" enctype="multipart/form-data" style= "display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;">
+		<p for="picture">Image : </p>
+		<input type="file" id="picture" name="picture" accept="image/*"><i class="fa-solid fa-plus"></i></input>
+		<input type="submit" value="get" hidden />
 		<p for="name">Titre</p>
 		<input type="text" id="name" name="name" value=""></input>
 		<p for="summary">Résumé</p>
