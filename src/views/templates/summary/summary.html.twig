@@ -22,15 +22,15 @@
 		<p id="name">{{ Work.Name }}</p>
 		<p id="summary">Résumé :</p>
 		<p id="summary2">{{ Work.Summary }}</p>
-		<p id="status">Status : {{ Work.Status }}</p>
+		<p id="status"><u> Status </u> : {{ Work.Status }}</p>
 		{% if Work.Category == "Series" %}
-		<p id="episodes">Nombre d'épisodes : {{ Work.NbEpisodes }}</p>
-		<p id="season">Nombre de Saisons : {{ Work.NbSeason }}</p>
+		<p id="episodes"><u> Nombre d'épisodes </u> : {{ Work.NbEpisodes }}</p>
+		<p id="season"><u> Nombre de Saisons </u> : {{ Work.NbSeason }}</p>
 		{% endif %}
 		{% if Work.Category == "Livres" %}
-		<p id="tome">Nombre de Tomes : {{ Work.NbTome }}</p>
+		<p id="tome"><u> Nombre de Tomes </u> : {{ Work.NbTome }}</p>
 		{% endif %}
-		<p id="category">Catégorie : {{ Work.Category }}</p>
+		<p id="category"><u> Catégorie </u> : {{ Work.Category }}</p>
 		<div class="tags">
 			<p style="font-weight: bold; text-decoration: underline">Tags : </p>
 			{% for tag in Work.Tags %}

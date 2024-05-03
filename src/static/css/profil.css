@@ -96,6 +96,7 @@ form {
 .containall p {
     font-size: 20px;
     font-family: "Hey Comic";
+    cursor: pointer;
 }
 
 .symbole p {

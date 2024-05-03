@@ -12,15 +12,15 @@
 	<div class="container">
 		<div class="nul"></div>
 		<div class="userinfo">
-			<img src="data:image/png;base64,{{ User.picture }}"/>
-			{% if User.ID == IDuser %}
+			<img src="data:image/png;base64,{{ User1.picture }}"/>
+			{% if User1.ID == IDuser %}
 			<button id="toggleButton">
 				<i class="fa-solid fa-pen"></i>
 				Modifier ma photo de profil
 			</button>
 			{% endif %}
-			<p id="name">{{ User.username }}</p>
-			{% if User.ID == IDuser %}
+			<p id="name">{{ User1.username }}</p>
+			{% if User1.ID == IDuser %}
 				<button class="modify" style="padding: 10px 15px;">
 					<i class="fa-solid fa-pen"></i>
 					Modifier mes informations
@@ -43,16 +43,16 @@
 			</div>
 		</div>
 		<div class="formUser" style="display: none;">
-			<form enctype="multipart/form-data" action="/getUserImage?id={{ User.ID }}" method="post" style="display: none;">
+			<form enctype="multipart/form-data" action="/getUserImage?id={{ User1.ID }}" method="post" style="display: none;">
 				<p for="picture">Image :
 				</p>
 				<input type="file" id="picture" name="picture" accept="image/jpg, image/png"></input>
 				<input type="submit" value="get" hidden/>
 			</form>
 			<form action="/mUser" method="post">
-				<input type="text" id="id" name="id" value="{{User.ID}}" hidden></input>
+				<input type="text" id="id" name="id" value="{{User1.ID}}" hidden></input>
 				<p for="name">Pseudo : </p>
-				<input type="text" id="nameUser" name="name" value="{{ User.username }}"></input>
+				<input type="text" id="nameUser" name="name" value="{{ User1.username }}"></input>
 				<p for="OP">Ancien Mot de passe : </p>
 				<input type="password" id="OP" name="OP" value=""></input>
 				<p for="NP">Nouveau Mot de passe : </p>
@@ -88,7 +88,7 @@
 								<i class="fa-solid fa-heart"></i>
 							</div>
 						</li>
-						{% if User.ID == IDuser %}
+						{% if User1.ID == IDuser %}
 						<li class="View" num="{{ SL.ID }}">
 							{% if SL.isPublic %}
 								<i class="fa-solid fa-eye"></i>
@@ -97,7 +97,7 @@
 							{% endif %}
 						</li>
 						{% endif %}
-						{% if User.ID == IDuser %}
+						{% if User1.ID == IDuser %}
 							<li class="pen" num="{{ SL.ID }}">
 								<i class="fa-solid fa-pen"></i>
 							</li>
@@ -110,7 +110,7 @@
 								{% endif %}
 							</li>
 						{% endif %}
-						{% if User.ID == IDuser %}
+						{% if User1.ID == IDuser %}
 							<li>
 								<a href="/deleteList?list={{ SL.ID }}">
 									<i class="fa-solid fa-trash"></i>
@@ -148,7 +148,7 @@
 								<i class="fa-solid fa-heart"></i>
 							</div>
 						</li>
-						{# {% if User.ID == IDuser %} #}
+						{# {% if User1.ID == IDuser %} #}
 						<li class="ltl" num="{{ SL.ID }}">
 							{% if SL.isLike %}
 								<i class="fa-solid fa-heart" title="Délikez la liste?"></i>
@@ -190,7 +190,7 @@
 								<i class="fa-solid fa-heart"></i>
 							</div>
 						</li>
-						{# {% if User.ID == IDuser %} #}
+						{# {% if User1.ID == IDuser %} #}
 						<li class="ftl" num="{{ SL.ID }}">
 							{% if SL.isLike %}
 								<i class="fa-solid fa-heart" title="Délikez la liste?"></i>
@@ -219,7 +219,7 @@
 			{% for abo in followers %}
 			<img src=""></img>
 			<p>Nom</p>
-			{% if User.ID == IDuser %}
+			{% if User1.ID == IDuser %}
 				<button>Suivre</button>
 			{% endif %}
 			{% endfor %}
@@ -233,7 +233,7 @@
 			{% for abo in followers %}
 				<img src=""></img>
 				<p>Nom</p>
-				{% if User.ID == IDuser %}
+				{% if User1.ID == IDuser %}
 					<button>Ne Plus Suivre</button>
 				{% endif %}
 			{% endfor %}

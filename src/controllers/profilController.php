@@ -22,12 +22,17 @@ class profilController
             header("Location: /connexion");
         } else {
             $UM = new userManager();
+            if (empty($_SESSION['idUser'])) {
+                $user1 = "";
+            } else {
+                $user1 = $UM->SelectOnebyID(($_SESSION['idUser']));
+            }
             $SM = new solunaslistManager();
             $user = $UM->SelectOnebyID($_SESSION["idUser"]);
             $SL = $SM->selectAllByIdUser($_SESSION["idUser"]);
             $SLl = $SM->selectAllByLikeIdUser($_SESSION["idUser"]);
             $SLf = $SM->selectAllByFavIdUser($_SESSION["idUser"]);
-            echo $this->twig->render('profil/profil.html.twig', ["User" => $user, "IDuser" => $_SESSION["idUser"], "SLs" => $SL, "SLl" => $SLl, "SLf" => $SLf]);
+            echo $this->twig->render('profil/profil.html.twig', ["User1" => $user, "User" => $user1, "IDuser" => $_SESSION["idUser"], "SLs" => $SL, "SLl" => $SLl, "SLf" => $SLf]);
         }
     }
     public function getImage()
@@ -57,13 +62,18 @@ class profilController
     public function showProfil()
     {
         // header("location: https://www.youtube.com/watch?v=dQw4w9WgXcQ");
-        $id = $_GET['id'] ?? 0;
         $UM = new userManager();
+        if (empty($_SESSION['idUser'])) {
+            $user1 = "";
+        } else {
+            $user1 = $UM->SelectOnebyID(($_SESSION['idUser']));
+        }
+        $id = $_GET['id'] ?? 0;
         $SM = new solunaslistManager();
         $user = $UM->SelectOnebyID($id);
         $SL = $SM->selectAllByIdUser($id);
         $SLl = $SM->selectAllByLikeIdUser($id);
         $SLf = $SM->selectAllByFavIdUser($id);
-        echo $this->twig->render('profil/profil.html.twig', ["User" => $user, "IDuser" => $_SESSION["idUser"], "SLs" => $SL, "SLl" => $SLl, "SLf" => $SLf]);
+        echo $this->twig->render('profil/profil.html.twig', ["User1" => $user, "User" => $user1, "IDuser" => $_SESSION["idUser"], "SLs" => $SL, "SLl" => $SLl, "SLf" => $SLf]);
     }
 }

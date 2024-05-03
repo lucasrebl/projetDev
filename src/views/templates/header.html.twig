@@ -13,7 +13,7 @@
 		">
 				<li class="soluna-icon"></li>
 			</a>
-			<div class="home">
+			<div class="home" title="Page des Oeuvres">
 				<a class="active" href="/oeuvres">
 					<li>
 						<i class="fa-solid fa-house"></i>
@@ -21,7 +21,7 @@
 					</li>
 				</a>
 			</div>
-			<div class="recommand" hidden>
+			<div class="recommand" title="Page de Recommandation de listes" hidden>
 				<a href="/recommande">
 					<li>
 						<i class="fa-solid fa-book-journal-whills"></i>
@@ -30,14 +30,14 @@
 				</a>
 			</div>
 			<div class="lists">
-				<a href="/solunasList">
+				<a href="/solunasList" title="Page des lists">
 					<li>
 						<i class="fa-solid fa-book-open-reader"></i>
 						<span data-text="SoluListes"></span>
 					</li>
 				</a>
 			</div>
-			<div class="profile">
+			<div class="profile" title="Page Profil">
 				<a href="/profil">
 					<li>
 						<i class="fa-solid fa-user"></i>
@@ -46,7 +46,7 @@
 				</a>
 			</div>
 			{% if User.isAdmin %}
-			<div class="admin">
+			<div class="admin"  title="Page Admin">
 				<a href="/panelAdmin">
 					<li>
 						<i class="fa-solid fa-key"></i>
@@ -55,7 +55,7 @@
 				</a>
 				</div>
 			{% endif %}
-			<div class="logout" {% if not User %} hidden{% endif %}>
+			<div class="logout"  title="Se déconnecter" {% if not User %} hidden{% endif %}>
 				<a href="/deconnexion">
 					<li>
 						<i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -64,7 +64,7 @@
 				</a>
 			</div>
 		</ul>
-		<label id="dark-change"></label>
+		<label id="dark-change" title="Changer de Thème"></label>
 	</div>
 	<div class="logo" href="/">
 		<a href="/">

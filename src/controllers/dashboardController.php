@@ -157,7 +157,7 @@ class dashboardController
                     echo "Erreur lors du téléchargement de l'image.";
                 }
             }
-        }        
+        }
     }
 
     public function readOeuvres()
@@ -222,7 +222,7 @@ class dashboardController
         $result3 = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result3 as &$user) {
             if ($user['pictures'] !== null) {
-                $user['pictures'] = base64_encode($user['pictures']);
+                // $user['pictures'] = base64_encode($user['pictures']);
             } else {
                 $user['pictures'] = '';
             }
@@ -274,7 +274,7 @@ class dashboardController
         $result4 = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result4 as &$user) {
             if ($user['pictures'] !== null) {
-                $user['pictures'] = base64_encode($user['pictures']);
+                // $user['pictures'] = base64_encode($user['pictures']);
             } else {
                 $user['pictures'] = '';
             }

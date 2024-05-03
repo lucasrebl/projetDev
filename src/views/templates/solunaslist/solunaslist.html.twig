@@ -52,13 +52,6 @@
 
 	<div class="SearchBarres">
 		<input list="Users" id="Usa" name="Usa" class="input-text" placeholder="Chercher Un Utilisateur">
-		<datalist id="Users">
-			{% for soluna in solunas %}
-			{% if soluna.isPublic %}
-			<option value="{{ soluna.username }}" />
-			{% endif %}
-			{% endfor %}
-		</datalist>
 		</input>
 		<button class="searchButton" href="#">
 			<svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">

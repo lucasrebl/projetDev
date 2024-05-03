@@ -113,4 +113,13 @@ body.night x {
 
 .blurred {
     filter: blur(20px);
-  }
+}
+
+.work #name {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.work #summary {
+    font-size: 30px;
+}

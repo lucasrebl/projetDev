@@ -12,10 +12,10 @@
 
 body.night .container-right img {
   position: fixed;
-    bottom: -20px;
-    right: -120px;
-    width: 60%;
-    height: auto;
+  bottom: -20px;
+  right: -120px;
+  width: 60%;
+  height: auto;
 }
 
 
@@ -35,13 +35,28 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 50% 10rem 10rem 15rem;
+  margin: 50% 10rem 10rem 10rem;
   background: rgb(255 255 255 / 15%);
   padding: 2rem;
   border: #FFFFFF 1px solid;
   border-radius: 50px;
   backdrop-filter: blur(10px);
   position: fixed;
+}
+
+.container-left2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50% 10rem 10rem 50rem;
+  background: rgb(255 255 255 / 15%);
+  padding: 2rem;
+  border: #FFFFFF 1px solid;
+  border-radius: 50px;
+  backdrop-filter: blur(5px);
+  position: fixed;
+  z-index: 1;
+  font-weight: bold;
 }
 
 button {
@@ -60,7 +75,8 @@ button {
   padding: 1rem;
 }
 
-button:hover, body.night .container-left button:hover {
+button:hover,
+body.night .container-left button:hover {
   transform: scale(1.15);
 }
 
@@ -79,9 +95,12 @@ body.night .container-left button {
   margin: 2rem;
   padding: 1rem;
 }
-body.night p{
+
+body.night p,
+body.night h1 {
   color: white;
 }
+
 .mylogo {
   width: 150px;
   height: 150px;
@@ -90,6 +109,6 @@ body.night p{
   background-repeat: no-repeat;
 }
 
-p{
+p {
   font-family: "FF";
 }

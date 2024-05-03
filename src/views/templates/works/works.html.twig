@@ -22,13 +22,15 @@
 				Catégories :
 				{% for Category in Categories %}
 				<div class="myFilter">
-					<img src = "data:image/png;base64, {{ Category.pictures}}"/>
+					<img src = "data:image/svg+xml;base64,{{ Category.Image}}"/>
 					<p>
 						<input class="category" type="radio" name="option" value="{{ Category.ID }}"/>
 						{{ Category.Name }}
 					</p>
 				</div>
 				{% endfor %}
+				<br>
+				Tags :
 				{% for tag in Tags %}
 				<div class="myFilter">
 					<img src = "data:image/svg+xml;base64,{{ tag.Image}}" alt="Image"/>

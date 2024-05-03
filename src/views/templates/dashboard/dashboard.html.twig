@@ -140,7 +140,7 @@
 				<div class="read">
 					<p id="read">id: {{tag.idTag}}</p>
 					<p id="read">name: {{tag.nameTag}}</p>
-					<img id="image" src="data:image;base64,{{tag.pictures}}" alt="Image" />
+					<img id="image" src="data:image/svg+xml;base64,{{tag.pictures}}" alt="Image" />
 				</div>
 				{% endfor %}
 			</div>
@@ -169,7 +169,7 @@
 				<div class="read">
 					<p id="read">Id: {{Category.idCategory}}</p>
 					<p id="read">Nom: {{Category.nameCategory}}</p>
-					<img id="image" src="data:image;base64,{{Category.pictures}}" alt="Image" />
+					<img id="image" src="data:image/svg+xml;base64,{{Category.pictures}}" alt="Image" />
 				</div>
 				{% endfor %}
 			</div>
