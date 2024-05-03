@@ -28,11 +28,15 @@ class profilController
                 $user1 = $UM->SelectOnebyID(($_SESSION['idUser']));
             }
             $SM = new solunaslistManager();
+            $SM2 = new subcriberManager();
             $user = $UM->SelectOnebyID($_SESSION["idUser"]);
             $SL = $SM->selectAllByIdUser($_SESSION["idUser"]);
             $SLl = $SM->selectAllByLikeIdUser($_SESSION["idUser"]);
             $SLf = $SM->selectAllByFavIdUser($_SESSION["idUser"]);
-            echo $this->twig->render('profil/profil.html.twig', ["User1" => $user, "User" => $user1, "IDuser" => $_SESSION["idUser"], "SLs" => $SL, "SLl" => $SLl, "SLf" => $SLf]);
+            $followers = $SM2->SelectAllbySubscriber($_SESSION["idUser"]);
+            $following = $SM2->SelectAllbyUser($_SESSION["idUser"]);
+            // print_r($followers);
+            echo $this->twig->render('profil/profil.html.twig', ["User1" => $user, "User" => $user1, "IDuser" => $_SESSION["idUser"], "SLs" => $SL, "SLl" => $SLl, "SLf" => $SLf, "FW1" => $followers, "FW2" => $following]);
         }
     }
     public function getImage()
@@ -65,15 +69,34 @@ class profilController
         $UM = new userManager();
         if (empty($_SESSION['idUser'])) {
             $user1 = "";
+            $sus = 0;
         } else {
             $user1 = $UM->SelectOnebyID(($_SESSION['idUser']));
+            $sus = $user1->ID;
         }
         $id = $_GET['id'] ?? 0;
         $SM = new solunaslistManager();
+        $SM2 = new subcriberManager();
         $user = $UM->SelectOnebyID($id);
         $SL = $SM->selectAllByIdUser($id);
         $SLl = $SM->selectAllByLikeIdUser($id);
         $SLf = $SM->selectAllByFavIdUser($id);
-        echo $this->twig->render('profil/profil.html.twig', ["User1" => $user, "User" => $user1, "IDuser" => $_SESSION["idUser"], "SLs" => $SL, "SLl" => $SLl, "SLf" => $SLf]);
+        $linkp = $SM2->SelectOne($sus, $id);
+        $followers = $SM2->SelectAllbySubscriber($id);
+        $following = $SM2->SelectAllbyUser($id);
+        echo $this->twig->render('profil/profil.html.twig', ["User1" => $user, "User" => $user1, "IDuser" => $_SESSION["idUser"], "SLs" => $SL, "SLl" => $SLl, "SLf" => $SLf, "linkP" => $linkp, "FW1" => $followers, "FW2" => $following]);
+    }
+
+    public function toogleSub()
+    {
+        $userid = $_GET['user'];
+        $subid = $_GET['sub'];
+        $SM = new subcriberManager();
+        $sub = $SM->SelectOne($userid, $subid) ?? "";
+        if (empty($sub)) {
+            $SM->addSub($userid, $subid);
+        } else {
+            $SM->removeSub($userid, $subid);
+        }
     }
 }

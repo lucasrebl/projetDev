@@ -30,6 +30,7 @@ class router
         'getJSOName' => ['controller' => 'solunaslistController', 'method' => 'getByNameJson'],
         'getJSONwork' => ['controller' => 'worksController', 'method' => 'getByNameJson'],
         'displayProfil' => ['controller' => 'profilController', 'method' => 'showProfil'],
+        'TS' => ['controller' => 'profilController', 'method' => 'toogleSub'],
         'myUser' => ['controller' => 'loginController', 'method' => 'myUser'],
     ];
     public function __construct($request)

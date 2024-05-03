@@ -17,9 +17,9 @@
 		<form id="filters" action="/oeuvres" method="post">
 			<fieldset class="custom-fieldset">
 				<legend>
-					Filtres:
+					<p> Filtres: </p>
 				</legend>
-				Catégories :
+				<p> Catégories : </p>
 				{% for Category in Categories %}
 				<div class="myFilter">
 					<img src = "data:image/svg+xml;base64,{{ Category.Image}}"/>
@@ -30,7 +30,7 @@
 				</div>
 				{% endfor %}
 				<br>
-				Tags :
+				<p> Tags : </p>
 				{% for tag in Tags %}
 				<div class="myFilter">
 					<img src = "data:image/svg+xml;base64,{{ tag.Image}}" alt="Image"/>

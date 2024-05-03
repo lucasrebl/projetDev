@@ -9,6 +9,7 @@ let FollowersDiv = document.querySelector('.Myfollowers')
 let FollowingDiv = document.querySelector('.Myfollowing')
 let Selection = document.querySelector(".selection")
 let mUser = userInfo.querySelector('.modify');
+let mSub = userInfo.querySelector('.Sub');
 let toggleButton2 = userInfo.querySelector("#toggleButton");
 let picture = formUser.querySelector('#picture')
 let cancel = formUser.querySelector('.cancel')
@@ -28,6 +29,8 @@ let fav_TF = listeFDiv.querySelectorAll('.ftf')
 let my_TL = listeDiv.querySelectorAll('.mtl')
 let my_TF = listeDiv.querySelectorAll('.mtf')
 let pen = listeDiv.querySelectorAll('.pen')
+let FW1 = FollowersDiv.querySelectorAll('.abo')
+let FW2 = FollowingDiv.querySelectorAll('.abo')
 
 
 function refreshMessage() {
@@ -47,29 +50,85 @@ function modifName(element) {
 }
 
 function toogleLike(element) {
-    let id = element.getAttribute("num")
-    let type = element.querySelector('i').className
-    if (type == "fa-regular fa-heart") {
-        element.querySelector('i').className = "fa-solid fa-heart"
-    } else {
-        element.querySelector('i').className = "fa-regular fa-heart"
-    }
-    refreshMessage()
-    fetch(`/tlike?list=${id}`)
+    fetch(`/myUser`).then((res) => {
+        return res.json()
+    }).then((user) => {
+        if (user == "") {
+            alert("Connectez-vous pour utiliser cette fonctionnalité")
+        } else {
+            let id = element.getAttribute("num")
+            let type = element.querySelector('i').className
+            if (type == "fa-regular fa-heart") {
+                element.querySelector('i').className = "fa-solid fa-heart"
+            } else {
+                element.querySelector('i').className = "fa-regular fa-heart"
+            }
+            refreshMessage()
+            fetch(`/tlike?list=${id}`)
+        }
+    })
 }
 
 function toogleFav(element) {
-    let id = element.getAttribute("num")
-    let type = element.querySelector('i').className
-    if (type == "fa-regular fa-star") {
-        element.querySelector('i').className = "fa-solid fa-star"
-    } else {
-        element.querySelector('i').className = "fa-regular fa-star"
-    }
-    refreshMessage()
-    fetch(`/tfav?list=${id}`)
+    fetch(`/myUser`).then((res) => {
+        return res.json()
+    }).then((user) => {
+        if (user == "") {
+            alert("Connectez-vous pour utiliser cette fonctionnalité")
+        } else {
+            let id = element.getAttribute("num")
+            let type = element.querySelector('i').className
+            if (type == "fa-regular fa-star") {
+                element.querySelector('i').className = "fa-solid fa-star"
+            } else {
+                element.querySelector('i').className = "fa-regular fa-star"
+            }
+            refreshMessage()
+            fetch(`/tfav?list=${id}`)
+        }
+    })
 }
 
+function toogleSub(element) {
+    fetch(`/myUser`).then((res) => {
+        return res.json()
+    }).then((user) => {
+        if (user == "") {
+            alert("Connectez-vous pour utiliser cette fonctionnalité")
+        } else {
+            if (element.querySelector('t').textContent == "S'abonner") {
+                element.innerHTML = `<i class="fa-solid fa-heart"></i>
+                <t>Se désabonner</t>`
+            } else {
+                element.innerHTML = `<i class="fa-regular fa-heart"></i>
+                <t>S'abonner</t>`
+            }
+            let id = element.getAttribute("num")
+            fetch(`/TS?user=${user.ID}&sub=${id}`)
+        }
+    })
+}
+
+function toogleSub2(element) {
+    fetch(`/myUser`).then((res) => {
+        return res.json()
+    }).then((user) => {
+        if (user == "") {
+            alert("Connectez-vous pour utiliser cette fonctionnalité")
+        } else {
+            if (element.querySelector("button") != null) {
+                if (element.querySelector('button').textContent == "Suivre") {
+                    element.querySelector('button').textContent = "Ne Plus Suivre"
+                } else {
+                    element.querySelector('button').textContent = "Suivre"
+                }
+                let id = element.getAttribute("num")
+                fetch(`/TS?user=${user.ID}&sub=${id}`)
+                refreshMessage()
+            }
+        }
+    })
+}
 
 document.addEventListener("DOMContentLoaded", (event) => {
     listeDiv.style.display = "none"
@@ -105,7 +164,7 @@ toggleButton.addEventListener("click", function () {
         myForm.style.maxHeight = "0px"
     }
 });
-if (mUser != null) {
+if (mUser != null && toggleButton2 != null) {
     toggleButton2.addEventListener("click", function () {
         picture.click();
     });
@@ -233,6 +292,28 @@ if (pen != null) {
     pen.forEach(element => {
         element.addEventListener('click', function () {
             modifName(element)
+        })
+    })
+}
+
+if (mSub != null) {
+    mSub.addEventListener('click', function () {
+        toogleSub(mSub)
+    })
+}
+
+if (FW1 != null) {
+    FW1.forEach(element => {
+        element.addEventListener('click', function () {
+            toogleSub2(element)
+        })
+    })
+}
+
+if (FW2 != null) {
+    FW2.forEach(element => {
+        element.addEventListener('click', function () {
+            toogleSub2(element)
         })
     })
 }

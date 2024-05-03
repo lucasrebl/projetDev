@@ -25,12 +25,22 @@
 					<i class="fa-solid fa-pen"></i>
 					Modifier mes informations
 				</button>
+			{% else %}
+				<button class="Sub" num="{{ User1.ID }}" style="padding: 10px 15px;">
+					{% if linkP %}
+						<i class="fa-solid fa-heart"></i>
+						<t>Se désabonner</t>
+					{% else %}
+						<i class="fa-regular fa-heart"></i>
+						<t>S'abonner</t>
+					{% endif %}
+				</button>
 			{% endif %}
 			<br/>
 			<div class="subinfo">
 				<div class="abo">
 					<p for="subscribers">Abonnés</p>
-					<p id="subscribers">0</p>
+					<p id="subscribers">{{ FW1|length }}</p>
 				</div>
 				<div class="abo">
 					<p for="solunaslist">Listes</p>
@@ -38,7 +48,7 @@
 				</div>
 				<div class="abo">
 					<p for="following">Abonnements</p>
-					<p id="following">0</p>
+					<p id="following">{{ FW2|length }}</p>
 				</div>
 			</div>
 		</div>
@@ -216,12 +226,18 @@
 			<p>Mes Abonnés</p>
 		</div>
 		<div class="Followers">
-			{% for abo in followers %}
-			<img src=""></img>
-			<p>Nom</p>
-			{% if User1.ID == IDuser %}
-				<button>Suivre</button>
+			{% for abo in FW1 %}
+			<div class="abo" num="{{ abo.UserID }}">
+			<img src="data:image/png;base64,{{ abo.SubcriberPicture }}"></img>
+			<a href="/displayProfil?id={{ abo.UserID }}"><p>{{ abo.SubcriberName }}</p></a>
+			{% if abo.UserID != IDuser %}
+				{% if abo.isLink %}
+					<button>Ne Plus Suivre</button>
+				{% else %}
+					<button>Suivre</button>
+				{% endif %}
 			{% endif %}
+			</div>
 			{% endfor %}
 		</div>
 	</div>
@@ -230,12 +246,18 @@
 			<p>Mes Abonnements</p>
 		</div>
 		<div class="Following">
-			{% for abo in followers %}
-				<img src=""></img>
-				<p>Nom</p>
-				{% if User1.ID == IDuser %}
-					<button>Ne Plus Suivre</button>
+			{% for abo in FW2 %}
+				<div class="abo" num="{{ abo.SubcriberID }}">
+				<img src="data:image/png;base64,{{ abo.UserPicture }}"></img>
+				<a href="/displayProfil?id={{ abo.SubcriberID }}"><p>{{ abo.UserName }}</p></a>
+				{% if abo.SubcriberID != IDuser %}
+					{% if abo.isLink %}
+						<button>Ne Plus Suivre</button>
+					{% else %}
+						<button>Suivre</button>
+					{% endif %}
 				{% endif %}
+				</div>
 			{% endfor %}
 		</div>
 	</div>

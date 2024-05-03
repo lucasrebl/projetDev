@@ -99,6 +99,10 @@ form {
     cursor: pointer;
 }
 
+.containall p:hover {
+    transform: scale(1.15);
+}
+
 .symbole p {
     margin-right: 10px;
     font-family: "FontAwesome";
@@ -288,6 +292,56 @@ body.night .Mylist {
     /* Allow .Mylist to fill remaining space */
 }
 
+.Myfollowing {
+    flex-direction: column;
+}
+
+.Myfollowers {
+    flex-direction: column;
+}
+
+.Following {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /* Crée des colonnes automatiquement avec une largeur minimale de 200px */
+    gap: 10px;
+    /* Espacement entre les éléments */
+    align-items: center;
+}
+
+.Followers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /* Crée des colonnes automatiquement avec une largeur minimale de 200px */
+    gap: 10px;
+    /* Espacement entre les éléments */
+    align-items: center;
+}
+
+.Following .abo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 160px;
+}
+
+.Following a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.Followers .abo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 160px;
+}
+
+.Followers a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .List_Favorites li {
     display: flex;
     flex-direction: column;
@@ -314,5 +368,21 @@ body.night .MyLike {
 }
 
 body.night .MyFavorites {
+    color: white;
+}
+
+.Following img {
+    max-width: 70%;
+}
+
+.Followers img {
+    max-width: 70%;
+}
+
+body.night .Myfollowing {
+    color: white;
+}
+
+body.night a {
     color: white;
 }
