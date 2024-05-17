@@ -14,7 +14,7 @@ $createTable = ("CREATE TABLE IF NOT EXISTS
     `isAdmin` tinyint(1) DEFAULT '0',
     PRIMARY KEY (`idUser`),
     CONSTRAINT unique_key UNIQUE (`username`, `email`)
-) ENGINE = InnoDB AUTO_INCREMENT = 14 DEFAULT CHARSET = latin1");
+) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1");
 $dsn->exec($createTable);
 
 $createTable = ("CREATE TABLE IF NOT EXISTS
@@ -25,7 +25,7 @@ $createTable = ("CREATE TABLE IF NOT EXISTS
     PRIMARY KEY (`id`),
     CONSTRAINT fk_idUser FOREIGN KEY (`idUser`) REFERENCES user(`idUser`),
     CONSTRAINT fk_idSubscriber FOREIGN KEY (`idSubscriber`) REFERENCES user(`idUser`)
-) ENGINE = InnoDB AUTO_INCREMENT = 14 DEFAULT CHARSET = latin1");
+) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1");
 $dsn->exec($createTable);
 
 
@@ -36,7 +36,7 @@ $createTable = ("CREATE TABLE IF NOT EXISTS
     `idUser` int(11) DEFAULT NULL,
     PRIMARY key (`idList`),
     CONSTRAINT fk_idUser_in_list FOREIGN KEY (`idUser`) REFERENCES user(`idUser`)
-) ENGINE = InnoDB AUTO_INCREMENT = 14 DEFAULT CHARSET = latin1");
+) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1");
 $dsn->exec($createTable);
 
 $createTable = ("CREATE TABLE IF NOT EXISTS
@@ -47,7 +47,7 @@ $createTable = ("CREATE TABLE IF NOT EXISTS
     PRIMARY key (`id`),
     CONSTRAINT fk_idUser_in_like FOREIGN KEY (`idUser`) REFERENCES user(`idUser`),
     CONSTRAINT fk_idList_in_like FOREIGN KEY (`idList`) REFERENCES list(`idList`)
-) ENGINE = InnoDB AUTO_INCREMENT = 14 DEFAULT CHARSET = latin1");
+) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1");
 $dsn->exec($createTable);
 
 $createTable = ("CREATE TABLE IF NOT EXISTS
@@ -58,7 +58,7 @@ $createTable = ("CREATE TABLE IF NOT EXISTS
     PRIMARY key (`id`),
     CONSTRAINT fk_idUser_in_favorites FOREIGN KEY (`idUser`) REFERENCES user(`idUser`),
     CONSTRAINT fk_idList_in_favorites FOREIGN KEY (`idList`) REFERENCES list(`idList`)
-) ENGINE = InnoDB AUTO_INCREMENT = 14 DEFAULT CHARSET = latin1");
+) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1");
 $dsn->exec($createTable);
 
 $createTable = ("CREATE TABLE IF NOT EXISTS
@@ -73,7 +73,7 @@ $createTable = ("CREATE TABLE IF NOT EXISTS
     `numberOfTome` int(11) DEFAULT NULL,
     PRIMARY key (`idWorks`),
     CONSTRAINT unique_nameWorks UNIQUE (`nameWorks`)
-) ENGINE = InnoDB AUTO_INCREMENT = 14 DEFAULT CHARSET = latin1");
+) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1");
 $dsn->exec($createTable);
 
 $createTable = ("CREATE TABLE IF NOT EXISTS
@@ -84,7 +84,7 @@ $createTable = ("CREATE TABLE IF NOT EXISTS
     PRIMARY key (`id`),
     CONSTRAINT fk_idWorks_in_listWorks FOREIGN KEY (`idWorks`) REFERENCES works(`idWorks`),
     CONSTRAINT fk_idList_in_listWorks FOREIGN KEY (`idList`) REFERENCES list(`idList`)
-) ENGINE = InnoDB AUTO_INCREMENT = 14 DEFAULT CHARSET = latin1");
+) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1");
 $dsn->exec($createTable);
 
 $createTable = ("CREATE TABLE IF NOT EXISTS
@@ -94,7 +94,7 @@ $createTable = ("CREATE TABLE IF NOT EXISTS
     `pictures` LONGBLOB DEFAULT NULL,
     PRIMARY key (`idTag`),
     CONSTRAINT unique_nameTag UNIQUE (`nameTag`)
-) ENGINE = InnoDB AUTO_INCREMENT = 14 DEFAULT CHARSET = latin1");
+) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1");
 $dsn->exec($createTable);
 
 $createTable = ("CREATE TABLE IF NOT EXISTS
@@ -104,7 +104,7 @@ $createTable = ("CREATE TABLE IF NOT EXISTS
     `pictures` LONGBLOB DEFAULT NULL,
     PRIMARY key (`idCategory`),
     CONSTRAINT unique_nameCategory UNIQUE (`nameCategory`)
-) ENGINE = InnoDB AUTO_INCREMENT = 14 DEFAULT CHARSET = latin1");
+) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1");
 $dsn->exec($createTable);
 
 $createTable = ("CREATE TABLE IF NOT EXISTS
@@ -115,7 +115,7 @@ $createTable = ("CREATE TABLE IF NOT EXISTS
     PRIMARY key (`id`),
     CONSTRAINT fk_idWorks_in_worksTag FOREIGN KEY (`idWorks`) REFERENCES works(`idWorks`),
     CONSTRAINT fk_idTag_in_worksTag FOREIGN KEY (`idTag`) REFERENCES tag(`idTag`)
-) ENGINE = InnoDB AUTO_INCREMENT = 14 DEFAULT CHARSET = latin1");
+) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1");
 $dsn->exec($createTable);
 
 $createTable = ("CREATE TABLE IF NOT EXISTS
@@ -126,5 +126,17 @@ $createTable = ("CREATE TABLE IF NOT EXISTS
     PRIMARY key (`id`),
     CONSTRAINT fk_idWorks_in_worksCategory FOREIGN KEY (`idWorks`) REFERENCES works(`idWorks`),
     CONSTRAINT fk_idTag_in_worksCategory FOREIGN KEY (`idCategory`) REFERENCES Category(`idCategory`)
-) ENGINE = InnoDB AUTO_INCREMENT = 14 DEFAULT CHARSET = latin1");
+) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1");
+$dsn->exec($createTable);
+
+$createTable = ("CREATE TABLE IF NOT EXISTS
+`Comments` (
+    `idComments` int(11) NOT NULL AUTO_INCREMENT,
+    `idWorks` int(11) DEFAULT NULL,
+    `idUser` int(11) DEFAULT NULL,
+    `comment` TEXT DEFAULT NULL,
+    PRIMARY key (`idComments`),
+    CONSTRAINT fk_idWorks_in_comment FOREIGN KEY (`idWorks`) REFERENCES works(`idWorks`),
+    CONSTRAINT fk_idUser_in_comment FOREIGN KEY (`idUser`) REFERENCES user(`idUser`)
+) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = latin1");
 $dsn->exec($createTable);

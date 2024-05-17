@@ -59,6 +59,39 @@
 			{% endfor %}
 		{% endif %}
 	</div>
+	<div class="comment-form">
+        <h2>Ajouter un Commentaire</h2>
+        {% if User %}
+        <form action="/resume?id={{ Work.ID }}" method="post">
+            <input type="hidden" name="idUser" value="{{ User.id }}">
+            <input type="hidden" name="idWork" value="{{ Work.ID }}">
+            <div class="form-group">
+                {# <label for="comment">Commentaire :</label> #}
+                <textarea id="comment" name="comment" required></textarea>
+            </div>
+            <button type="submit">Ajouter Commentaire</button>
+        </form>
+        {% else %}
+        <p>Vous devez être connecté pour ajouter un commentaire.</p>
+        {% endif %}
+    </div>
+	<div class="comments">
+		<h2>Commentaires</h2>
+		{% if Message %}
+			<div class="alert">{{ Message }}</div>
+		{% endif %}
+		{% if Comments|length > 0 %}
+			{% for comment in Comments %}
+				<div class="comment">
+					<p><strong>{{ comment.username }}</strong> :</p>
+					<p>{{ comment.content }}</p> <!-- Utilisation de 'content' au lieu de 'comment' -->
+				</div>
+			{% endfor %}
+		{% else %}
+			<p>Aucun commentaire pour le moment.</p>
+		{% endif %}
+	</div>
+	
 	<div class="form" style="display: none;">
 		<form enctype="multipart/form-data" action="/getImage?id={{ Work.ID }}" method="post">
 			<p for="picture">Image : </p>
