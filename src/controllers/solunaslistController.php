@@ -96,6 +96,23 @@ class solunaslistController
         }
         echo $result;
     }
+    public function getByNameJson2()
+    {
+        $LS = [];
+        $name = $_GET["listname"] ?? "";
+        $bar = $_GET["bar"] ?? "";
+        $SM2 = new subcriberManager();
+        $following = $SM2->SelectAllbyUser($_SESSION["idUser"]);
+        $SM = new solunaslistManager();
+        foreach ($following as $follow) {
+            if ($name != "") {
+                $LS[] = $SM->selectAllByIdUserName($follow->SubcriberID, $name, $bar);
+            } else {
+                $LS[] = $SM->selectAllByIdUser($follow->SubcriberID);
+            }
+        }
+        echo json_encode($LS);
+    }
 
     public function toogleLike()
     {

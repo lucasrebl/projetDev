@@ -28,6 +28,7 @@ class router
         'tfav' => ['controller' => 'solunaslistController', 'method' => 'toogleFav'],
         'newlistname' => ['controller' => 'solunaslistController', 'method' => 'modifName'],
         'getJSOName' => ['controller' => 'solunaslistController', 'method' => 'getByNameJson'],
+        'getJSOName2' => ['controller' => 'solunaslistController', 'method' => 'getByNameJson2'],
         'getJSONwork' => ['controller' => 'worksController', 'method' => 'getByNameJson'],
         'displayProfil' => ['controller' => 'profilController', 'method' => 'showProfil'],
         'TS' => ['controller' => 'profilController', 'method' => 'toogleSub'],

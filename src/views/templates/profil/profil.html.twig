@@ -190,6 +190,7 @@
 		{% else %}
 			{% for SL in SLf %}
 				<ul>
+					{# {{ dump(SL) }} #}
 						<li id="pic"><img src="data:image/png;base64,{{ SL.userpicture }}"/></li>
 						<li><a href="/displayProfil?id={{ SL.userID }}">{{ SL.username }}</a></li>
 						<li><a href="/viewList?list={{ SL.ID }}">{{ SL.Name }}</a></li>

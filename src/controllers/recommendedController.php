@@ -18,6 +18,23 @@ class recommendedController
 
     public function recommended()
     {
-        echo $this->twig->render('recommended/recommended.html.twig');
+        $UM = new userManager();
+        if (empty($_SESSION['idUser'])) {
+            $user = "";
+        } else {
+            $user = $UM->SelectOnebyID(($_SESSION['idUser']));
+        }
+        $SM2 = new subcriberManager();
+        $following = $SM2->SelectAllbyUser($_SESSION["idUser"]);
+        $SM = new solunaslistManager();
+        if ($following != null) {
+            foreach ($following as $follow) {
+                $LS[] = $SM->selectAllByIdUser($follow->SubcriberID);
+            }
+        } else {
+            $LS[] = null;
+        }
+        // print_r($LS);
+        echo $this->twig->render('recommended/recommended.html.twig', ["User" => $user, "solunas" => $LS]);
     }
 }

@@ -21,7 +21,7 @@
 					</li>
 				</a>
 			</div>
-			<div class="recommand" title="Page de Recommandation de listes" hidden>
+			<div class="recommand" title="Page de Recommandation de listes" {% if not User %} hidden{% endif %}>
 				<a href="/recommande">
 					<li>
 						<i class="fa-solid fa-book-journal-whills"></i>

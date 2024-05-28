@@ -13,7 +13,11 @@ class profilController
     public function __construct()
     {
         $this->loader = new FilesystemLoader(__DIR__ . '/../views/templates');
-        $this->twig = new Environment($this->loader);
+        $this->twig = $twig = new \Twig\Environment($this->loader, [
+            'debug' => true,
+            // ...✅❌
+        ]);
+        $twig->addExtension(new \Twig\Extension\DebugExtension());;
     }
 
     public function profil()
