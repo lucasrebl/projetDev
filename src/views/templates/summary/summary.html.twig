@@ -12,144 +12,147 @@
 {% block body %}
 {% include "header.html.twig" %}
 <div class="container">
-	<div class="work">
-		<b class="modify">{% if User %}<i class="fa-solid fa-gear"></i>{% endif %}</b>
-		{% if work.isNsfw == 1 %}
-		<img src="data:image/png;base64,{{ Work.Image }}" class="blurred"/>
-		{% else %}
-		<img src="data:image/png;base64,{{ Work.Image }}"/>
-		{% endif %}
-		<p id="name">{{ Work.Name }}</p>
-		<p id="summary">Résumé :</p>
-		<p id="summary2">{{ Work.Summary }}</p>
-		<p id="status"><u> Status </u> : {{ Work.Status }}</p>
-		{% if Work.Category == "Series" %}
-		<p id="episodes"><u> Nombre d'épisodes </u> : {{ Work.NbEpisodes }}</p>
-		<p id="season"><u> Nombre de Saisons </u> : {{ Work.NbSeason }}</p>
-		{% endif %}
-		{% if Work.Category == "Livres" %}
-		<p id="tome"><u> Nombre de Tomes </u> : {{ Work.NbTome }}</p>
-		{% endif %}
-		<p id="category"><u> Catégorie </u> : {{ Work.Category }}</p>
-		<div class="tags">
-			<p style="font-weight: bold; text-decoration: underline">Tags : </p>
-			{% for tag in Work.Tags %}
-			<p class="tag">{{ tag.name }}</p>
-			{% endfor %}
-		</div>	
-	</div>
-	<div class="listss">
-		<h2>Ajouter à Mes Listes</h2>
-		{% if SLs|length < 1 %} <p>Aucunes Listes</p>
-		{% else %}
-			{% for SL in SLs %}
-			<ul>
-				{% if SL.isAdded %}
-					<li class="list" id="check" num="{{ SL.ID }}">
-						<x>{{ SL.Name }}</x>
-						<i class="fa-solid fa-check" title="Enlever de la liste ?"></i>
-					</li>
-				{% else %}
-					<li class="list" id="no_check" num="{{ SL.ID }}">
-						<x>{{ SL.Name }}</x>
-						<i class="fa-solid fa-xmark" title="Ajouter à la liste ?"></i>
-					</li>
-				{% endif %}
-			</ul>
-			{% endfor %}
-		{% endif %}
-	</div>
-	<div class="comment-form">
-        <h2>Ajouter un Commentaire</h2>
-        {% if User %}
-        <form action="/resume?id={{ Work.ID }}" method="post">
-            <input type="hidden" name="idUser" value="{{ User.id }}">
-            <input type="hidden" name="idWork" value="{{ Work.ID }}">
-            <div class="form-group">
-                {# <label for="comment">Commentaire :</label> #}
-                <textarea id="comment" name="comment" required></textarea>
-            </div>
-            <button type="submit">Ajouter Commentaire</button>
-        </form>
-        {% else %}
-        <p>Vous devez être connecté pour ajouter un commentaire.</p>
-        {% endif %}
-    </div>
-	<div class="comments">
-		<h2>Commentaires</h2>
-		{% if Message %}
-			<div class="alert">{{ Message }}</div>
-		{% endif %}
-		{% if Comments|length > 0 %}
-			{% for comment in Comments %}
-				<div class="comment">
-					<p><strong>{{ comment.username }}</strong> :</p>
-					<p>{{ comment.content }}</p> <!-- Utilisation de 'content' au lieu de 'comment' -->
-				</div>
-			{% endfor %}
-		{% else %}
-			<p>Aucun commentaire pour le moment.</p>
-		{% endif %}
-	</div>
-	
-	<div class="form" style="display: none;">
-		<form enctype="multipart/form-data" action="/getImage?id={{ Work.ID }}" method="post">
-			<p for="picture">Image : </p>
-			<input type="file" id="picture" name="picture" accept="image/*"><i class="fa-solid fa-plus"></i></input>
-			<input type="submit" value="get" hidden />
-		</form>
-		<form action="/mWork" method="post">
-			<input type="text" id="id" name="id" value="{{ Work.ID }}" hidden></input>
-			<p for="name">Titre : </p>
-			<input type="text" id="name" name="name" value="{{ Work.Name }}"></input>
-			<p for="summary">Résumé : </p>
-			<textarea type="text" id="summary" name="summary">{{ Work.Summary }}</textarea>
-			<p for="status">Status : </p>
-			<input type="text" id="status" name="status" value="{{ Work.Status }}"></input>
-			<p for="isnfsw">Contenu Mature?</p>
-			<select type="isnsfw" id="isnsfw" name="isnsfw">
-				<option value="0">Non</option>
-				<option value="1">Oui</option>
-			</select>
-			<p for="category">Category : </p>
-			<select list="category" id="category" name="category" required>
-				<option value="">Ajouter une Catégorie</option>
-				{% for Category in Categories %}
-				<option value="{{ Category.ID }}">{{ Category.Name }}</option>
-				{% endfor %}
-			</select>
-			<div class="part2" style="display: none;">
-				<p for="episodes">Nombre d'épisodes : </p>
-				<input type="text" id="episodes" name="episodes" value="{{ Work.NbEpisodes }}"></input>
-				<p for="season">Nombre de Saisons : </p>
-				<input type="text" id="season" name="season" value="{{ Work.NbSeason }}"></input>
-			</div>
-			<div class="part3" style="display: none;">
-				<p for="tome">Nombre de Tomes : </p>
-				<input type="text" id="tome" name="tome" value="{{ Work.NbTome }}"></input>
-			</div>
-			<div class="tagsM">
+	<div class="WL">
+		<div class="work">
+			<b class="modify">{% if User %}<i class="fa-solid fa-gear"></i>{% endif %}</b>
+			{% if work.isNsfw == 1 %}
+			<img src="data:image/png;base64,{{ Work.Image }}" class="blurred"/>
+			{% else %}
+			<img src="data:image/png;base64,{{ Work.Image }}"/>
+			{% endif %}
+			<p id="name">{{ Work.Name }}</p>
+			<p id="summary">Résumé :</p>
+			<p id="summary2">{{ Work.Summary }}</p>
+			<p id="status"><u> Status </u> : {{ Work.Status }}</p>
+			{% if Work.Category == "Series" %}
+			<p id="episodes"><u> Nombre d'épisodes </u> : {{ Work.NbEpisodes }}</p>
+			<p id="season"><u> Nombre de Saisons </u> : {{ Work.NbSeason }}</p>
+			{% endif %}
+			{% if Work.Category == "Livres" %}
+			<p id="tome"><u> Nombre de Tomes </u> : {{ Work.NbTome }}</p>
+			{% endif %}
+			<p id="category"><u> Catégorie </u> : {{ Work.Category }}</p>
+			<div class="tags">
+				<p style="font-weight: bold; text-decoration: underline">Tags : </p>
 				{% for tag in Work.Tags %}
-				<div class="tag">
-					<select name="tag">
-						<option value="{{ tag.id }}">{{ tag.name }}</option>
-					</select>
-					<p class="delete">supprimer</p>
+				<p class="tag">{{ tag.name }}</p>
+				{% endfor %}
+			</div>	
+		</div>
+		<div class="listss">
+			<h2>Ajouter à Mes Listes</h2>
+			{% if SLs|length < 1 %} <p>Aucunes Listes</p>
+			{% else %}
+				{% for SL in SLs %}
+				<ul>
+					{% if SL.isAdded %}
+						<li class="list" id="check" num="{{ SL.ID }}">
+							<p>{{ SL.Name }}</p>
+							<i class="fa-solid fa-check" title="Enlever de la liste ?"></i>
+						</li>
+					{% else %}
+						<li class="list" id="no_check" num="{{ SL.ID }}">
+							<p>{{ SL.Name }}</p>
+							<i class="fa-solid fa-xmark" title="Ajouter à la liste ?"></i>
+						</li>
+					{% endif %}
+				</ul>
+				{% endfor %}
+			{% endif %}
+		</div>
+		<div class="form" style="display: none;">
+			<form enctype="multipart/form-data" action="/getImage?id={{ Work.ID }}" method="post">
+				<p for="picture">Image : </p>
+				<input type="file" id="picture" name="picture" accept="image/*"><i class="fa-solid fa-plus"></i></input>
+				<input type="submit" value="get" hidden />
+			</form>
+			<form action="/mWork" method="post">
+				<input type="text" id="id" name="id" value="{{ Work.ID }}" hidden></input>
+				<p for="name">Titre : </p>
+				<input type="text" id="name" name="name" value="{{ Work.Name }}"></input>
+				<p for="summary">Résumé : </p>
+				<textarea type="text" id="summary" name="summary">{{ Work.Summary }}</textarea>
+				<p for="status">Status : </p>
+				<input type="text" id="status" name="status" value="{{ Work.Status }}"></input>
+				<p for="isnfsw">Contenu Mature?</p>
+				<select type="isnsfw" id="isnsfw" name="isnsfw">
+					<option value="0">Non</option>
+					<option value="1">Oui</option>
+				</select>
+				<p for="category">Category : </p>
+				<select list="category" id="category" name="category" required>
+					<option value="">Ajouter une Catégorie</option>
+					{% for Category in Categories %}
+					<option value="{{ Category.ID }}">{{ Category.Name }}</option>
+					{% endfor %}
+				</select>
+				<div class="part2" style="display: none;">
+					<p for="episodes">Nombre d'épisodes : </p>
+					<input type="text" id="episodes" name="episodes" value="{{ Work.NbEpisodes }}"></input>
+					<p for="season">Nombre de Saisons : </p>
+					<input type="text" id="season" name="season" value="{{ Work.NbSeason }}"></input>
 				</div>
-				{% endfor %}
-			</div>
-			<select class="NewTag">
-				<option value="0">Ajouter un tag</option>
-				{% for tag in Tags %}
-				<option value="{{ tag.ID }}">{{ tag.Name }}</option>
-				{% endfor %}
-			</select>
+				<div class="part3" style="display: none;">
+					<p for="tome">Nombre de Tomes : </p>
+					<input type="text" id="tome" name="tome" value="{{ Work.NbTome }}"></input>
+				</div>
+				<div class="tagsM">
+					{% for tag in Work.Tags %}
+					<div class="tag">
+						<select name="tag">
+							<option value="{{ tag.id }}">{{ tag.name }}</option>
+						</select>
+						<p class="delete">supprimer</p>
+					</div>
+					{% endfor %}
+				</div>
+				<select class="NewTag">
+					<option value="0">Ajouter un tag</option>
+					{% for tag in Tags %}
+					<option value="{{ tag.ID }}">{{ tag.Name }}</option>
+					{% endfor %}
+				</select>
+				<div class="myBtn">
+					<button type="submit">Valider</button>
+				</div>
+			</form>
 			<div class="myBtn">
-				<button type="submit">Valider</button>
+				<button class="cancel" style="visibility: hidden;">Annuler</button>
 			</div>
-		</form>
-		<div class="myBtn">
-			<button class="cancel" style="visibility: hidden;">Annuler</button>
+		</div>
+	</div>
+	<div class="CM">
+		<div class="comment-form">
+			<h2>Ajouter un Commentaire</h2>
+			{% if User %}
+			<form action="/resume?id={{ Work.ID }}" method="post">
+				<input type="hidden" name="idUser" value="{{ User.id }}">
+				<input type="hidden" name="idWork" value="{{ Work.ID }}">
+				<div class="form-group">
+					{# <label for="comment">Commentaire :</label> #}
+					<textarea id="comment" name="comment" required></textarea>
+				</div>
+				<button type="submit">Ajouter Commentaire</button>
+			</form>
+			{% else %}
+			<p>Vous devez être connecté pour ajouter un commentaire.</p>
+			{% endif %}
+		</div>
+		<div class="comments">
+			<h2>Commentaires</h2>
+			{% if Message %}
+				<div class="alert">{{ Message }}</div>
+			{% endif %}
+			{% if Comments|length > 0 %}
+				{% for comment in Comments %}
+					<div class="comment">
+						<p><strong>{{ comment.username }}</strong> :</p>
+						<p>{{ comment.content }}</p> <!-- Utilisation de 'content' au lieu de 'comment' -->
+					</div>
+				{% endfor %}
+			{% else %}
+				<p>Aucun commentaire pour le moment.</p>
+			{% endif %}
 		</div>
 	</div>
 </div>
