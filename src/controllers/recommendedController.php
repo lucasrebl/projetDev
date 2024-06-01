@@ -34,7 +34,6 @@ class recommendedController
         } else {
             $LS[] = null;
         }
-        // print_r($LS);
         echo $this->twig->render('recommended/recommended.html.twig', ["User" => $user, "solunas" => $LS]);
     }
 }
