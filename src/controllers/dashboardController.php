@@ -170,7 +170,7 @@ class dashboardController
         $result2 = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result2 as &$user) {
             if ($user['image'] !== null) {
-                $user['image'] = base64_encode($user['image']);
+                $user['image'] = $user['image'];
             } else {
                 $user['image'] = '';
             }
