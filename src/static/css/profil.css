@@ -386,3 +386,14 @@ body.night .Myfollowing {
 body.night a {
     color: white;
 }
+
+.fa-eye,
+.fa-eye-slash,
+.fa-pen {
+    cursor: pointer;
+}
+
+.List a {
+    display: flex;
+    align-items: center;
+}
