@@ -28,7 +28,7 @@ presentation du projet
         - docker-compose.yaml
         - .htaccess
     
-      https://github.com/lucasrebl/template-Login_Register_Header/releases
+      https://github.com/lucasrebl/solunaComic/releases
 
       Attention le fichier .htaccess est nommé 'default.htaccess',
       une fois télécharger renommé le juste '.htaccess' sinon cela ne fonctionnera pas.
