@@ -6,6 +6,7 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+    flex-direction: column;
 }
 
 .work,
@@ -21,6 +22,18 @@
     width: 40%;
     padding: 1rem;
     border: rgb(255 255 255 / 25%) 1px solid
+}
+
+.WL {
+    display: flex;
+    align-items: center;
+    width: 90%;
+    gap: 10%;
+}
+
+.CM {
+    display: flex;
+    flex-direction: column;
 }
 
 p,
@@ -122,4 +135,10 @@ body.night x {
 
 .work #summary {
     font-size: 30px;
+}
+
+.listss .list {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
 }

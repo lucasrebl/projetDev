@@ -5,6 +5,8 @@ require 'vendor/autoload.php';
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
+require_once __DIR__ . '/../models/commentManager.php';
+
 class summaryController
 {
     protected $twig;
@@ -22,7 +24,7 @@ class summaryController
 
     public function summary()
     {
-
+        $this->addComment();
         $idUser = $_SESSION["idUser"] ?? 0;
         $Workid = $_GET['id'];
         $WM = new worksManager;
@@ -38,7 +40,20 @@ class summaryController
         } else {
             $user = $UM->SelectOnebyID(($_SESSION['idUser']));
         }
-        echo $this->twig->render('summary/summary.html.twig', ['Work' => $work, "Categories" => $categories, "Tags" => $tags, "SLs" => $list, "User" => $user]);
+        $CM = new commentsManager();
+        $comments = $CM->getCommentsByWorkId($Workid);
+
+        echo $this->twig->render('summary/summary.html.twig', [
+            'Work' => $work,
+            "Categories" => $categories,
+            "Tags" => $tags,
+            "SLs" => $list,
+            "User" => $user,
+            "Comments" => $comments,
+            "Message" => $_SESSION['message'] ?? null
+        ]);
+
+        unset($_SESSION['message']);
     }
 
     public function modify()
@@ -90,5 +105,21 @@ class summaryController
         $WM = new worksManager;
         $WM->UpdateImageById($id, base64_encode($img_blob));
         header("location: /resume?id=$id");
+    }
+
+    public function addComment()
+    {
+        $idUser = $_POST['idUser'] ?? "";
+        $idWork = $_POST['idWork'] ?? "";
+        $comment = $_POST['comment'] ?? "";
+
+        if (!empty($idUser) && !empty($idWork) && !empty($comment)) {
+            $CM = new commentsManager();
+            if (!$CM->isCommentExists($idUser, $idWork, $comment)) {
+                $CM->insertComment($idUser, $idWork, $comment);
+            } else {
+                $_SESSION['message'] = 'vous ne pouvez pas ajouter 2 fois le même commentaires';
+            }
+        }
     }
 }
