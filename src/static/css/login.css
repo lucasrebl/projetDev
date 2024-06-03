@@ -82,7 +82,7 @@ h3 {
   width: inherit;
 }
 
-span {
+.champ span {
   position: absolute;
   left: 15%;
   top: 37%;

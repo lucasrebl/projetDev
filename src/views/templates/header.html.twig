@@ -45,17 +45,18 @@
 					</li>
 				</a>
 			</div>
+
 			{% if User.isAdmin %}
-			<div class="admin"  title="Page Admin">
+			<div class="admin" title="Page Admin">
 				<a href="/panelAdmin">
 					<li>
 						<i class="fa-solid fa-key"></i>
 						<span data-text="CheatMode"></span>
 					</li>
 				</a>
-				</div>
+			</div>
 			{% endif %}
-			<div class="logout"  title="Se déconnecter" {% if not User %} hidden{% endif %}>
+			<div class="logout" title="Se déconnecter" {% if not User %} hidden{% endif %}>
 				<a href="/deconnexion">
 					<li>
 						<i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -66,6 +67,14 @@
 		</ul>
 		<label id="dark-change" title="Changer de Thème"></label>
 	</div>
+	<div id="google_translate_element" aria-label="Sélectionner la langue"></div>
+	<script type="text/javascript">
+		function googleTranslateElementInit() {
+			new google.translate.TranslateElement({ pageLanguage: 'fr', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
+		}
+	</script>
+	<script type="text/javascript"
+		src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 	<div class="logo" href="/">
 		<a href="/">
 			<li class="soluna-logo"></li>
@@ -108,7 +117,7 @@
 				</li>
 			</a>
 		</div>
-	{% endif %}
+		{% endif %}
 		<div class="logout" {% if not User %} hidden{% endif %}>
 			<a href="/deconnexion">
 				<li>
