@@ -95,7 +95,7 @@ form {
 
 .containall p {
     font-size: 20px;
-    font-family: "Hey Comic";
+    font-family: "Montserrat";
     cursor: pointer;
 }
 
@@ -211,7 +211,7 @@ body.night .custom-fieldset {
 }
 
 .userinfo p {
-    font-family: "Komigo";
+    font-family: "Montserrat";
     font-size: 1.7rem;
 }
 
@@ -262,7 +262,7 @@ body.night .Mylist {
 
 .LKT {
     font-size: 30px;
-    font-family: "Hey Comic";
+    font-family: "Montserrat";
 }
 
 .MyLike img {
@@ -354,7 +354,7 @@ body.night .Mylist {
 
 .LFT {
     font-size: 30px;
-    font-family: "Hey Comic";
+    font-family: "Montserrat";
 }
 
 .MyFavorites img {

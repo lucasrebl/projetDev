@@ -13,33 +13,8 @@ body {
 }
 
 @font-face {
-  font-family: "Hey Comic";
-  src: url(../font/Hey\ Comic.ttf);
-}
-
-@font-face {
-  font-family: "Anime Ace Regular";
-  src: url(../font/animeace/animeace2_reg.ttf);
-}
-
-@font-face {
-  font-family: "Anime Ace Bold";
-  src: url(../font/animeace/animeace2_bld.ttf);
-}
-
-@font-face {
-  font-family: "FF";
-  src: url(../font/finalf.ttf);
-}
-
-@font-face {
-  font-family: "Anime Ace Italic";
-  src: url(../font/animeace/animeace2_ital.ttf);
-}
-
-@font-face {
-  font-family: "Komigo";
-  src: url(../font/Moonstar.ttf);
+  font-family: "Montserrat";
+  src: url(../font/Montserrat/Montserrat-VariableFont_wght.ttf);
 }
 
 /* BOUTON LIGHT/DARK MODE */
