@@ -397,3 +397,19 @@ body.night a {
     display: flex;
     align-items: center;
 }
+
+.Myfollowing p,
+.Myfollowers p,
+.addList,
+.List_like p,
+.List_Favorites p {
+    font-family: "Montserrat";
+    font-size: 1.3rem;
+}
+
+.FollowersT,
+.FollowingT,
+.LFT,
+.LKT {
+    font-weight: bold;
+}

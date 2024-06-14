@@ -79,6 +79,9 @@ class profilController
             $sus = $user1->ID;
         }
         $id = $_GET['id'] ?? 0;
+        if ($id == $_SESSION['idUser']) {
+            header("location: /profil");
+        }
         $SM = new solunaslistManager();
         $SM2 = new subcriberManager();
         $user = $UM->SelectOnebyID($id);

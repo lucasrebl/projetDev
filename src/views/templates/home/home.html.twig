@@ -22,6 +22,7 @@
 					Participez en rajoutant vos oeuvres préférées!</p>
 				</div>
 				<div class="button">
+				{% if not User %}
 					<a href="/inscription">
 						<button>Débutez</button>
 					</a>
@@ -31,6 +32,17 @@
 					<a href="/oeuvres">
 						<button>Découvrir Soluna</button>
 					</a>
+				{% else %}
+					<a href="/solunasList">
+						<button>WatchLists</button>
+					</a>
+					<a href="/oeuvres">
+						<button>Oeuvres</button>
+					</a>
+					<a href="/deconnexion">
+						<button>Déconnexion</button>
+					</a>
+				{% endif %}
 				</div>
 			</div>
 
