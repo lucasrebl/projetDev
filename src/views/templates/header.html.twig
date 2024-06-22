@@ -1,5 +1,5 @@
 <header>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<div class="navbar">
 		<div class="action-btn">
 			<i class="fa-solid fa-bars"></i>
@@ -31,7 +31,7 @@
 				</a>
 			</div>
 			<div class="lists">
-				<a href="/solunasList" title="Page des lists">
+				<a href="/solunasList" title="Solulists">
 					<li>
 						<i class="fa-solid fa-book-open-reader"></i>
 						<span data-text="SoluListes"></span>
@@ -48,14 +48,14 @@
 			</div>
 
 			{% if User.isAdmin %}
-				<div class="admin" title="Page Admin">
-					<a href="/panelAdmin">
-						<li>
-							<i class="fa-solid fa-key"></i>
-							<span data-text="CheatMode"></span>
-						</li>
-					</a>
-				</div>
+			<div class="admin" title="Page Admin">
+				<a href="/panelAdmin">
+					<li>
+						<i class="fa-solid fa-key"></i>
+						<span data-text="CheatMode"></span>
+					</li>
+				</a>
+			</div>
 			{% endif %}
 			<div class="logout" title="Se déconnecter" {% if not User %} hidden {% endif %}>
 				<a href="/deconnexion">
@@ -66,7 +66,7 @@
 				</a>
 			</div>
 			<div id="google_translate_element" aria-label="Sélectionner la langue"></div>
-			</ul>
+		</ul>
 		<label id="dark-change" title="Changer de Thème"></label>
 	</div>
 	<a href="/">
@@ -89,56 +89,58 @@
 				</li>
 			</a>
 		</div>
-		<div id="google_translate_element" aria-label="Sélectionner la langue"></div>
 		<div class="lists">
-			<a href="/solunasList">
+			<a href="/solunasList" title="SoluLists">
 				<li>
-					<i class="fa-solid fa-book-open-reader"></i>Watchlists
+					<i class="fa-solid fa-book-open-reader"></i>SoluListes
 				</li>
 			</a>
 		</div>
-		<div class="profile">
+		<div class="profile" title="Page Profil">
 			<a href="/profil">
 				<li>
 					<i class="fa-solid fa-user"></i>Profil
 				</li>
 			</a>
 		</div>
+
 		{% if User.isAdmin %}
-			<div class="admin">
-				<a href="/panelAdmin">
-					<li>
-						<i class="fa-solid fa-key"></i>CheatMode
-					</li>
-				</a>
-			</div>
-		{% endif %}
-		<div class="logout" {% if not User %} hidden {% endif %}>
-			<a href="/deconnexion">
+		<div class="admin" title="Page Admin">
+			<a href="/panelAdmin">
 				<li>
-					<i class="fa-solid fa-arrow-right-from-bracket"></i>Se déconnecter
+					<i class="fa-solid fa-key"></i>CheatMode
 				</li>
 			</a>
 		</div>
+		{% endif %}
+		<div class="logout" title="Se déconnecter" {% if not User %} hidden {% endif %}>
+			<a href="/deconnexion">
+				<li>
+					<i class="fa-solid fa-arrow-right-from-bracket"></i>Se Déconnecter
+				</li>
+			</a>
+		</div>
+		<div id="google_translate_element" aria-label="Sélectionner la langue"></div>
 	</div>
 	<script type="text/javascript">
-				function googleTranslateElementInit() {
-new google.translate.TranslateElement({
-pageLanguage: 'fr',
-layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-}, 'google_translate_element');
-}
-			</script>
-			<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-		
+		function googleTranslateElementInit() {
+			new google.translate.TranslateElement({
+				pageLanguage: 'fr',
+				layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+			}, 'google_translate_element');
+		}
+	</script>
+	<script type="text/javascript"
+		src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 	<script src="/static/js/home.js"></script>
-	<script type="text/javascript"> $(document).ready(function() {
-  $('#google_translate_element select').change(function() {
-    if ($(this).val() != '') {
-      $('header').css('top', '35px');
-    } else {
-      $('header').css('top', '0');
-    }
-  });
-});</script>
+	<script type="text/javascript"> $(document).ready(function () {
+			$('#google_translate_element select').change(function () {
+				if ($(this).val() != '') {
+					$('header').css('top', '35px');
+				} else {
+					$('header').css('top', '0');
+				}
+			});
+		});</script>
 </header>
