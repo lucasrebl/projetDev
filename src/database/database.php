@@ -193,7 +193,7 @@ class database
     {
         $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
         $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $query1 = $dsn->prepare("SELECT * FROM user WHERE user = 'admin'");
+        $query1 = $dsn->prepare("SELECT * FROM user WHERE username = 'admin'");
         $query1->execute();
         if ($query1->rowCount() == 0) {
             $hash = password_hash("123456789", PASSWORD_DEFAULT);
