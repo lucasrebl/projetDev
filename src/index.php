@@ -16,6 +16,7 @@ if ($_SESSION['initD'] == null) {
     $query->execute();
     if ($query->rowCount() <= 0) {
         $database->init();
+        $database->admin();
     }
     $_SESSION['initD'] = 0;
 }

@@ -188,4 +188,18 @@ class database
         INSERT INTO Category(nameCategory) VALUES('Livres');");
         $query->execute();
     }
+
+    function admin()
+    {
+        $dsn = new PDO("mysql:host=mysql;dbname=my_database", "my_user", "my_password");
+        $dsn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query1 = $dsn->prepare("SELECT * FROM user WHERE user = 'admin'");
+        $query1->execute();
+        if ($query1->rowCount() == 0) {
+            $hash = password_hash("123456789", PASSWORD_DEFAULT);
+            $picture = base64_encode(file_get_contents('static/asset/squid-game.png'));
+            $query = $dsn->prepare("INSERT INTO user (username, email, passwordUser, age, pictures, isAdmin) VALUES ('admin', 'user@user.com', $hash, 40, $picture, 1)");
+            $query->execute();
+        }
+    }
 }
