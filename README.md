@@ -1,6 +1,7 @@
 # SolunaComic
 
-presentation du projet
+Soluna est un site web communautaire permettant d'ajouter des résumer d'oeuvres et des listes d'oeuvres à voir plus tard pour les partager avec les autres utilisateurs en mettant ces listes en publiques ou privées.
+Il est possible de s'abonner et de se désabonner d'un autre utilisateur et de laisser des commentaires sur les oeuvres.
 
 # Technologie
 
