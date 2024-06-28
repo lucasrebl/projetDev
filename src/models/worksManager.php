@@ -263,4 +263,12 @@ class worksManager
         DELETE FROM works WHERE idWorks = $id;");
         $result->execute();
     }
+
+    function SelectLast()
+    {
+        $db = $this->db;
+        $result = $db->prepare("SELECT * FROM works ORDER BY idWorks DESC LIMIT 1");
+        $result->execute();
+        return $result->fetch()['idWorks'];
+    }
 }

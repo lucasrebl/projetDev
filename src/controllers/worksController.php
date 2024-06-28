@@ -53,7 +53,7 @@ class worksController
         } else {
             $image = base64_encode(file_get_contents($_FILES['picture']['tmp_name']));
         }
-        $category = $_POST["category"] ?? "";
+        $category = $_POST["category"] ?? 0;
         $isnsfw = $_POST["isnsfw"] ?? 0;
         if (empty($episodes)) {
             $episodes = 0;
@@ -68,8 +68,8 @@ class worksController
         $FW = new filterManager();
         $bdd = new database();
         $MW->addOneM($name, $status, $image, $summary, $episodes, $season, $tome, $isnsfw);
-        $Works = count($MW->selectAll());
-        $FW->addCategory($Works, $category);
+        $Works = $MW->SelectLast();
+        $FW->addCategory($Works, intval($category));
         $data = $bdd->connect();
         if (count($_POST) > 7) {
             // $data->prepare("DELETE FROM worksTag WHERE idWorks = $id")->execute();
